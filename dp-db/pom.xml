@@ -5,4 +5,27 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>dp-db</name>
   <description>Modulo de banco de dados do projeto Deu Pet</description>
+  
+  
+   	<dependencies>
+		<dependency>
+			<groupId>br.dp.model</groupId>
+ 			<artifactId>dp-model</artifactId>
+  			<version>0.0.1-SNAPSHOT</version>	
+		</dependency>
+		
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>5.1.9.RELEASE</version>
+		</dependency>		
+		
+		
+ 	</dependencies>
 </project>

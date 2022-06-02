@@ -10,7 +10,7 @@ public class Animal extends BasePojo {
 	private boolean situacaoAodocao;
 	private String temperamento;
 	private String pelagemPrimaria;
-	private String pelagemSecunaria;
+	private String pelagemSecundaria;
 
 	public String getTipo() {
 		return tipo;
@@ -77,23 +77,21 @@ public class Animal extends BasePojo {
 	}
 
 	public String getPelagemSecunaria() {
-		return pelagemSecunaria;
+		return pelagemSecundaria;
 	}
 
-	public void setPelagemSecunaria(final String pelagemSecunaria) {
-		this.pelagemSecunaria = pelagemSecunaria;
+	public void setPelagemSecundaria(final String pelagemSecundaria) {
+		this.pelagemSecundaria = pelagemSecundaria;
 	}
 
 	@Override
 	public String toString() {
 		return "Animal [tipo=" + tipo + ", sexo=" + sexo + ", peso=" + peso + ", porte=" + porte + ", raca=" + raca
 				+ ", situacaoAodocao=" + situacaoAodocao + ", temperamento=" + temperamento + ", pelagemPrimaria="
-				+ pelagemPrimaria + ", pelagemSecunaria=" + pelagemSecunaria + "]";
+				+ pelagemPrimaria + ", pelagemSecunaria=" + pelagemSecundaria + "]";
 	}
 
-	public Animal(final String tipo, final String sexo, final Double peso, final String porte, final String raca,
-			final boolean situacaoAodocao, final String temperamento, final String pelagemPrimaria,
-			final String pelagemSecunaria) {
+	public Animal() {
 		super();
 		this.tipo = tipo;
 		this.sexo = sexo;
@@ -103,7 +101,7 @@ public class Animal extends BasePojo {
 		this.situacaoAodocao = situacaoAodocao;
 		this.temperamento = temperamento;
 		this.pelagemPrimaria = pelagemPrimaria;
-		this.pelagemSecunaria = pelagemSecunaria;
+		this.pelagemSecundaria = pelagemSecundaria;
 	}
 
 }

@@ -41,19 +41,4 @@ public class PessoaCadastraCampanha {
 		this.data = data;
 	}
 
-	@Override
-	public String toString() {
-		return "PessoaCadastraCampanha [pessoaId=" + pessoaId + ", campanhaId=" + campanhaId + ", situacao=" + situacao
-				+ ", data=" + data + "]";
-	}
-
-	public PessoaCadastraCampanha(final String pessoaId, final String campanhaId, final String situacao,
-			final Timestamp data) {
-		super();
-		this.pessoaId = pessoaId;
-		this.campanhaId = campanhaId;
-		this.situacao = situacao;
-		this.data = data;
-	}
-
 }

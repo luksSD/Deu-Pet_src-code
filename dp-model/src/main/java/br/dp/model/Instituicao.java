@@ -1,14 +1,6 @@
 package br.dp.model;
 
-import java.security.Timestamp;
-
 public class Instituicao extends Usuario {
-
-	public Instituicao(final String nome, final String senha, final String email, final String celular,
-			final boolean situacao, final Timestamp data, final boolean aceite, final String tipo) {
-		super(nome, senha, email, celular, situacao, data, aceite, tipo);
-		// TODO Auto-generated constructor stub
-	}
 
 	private String telefone;
 	private String cnpj;
@@ -72,12 +64,6 @@ public class Instituicao extends Usuario {
 
 	public void setMunicipioId(final Long municipioId) {
 		this.municipioId = municipioId;
-	}
-
-	@Override
-	public String toString() {
-		return "Instituicao [telefone=" + telefone + ", cnpj=" + cnpj + ", logradouro=" + logradouro + ", numero="
-				+ numero + ", cep=" + cep + ", cpf=" + cpf + ", municipioId=" + municipioId + "]";
 	}
 
 }

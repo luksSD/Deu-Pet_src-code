@@ -32,16 +32,4 @@ public class PessoaInteressaAnimal {
 		this.data = data;
 	}
 
-	@Override
-	public String toString() {
-		return "PessoaInteressaAnimal [pessoaId=" + pessoaId + ", animalId=" + animalId + ", data=" + data + "]";
-	}
-
-	public PessoaInteressaAnimal(final String pessoaId, final String animalId, final Timestamp data) {
-		super();
-		this.pessoaId = pessoaId;
-		this.animalId = animalId;
-		this.data = data;
-	}
-
 }

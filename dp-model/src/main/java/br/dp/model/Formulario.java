@@ -21,15 +21,4 @@ public class Formulario extends BasePojo {
 		this.campanhaId = campanhaId;
 	}
 
-	@Override
-	public String toString() {
-		return "Formulario [url=" + url + ", campanhaId=" + campanhaId + "]";
-	}
-
-	public Formulario(final String url, final Long campanhaId) {
-		super();
-		this.url = url;
-		this.campanhaId = campanhaId;
-	}
-
 }

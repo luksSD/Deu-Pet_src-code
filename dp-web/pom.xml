@@ -16,10 +16,12 @@
 	<description>Modulo Web do projeto Deu Pet</description>
 	<properties>
 		<java.version>11</java.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
 
-<dependencies>
+	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -57,11 +59,11 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>net.sf.jasperreports</groupId> -->
-<!-- 			<artifactId>jasperreports</artifactId> -->
-<!-- 			<version>6.15.0</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>net.sf.jasperreports</groupId> -->
+		<!-- <artifactId>jasperreports</artifactId> -->
+		<!-- <version>6.15.0</version> -->
+		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

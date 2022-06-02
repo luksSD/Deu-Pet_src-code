@@ -59,21 +59,4 @@ public class Campanha extends BasePojo {
 		this.instituicaoId = instituicaoId;
 	}
 
-	@Override
-	public String toString() {
-		return "Campanha [titulo=" + titulo + ", descricao=" + descricao + ", requisitos=" + requisitos
-				+ ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + ", instituicaoId=" + instituicaoId + "]";
-	}
-
-	public Campanha(final String titulo, final String descricao, final String requisitos, final Timestamp dataInicio,
-			final Timestamp dataFim, final Long instituicaoId) {
-		super();
-		this.titulo = titulo;
-		this.descricao = descricao;
-		this.requisitos = requisitos;
-		this.dataInicio = dataInicio;
-		this.dataFim = dataFim;
-		this.instituicaoId = instituicaoId;
-	}
-
 }

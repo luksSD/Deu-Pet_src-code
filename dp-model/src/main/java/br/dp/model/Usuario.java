@@ -9,7 +9,7 @@ public abstract class Usuario extends BasePojo {
 	private String email;
 	private String celular;
 	private boolean situacao;
-	private Timestamp data;
+	private Timestamp dataCadastro;
 	private boolean aceite;
 	private String tipo;
 
@@ -53,12 +53,12 @@ public abstract class Usuario extends BasePojo {
 		this.situacao = situacao;
 	}
 
-	public Timestamp getData() {
-		return data;
+	public Timestamp getDataCadastro() {
+		return dataCadastro;
 	}
 
-	public void setData(final Timestamp data) {
-		this.data = data;
+	public void setDataCadastro(final Timestamp dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 
 	public boolean isAceite() {
@@ -74,25 +74,6 @@ public abstract class Usuario extends BasePojo {
 	}
 
 	public void setTipo(final String tipo) {
-		this.tipo = tipo;
-	}
-
-	@Override
-	public String toString() {
-		return "Usuario [nome=" + nome + ", senha=" + senha + ", email=" + email + ", celular=" + celular
-				+ ", situacao=" + situacao + ", data=" + data + ", aceite=" + aceite + ", tipo=" + tipo + "]";
-	}
-
-	public Usuario(final String nome, final String senha, final String email, final String celular,
-			final boolean situacao, final Timestamp data, final boolean aceite, final String tipo) {
-		super();
-		this.nome = nome;
-		this.senha = senha;
-		this.email = email;
-		this.celular = celular;
-		this.situacao = situacao;
-		this.data = data;
-		this.aceite = aceite;
 		this.tipo = tipo;
 	}
 

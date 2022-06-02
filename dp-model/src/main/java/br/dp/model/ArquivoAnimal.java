@@ -21,15 +21,4 @@ public class ArquivoAnimal extends BasePojo {
 		this.fotos = fotos;
 	}
 
-	@Override
-	public String toString() {
-		return "ArquivoAnimal [animalID=" + animalID + ", fotos=" + fotos + "]";
-	}
-
-	public ArquivoAnimal(final Long animalID, final String fotos) {
-		super();
-		this.animalID = animalID;
-		this.fotos = fotos;
-	}
-
 }

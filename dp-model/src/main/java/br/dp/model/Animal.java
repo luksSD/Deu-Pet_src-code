@@ -84,24 +84,4 @@ public class Animal extends BasePojo {
 		this.pelagemSecundaria = pelagemSecundaria;
 	}
 
-	@Override
-	public String toString() {
-		return "Animal [tipo=" + tipo + ", sexo=" + sexo + ", peso=" + peso + ", porte=" + porte + ", raca=" + raca
-				+ ", situacaoAodocao=" + situacaoAodocao + ", temperamento=" + temperamento + ", pelagemPrimaria="
-				+ pelagemPrimaria + ", pelagemSecunaria=" + pelagemSecundaria + "]";
-	}
-
-	public Animal() {
-		super();
-		this.tipo = tipo;
-		this.sexo = sexo;
-		this.peso = peso;
-		this.porte = porte;
-		this.raca = raca;
-		this.situacaoAodocao = situacaoAodocao;
-		this.temperamento = temperamento;
-		this.pelagemPrimaria = pelagemPrimaria;
-		this.pelagemSecundaria = pelagemSecundaria;
-	}
-
 }

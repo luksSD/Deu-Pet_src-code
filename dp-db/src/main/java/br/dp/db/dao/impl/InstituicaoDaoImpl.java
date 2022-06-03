@@ -9,12 +9,16 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import br.dp.db.connection.ConnectionFactory;
 import br.dp.db.dao.InstituicaoDao;
 import br.dp.model.Instituicao;
 
+@Repository
 public class InstituicaoDaoImpl implements InstituicaoDao {
 
+	@Override
 	public List<Instituicao> readAll() {
 
 		final List<Instituicao> instituicoes = new ArrayList<Instituicao>();
@@ -64,6 +68,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
 		return instituicoes;
 	}
 
+	@Override
 	public Instituicao readById(final Long id) {
 
 		Instituicao instituicao = null;
@@ -116,6 +121,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
 		return instituicao;
 	}
 
+	@Override
 	public Long create(final Instituicao entity) {
 
 		Connection connection = null;
@@ -142,7 +148,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
 			preparedStatement.setString(4, entity.getCelular());
 			preparedStatement.setBoolean(5, true);
 			preparedStatement.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
-			preparedStatement.setString(7, entity.getTipo());
+			preparedStatement.setString(7, "INSTITUICAO");
 
 			preparedStatement.execute();
 			resultSet = preparedStatement.getGeneratedKeys();
@@ -188,6 +194,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
 		return id;
 	}
 
+	@Override
 	public boolean update(final Instituicao entity) {
 
 		Connection connection = null;
@@ -253,6 +260,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
 		}
 	}
 
+	@Override
 	public boolean delete(final Long id) {
 
 		Connection connection = null;

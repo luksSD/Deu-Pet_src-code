@@ -8,12 +8,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import br.dp.db.connection.ConnectionFactory;
 import br.dp.db.dao.AnimalDao;
 import br.dp.model.Animal;
 
+@Repository
 public class AnimalDaoImpl implements AnimalDao {
 
+	@Override
 	public List<Animal> readAll() {
 
 		final List<Animal> animais = new ArrayList<Animal>();
@@ -58,6 +62,7 @@ public class AnimalDaoImpl implements AnimalDao {
 		return animais;
 	}
 
+	@Override
 	public Animal readById(final Long id) {
 
 		Animal animal = null;
@@ -104,6 +109,7 @@ public class AnimalDaoImpl implements AnimalDao {
 		return animal;
 	}
 
+	@Override
 	public Long create(final Animal entity) {
 
 		Connection connection = null;
@@ -111,7 +117,9 @@ public class AnimalDaoImpl implements AnimalDao {
 		ResultSet resultSet = null;
 
 		String sql = "INSERT INTO animal";
-		sql += " (tipo, sexo, peso, porte, raca, situacao_adocao, temperamento, pelagem_primaria, pelagem_secundaria) ";
+		sql += " (tipo, sexo, peso, porte, ";
+		sql += " raca, situacao_adocao, temperamento, ";
+		sql += " pelagem_primaria, pelagem_secundaria) ";
 		sql += "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 		Long id = Long.valueOf(-1);
@@ -127,7 +135,7 @@ public class AnimalDaoImpl implements AnimalDao {
 			preparedStatement.setDouble(3, entity.getPeso());
 			preparedStatement.setString(4, entity.getPorte());
 			preparedStatement.setString(5, entity.getRaca());
-			preparedStatement.setBoolean(6, entity.isSituacaoAodocao());
+			preparedStatement.setBoolean(6, false);
 			preparedStatement.setString(7, entity.getTemperamento());
 			preparedStatement.setString(8, entity.getPelagemPrimaria());
 			preparedStatement.setString(9, entity.getPelagemSecunaria());
@@ -161,6 +169,7 @@ public class AnimalDaoImpl implements AnimalDao {
 		return id;
 	}
 
+	@Override
 	public boolean update(final Animal entity) {
 
 		Connection connection = null;
@@ -214,6 +223,7 @@ public class AnimalDaoImpl implements AnimalDao {
 		}
 	}
 
+	@Override
 	public boolean delete(final Long id) {
 
 		Connection connection = null;

@@ -35,7 +35,7 @@ public class InstituicaoRestController {
 	@GetMapping("/read-by-id/{id}")
 	public ResponseEntity<Instituicao> readById(@PathVariable("id") final long id) {
 
-		return ResponseEntity.ok(instituicaoService.readById(null));
+		return ResponseEntity.ok(instituicaoService.readById(id));
 
 	}
 
@@ -56,7 +56,7 @@ public class InstituicaoRestController {
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Boolean> delete(@PathVariable("id") final long id) {
 
-		return ResponseEntity.ok(instituicaoService.delete(null));
+		return ResponseEntity.ok(instituicaoService.delete(id));
 
 	}
 

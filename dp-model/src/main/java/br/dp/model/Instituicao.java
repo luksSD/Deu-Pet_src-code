@@ -9,6 +9,15 @@ public class Instituicao extends Usuario {
 	private String cep;
 	private String cpf;
 	private Long municipioId;
+	private Long usuarioId;
+
+	public Long getUsuarioId() {
+		return usuarioId;
+	}
+
+	public void setUsuarioId(final Long usuarioId) {
+		this.usuarioId = usuarioId;
+	}
 
 	public String getTelefone() {
 		return telefone;

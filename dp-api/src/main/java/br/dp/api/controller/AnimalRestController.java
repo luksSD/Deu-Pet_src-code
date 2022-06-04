@@ -35,7 +35,7 @@ public class AnimalRestController {
 	@GetMapping("/read-by-id/{id}")
 	public ResponseEntity<Animal> readById(@PathVariable("id") final long id) {
 
-		return ResponseEntity.ok(animalService.readById(null));
+		return ResponseEntity.ok(animalService.readById(id));
 
 	}
 
@@ -56,7 +56,7 @@ public class AnimalRestController {
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Boolean> delete(@PathVariable("id") final long id) {
 
-		return ResponseEntity.ok(animalService.delete(null));
+		return ResponseEntity.ok(animalService.delete(id));
 
 	}
 

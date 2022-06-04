@@ -119,8 +119,8 @@ public class AnimalDaoImpl implements AnimalDao {
 		String sql = "INSERT INTO animal";
 		sql += " (tipo, sexo, peso, porte, ";
 		sql += " raca, situacao_adocao, temperamento, ";
-		sql += " pelagem_primaria, pelagem_secundaria) ";
-		sql += "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		sql += " pelagem_primaria, pelagem_secundaria, instituicao_id) ";
+		sql += "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 		Long id = Long.valueOf(-1);
 
@@ -139,6 +139,7 @@ public class AnimalDaoImpl implements AnimalDao {
 			preparedStatement.setString(7, entity.getTemperamento());
 			preparedStatement.setString(8, entity.getPelagemPrimaria());
 			preparedStatement.setString(9, entity.getPelagemSecunaria());
+			preparedStatement.setLong(10, entity.getIdInstituicao());
 
 			preparedStatement.execute();
 
@@ -177,13 +178,13 @@ public class AnimalDaoImpl implements AnimalDao {
 
 		String sql = "UPDATE animal Set ";
 		sql += " tipo = ?, ";
-		sql += " sexo = ?  ";
-		sql += " peso = ?  ";
-		sql += " porte = ?  ";
-		sql += " raca = ?  ";
-		sql += " situacao_adocao = ?  ";
-		sql += " temperamento = ?  ";
-		sql += " pelagem_primaria = ?  ";
+		sql += " sexo = ?, ";
+		sql += " peso = ?, ";
+		sql += " porte = ?, ";
+		sql += " raca = ? ,";
+		sql += " situacao_adocao = ?, ";
+		sql += " temperamento = ?, ";
+		sql += " pelagem_primaria = ?, ";
 		sql += " pelagem_secundaria = ?  ";
 		sql += " WHERE id = ?;  ";
 
@@ -202,6 +203,7 @@ public class AnimalDaoImpl implements AnimalDao {
 			preparedStatement.setString(7, entity.getTemperamento());
 			preparedStatement.setString(8, entity.getPelagemPrimaria());
 			preparedStatement.setString(9, entity.getPelagemSecunaria());
+			preparedStatement.setLong(10, entity.getId());
 
 			preparedStatement.execute();
 

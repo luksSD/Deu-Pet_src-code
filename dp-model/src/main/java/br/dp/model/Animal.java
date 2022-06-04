@@ -11,6 +11,15 @@ public class Animal extends BasePojo {
 	private String temperamento;
 	private String pelagemPrimaria;
 	private String pelagemSecundaria;
+	private Long idInstituicao;
+
+	public Long getIdInstituicao() {
+		return idInstituicao;
+	}
+
+	public void setIdInstituicao(final Long idInstituicao) {
+		this.idInstituicao = idInstituicao;
+	}
 
 	public String getTipo() {
 		return tipo;

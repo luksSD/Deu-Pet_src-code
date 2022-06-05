@@ -45,7 +45,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
 				instituicao.setEmail(resultSet.getString("email"));
 				instituicao.setCelular(resultSet.getString("celular"));
 				instituicao.setSituacao(resultSet.getBoolean("situacao"));
-//				instituicao.setDataCadastro(resultSet.getTimestamp("data"));
+				instituicao.setDataCadastro(resultSet.getTimestamp("data"));
 				instituicao.setTipo(resultSet.getString("tipo"));
 				instituicao.setTelefone(resultSet.getString("telefone"));
 				instituicao.setCnpj(resultSet.getString("cnpj"));
@@ -100,7 +100,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
 				instituicao.setEmail(resultSet.getString("email"));
 				instituicao.setCelular(resultSet.getString("celular"));
 				instituicao.setSituacao(resultSet.getBoolean("situacao"));
-//				instituicao.setDataCadastro(resultSet.getTimestamp("data"));
+				instituicao.setDataCadastro(resultSet.getTimestamp("data"));
 				instituicao.setTipo(resultSet.getString("tipo"));
 				instituicao.setTelefone(resultSet.getString("telefone"));
 				instituicao.setCnpj(resultSet.getString("cnpj"));

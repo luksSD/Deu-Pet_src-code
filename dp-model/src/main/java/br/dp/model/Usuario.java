@@ -1,6 +1,6 @@
 package br.dp.model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public abstract class Usuario extends BasePojo {
 

@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.dp.api.service.InstituicaoService;
 import br.dp.model.Instituicao;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/v1/instituicao")
+@Api(value = "Instituicao", tags = "Instituição")
 @CrossOrigin(origins = "*")
 public class InstituicaoRestController {
 
@@ -26,6 +29,7 @@ public class InstituicaoRestController {
 	private InstituicaoService instituicaoService;
 
 	@GetMapping("/read-all")
+	@ApiOperation(value = "Retorna lista de instituiçoes")
 	public ResponseEntity<List<Instituicao>> readAll() {
 
 		return ResponseEntity.ok(instituicaoService.readAll());
@@ -33,6 +37,7 @@ public class InstituicaoRestController {
 	}
 
 	@GetMapping("/read-by-id/{id}")
+	@ApiOperation(value = "Retorna instituição selecionada pelo ID")
 	public ResponseEntity<Instituicao> readById(@PathVariable("id") final long id) {
 
 		return ResponseEntity.ok(instituicaoService.readById(id));
@@ -40,6 +45,7 @@ public class InstituicaoRestController {
 	}
 
 	@PostMapping("/create")
+	@ApiOperation(value = "Cria cadastro de Instituição")
 	public ResponseEntity<Long> create(@RequestBody final Instituicao instituicao) {
 
 		return ResponseEntity.ok(instituicaoService.create(instituicao));
@@ -47,6 +53,7 @@ public class InstituicaoRestController {
 	}
 
 	@PutMapping("/update")
+	@ApiOperation(value = "Atualiza cadastro de Instituiçoes")
 	public ResponseEntity<Boolean> update(@RequestBody final Instituicao instituicao) {
 
 		return ResponseEntity.ok(instituicaoService.update(instituicao));
@@ -54,6 +61,7 @@ public class InstituicaoRestController {
 	}
 
 	@DeleteMapping("/delete/{id}")
+	@ApiOperation(value = "Deleta cadastro de Instituiçoes")
 	public ResponseEntity<Boolean> delete(@PathVariable("id") final long id) {
 
 		return ResponseEntity.ok(instituicaoService.delete(id));

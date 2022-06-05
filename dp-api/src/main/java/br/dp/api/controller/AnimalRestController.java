@@ -16,15 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.dp.api.service.AnimalService;
 import br.dp.model.Animal;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/v1/animal")
+@Api(value = "Animal", tags = "Animal")
 @CrossOrigin(origins = "*")
 public class AnimalRestController {
 
 	@Autowired
 	private AnimalService animalService;
 
+	@ApiOperation(nickname = "teste", value = "Retorna uma lista de Animais")
 	@GetMapping("/read-all")
 	public ResponseEntity<List<Animal>> readAll() {
 
@@ -32,6 +36,7 @@ public class AnimalRestController {
 
 	}
 
+	@ApiOperation(value = "Retorna um animal baseado no ID")
 	@GetMapping("/read-by-id/{id}")
 	public ResponseEntity<Animal> readById(@PathVariable("id") final long id) {
 
@@ -39,6 +44,7 @@ public class AnimalRestController {
 
 	}
 
+	@ApiOperation(value = "Cria uma novo animal", consumes = "application/json")
 	@PostMapping("/create")
 	public ResponseEntity<Long> create(@RequestBody final Animal animal) {
 
@@ -46,6 +52,7 @@ public class AnimalRestController {
 
 	}
 
+	@ApiOperation(value = "Atualiza o cadastro de um animal")
 	@PutMapping("/update")
 	public ResponseEntity<Boolean> update(@RequestBody final Animal animal) {
 
@@ -53,6 +60,7 @@ public class AnimalRestController {
 
 	}
 
+	@ApiOperation(value = "Deleta o cadastro de um animal")
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Boolean> delete(@PathVariable("id") final long id) {
 

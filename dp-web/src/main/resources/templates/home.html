@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+
+<div layout:fragment="body">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-primary text-white me-2">
+                  <i class="mdi mdi-home"></i>
+                </span> Home
+            </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span></span>Overview <i
+                            class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-4  grid-margin stretch-card ">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="resources/images/DeuPetLogo-2.png" class="mw-100 w-100 rounded"
+                             alt="image">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8  grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Administrativo</h4>
+                        <p class="card-description"> Instituição/ORG </p>
+                        <p> Gerencie suas informações, cadastros de animais pra adoção, solicitações de adoção,
+                            campanhas de saude e muito mais.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-danger card-img-holder text-white">
+                    <a class="text-white" href="#" style="text-decoration: none">
+                        <div class="card-body">
+                            <img src="resources/images/dashboard/circle.svg" class="card-img-absolute"
+                                 alt="circle-image"/>
+                            <h4 class="font-weight-normal mb-3">Adoção de Animais <i
+                                    class="mdi mdi-cat mdi-24px float-right"></i>
+                            </h4>
+                            <h5 class="card-text">Gerencie os animais para adoção, visualize as solicitações de adoção e
+                                muito mais. </h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-info card-img-holder text-white">
+                    <a class="text-white" href="#" style="text-decoration: none">
+                        <div class="card-body">
+                            <img src="resources/images/dashboard/circle.svg" class="card-img-absolute"
+                                 alt="circle-image"/>
+                            <h4 class="font-weight-normal mb-3">Campanhas de Saúde Animal <i
+                                    class="mdi mdi-hospital mdi-24px float-right"></i>
+                            </h4>
+                            <h5 class="card-text">Gerencie campanhas de saúde, cadastre nova ou exclua campanhas
+                                existentes. </h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4 stretch-card grid-margin">
+
+                <div class="card bg-gradient-success card-img-holder text-white">
+                    <a class="text-white" href="#" style="text-decoration: none">
+                        <div class="card-body">
+                            <img src="resources/images/dashboard/circle.svg" class="card-img-absolute"
+                                 alt="circle-image"/>
+                            <h4 class="font-weight-normal mb-3">Perfíl <i
+                                    class="mdi mdi-account-card-details mdi-24px float-right"></i>
+                            </h4>
+                            <h5 class="card-text">Gerenciar perfíl, visualizar dados e alterar senha. </h5>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+</body>
+</html>

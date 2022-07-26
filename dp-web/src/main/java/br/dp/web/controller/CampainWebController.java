@@ -10,12 +10,12 @@ public class CampainWebController {
 
     @GetMapping("/gerenciar")
     public String getCampainsPage() {
-        return "campains/campains-page";
+        return "campain/campain-page";
     }
 
     @GetMapping("/cadastrar")
     public String getRegisterCampainPage() {
-        return "campains/create-campain-page";
+        return "campain/register-campain-page";
     }
 
 }

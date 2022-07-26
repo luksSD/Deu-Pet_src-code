@@ -13,14 +13,9 @@ public class ProfileWebController {
         return "profile/profile-detail-page";
     }
 
-    @GetMapping("/alterar")
+    @GetMapping("/alteracao")
     public String getEditProfilePage() {
         return "profile/profile-edit-page";
-    }
-
-    @GetMapping("/alterar-senha")
-    public String getEditPasswordPage() {
-        return "profile/password-page";
     }
 
 }

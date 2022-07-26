@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/instituicao")
 public class InstitutionWebController {
 
-    @GetMapping("/gerenciar")
+    @GetMapping("/gerenciar-instituicoes")
     public String getInstitutionsPage() {
         return "institutions/institutions-page";
     }
 
     @GetMapping("/cadastrar-instituicao")
-    public String getRegisterAnimalPage() {
-        return "adoption/create-institution-page";
+    public String getRegisterInstitutionPage() {
+        return "institutions/create-institution-page";
     }
 
 

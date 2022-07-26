@@ -129,7 +129,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" th:href="@{/}">
                         <span class="menu-title">Home</span>
                         <i class="mdi mdi-home menu-icon"></i>
                     </a>
@@ -166,10 +166,11 @@
                     </a>
                     <div class="collapse" id="menu-instituicao">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" th:href="@{/adocao/gerenciar}">Gerenciar
-                                Instituições</a>
+                            <li class="nav-item"><a class="nav-link" th:href="@{/instituicao/gerenciar-instituicoes}">Gerenciar
+                                Instituções
+                            </a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" th:href="@{/adocao/cadastrar-animal}">Cadastrar
+                            <li class="nav-item"><a class="nav-link" th:href="@{/instituicao/cadastrar-instituicao}">Cadastrar
                                 Instituição</a>
                             </li>
 
@@ -186,10 +187,10 @@
                     </a>
                     <div class="collapse" id="menu-campanhas">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="ui-features/buttons.html">Gerenciar
+                            <li class="nav-item"><a class="nav-link" th:href="@{/campanhas/gerenciar}">Gerenciar
                                 Campanhas</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="ui-features/typography.html">Cadastrar
+                            <li class="nav-item"><a class="nav-link" th:href="@{/campanhas/cadastrar}">Cadastrar
                                 Campanhas</a>
                             </li>
                         </ul>
@@ -205,12 +206,12 @@
                     </a>
                     <div class="collapse" id="menu-perfil">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="ui-features/buttons.html">Detalhes</a>
+                            <li class="nav-item"><a class="nav-link" th:href="@{/perfil/detalhes}">Detalhes</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="ui-features/typography.html">Alteração
+                            <li class="nav-item"><a class="nav-link" th:href="@{/perfil/alterar}">Alteração
                                 de dados</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="ui-features/typography.html">Alterar
+                            <li class="nav-item"><a class="nav-link" th:href="@{/perfil/alterar-senha}">Alterar
                                 Senha</a>
                             </li>
                         </ul>

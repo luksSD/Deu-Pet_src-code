@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/adocao")
 public class AdoptionWebController {
 
-    @GetMapping("/gerenciar")
+    @GetMapping("/gerenciar-animais")
     public String getAdoptionPage() {
         return "adoption/adoption-page";
     }

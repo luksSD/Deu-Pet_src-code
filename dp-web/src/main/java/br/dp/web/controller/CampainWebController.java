@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/campanhas")
 public class CampainWebController {
 
-    @GetMapping("/gerenciar")
+    @GetMapping("/gerenciar-campanhas")
     public String getCampainsPage() {
         return "campains/campains-page";
     }
 
-    @GetMapping("/cadastrar")
+    @GetMapping("/cadastrar-campanhas")
     public String getRegisterCampainPage() {
         return "campains/create-campain-page";
     }

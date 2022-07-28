@@ -3,23 +3,23 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <artifactId>deu-pet-parent</artifactId>
+        <groupId>br.dp</groupId>
+        <version>1.0.0</version>
     </parent>
-    <groupId>br.dp.web</groupId>
+
+
+    <groupId>br.dp</groupId>
     <artifactId>dp-web</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>dp-web</name>
     <description>Modulo Web do projeto Deu Pet</description>
-    <properties>
-        <java.version>11</java.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
 
+    <properties>
+        <revision>${deu-pet.version}</revision>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -37,6 +37,16 @@
             <artifactId>thymeleaf-spring5</artifactId>
         </dependency>
 
+        <!--		<dependency>
+                    <groupId>org.thymeleaf.extras</groupId>
+                    <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+                </dependency>-->
+
+        <!--		<dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-security</artifactId>
+                </dependency>-->
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -44,9 +54,9 @@
         </dependency>
 
         <dependency>
-            <groupId>br.dp.model</groupId>
+            <groupId>br.dp</groupId>
             <artifactId>dp-model</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
 
         <!-- <dependency> -->

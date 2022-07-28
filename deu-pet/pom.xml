@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>br.dp</groupId>
+    <artifactId>deu-pet-parent</artifactId>
+    <version>1.0.0</version>
+
+    <name>deu-pet-parent</name>
+    <packaging>pom</packaging>
+
+    <organization>
+        <name>DeuPet</name>
+    </organization>
+
+
+    <properties>
+        <deu-pet.version>1.0.0</deu-pet.version>
+        <dp-web.version>1.0.0</dp-web.version>
+        <dp-model.version>1.0.0</dp-model.version>
+        <dp-bd.version>1.0.0</dp-bd.version>
+
+        <!-- build-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>13</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.version.compiler>3.8.0</maven.version.compiler>
+        <maven.site.version>3.3</maven.site.version>
+
+        <!-- 3rd party-->
+        <springfox-swagger-ui.version>2.9.2</springfox-swagger-ui.version>
+        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+        <gson.version>2.8.5</gson.version>
+        <commons-validator.version>1.6</commons-validator.version>
+        <lombok.version>1.18.22</lombok.version>
+        <postgresql.version>42.2.5.jre7</postgresql.version>
+        <commons-lang.version>2.6</commons-lang.version>
+        <exec-maven-plugin.version>1.2.1</exec-maven-plugin.version>
+        <maven-assembly-plugin.version>2.2-beta-5</maven-assembly-plugin.version>
+    </properties>
+
+    <modules>
+        <module>dp-model</module>
+        <module>dp-db</module>
+        <module>dp-api</module>
+        <module>dp-web</module>
+    </modules>
+
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>br.dp</groupId>
+                <artifactId>dp-model</artifactId>
+                <version>${dp-model.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>br.dp</groupId>
+                <artifactId>dp-db</artifactId>
+                <version>${dp-model.version}</version>
+            </dependency>
+
+            <!-- 3rd party-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox-swagger-ui.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox-swagger2.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-validator</groupId>
+                <artifactId>commons-validator</artifactId>
+                <version>${commons-validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons-lang.version}</version>
+                <type>jar</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

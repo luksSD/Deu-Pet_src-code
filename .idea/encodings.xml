@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/dp-api/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/dp-api/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/dp-web/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/dp-web/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/deu-pet/dp-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/deu-pet/dp-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/deu-pet/dp-db/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/deu-pet/dp-db/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/deu-pet/dp-model/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/deu-pet/dp-model/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/deu-pet/dp-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/deu-pet/dp-web/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/deu-pet/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/deu-pet/src/main/resources" charset="UTF-8" />
   </component>
 </project>

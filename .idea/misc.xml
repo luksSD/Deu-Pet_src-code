@@ -5,12 +5,15 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/deu-pet-parent/pom.xml" />
         <option value="$PROJECT_DIR$/dp-model/pom.xml" />
         <option value="$PROJECT_DIR$/dp-db/pom.xml" />
         <option value="$PROJECT_DIR$/dp-api/pom.xml" />
         <option value="$PROJECT_DIR$/dp-web/pom.xml" />
+        <option value="$PROJECT_DIR$/deu-pet/dp-web/pom.xml" />
+        <option value="$PROJECT_DIR$/deu-pet/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="15" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" project-jdk-name="13" project-jdk-type="JavaSDK" />
 </project>

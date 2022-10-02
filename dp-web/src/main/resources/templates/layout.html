@@ -24,7 +24,7 @@
 </head>
 <body>
 <div class="container-scroller">
-
+    
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -36,7 +36,7 @@
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                 <span class="mdi mdi-menu"></span>
             </button>
-
+            
             <ul class="navbar-nav navbar-nav-right">
                 <li class="nav-item nav-profile dropdown">
                     <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
@@ -125,7 +125,7 @@
                             <span class="font-weight-bold mb-2">Soc. Prot. Animais</span>
                             <span class="text-secondary text-small">Santa Rita do Sapucaí</span>
                         </div>
-
+                    
                     </a>
                 </li>
                 <li class="nav-item">
@@ -134,7 +134,7 @@
                         <i class="mdi mdi-home menu-icon"></i>
                     </a>
                 </li>
-
+                
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#menu-adocao" aria-expanded="false"
                        aria-controls="ui-basic">
@@ -145,18 +145,19 @@
                     <div class="collapse" id="menu-adocao">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"><a class="nav-link" th:href="@{/adocao/gerenciar-animais}">Gerenciar
-                                Animais</a>
+                                                                                                            Animais</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" th:href="@{/adocao/cadastrar-animal}">Cadastrar
-                                Animal</a>
+                                                                                                           Animal</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" th:href="@{/adocao/solicitacoes-adocao}">Solicitações
-                                de Adoção</a>
+                                                                                                              de
+                                                                                                              Adoção</a>
                             </li>
                         </ul>
                     </div>
                 </li>
-
+                
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#menu-instituicao" aria-expanded="false"
                        aria-controls="ui-basic">
@@ -167,17 +168,17 @@
                     <div class="collapse" id="menu-instituicao">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"><a class="nav-link" th:href="@{/instituicao/gerenciar-instituicoes}">Gerenciar
-                                Instituções
+                                                                                                                      Instituções
                             </a>
                             </li>
                             <li class="nav-item"><a class="nav-link" th:href="@{/instituicao/cadastrar-instituicao}">Cadastrar
-                                Instituição</a>
+                                                                                                                     Instituição</a>
                             </li>
-
+                        
                         </ul>
                     </div>
                 </li>
-
+                
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#menu-campanhas" aria-expanded="false"
                        aria-controls="ui-basic">
@@ -188,15 +189,15 @@
                     <div class="collapse" id="menu-campanhas">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"><a class="nav-link" th:href="@{/campanhas/gerenciar-campanhas}">Gerenciar
-                                Campanhas</a>
+                                                                                                                 Campanhas</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" th:href="@{/campanhas/cadastrar-campanhas}">Cadastrar
-                                Campanhas</a>
+                                                                                                                 Campanhas</a>
                             </li>
                         </ul>
                     </div>
                 </li>
-
+                
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#menu-perfil" aria-expanded="false"
                        aria-controls="ui-basic">
@@ -209,24 +210,24 @@
                             <li class="nav-item"><a class="nav-link" th:href="@{/perfil/detalhes}">Detalhes</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" th:href="@{/perfil/alterar}">Alteração
-                                de dados</a>
+                                                                                                  de dados</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" th:href="@{/perfil/alterar-senha}">Alterar
-                                Senha</a>
+                                                                                                        Senha</a>
                             </li>
                         </ul>
                     </div>
                 </li>
-
+            
             </ul>
         </nav>
         <!-- partial -->
         <div class="main-panel">
-
+            
             <!-- thymeleaf layout injection -->
             <div layout:fragment="body"></div>
-
-
+            
+            
             <!-- content-wrapper ends -->
             <!-- partial:partials/_footer.html -->
             <footer class="footer">
@@ -245,6 +246,7 @@
 <!-- container-scroller -->
 <!-- plugins:js -->
 <script src="/resources/vendors/js/vendor.bundle.base.js"></script>
+<script src="/resources/vendors/js/jquery.inputmask.bundle.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
 <script src="/resources/vendors/chart.js/Chart.min.js"></script>
@@ -258,6 +260,7 @@
 <!-- Custom js for this page -->
 <script src="/resources/js/dashboard.js"></script>
 <script src="/resources/js/todolist.js"></script>
+<script src="/resources/js/inputmask.js"></script>
 <!-- End custom js for this page -->
 </body>
 </html>

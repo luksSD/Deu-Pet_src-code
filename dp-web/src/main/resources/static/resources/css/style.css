@@ -16660,4 +16660,196 @@
      -ms-flex-positive: 1;
      flex-grow: 1;
 }
+
+.accordion {
+  overflow-anchor: none; }
+  .accordion > .card {
+    overflow: hidden; }
+    .accordion > .card:not(:last-of-type) {
+      border-bottom: 0;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0; }
+    .accordion > .card:not(:first-of-type) {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0; }
+    .accordion > .card > .card-header {
+      border-radius: 0;
+      margin-bottom: -1px;
+}
+
+/*-------------------------------------------------------------------*/
+/* === Components === */
+/* Accordions */
+.accordion .card {
+  margin-bottom: .75rem;
+  -webkit-box-shadow: 0px 1px 15px 1px rgba(230, 234, 236, 0.35);
+  box-shadow: 0px 1px 15px 1px rgba(230, 234, 236, 0.35);
+  border-radius: .25rem; }
+  .accordion .card .card-header {
+    background-color: transparent;
+    border: none;
+    padding: 2rem; }
+    .accordion .card .card-header * {
+      font-family: "ubuntu-regular", sans-serif;
+      font-size: 1rem; }
+    .accordion .card .card-header a {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      font-size: inherit;
+      position: relative;
+      -webkit-transition: color 0.5s ease;
+      transition: color 0.5s ease;
+      padding-right: .5rem; }
+      .accordion .card .card-header a:before {
+        font-family: "Material Design Icons";
+        position: absolute;
+        right: 7px;
+        top: 0;
+        font-size: 18px;
+        display: block; }
+      .accordion .card .card-header a[aria-expanded="true"] {
+        color: #b66dff; }
+        .accordion .card .card-header a[aria-expanded="true"]:before {
+          content: "\F0374"; }
+      .accordion .card .card-header a[aria-expanded="false"]:before {
+        content: "\F0415"; }
+  .accordion .card .card-body {
+    font-size: 14px;
+    padding: 0 2rem 2rem 2rem;
+    font-family: "ubuntu-regular", sans-serif;
+    line-height: 1.5; }
+    .accordion .card .card-body i {
+      font-size: 1.25rem; }
+
+.accordion.accordion-bordered {
+  -webkit-box-shadow: 0px 1px 15px 1px rgba(230, 234, 236, 0.35);
+  box-shadow: 0px 1px 15px 1px rgba(230, 234, 236, 0.35); }
+  .accordion.accordion-bordered .card {
+    margin: 0 2rem;
+    border-top: 1px solid #ebedf2;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0; }
+    .accordion.accordion-bordered .card .card-header,
+    .accordion.accordion-bordered .card .card-body {
+      padding-left: 0;
+      padding-right: 0; }
+    .accordion.accordion-bordered .card .card-header a:before {
+      color: #fe7c96; }
+    .accordion.accordion-bordered .card .card-header a[aria-expanded="true"] {
+      color: inherit; }
+      .accordion.accordion-bordered .card .card-header a[aria-expanded="true"]:before {
+        content: "\F0062"; }
+    .accordion.accordion-bordered .card .card-header a[aria-expanded="false"]:before {
+      content: "\F004A"; }
+    .accordion.accordion-bordered .card:first-child {
+      border-top: 0; }
+
+.accordion.accordion-filled .card {
+  padding: 0; }
+  .accordion.accordion-filled .card .card-header {
+    padding: 0; }
+    .accordion.accordion-filled .card .card-header a {
+      padding: 2rem 4.5rem 2rem 2rem;
+      -webkit-transition: all 0.2s linear;
+      transition: all 0.2s linear; }
+      .accordion.accordion-filled .card .card-header a:before {
+        top: 40%;
+        right: 40px; }
+      .accordion.accordion-filled .card .card-header a[aria-expanded="true"] {
+        background: -webkit-gradient(linear, left top, right top, from(#90caf9), color-stop(99%, #047edf));
+        background: linear-gradient(to right, #90caf9, #047edf 99%);
+        color: #ffffff; }
+        .accordion.accordion-filled .card .card-header a[aria-expanded="true"]:before {
+          content: "\F0143";
+          color: #ffffff; }
+      .accordion.accordion-filled .card .card-header a[aria-expanded="false"]:before {
+        content: "\f0140"; }
+  .accordion.accordion-filled .card .card-body {
+    padding: 0 2rem 2rem 2rem;
+    background: -webkit-gradient(linear, left top, right top, from(#90caf9), color-stop(99%, #047edf));
+    background: linear-gradient(to right, #90caf9, #047edf 99%);
+    color: #ffffff; }
+
+.accordion.accordion-solid-header .card {
+  padding: 0; }
+  .accordion.accordion-solid-header .card .card-header {
+    padding: 0; }
+    .accordion.accordion-solid-header .card .card-header a {
+      padding: 2rem 4.5rem 2rem 2rem;
+      -webkit-transition: all 0.2s linear;
+      transition: all 0.2s linear; }
+      .accordion.accordion-solid-header .card .card-header a:before {
+        top: 40%;
+        right: 40px; }
+      .accordion.accordion-solid-header .card .card-header a[aria-expanded="true"] {
+        background: -webkit-gradient(linear, left top, right top, from(#da8cff), to(#9a55ff));
+        background: linear-gradient(to right, #da8cff, #9a55ff);
+        color: #ffffff; }
+        .accordion.accordion-solid-header .card .card-header a[aria-expanded="true"]:before {
+          content: "\F0143";
+          color: #ffffff; }
+      .accordion.accordion-solid-header .card .card-header a[aria-expanded="false"]:before {
+        content: "\f0140"; }
+  .accordion.accordion-solid-header .card .card-body {
+    padding: 2rem; }
+
+.accordion.accordion-solid-content .card {
+  padding: 0; }
+  .accordion.accordion-solid-content .card .card-header {
+    padding: 0; }
+    .accordion.accordion-solid-content .card .card-header a {
+      padding: 2rem 4.5rem 2rem 2rem;
+      -webkit-transition: all 0.2s linear;
+      transition: all 0.2s linear; }
+      .accordion.accordion-solid-content .card .card-header a:before {
+        top: 40%;
+        right: 40px; }
+      .accordion.accordion-solid-content .card .card-header a[aria-expanded="true"] {
+        color: inherit; }
+        .accordion.accordion-solid-content .card .card-header a[aria-expanded="true"]:before {
+          content: "\F0143"; }
+      .accordion.accordion-solid-content .card .card-header a[aria-expanded="false"]:before {
+        content: "\f0140"; }
+  .accordion.accordion-solid-content .card .card-body {
+    padding: 2rem;
+    background: -webkit-gradient(linear, left top, right top, from(#84d9d2), to(#07cdae));
+    background: linear-gradient(to right, #84d9d2, #07cdae);
+    color: #ffffff; }
+
+.accordion.accordion-multi-colored .card .card-header,
+.accordion.accordion-multi-colored .card .card-body {
+  background: transparent;
+  color: #ffffff; }
+
+.accordion.accordion-multi-colored .card:nth-child(1) {
+  background: -webkit-gradient(linear, left top, right top, from(#da8cff), to(#9a55ff));
+  background: linear-gradient(to right, #da8cff, #9a55ff); }
+
+.accordion.accordion-multi-colored .card:nth-child(2) {
+  background: -webkit-gradient(linear, left top, right top, from(#84d9d2), to(#07cdae));
+  background: linear-gradient(to right, #84d9d2, #07cdae); }
+
+.accordion.accordion-multi-colored .card:nth-child(3) {
+  background: -webkit-gradient(linear, left top, right top, from(#ffbf96), to(#fe7096));
+  background: linear-gradient(to right, #ffbf96, #fe7096); }
+
+.accordion.accordion-multi-colored .card:nth-child(4) {
+  background: -webkit-gradient(linear, left top, right top, from(#f6e384), to(#ffd500));
+  background: linear-gradient(to right, #f6e384, #ffd500); }
+
+.accordion.accordion-multi-colored .card:nth-child(5) {
+  background: -webkit-gradient(linear, left top, right top, from(#90caf9), color-stop(99%, #047edf));
+  background: linear-gradient(to right, #90caf9, #047edf 99%); }
+
+.accordion.accordion-multi-colored .card .card-header a[aria-expanded="true"] {
+  color: inherit; }
+  .accordion.accordion-multi-colored .card .card-header a[aria-expanded="true"]:before {
+    content: "\F0143"; }
+
+.accordion.accordion-multi-colored .card .card-header a[aria-expanded="false"]:before {
+  content: "\f0140"; }
+
+
 /*# sourceMappingURL=style.css.map */

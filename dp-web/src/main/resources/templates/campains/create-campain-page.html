@@ -2,13 +2,169 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Deu Pet - Cadastrar Campanha de Saúde</title>
+  <meta charset="UTF-8">
+  <title>Deu Pet - Cadastrar Campanha de Saúde</title>
+  <script src="/resources/vendors/js/dropzone.js"></script>
+
 </head>
 <body>
 
-<div layout:fragment="body"></div>
+<div layout:fragment="body">
 
 
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title"> Cadastrar Campanha </h3>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
+          <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/campanhas/gerenciar-campanhas}">Gerenciar
+                                                                                                                Campanhas</a>
+          <li class="breadcrumb-item active" aria-current="page">Cadastrar Campanha</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Campanhas de saúde geral dos animais</h4>
+
+            <form method="post" action="upload.php" class="dropzone" id="mydropzone"
+                  enctype='multipart/form-data'>
+
+              <p class="card-description"> Insira os dados da campanha </p>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Título</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control">
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-md-3">
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Data Início</label>
+                    <div class="col-sm-8">
+                      <input type="date" class="form-control">
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-md-3">
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Data Fim</label>
+                    <div class="col-sm-8">
+                      <input type="date" class="form-control">
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="taDescription">Descrição</label>
+                    <textarea class="form-control" id="taDescription" rows="5"></textarea>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="tdRequisits">Requisitos</label>
+                    <textarea class="form-control" id="tdRequisits" rows="5"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <p class="card-description"> Formulário para campanha </p>
+
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="form-group row">
+                    <label class="col-sm-12 col-form-label">Link do formulário</label>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="form-group row">
+                    <label class="col-sm-12 col-form-label">Inserir imagem da campanha</label>
+                    <div class="col-sm-12">
+                      <div class="dropzone-previews" id="dropzonePreview"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </form>
+            <div>
+              <button type="submit" class="btn btn-gradient-primary mr-2">Cadastrar</button>
+              <a class="btn btn-light" th:href="@{/adocao/gerenciar-animais}">Cancelar</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<script type="application/javascript">
+Dropzone.options.mydropzone = {
+    //url does not has to be written
+    //if we have wrote action in the form
+    //tag but i have mentioned here just for convenience sake
+        url: 'upload.php',
+        addRemoveLinks: true,
+        autoProcessQueue: false, // this is important as you dont want form to be submitted unless you have clicked the submit button
+        autoDiscover: false,
+        paramName: 'pic', // this is optional Like this one will get accessed in php by writing $_FILE['pic'] // if you dont specify it then bydefault it taked 'file' as paramName eg: $_FILE['file']
+        previewsContainer: '#dropzonePreview', // we specify on which div id we must show the files
+        clickable: false, // this tells that the dropzone will not be clickable . we have to do it because v dont want the whole form to be clickable
+        accept: function(file, done) {
+            console.log("uploaded");
+            done();
+        },
+        error: function(file, msg){
+            alert(msg);
+        },
+        init: function() {
+            var myDropzone = this;
+            //now we will submit the form when the button is clicked
+            $("#sbmtbtn").on('click',function(e) {
+               e.preventDefault();
+               myDropzone.processQueue(); // this will submit your form to the specified action path
+              // after this, your whole form will get submitted with all the inputs + your files and the php code will remain as usual
+        //REMEMBER you DON'T have to call ajax or anything by yourself, dropzone will take care of that
+            });
+        } // init end
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
 </body>
 </html>

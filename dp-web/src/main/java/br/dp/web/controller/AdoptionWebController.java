@@ -27,4 +27,9 @@ public class AdoptionWebController {
     public String getDetailPage() {
         return "adoption/detail-animal-page";
     }
+
+    @GetMapping("/editar-animal")
+    public String getEditPage() {
+        return "adoption/edit-animal-page";
+    }
 }

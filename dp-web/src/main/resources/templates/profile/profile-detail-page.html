@@ -48,7 +48,9 @@
                   <button class="btn btn-sm btn-gradient-primary btn-block">Alterar Imagem</button>
                 </div>
                 <div class="d-flex justify-content-between mb-1">
-                  <button class="btn btn-sm btn-gradient-primary btn-block">Alterar Senha</button>
+                  <button class="btn btn-sm btn-gradient-primary btn-block"
+                          onclick="showExample()">Alterar Senha
+                  </button>
                 </div>
                 <div class="d-flex justify-content-between mb-1">
                   <button class="btn btn-sm btn-gradient-primary btn-block">Solicitar Alteração de Dados</button>
@@ -100,7 +102,6 @@
               </div>
             </div>
 
-
           </div>
         </div>
       </div>
@@ -109,8 +110,46 @@
 </div>
 
 
-</div>
-
-
 </body>
 </html>
+
+<script>
+window.showExample = () => {
+new swal({
+  title: 'Alterar senha',
+  icon: 'warning',
+  html: `<span class="float-left"> Nova senha </span>
+         <input type="password" id="newPassword" class="swal2-input" placeholder="Nova senha">
+         <span class="float-left"> Confirmar senha </span>
+         <input type="password" id="confirmNewPassword" class="swal2-input" placeholder="Confirmar senha">`,
+  buttonsStyling: false,
+  confirmButtonText: 'Alterar',
+  cancelButtonText: 'Cancelar',
+  showCancelButton: true,
+  customClass: {
+    confirmButton: "btn btn-primary",
+    cancelButton: "btn btn-danger",
+  },
+  focusConfirm: false,
+
+  preConfirm: () => {
+    const newPassword = Swal.getPopup().querySelector('#newPassword').value
+    const confirmNewPassword = Swal.getPopup().querySelector('#confirmNewPassword').value
+
+    if (!newPassword || !confirmNewPassword) {
+      Swal.showValidationMessage(`Senha não preenchida`)
+    } else if (newPassword !== confirmNewPassword) {
+      Swal.showValidationMessage(`As senhas informadas não são iguais`)
+    }
+    return { newPassword: newPassword }
+  }
+}).then((result) => {
+  Swal.fire(`
+    newPassword: ${result.value.newPassword}
+  `.trim())
+})
+}
+
+
+</script>
+

@@ -1,104 +1,102 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Deu Pet - Instituição</title>
-    <script></script>
+  <meta charset="UTF-8">
+  <title>Deu Pet - Instituição</title>
+  <script></script>
 </head>
 <body>
 <div layout:fragment="body">
-    <div class="content-wrapper">
-        <div class="page-header">
-            <h3 class="page-title"> Gerenciar Instituições </h3>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a th:href="@{/}">Início</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Gerenciar Instituições</li>
-                    </li>
-                </ol>
-            </nav>
-        </div>
-        <div class="row">
-            <div class="col-12 grid-margin">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <h4 class="card-title">Lista de instituições cadastradas</h4>
-                                </div>
-                                <div class="col-md-2">
-                                    <a class="btn btn-gradient-primary btn-sm"
-                                       th:href="@{/instituicao/cadastrar-instituicao}">
-                                        Cadastrar Instituições</a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="accordion" id="accordion" role="tablist">
-                                    <div class="col-12">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th> Instituição</th>
-                                <th> Email</th>
-                                <th> Telefone</th>
-                                <th> ID de registro</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody id="myTable">
-                            <tr>
-                                <td>
-                                    <img src="/resources/images/animals/cachorro1.png" class="me-2" alt="image">
-                                    Sociedade Protetora Dos Animais
-                                </td>
-                                <td> spa@gmail.com</td>
-                                <td> (35) 99999-9999</td>
-                                <td> 1</td>
-                                <td>
-                                    <a class="btn btn-gradient-info btn-sm"> Editar</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="/resources/images/animals/gato1.png" class="me-2" alt="image"> Lar Feliz
-                                </td>
-                                <td> larfeliz@gmail.com</td>
-                                <td> (35) 99999-9999</td>
-
-                                <td> 2</td>
-                                <td>
-                                    <a class="btn btn-gradient-info btn-sm"> Editar</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="/resources/images/animals/cachorro2.png" class="me-2" alt="image">
-                                    Maria do Carmo
-                                </td>
-                                <td> euamocachorro@gmail.com</td>
-                                <td> (35) 99999-9999</td>
-
-                                <td> 3</td>
-                                <td>
-                                    <a class="btn btn-gradient-info btn-sm"> Editar</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+  <div class="page-header">
+    <h3 class="page-title"> Gerenciar Instituições </h3>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a th:href="@{/}">Início</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Gerenciar Instituições</li>
+        </li>
+      </ol>
+    </nav>
+  </div>
+  <div class="row">
+    <div class="col-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-md-10">
+                <h4 class="card-title">Lista de instituições cadastradas</h4>
+              </div>
+              <div class="col-md-2">
+                <a class="btn btn-gradient-primary btn-sm"
+                   th:href="@{/instituicao/cadastrar-instituicao}">
+                  Cadastrar Instituições</a>
+              </div>
             </div>
+            <div class="row">
+              <div class="accordion" id="accordion" role="tablist">
+                <div class="col-12">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th> Instituição</th>
+              <th> Email</th>
+              <th> Telefone</th>
+              <th> ID de registro</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            <tr>
+              <td>
+                <img src="/resources/images/animals/cachorro1.png" class="me-2" alt="image">
+                Sociedade Protetora Dos Animais
+              </td>
+              <td> spa@gmail.com</td>
+              <td> (35) 99999-9999</td>
+              <td> 1</td>
+              <td>
+                <a class="btn btn-gradient-info btn-sm"> Editar</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="/resources/images/animals/gato1.png" class="me-2" alt="image"> Lar Feliz
+              </td>
+              <td> larfeliz@gmail.com</td>
+              <td> (35) 99999-9999</td>
+
+              <td> 2</td>
+              <td>
+                <a class="btn btn-gradient-info btn-sm"> Editar</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="/resources/images/animals/cachorro2.png" class="me-2" alt="image">
+                Maria do Carmo
+              </td>
+              <td> euamocachorro@gmail.com</td>
+              <td> (35) 99999-9999</td>
+
+              <td> 3</td>
+              <td>
+                <a class="btn btn-gradient-info btn-sm"> Editar</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 </div>
 </body>

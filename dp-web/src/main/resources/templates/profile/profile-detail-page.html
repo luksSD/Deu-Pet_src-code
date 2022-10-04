@@ -144,11 +144,40 @@ new swal({
     return { newPassword: newPassword }
   }
 }).then((result) => {
-  Swal.fire(`
-    newPassword: ${result.value.newPassword}
-  `.trim())
+  if (result.isConfirmed) {
+    swal.fire(
+      'Alterado!',
+      'Sua senha foi alterada com sucesso.',
+      'success',
+      window.location = "/perfil/alterar-senha/" + newPassword.value,
+    )
+  }
+
 })
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </script>

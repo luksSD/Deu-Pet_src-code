@@ -22,4 +22,9 @@ public class AdoptionWebController {
     public String getAdoptionRequestPage() {
         return "adoption/adoption-request-page";
     }
+
+    @GetMapping("/detalhes-animal")
+    public String getDetailPage() {
+        return "adoption/detail-animal-page";
+    }
 }

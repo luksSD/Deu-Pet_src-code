@@ -23,6 +23,11 @@ public class AdoptionWebController {
         return "adoption/adoption-request-page";
     }
 
+    @GetMapping("/detalhes-solicitacao-adocao")
+    public String getDetailAdoptionRequestPage() {
+        return "adoption/detail-adoption-request-page";
+    }
+
     @GetMapping("/detalhes-animal")
     public String getDetailPage() {
         return "adoption/detail-animal-page";

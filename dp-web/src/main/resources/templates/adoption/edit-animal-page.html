@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Deu Pet - Editar Animal</title>
+
+</head>
+
+<body>
+
+<div layout:fragment="body">
+
+    <div class="page-header">
+        <h3 class="page-title"> Editar Animal </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/adocao/gerenciar-animais}">Gerenciar
+                    Animais</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/adocao/detalhes-animal}">Detalhes
+                    Animais</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Editar Animal</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Dados do Animal</h4>
+
+                    <form method="post" action="upload.php" class="dropzone" id="mydropzone"
+                          enctype='multipart/form-data'>
+
+                        <p class="card-description"> Altere os dados do animal </p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Nome</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Tipo</label>
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="typeRadios"
+                                                       id="typeRadios1" value="" checked=""> Cachoro </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="typeRadios"
+                                                       id="typeRadios2" value="option2"> Gato </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Peso</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" data-inputmask="'alias': 'wheight'"
+                                               im-insert="true" style="text-align: right;">
+                                        <!--                                            <input type="text" class="form-control">-->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Sexo</label>
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="sexRadios"
+                                                       id="sexRadios1" value="" checked=""> Macho </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="sexRadios"
+                                                       id="sexRadios2" value="option2"> Fêmea </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Porte</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Raça</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row"></div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Pelagem Primária</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Pelagem Secundária</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Temperamento</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-mlx-10">
+                                <div class="dropzone-previews" id="dropzonePreview"></div>
+                            </div>
+                        </div>
+
+                    </form>
+                    <div>
+                        <button type="submit" class="btn btn-gradient-primary mr-2">Salvar</button>
+                        <a class="btn btn-light" th:href="@{/adocao/gerenciar-animais}">Sair</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Deu Pet - Detalhes Solicitação Adoção</title>
+</head>
+<body>
+
+<div layout:fragment="body">
+
+    <div class="page-header">
+        <h3 class="page-title"> Detalhes Solicitação Adoção </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/adocao/solicitacoes-adocao}">Solicitações de adoção</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Detalhes Solicitação Adoção</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="border-bottom text-center pb-4">
+                                <img src="/resources/images/faces/face1.jpg" alt="profile"
+                                     class=" mw-100 rounded mb-3">
+                            </div>
+                            <div class="py-4">
+
+                                <div class="border-bottom">
+                                    <p class="lead">
+                                        <span class="float-left"> Nome </span>
+                                        <span class="float-right text-muted"> Vinicius </span>
+                                    </p>
+                                    <p class="lead">
+                                        <span class="float-left"> Cidade </span>
+                                        <span class="float-right text-muted"> Santa Rita do Sapucai </span>
+                                    </p>
+                                    <p class="lead">
+                                        <span class="float-left"> Email </span>
+                                        <span class="float-right text-muted"> vinicius@gmail.com </span>
+                                    </p>
+                                    <p class="lead">
+                                        <span class="float-left"> Telefone </span>
+                                        <span class="float-right text-muted"> (35) 99999-9999 </span>
+                                    </p>
+                                    <p class="lead">
+                                        <span class="float-left"> Data Solicitação </span>
+                                        <span class="float-right text-muted"> 04/01/2023 </span>
+                                    </p>
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="col-lg-6">
+                            <div class="border-bottom text-center pb-4">
+                                <img src="/resources/images/animals/cachorro2.png" alt="profile"
+                                     class=" mw-100 rounded mb-3">
+                            </div>
+                            <div class="py-4">
+
+                                <div class="border-bottom">
+                                    <p class="lead">
+                                        <span class="float-left"> Espécie </span>
+                                        <span class="float-right text-muted"> Cachorro </span>
+                                    </p>
+                                    <p class="lead">
+                                        <span class="float-left"> Sexo </span>
+                                        <span class="float-right text-muted"> Macho </span>
+                                    </p>
+                                    <p class="lead">
+                                        <span class="float-left"> Porte </span>
+                                        <span class="float-right text-muted"> Médio </span>
+                                    </p>
+                                    <p class="lead">
+                                        <span class="float-left"> Raça </span>
+                                        <span class="float-right text-muted"> Sem Raça Definida </span>
+                                    </p>
+                                    <p class="lead">
+                                        <span class="float-left"> Pelagem primaria </span>
+                                        <span class="float-right text-muted"> Marrom </span>
+                                    </p>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class=text-align: center>
+
+                            <button type="button" class="btn btn-gradient-primary btn-lg btn-block"> Deu Pet!</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+</body>
+</html>

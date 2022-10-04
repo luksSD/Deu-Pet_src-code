@@ -22,4 +22,19 @@ public class AdoptionWebController {
     public String getAdoptionRequestPage() {
         return "adoption/adoption-request-page";
     }
+
+    @GetMapping("/detalhes-solicitacao-adocao")
+    public String getDetailAdoptionRequestPage() {
+        return "adoption/detail-adoption-request-page";
+    }
+
+    @GetMapping("/detalhes-animal")
+    public String getDetailPage() {
+        return "adoption/detail-animal-page";
+    }
+
+    @GetMapping("/editar-animal")
+    public String getEditPage() {
+        return "adoption/edit-animal-page";
+    }
 }

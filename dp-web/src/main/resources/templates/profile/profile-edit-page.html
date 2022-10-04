@@ -3,12 +3,150 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Deu Pet - Alteração de Dados</title>
+    <title>Deu Pet - Alterar Dados</title>
 </head>
 <body>
 
-<div layout:fragment="body"></div>
+<div layout:fragment="body">
 
+    <div class="page-header">
+        <h3 class="page-title"> Alterar Dados </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Alterar Dados</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Dados da Instituição</h4>
+
+                    <form method="post" action="upload.php" enctype='multipart/form-data'>
+
+                        <p class="card-description"> Altere os dados da instituição </p>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Nome/Razão Social</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Telefone/Celular</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">CNPJ</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">CPF</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="card-description"> Endereço </p>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">CEP</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Cidade</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Logradouro</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Número</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="card-description"> Informações de Acesso </p>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">E-Mail</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Senha</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                    <label class="col-sm-3 col-form-label">Confirmar Senha</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    <div>
+                        <button type="submit" class="btn btn-gradient-primary mr-2">Salvar</button>
+                        <a class="btn btn-light" th:href="@{/}">Cancelar</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

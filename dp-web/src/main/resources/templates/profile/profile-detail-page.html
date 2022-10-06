@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Deu Pet - Detalhes do Perfíl</title>
+
+  <script src="/resources/js/validate-password.js"></script>
 </head>
 <body>
 
@@ -47,11 +49,54 @@
                 <div class="d-flex justify-content-between mb-1">
                   <button class="btn btn-sm btn-gradient-primary btn-block">Alterar Imagem</button>
                 </div>
+
                 <div class="d-flex justify-content-between mb-1">
-                  <button class="btn btn-sm btn-gradient-primary btn-block"
-                          onclick="showExample()">Alterar Senha
+                  <button type="button" class="btn btn-sm btn-gradient-primary btn-block" data-toggle="modal"
+                          data-target="#exampleModal">
+                    Alterar Senha
                   </button>
                 </div>
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+
+                      <div class="swal2-icon swal2-warning swal2-icon-show" style="display: flex;">
+                        <div class="swal2-icon-content">!</div>
+                      </div>
+                      <h2 class="swal2-title" id="swal2-title" style="display: block;">Deseja alterar senha?</h2>
+                      <div class="modal-body">
+                        <form>
+                          <div class="form-group">
+                            <label for="new-password" class="col-form-label">Digite a nova senha:</label>
+                            <input type="text" class="form-control" id="new-password">
+                          </div>
+                          <div class="form-group">
+                            <label for="confirm-password" class="col-form-label">Confirme a senha:</label>
+                            <input type="text" class="form-control" id="confirm-password">
+                          </div>
+
+                          <div class="form-group bg-light py-1 text-center text-danger d-none" id="errorMessageDiv">
+                            <p id="errorMessage"></p>
+                          </div>
+
+                        </form>
+                      </div>
+
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-gradient-danger" onclick="clearErrorMessage();"
+                                data-dismiss="modal">Cancelar
+                        </button>
+                        <button class="btn btn-gradient-success" id="teste" onclick="validatePassword();"
+                                type="submit">Alterar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
                 <div class="d-flex justify-content-between mb-1">
                   <button class="btn btn-sm btn-gradient-primary btn-block">Solicitar Alteração de Dados</button>
                 </div>
@@ -109,76 +154,5 @@
   </div>
 </div>
 
-
 </body>
 </html>
-
-<script>
-window.showExample = () => {
-new swal({
-  title: 'Alterar senha',
-  icon: 'warning',
-  html: `<span class="float-left"> Nova senha </span>
-         <input type="password" id="newPassword" class="swal2-input" placeholder="Nova senha">
-         <span class="float-left"> Confirmar senha </span>
-         <input type="password" id="confirmNewPassword" class="swal2-input" placeholder="Confirmar senha">`,
-  buttonsStyling: false,
-  confirmButtonText: 'Alterar',
-  cancelButtonText: 'Cancelar',
-  showCancelButton: true,
-  customClass: {
-    confirmButton: "btn btn-primary",
-    cancelButton: "btn btn-danger",
-  },
-  focusConfirm: false,
-
-  preConfirm: () => {
-    const newPassword = Swal.getPopup().querySelector('#newPassword').value
-    const confirmNewPassword = Swal.getPopup().querySelector('#confirmNewPassword').value
-
-    if (!newPassword || !confirmNewPassword) {
-      Swal.showValidationMessage(`Senha não preenchida`)
-    } else if (newPassword !== confirmNewPassword) {
-      Swal.showValidationMessage(`As senhas informadas não são iguais`)
-    }
-    return { newPassword: newPassword }
-  }
-}).then((result) => {
-  if (result.isConfirmed) {
-    swal.fire(
-      'Alterado!',
-      'Sua senha foi alterada com sucesso.',
-      'success',
-      window.location = "/perfil/alterar-senha/" + newPassword.value,
-    )
-  }
-
-})
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</script>
-

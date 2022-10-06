@@ -1,48 +1,64 @@
 package br.dp.api.service.impl;
 
-import java.util.List;
-
+import br.dp.api.service.InstituicaoService;
+import br.dp.db.dao.InstituicaoDao;
+import br.dp.db.dao.MunicipioDao;
+import br.dp.model.Instituicao;
+import br.dp.model.Municipio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.dp.api.service.InstituicaoService;
-import br.dp.db.dao.InstituicaoDao;
-import br.dp.model.Instituicao;
+import java.util.List;
 
 @Service
 public class InstituicaoServiceImpl implements InstituicaoService {
 
-	@Autowired
-	private InstituicaoDao dao;
+    @Autowired
+    private InstituicaoDao instituicaoDao;
+    private MunicipioDao municipioDao;
 
-	@Override
-	public List<Instituicao> readAll() {
-		// TODO Auto-generated method stub
-		return dao.readAll();
-	}
+    @Override
+    public List<Instituicao> readAll() {
+        // TODO Auto-generated method stub
+        return instituicaoDao.readAll();
+    }
 
-	@Override
-	public Instituicao readById(final Long id) {
-		// TODO Auto-generated method stub
-		return dao.readById(id);
-	}
+    @Override
+    public Instituicao readById(final Long id) {
+        // TODO Auto-generated method stub
+        return instituicaoDao.readById(id);
+    }
 
-	@Override
-	public Long create(final Instituicao entity) {
-		// TODO Auto-generated method stub
-		return dao.create(entity);
-	}
+    @Override
+    public Long create(final Instituicao entity) {
 
-	@Override
-	public boolean update(final Instituicao entity) {
-		// TODO Auto-generated method stub
-		return dao.update(entity);
-	}
+        final Long id;
+        final Municipio municipio = null;
 
-	@Override
-	public boolean delete(final Long id) {
-		// TODO Auto-generated method stub
-		return dao.delete(id);
-	}
+        municipio.setNome(entity.getNome());
+        municipio.setUf(entity.getUf());
+
+        id = municipioDao.checkExist(municipio);
+
+        if (id != -1) {
+            entity.setMunicipioId(id);
+        } else {
+            return id;
+        }
+
+        return instituicaoDao.create(entity);
+    }
+
+    @Override
+    public boolean update(final Instituicao entity) {
+        // TODO Auto-generated method stub
+        return instituicaoDao.update(entity);
+    }
+
+    @Override
+    public boolean delete(final Long id) {
+        // TODO Auto-generated method stub
+        return instituicaoDao.delete(id);
+    }
 
 }

@@ -1,15 +1,12 @@
 package br.dp.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public abstract class BasePojo {
 
-	private Long id;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(final Long id) {
-		this.id = id;
-	}
+    private Long id;
 
 }

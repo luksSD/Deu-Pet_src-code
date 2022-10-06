@@ -4,11 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Deu Pet - Cadastrar Instituição</title>
+    <script src="/resources/js/viacep.js"></script>
 </head>
+
 <body>
 
 <div layout:fragment="body">
-
+    
     <div class="page-header">
         <h3 class="page-title"> Cadastrar Instituição </h3>
         <nav aria-label="breadcrumb">
@@ -16,7 +18,7 @@
                 <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a
                         th:href="@{/instituicao/gerenciar-instituicoes}">Gerenciar
-                    Instituições</a>
+                                                                         Instituições</a>
                 <li class="breadcrumb-item active" aria-current="page">Cadastrar Instituições</li>
             </ol>
         </nav>
@@ -26,11 +28,11 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Dados da Instituição</h4>
-
+                    
                     <form method="post" action="upload.php" enctype='multipart/form-data'>
-
+                        
                         <p class="card-description"> Insira os dados da instituição a ser cadastrado </p>
-
+                        
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
@@ -40,7 +42,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Telefone/Celular</label>
@@ -50,7 +52,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
@@ -60,7 +62,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">CPF</label>
@@ -70,16 +72,17 @@
                                 </div>
                             </div>
                         </div>
-
+                        
                         <p class="card-description"> Endereço </p>
-
+                        
                         <div class="row">
-
+                            
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">CEP</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control">
+                                        <input class="form-control" id="cep" value="" maxlength="9"
+                                               onblur="pesquisacep(this.value);">
                                     </div>
                                 </div>
                             </div>
@@ -87,19 +90,19 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Cidade</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control">
+                                        <input class="form-control" id="cidade">
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        
                         <div class="row">
-
+                            
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Logradouro</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control">
+                                        <input class="form-control" id="rua">
                                     </div>
                                 </div>
                             </div>
@@ -112,9 +115,9 @@
                                 </div>
                             </div>
                         </div>
-
+                        
                         <p class="card-description"> Informações de Acesso </p>
-
+                        
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
@@ -124,7 +127,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Senha</label>
@@ -138,13 +141,13 @@
                                 </div>
                             </div>
                         </div>
-
+                    
                     </form>
                     <div>
                         <button type="submit" class="btn btn-gradient-primary mr-2">Cadastrar</button>
                         <a class="btn btn-light" th:href="@{/}">Cancelar</a>
                     </div>
-
+                
                 </div>
             </div>
         </div>

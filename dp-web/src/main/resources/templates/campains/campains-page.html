@@ -1,83 +1,85 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
-  <meta charset="UTF-8">
-  <title>Deu Pet - Campanhas</title>
-  <script></script>
+    <meta charset="UTF-8">
+    <title>Deu Pet - Campanhas</title>
+    <script></script>
 </head>
 <body>
 <div layout:fragment="body">
-  <div class="page-header">
-    <h3 class="page-title"> Gerenciar Campanhas </h3>
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a th:href="@{/}">Início</a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">Gerenciar Campanhas</li>
-        </li>
-      </ol>
-    </nav>
-  </div>
-  <div class="row">
-    <div class="col-12 grid-margin">
-      <div class="card">
-        <div class="card-body">
-          <div class="col-12">
-            <div class="row">
-              <div class="col-md-10">
-                <h4 class="card-title">Lista de campanhas cadastradas</h4>
-              </div>
-              <div class="col-md-2">
-                <a class="btn btn-gradient-primary btn-sm"
-                   th:href="@{/campanhas/cadastrar-campanhas}">
-                  Cadastrar campanha</a>
-              </div>
-            </div>
-            <div class="row">
-              <div class="accordion" id="accordion" role="tablist">
-                <div class="col-12">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-            <tr>
-              <th> Título</th>
-              <th> Data inicio</th>
-              <th> Data fim</th>
-              <th> ID de registro</th>
-              <th></th>
-            </tr>
-            </thead>
-            <tbody id="myTable">
-            <tr>
-              <td>Vacinação</td>
-              <td> 01/01/2022</td>
-              <td> 01/05/2023</td>
-              <td> 1</td>
-              <td>
-                <a class="btn btn-gradient-info btn-sm"> Editar</a>
-              </td>
-            </tr>
-            <tr>
-              <td>Castração</td>
-              <td> 01/09/2022</td>
-              <td> 01/11/2022</td>
-              <td> 2</td>
-              <td>
-                <a class="btn btn-gradient-info btn-sm"> Editar</a>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+    <div class="page-header">
+        <h3 class="page-title"> Gerenciar Campanhas </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a th:href="@{/}">Início</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Gerenciar Campanhas</li>
+                </li>
+            </ol>
+        </nav>
     </div>
-  </div>
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <h4 class="card-title">Lista de campanhas cadastradas</h4>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="btn btn-gradient-primary btn-sm"
+                                   th:href="@{/campanhas/cadastrar-campanhas}">
+                                    Cadastrar campanha</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="accordion" id="accordion" role="tablist">
+                                <div class="col-12">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th> Título</th>
+                                <th> Data inicio</th>
+                                <th> Data fim</th>
+                                <th> ID de registro</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody id="myTable">
+                            <tr>
+                                <td>Vacinação</td>
+                                <td> 01/01/2022</td>
+                                <td> 01/05/2023</td>
+                                <td> 1</td>
+                                <td>
+                                    <a class="btn btn-gradient-info btn-sm"> Editar</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Castração</td>
+                                <td> 01/09/2022</td>
+                                <td> 01/11/2022</td>
+                                <td> 2</td>
+                                <td>
+                                    <a class="btn btn-gradient-info btn-sm"> Editar</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
 </body>

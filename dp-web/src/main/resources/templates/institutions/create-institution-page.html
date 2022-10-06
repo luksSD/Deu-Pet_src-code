@@ -29,7 +29,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Dados da Instituição</h4>
                     
-                    <form method="post" action="upload.php" enctype='multipart/form-data'>
+                    <form th:action="@{/instituicao/create}" method="POST" th:objetc="${instituicao}">
                         
                         <p class="card-description"> Insira os dados da instituição a ser cadastrado </p>
                         
@@ -38,7 +38,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Nome/Razão Social</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" th:field="${instituicao.nome}">
                                     </div>
                                 </div>
                             </div>
@@ -47,18 +47,18 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Telefone/Celular</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" th:field="${instituicao.telefone}">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="row">
+                        <div class=" row">
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">CNPJ</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" th:field="${instituicao.cnpj}">
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">CPF</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" th:field="${instituicao.cpf}">
                                     </div>
                                 </div>
                             </div>
@@ -82,27 +82,29 @@
                                     <label class="col-sm-3 col-form-label">CEP</label>
                                     <div class="col-sm-9">
                                         <input class="form-control" id="cep" value="" maxlength="9"
-                                               onblur="pesquisacep(this.value);">
+                                               onblur="pesquisacep(this.value);" th:field="${instituicao.cep}">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Cidade</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" id="cidade">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Logradouro</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" id="rua">
+                                        <input class="form-control" id="rua" th:field="${instituicao.logradouro}">
+                                    </div>
+                                </div>
+                            
+                            
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Cidade</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="cidade"
+                                               th:field="${instituicao.muinicipioNome}">
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +112,18 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Número</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control">
+                                        <input class="form-control" th:field="${instituicao.numero}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">UF</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control" id="uf" th:field="${instituicao.uf}">
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +136,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">E-Mail</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" th:field="${instituicao.email}">
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +145,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Senha</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" th:field="${instituicao.senha}">
                                     </div>
                                     <label class="col-sm-3 col-form-label">Confirmar Senha</label>
                                     <div class="col-sm-9">

@@ -1,5 +1,6 @@
 package br.dp.web.controller;
 
+import br.dp.model.Instituicao;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,7 @@ public class InstitutionWebController {
     }
 
     @GetMapping("/cadastrar-instituicao")
-    public String getRegisterInstitutionPage() {
+    public String getRegisterInstitutionPage(final Instituicao instituicao) {
         return "institutions/create-institution-page";
     }
 

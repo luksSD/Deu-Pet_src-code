@@ -2,6 +2,7 @@
             //Limpa valores do formulário de cep.
             document.getElementById('rua').value=("");
             document.getElementById('cidade').value=("");
+            document.getElementById('uf').value=("");
     }
 
     function meu_callback(conteudo) {
@@ -9,6 +10,7 @@
             //Atualiza os campos com os valores.
             document.getElementById('rua').value=(conteudo.logradouro);
             document.getElementById('cidade').value=(conteudo.localidade);
+            document.getElementById('uf').value=(conteudo.uf);
         } //end if.
         else {
             //CEP não Encontrado.
@@ -34,6 +36,7 @@
                 //Preenche os campos com "..." enquanto consulta webservice.
                 document.getElementById('rua').value="...";
                 document.getElementById('cidade').value="...";
+                document.getElementById('uf').value="...";
 
                 //Cria um elemento javascript.
                 var script = document.createElement('script');

@@ -61,16 +61,7 @@
                                                                         </label>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-2">
-                                                                    <div class="form-check form-check-primary">
-                                                                        <label class="form-check-label">
-                                                                            <input type="checkbox"
-                                                                                   class="form-check-input animal-status"
-                                                                                   value="Adotado">
-                                                                            Adotado <i class="input-helper"></i>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
+
                                                                 <div class="col-2">
                                                                     <div class="form-check form-check-primary">
                                                                         <label class="form-check-label">
@@ -118,61 +109,20 @@
                         <tbody id="myTable">
                         <tr>
                             <td>
-                                <img src="/resources/images/animals/cachorro1.png" class="me-2" alt="image">
-                                Caramelo
+                                <img src="/resources/images/animals/gato1.png" class="me-2" alt="image">
                             </td>
-                            <td> Cachorro</td>
-                            <td>
-                                <label class="badge badge-gradient-success">ADOTADO</label>
-                            </td>
-                            <td> 1</td>
-                            <td>
-                                <a class="btn btn-gradient-info btn-sm" th:href="@{/adocao/detalhes-animal}">
-                                    Detalhes</a>
-                            </td>
+                        <tr th:each="animal : ${listaAnimal}">
+                            <td th:text="${animal.id}">id aqui</td>
+                            <td th:text="${animal.nome}">nome aqui</td>
+                            <td th:text="${animal.tipo}">tipo aqui</td>
+
                         </tr>
+                        <td>
+                            <a class="btn btn-gradient-info btn-sm" th:href="@{/adocao/detalhes-animal}">
+                                Detalhes</a>
+                        </td>
                         <tr>
-                            <td>
-                                <img src="/resources/images/animals/gato1.png" class="me-2" alt="image"> Miau
-                            </td>
-                            <td> Gato</td>
-                            <td>
-                                <label class="badge badge-gradient-warning">PARA ADOÇÂO</label>
-                            </td>
-                            <td> 2</td>
-                            <td>
-                                <a class="btn btn-gradient-info btn-sm" th:href="@{/adocao/detalhes-animal}">
-                                    Detalhes</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="/resources/images/animals/cachorro2.png" class="me-2" alt="image">
-                                Tiburcinho
-                            </td>
-                            <td> Cachorro</td>
-                            <td>
-                                <label class="badge badge-gradient-warning">PARA ADOÇÂO</label>
-                            </td>
-                            <td> 3</td>
-                            <td>
-                                <a class="btn btn-gradient-info btn-sm" th:href="@{/adocao/detalhes-animal}">
-                                    Detalhes</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="/resources/images/animals/gato2.png" class="me-2" alt="image"> Johnzinho
-                            </td>
-                            <td> Gato</td>
-                            <td>
-                                <label class="badge badge-gradient-success">ADOTADO</label>
-                            </td>
-                            <td> 4</td>
-                            <td>
-                                <a class="btn btn-gradient-info btn-sm" th:href="@{/adocao/detalhes-animal}">
-                                    Detalhes</a>
-                            </td>
+
                         </tr>
                         </tbody>
                     </table>
@@ -203,6 +153,17 @@ $(document).ready(function() {
             $("#myTable tr").show()
     });
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -24,7 +24,6 @@ public class AnimalServiceImpl implements AnimalService {
         List<Animal> response = null;
         try {
 
-
             final RestTemplate restTemplate = new RestTemplate();
 
             final HttpEntity<String> httpEntity = new HttpEntity<String>("");

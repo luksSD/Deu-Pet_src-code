@@ -2,95 +2,105 @@ package br.dp.model;
 
 public class Animal extends BasePojo {
 
-	private String tipo;
-	private String sexo;
-	private Double peso;
-	private String porte;
-	private String raca;
-	private boolean situacaoAodocao;
-	private String temperamento;
-	private String pelagemPrimaria;
-	private String pelagemSecundaria;
-	private Long idInstituicao;
+    private String tipo;
 
-	public Long getIdInstituicao() {
-		return idInstituicao;
-	}
+    private String nome;
+    private String sexo;
+    private Double peso;
+    private String porte;
+    private String raca;
+    private boolean situacaoAodocao;
+    private String temperamento;
+    private String pelagemPrimaria;
+    private String pelagemSecundaria;
+    private Long idInstituicao;
 
-	public void setIdInstituicao(final Long idInstituicao) {
-		this.idInstituicao = idInstituicao;
-	}
+    public Long getIdInstituicao() {
+        return idInstituicao;
+    }
 
-	public String getTipo() {
-		return tipo;
-	}
+    public void setIdInstituicao(final Long idInstituicao) {
+        this.idInstituicao = idInstituicao;
+    }
 
-	public void setTipo(final String tipo) {
-		this.tipo = tipo;
-	}
+    public String getTipo() {
+        return tipo;
+    }
 
-	public String getSexo() {
-		return sexo;
-	}
+    public void setTipo(final String tipo) {
+        this.tipo = tipo;
+    }
 
-	public void setSexo(final String sexo) {
-		this.sexo = sexo;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public Double getPeso() {
-		return peso;
-	}
+    public void setNome(final String nome) {
+        this.nome = nome;
+    }
 
-	public void setPeso(final Double peso) {
-		this.peso = peso;
-	}
+    public String getSexo() {
+        return sexo;
+    }
 
-	public String getPorte() {
-		return porte;
-	}
+    public void setSexo(final String sexo) {
+        this.sexo = sexo;
+    }
 
-	public void setPorte(final String porte) {
-		this.porte = porte;
-	}
+    public Double getPeso() {
+        return peso;
+    }
 
-	public String getRaca() {
-		return raca;
-	}
+    public void setPeso(final Double peso) {
+        this.peso = peso;
+    }
 
-	public void setRaca(final String raca) {
-		this.raca = raca;
-	}
+    public String getPorte() {
+        return porte;
+    }
 
-	public boolean isSituacaoAodocao() {
-		return situacaoAodocao;
-	}
+    public void setPorte(final String porte) {
+        this.porte = porte;
+    }
 
-	public void setSituacaoAodocao(final boolean situacaoAodocao) {
-		this.situacaoAodocao = situacaoAodocao;
-	}
+    public String getRaca() {
+        return raca;
+    }
 
-	public String getTemperamento() {
-		return temperamento;
-	}
+    public void setRaca(final String raca) {
+        this.raca = raca;
+    }
 
-	public void setTemperamento(final String temperamento) {
-		this.temperamento = temperamento;
-	}
+    public boolean isSituacaoAodocao() {
+        return situacaoAodocao;
+    }
 
-	public String getPelagemPrimaria() {
-		return pelagemPrimaria;
-	}
+    public void setSituacaoAodocao(final boolean situacaoAodocao) {
+        this.situacaoAodocao = situacaoAodocao;
+    }
 
-	public void setPelagemPrimaria(final String pelagemPrimaria) {
-		this.pelagemPrimaria = pelagemPrimaria;
-	}
+    public String getTemperamento() {
+        return temperamento;
+    }
 
-	public String getPelagemSecunaria() {
-		return pelagemSecundaria;
-	}
+    public void setTemperamento(final String temperamento) {
+        this.temperamento = temperamento;
+    }
 
-	public void setPelagemSecundaria(final String pelagemSecundaria) {
-		this.pelagemSecundaria = pelagemSecundaria;
-	}
+    public String getPelagemPrimaria() {
+        return pelagemPrimaria;
+    }
+
+    public void setPelagemPrimaria(final String pelagemPrimaria) {
+        this.pelagemPrimaria = pelagemPrimaria;
+    }
+
+    public String getPelagemSecunaria() {
+        return pelagemSecundaria;
+    }
+
+    public void setPelagemSecundaria(final String pelagemSecundaria) {
+        this.pelagemSecundaria = pelagemSecundaria;
+    }
 
 }

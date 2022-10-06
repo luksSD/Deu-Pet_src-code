@@ -1,264 +1,259 @@
 package br.dp.db.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.stereotype.Repository;
-
 import br.dp.db.connection.ConnectionFactory;
 import br.dp.db.dao.AnimalDao;
 import br.dp.model.Animal;
+import org.springframework.stereotype.Repository;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class AnimalDaoImpl implements AnimalDao {
 
-	@Override
-	public List<Animal> readAll() {
+    @Override
+    public List<Animal> readAll() {
 
-		final List<Animal> animais = new ArrayList<Animal>();
+        final List<Animal> animais = new ArrayList<Animal>();
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
 
-		try {
-			connection = ConnectionFactory.getConnection();
+        try {
+            connection = ConnectionFactory.getConnection();
 
-			final String sql = "SELECT * FROM animal";
+            final String sql = "SELECT * FROM animal";
 
-			preparedStatement = connection.prepareStatement(sql);
-			resultSet = preparedStatement.executeQuery();
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
 
-			while (resultSet.next()) {
+            while (resultSet.next()) {
 
-				final Animal animal = new Animal();
+                final Animal animal = new Animal();
 
-				animal.setId(resultSet.getLong("id"));
-				animal.setTipo(resultSet.getString("tipo"));
-				animal.setSexo(resultSet.getString("sexo"));
-				animal.setPeso(resultSet.getDouble("peso"));
-				animal.setPorte(resultSet.getString("porte"));
-				animal.setRaca(resultSet.getString("raca"));
-				animal.setSituacaoAodocao(resultSet.getBoolean("situacao_adocao"));
-				animal.setTemperamento(resultSet.getString("temperamento"));
-				animal.setPelagemPrimaria(resultSet.getString("pelagem_primaria"));
-				animal.setPelagemSecundaria(resultSet.getString("pelagem_secundaria"));
+                animal.setId(resultSet.getLong("id"));
+                animal.setTipo(resultSet.getString("tipo"));
+                animal.setSexo(resultSet.getString("sexo"));
+                animal.setPeso(resultSet.getDouble("peso"));
+                animal.setPorte(resultSet.getString("porte"));
+                animal.setRaca(resultSet.getString("raca"));
+                animal.setSituacaoAodocao(resultSet.getBoolean("situacao_adocao"));
+                animal.setTemperamento(resultSet.getString("temperamento"));
+                animal.setPelagemPrimaria(resultSet.getString("pelagem_primaria"));
+                animal.setPelagemSecundaria(resultSet.getString("pelagem_secundaria"));
 
-				animais.add(animal);
+                animais.add(animal);
 
-			}
+            }
 
-		} catch (final Exception e) {
-			System.out.println(e.getMessage());
-		} finally {
-			ConnectionFactory.close(resultSet, preparedStatement, connection);
-		}
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            ConnectionFactory.close(resultSet, preparedStatement, connection);
+        }
 
-		return animais;
-	}
+        return animais;
+    }
 
-	@Override
-	public Animal readById(final Long id) {
+    @Override
+    public Animal readById(final Long id) {
 
-		Animal animal = null;
+        Animal animal = null;
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
 
-		try {
+        try {
 
-			connection = ConnectionFactory.getConnection();
+            connection = ConnectionFactory.getConnection();
 
-			final String sql = "SELECT * FROM animal WHERE id = ?;";
+            final String sql = "SELECT * FROM animal WHERE id = ?;";
 
-			preparedStatement = connection.prepareStatement(sql);
+            preparedStatement = connection.prepareStatement(sql);
 
-			preparedStatement.setLong(1, id);
+            preparedStatement.setLong(1, id);
 
-			resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
 
-			if (resultSet.next()) {
+            if (resultSet.next()) {
 
-				animal = new Animal();
+                animal = new Animal();
 
-				animal.setId(resultSet.getLong("id"));
-				animal.setTipo(resultSet.getString("tipo"));
-				animal.setSexo(resultSet.getString("sexo"));
-				animal.setPeso(resultSet.getDouble("peso"));
-				animal.setPorte(resultSet.getString("porte"));
-				animal.setRaca(resultSet.getString("raca"));
-				animal.setSituacaoAodocao(resultSet.getBoolean("situacao_adocao"));
-				animal.setTemperamento(resultSet.getString("temperamento"));
-				animal.setPelagemPrimaria(resultSet.getString("pelagem_primaria"));
-				animal.setPelagemSecundaria(resultSet.getString("pelagem_secundaria"));
+                animal.setId(resultSet.getLong("id"));
+                animal.setTipo(resultSet.getString("tipo"));
+                animal.setSexo(resultSet.getString("sexo"));
+                animal.setPeso(resultSet.getDouble("peso"));
+                animal.setPorte(resultSet.getString("porte"));
+                animal.setRaca(resultSet.getString("raca"));
+                animal.setSituacaoAodocao(resultSet.getBoolean("situacao_adocao"));
+                animal.setTemperamento(resultSet.getString("temperamento"));
+                animal.setPelagemPrimaria(resultSet.getString("pelagem_primaria"));
+                animal.setPelagemSecundaria(resultSet.getString("pelagem_secundaria"));
 
-			}
+            }
 
-		} catch (final Exception e) {
+        } catch (final Exception e) {
 
-		} finally {
+        } finally {
 
-			ConnectionFactory.close(resultSet, preparedStatement, connection);
-		}
-		return animal;
-	}
+            ConnectionFactory.close(resultSet, preparedStatement, connection);
+        }
+        return animal;
+    }
 
-	@Override
-	public Long create(final Animal entity) {
+    @Override
+    public Long create(final Animal entity) {
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
 
-		String sql = "INSERT INTO animal";
-		sql += " (tipo, sexo, peso, porte, ";
-		sql += " raca, situacao_adocao, temperamento, ";
-		sql += " pelagem_primaria, pelagem_secundaria, instituicao_id) ";
-		sql += "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO animal";
+        sql += " (tipo, sexo, peso, porte, ";
+        sql += " raca, situacao_adocao, temperamento, ";
+        sql += " pelagem_primaria, pelagem_secundaria, instituicao_id) ";
+        sql += "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-		Long id = Long.valueOf(-1);
-
-		try {
-			connection = ConnectionFactory.getConnection();
-			connection.setAutoCommit(false);
-
-			preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        Long id = Long.valueOf(-1);
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
+
+            preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-			preparedStatement.setString(1, entity.getTipo());
-			preparedStatement.setString(2, entity.getSexo());
-			preparedStatement.setDouble(3, entity.getPeso());
-			preparedStatement.setString(4, entity.getPorte());
-			preparedStatement.setString(5, entity.getRaca());
-			preparedStatement.setBoolean(6, false);
-			preparedStatement.setString(7, entity.getTemperamento());
-			preparedStatement.setString(8, entity.getPelagemPrimaria());
-			preparedStatement.setString(9, entity.getPelagemSecunaria());
-			preparedStatement.setLong(10, entity.getIdInstituicao());
+            preparedStatement.setString(1, entity.getTipo());
+            preparedStatement.setString(2, entity.getSexo());
+            preparedStatement.setDouble(3, entity.getPeso());
+            preparedStatement.setString(4, entity.getPorte());
+            preparedStatement.setString(5, entity.getRaca());
+            preparedStatement.setBoolean(6, false);
+            preparedStatement.setString(7, entity.getTemperamento());
+            preparedStatement.setString(8, entity.getPelagemPrimaria());
+            preparedStatement.setString(9, entity.getPelagemSecundaria());
+            preparedStatement.setLong(10, entity.getIdInstituicao());
 
-			preparedStatement.execute();
+            preparedStatement.execute();
 
-			resultSet = preparedStatement.getGeneratedKeys();
-			if (resultSet.next())
-				;
-			{
-				id = resultSet.getLong(1);
-			}
+            resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next())
+                ;
+            {
+                id = resultSet.getLong(1);
+            }
 
-			connection.commit();
+            connection.commit();
 
-		} catch (final Exception e) {
+        } catch (final Exception e) {
 
-			try {
-				connection.rollback();
+            try {
+                connection.rollback();
 
-			} catch (final SQLException e1) {
+            } catch (final SQLException e1) {
 
-				System.out.println(e1.getMessage());
-			} finally {
-				ConnectionFactory.close(resultSet, preparedStatement, connection);
+                System.out.println(e1.getMessage());
+            } finally {
+                ConnectionFactory.close(resultSet, preparedStatement, connection);
 
-			}
+            }
 
-		}
+        }
 
-		return id;
-	}
+        return id;
+    }
 
-	@Override
-	public boolean update(final Animal entity) {
+    @Override
+    public boolean update(final Animal entity) {
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
 
-		String sql = "UPDATE animal Set ";
-		sql += " tipo = ?, ";
-		sql += " sexo = ?, ";
-		sql += " peso = ?, ";
-		sql += " porte = ?, ";
-		sql += " raca = ? ,";
-		sql += " situacao_adocao = ?, ";
-		sql += " temperamento = ?, ";
-		sql += " pelagem_primaria = ?, ";
-		sql += " pelagem_secundaria = ?  ";
-		sql += " WHERE id = ?;  ";
+        String sql = "UPDATE animal Set ";
+        sql += " tipo = ?, ";
+        sql += " sexo = ?, ";
+        sql += " peso = ?, ";
+        sql += " porte = ?, ";
+        sql += " raca = ? ,";
+        sql += " situacao_adocao = ?, ";
+        sql += " temperamento = ?, ";
+        sql += " pelagem_primaria = ?, ";
+        sql += " pelagem_secundaria = ?  ";
+        sql += " WHERE id = ?;  ";
 
-		try {
-			connection = ConnectionFactory.getConnection();
-			connection.setAutoCommit(false);
+        try {
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
 
-			preparedStatement = connection.prepareStatement(sql);
+            preparedStatement = connection.prepareStatement(sql);
 
-			preparedStatement.setString(1, entity.getTipo());
-			preparedStatement.setString(2, entity.getSexo());
-			preparedStatement.setDouble(3, entity.getPeso());
-			preparedStatement.setString(4, entity.getPorte());
-			preparedStatement.setString(5, entity.getRaca());
-			preparedStatement.setBoolean(6, entity.isSituacaoAodocao());
-			preparedStatement.setString(7, entity.getTemperamento());
-			preparedStatement.setString(8, entity.getPelagemPrimaria());
-			preparedStatement.setString(9, entity.getPelagemSecunaria());
-			preparedStatement.setLong(10, entity.getId());
+            preparedStatement.setString(1, entity.getTipo());
+            preparedStatement.setString(2, entity.getSexo());
+            preparedStatement.setDouble(3, entity.getPeso());
+            preparedStatement.setString(4, entity.getPorte());
+            preparedStatement.setString(5, entity.getRaca());
+            preparedStatement.setBoolean(6, entity.isSituacaoAodocao());
+            preparedStatement.setString(7, entity.getTemperamento());
+            preparedStatement.setString(8, entity.getPelagemPrimaria());
+            preparedStatement.setString(9, entity.getPelagemSecundaria());
+            preparedStatement.setLong(10, entity.getId());
 
-			preparedStatement.execute();
+            preparedStatement.execute();
 
-			connection.commit();
+            connection.commit();
 
-			return true;
+            return true;
 
-		} catch (final Exception e) {
+        } catch (final Exception e) {
 
-			try {
-				connection.rollback();
-			} catch (final SQLException e1) {
-				System.out.println(e1.getMessage());
-			}
+            try {
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println(e1.getMessage());
+            }
 
-			return false;
-		} finally {
-			ConnectionFactory.close(preparedStatement, connection);
-		}
-	}
+            return false;
+        } finally {
+            ConnectionFactory.close(preparedStatement, connection);
+        }
+    }
 
-	@Override
-	public boolean delete(final Long id) {
+    @Override
+    public boolean delete(final Long id) {
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
 
-		final String sql = "DELETE FROM animal WHERE id = ?; ";
+        final String sql = "DELETE FROM animal WHERE id = ?; ";
 
-		try {
-			connection = ConnectionFactory.getConnection();
-			connection.setAutoCommit(false);
+        try {
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
 
-			preparedStatement = connection.prepareStatement(sql);
+            preparedStatement = connection.prepareStatement(sql);
 
-			preparedStatement.setLong(1, id);
+            preparedStatement.setLong(1, id);
 
-			preparedStatement.execute();
+            preparedStatement.execute();
 
-			connection.commit();
+            connection.commit();
 
-			return true;
+            return true;
 
-		} catch (final Exception e) {
+        } catch (final Exception e) {
 
-			try {
-				connection.rollback();
-			} catch (final SQLException e1) {
-				System.out.println(e1.getMessage());
-			}
+            try {
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println(e1.getMessage());
+            }
 
-			return false;
-		} finally {
-			ConnectionFactory.close(preparedStatement, connection);
-		}
-	}
+            return false;
+        } finally {
+            ConnectionFactory.close(preparedStatement, connection);
+        }
+    }
 
 }

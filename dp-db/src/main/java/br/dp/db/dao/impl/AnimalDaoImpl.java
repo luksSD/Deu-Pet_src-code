@@ -129,8 +129,8 @@ public class AnimalDaoImpl implements AnimalDao {
             preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, entity.getNome());
-            preparedStatement.setString(2, "Cachorro");
-            preparedStatement.setString(3, "Macho");
+            preparedStatement.setString(2, entity.getTipo());
+            preparedStatement.setString(3, entity.getSexo());
             preparedStatement.setDouble(4, entity.getPeso());
             preparedStatement.setString(5, entity.getPorte());
             preparedStatement.setString(6, entity.getRaca());

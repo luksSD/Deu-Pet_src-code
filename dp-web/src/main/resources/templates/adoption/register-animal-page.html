@@ -53,15 +53,19 @@
                                     <div class="col-sm-4">
                                         <div class="form-check">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="typeRadios"
-                                                       id="typeRadios1" value="" checked=""> Cachoro </label>
+                                                <input type="radio" required class="form-check-input" name="tipo1"
+                                                       id="tipo1" th:field="*{animal.tipo}" value="Cachorro"
+                                                       checked="Cachorro">
+                                                Cachorro </label>
                                         </div>
                                     </div>
                                     <div class="col-sm-5">
                                         <div class="form-check">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="typeRadios"
-                                                       id="typeRadios2" value="option2"> Gato </label>
+                                                <input type="radio" required class="form-check-input" name="tipo2"
+                                                       id="tipo2" th:field="*{animal.tipo}" value="Gato"
+                                                       checked="Gato">
+                                                Gato </label>
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +76,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Peso</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" id="inputAnimalPeso"
+                                        <input class="form-control" required id="inputAnimalPeso"
                                                placeholder="Insira o peso do animal" th:field="${animal.peso}"/>
                                         <!--                                            <input type="text" class="form-control">-->
                                     </div>
@@ -85,15 +89,21 @@
                                     <div class="col-sm-4">
                                         <div class="form-check">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="sexRadios"
-                                                       id="sexRadios1" value="" checked=""> Macho </label>
+
+
+                                                <input type="radio" required class="form-check-input" name="sexo1"
+                                                       id="sexo1" th:field="*{animal.sexo}" value="Macho"
+                                                       checked="Macho">
+                                                Macho </label>
                                         </div>
                                     </div>
                                     <div class="col-sm-5">
                                         <div class="form-check">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="sexRadios"
-                                                       id="sexRadios2" value="option2"> Fêmea </label>
+                                                <input type="radio" required class="form-check-input" name="sexo2"
+                                                       id="sexo2" th:field="*{animal.sexo}" value="Fêmea"
+                                                       checked="Fêmea">
+                                                Fêmea </label>
                                         </div>
                                     </div>
                                 </div>
@@ -212,6 +222,22 @@ Dropzone.options.mydropzone = {
             });
         } // init end
     };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -89,4 +89,40 @@ public class MunicipioDaoImpl implements MunicipioDao {
 
         return id;
     }
+
+    @Override
+    public Municipio readById(final Long id) {
+
+        Municipio city = null;
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+
+            connection = ConnectionFactory.getConnection();
+
+            final String sql = "select * from municipio where id = ?";
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, id);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+
+                city = new Municipio();
+                city.setId(resultSet.getLong("id"));
+                city.setNome(resultSet.getString("nome"));
+                city.setUf(resultSet.getString("uf"));
+
+            }
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            ConnectionFactory.close(resultSet, preparedStatement, connection);
+        }
+
+        return city;
+    }
 }

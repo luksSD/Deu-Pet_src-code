@@ -8,4 +8,6 @@ public interface MunicipioDao {
 
     Long create(Municipio entity);
 
+    Municipio readById(Long id);
+
 }

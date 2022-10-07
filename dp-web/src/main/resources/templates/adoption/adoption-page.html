@@ -7,7 +7,7 @@
 </head>
 <body>
 <div layout:fragment="body">
-
+    
     <div class="page-header">
         <h3 class="page-title"> Gerenciar Animais </h3>
         <nav aria-label="breadcrumb">
@@ -123,13 +123,12 @@
                                     <span th:text="${animal.nome}">Tibursinho</span>
                                 </td>
                                 <td th:text="${animal.tipo}">tipo aqui</td>
-                                <!--                                <td th:text="${animal.situacaoAodocao}">situacao aqui</td>-->
                                 <td th:if="${animal.situacaoAodocao == true}"><label
                                         class="badge badge-gradient-success">ADOTADO</label></td>
                                 <td th:if="${animal.situacaoAodocao == false}"><label
                                         class="badge badge-gradient-warning">PARA ADOÇÃO</label></td>
                                 <td th:text="${animal.id}">id aqui</td>
-
+                                
                                 <td>
                                     <a th:href="@{/adocao/detalhes-animal/{id} (id=${animal.id})}"
                                        class="btn btn-gradient-info btn-sm"> Detalhes<i
@@ -173,6 +172,7 @@ $(document).ready(function() {
             $("#myTable tr").show()
     });
 });
+
 
 
 

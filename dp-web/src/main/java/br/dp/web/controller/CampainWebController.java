@@ -37,7 +37,7 @@ public class CampainWebController {
     }
 
     @GetMapping("/editar-campanha/{id}")
-    public String getEditPage(@PathVariable("id") final long id, final Model model) {
+    public String getEditPage(@PathVariable("id") final Long id, final Model model) {
         final Campanha campanhaModel = campainService.readById(id);
         model.addAttribute("campanha", campanhaModel);
 

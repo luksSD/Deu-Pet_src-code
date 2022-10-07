@@ -15,4 +15,6 @@ public interface CampainService {
     boolean update(Campanha entity);
 
     boolean deleteById(Long id);
+
+
 }

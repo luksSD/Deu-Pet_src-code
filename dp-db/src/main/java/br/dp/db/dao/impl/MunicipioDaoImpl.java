@@ -1,13 +1,16 @@
 package br.dp.db.dao.impl;
 
+
 import br.dp.db.connection.ConnectionFactory;
 import br.dp.db.dao.MunicipioDao;
 import br.dp.model.Municipio;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 
-public class MunicipioDaoImpl implements MunicipioDao {
 
+@Repository
+public class MunicipioDaoImpl implements MunicipioDao {
 
     @Override
     public Long checkExist(final Municipio municipio) {
@@ -23,7 +26,7 @@ public class MunicipioDaoImpl implements MunicipioDao {
             final String sql = "select id from municipio where nome = ?";
 
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, municipio.getId());
+            preparedStatement.setString(1, municipio.getNome());
 
             resultSet = preparedStatement.executeQuery();
 
@@ -46,7 +49,7 @@ public class MunicipioDaoImpl implements MunicipioDao {
         final PreparedStatement preparedStatement2 = null;
         ResultSet resultSet = null;
 
-        final String sql = " INSERT INTO municipio (nome, uf) values (?, ?);";
+        final String sql = " INSERT INTO municipio(nome, uf) values (?, ?);";
 
         Long id = Long.valueOf(-1);
         try {

@@ -4,10 +4,10 @@ import java.sql.*;
 
 public class ConnectionFactory {
 
-    private static final String url = "jdbc:postgresql://localhost:5432/deupet";
+    private static final String url = "jdbc:postgresql://localhost:5432/deu_pet";
 
     private static final String username = "postgres";
-    private static final String password = "123";
+    private static final String password = "rootpass4intelbras";
 
     private static Connection connection = null;
 

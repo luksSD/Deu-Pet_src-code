@@ -65,7 +65,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
     @Override
     public Instituicao readById(final Long id) {
 
-        Instituicao instituicao = null;
+        Instituicao institution = null;
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -79,41 +79,33 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
             sql += " where U.id = ?";
 
             preparedStatement = connection.prepareStatement(sql);
-
             preparedStatement.setLong(1, id);
-
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
 
-                instituicao = new Instituicao();
-
-                instituicao.setId(resultSet.getLong("id"));
-                instituicao.setNome(resultSet.getString("nome"));
-                instituicao.setSenha(resultSet.getString("senha"));
-                instituicao.setEmail(resultSet.getString("email"));
-                instituicao.setCelular(resultSet.getString("celular"));
-                instituicao.setSituacao(resultSet.getBoolean("situacao"));
-                instituicao.setDataCadastro(resultSet.getTimestamp("data"));
-                instituicao.setTipo(resultSet.getString("tipo"));
-                instituicao.setTelefone(resultSet.getString("telefone"));
-                instituicao.setCnpj(resultSet.getString("cnpj"));
-                instituicao.setLogradouro(resultSet.getString("logradouro"));
-                instituicao.setNumero(resultSet.getString("numero"));
-                instituicao.setCep(resultSet.getString("cep"));
-                instituicao.setCpf(resultSet.getString("cpf"));
-                instituicao.setMunicipioId(resultSet.getLong("municipio_id"));
-
+                institution = new Instituicao();
+                institution.setId(resultSet.getLong("id"));
+                institution.setNome(resultSet.getString("nome"));
+                institution.setSenha(resultSet.getString("senha"));
+                institution.setEmail(resultSet.getString("email"));
+                institution.setCelular(resultSet.getString("celular"));
+                institution.setSituacao(resultSet.getBoolean("situacao"));
+                institution.setDataCadastro(resultSet.getTimestamp("data"));
+                institution.setTipo(resultSet.getString("tipo"));
+                institution.setCnpj(resultSet.getString("cnpj"));
+                institution.setLogradouro(resultSet.getString("logradouro"));
+                institution.setNumero(resultSet.getString("numero"));
+                institution.setCep(resultSet.getString("cep"));
+                institution.setCpf(resultSet.getString("cpf"));
+                institution.setMunicipioId(resultSet.getLong("municipio_id"));
             }
-
         } catch (final Exception e) {
             System.out.println(e.getMessage());
-
         } finally {
-
             ConnectionFactory.close(resultSet, preparedStatement, connection);
         }
-        return instituicao;
+        return institution;
     }
 
     @Override

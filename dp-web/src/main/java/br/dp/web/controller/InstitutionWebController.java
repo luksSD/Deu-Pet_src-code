@@ -1,6 +1,8 @@
 package br.dp.web.controller;
 
 import br.dp.model.Instituicao;
+import br.dp.model.Municipio;
+import br.dp.web.service.CityService;
 import br.dp.web.service.InstitutionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,7 @@ public class InstitutionWebController {
     private InstitutionService instituicaoService;
 
     @Autowired
-    private ProfileWebController profileWebController;
+    private CityService cityService;
 
     @GetMapping("/gerenciar-instituicoes")
     public String getInstitutionsPage() {
@@ -45,10 +47,20 @@ public class InstitutionWebController {
     @GetMapping("/detalhes/{id}")
     public String getInstitutionDetailPage(@PathVariable("id") final Long id, final Model model) {
 
-        final Instituicao instituicao = instituicaoService.readById(id);
-        model.addAttribute("instituicao", instituicao);
+        final Instituicao institution = instituicaoService.readById(id);
+        final Municipio city = cityService.readById(institution.getMunicipioId());
 
-        return "intitutions/institution-detail-page";
+        model.addAttribute("instituicao", institution);
+        model.addAttribute("cidade", city);
+
+        return "institutions/institution-detail-page";
+    }
+
+    @GetMapping("/editar-instituicao/{id}")
+    public String getEditPage(@PathVariable("id") final Long id, final Model model) {
+        final Instituicao instituicaoModel = instituicaoService.readById(id);
+        model.addAttribute("instituicao", instituicaoModel);
+        return "institution/edit-institution-page";
     }
 
 }

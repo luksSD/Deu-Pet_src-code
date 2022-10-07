@@ -34,6 +34,7 @@ public class AnimalDaoImpl implements AnimalDao {
                 final Animal animal = new Animal();
 
                 animal.setId(resultSet.getLong("id"));
+                animal.setNome(resultSet.getString("nome"));
                 animal.setTipo(resultSet.getString("tipo"));
                 animal.setSexo(resultSet.getString("sexo"));
                 animal.setPeso(resultSet.getDouble("peso"));
@@ -84,6 +85,7 @@ public class AnimalDaoImpl implements AnimalDao {
 
                 animal.setId(resultSet.getLong("id"));
                 animal.setTipo(resultSet.getString("tipo"));
+                animal.setNome(resultSet.getString("nome"));
                 animal.setSexo(resultSet.getString("sexo"));
                 animal.setPeso(resultSet.getDouble("peso"));
                 animal.setPorte(resultSet.getString("porte"));
@@ -112,10 +114,10 @@ public class AnimalDaoImpl implements AnimalDao {
         ResultSet resultSet = null;
 
         String sql = "INSERT INTO animal";
-        sql += " (tipo, sexo, peso, porte, ";
+        sql += " (nome, tipo, sexo, peso, porte, ";
         sql += " raca, situacao_adocao, temperamento, ";
         sql += " pelagem_primaria, pelagem_secundaria, instituicao_id) ";
-        sql += "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        sql += "VALUES(?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         Long id = Long.valueOf(-1);
 
@@ -125,16 +127,17 @@ public class AnimalDaoImpl implements AnimalDao {
 
             preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            preparedStatement.setString(1, entity.getTipo());
-            preparedStatement.setString(2, entity.getSexo());
-            preparedStatement.setDouble(3, entity.getPeso());
-            preparedStatement.setString(4, entity.getPorte());
-            preparedStatement.setString(5, entity.getRaca());
-            preparedStatement.setBoolean(6, false);
-            preparedStatement.setString(7, entity.getTemperamento());
-            preparedStatement.setString(8, entity.getPelagemPrimaria());
-            preparedStatement.setString(9, entity.getPelagemSecundaria());
-            preparedStatement.setLong(10, entity.getIdInstituicao());
+            preparedStatement.setString(1, entity.getNome());
+            preparedStatement.setString(2, "Cachorro");
+            preparedStatement.setString(3, "Macho");
+            preparedStatement.setDouble(4, entity.getPeso());
+            preparedStatement.setString(5, entity.getPorte());
+            preparedStatement.setString(6, entity.getRaca());
+            preparedStatement.setBoolean(7, false);
+            preparedStatement.setString(8, entity.getTemperamento());
+            preparedStatement.setString(9, entity.getPelagemPrimaria());
+            preparedStatement.setString(10, entity.getPelagemSecundaria());
+            preparedStatement.setLong(11, 4);
 
             preparedStatement.execute();
 
@@ -173,6 +176,7 @@ public class AnimalDaoImpl implements AnimalDao {
 
         String sql = "UPDATE animal Set ";
         sql += " tipo = ?, ";
+        sql += " nome = ?, ";
         sql += " sexo = ?, ";
         sql += " peso = ?, ";
         sql += " porte = ?, ";

@@ -7,7 +7,7 @@
 </head>
 <body>
 <div layout:fragment="body">
-    
+
     <div class="page-header">
         <h3 class="page-title"> Gerenciar Animais </h3>
         <nav aria-label="breadcrumb">
@@ -103,81 +103,42 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table"
-                               id="animal-table">
-                            <thead>
-                            <tr>
-                                <th> Animal</th>
-                                <th> Tipo</th>
-                                <th> Situação</th>
-                                <th> ID de registro</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody id="myTable">
-                            <tr>
-                                <td>
-                                    <img src="/resources/images/animals/cachorro1.png" class="me-2" alt="image">
-                                    Caramelo
-                                </td>
-                                <td> Cachorro</td>
-                                <td>
-                                    <label class="badge badge-gradient-success">ADOTADO</label>
-                                </td>
-                                <td> 1</td>
-                                <td>
-                                    <a class="btn btn-gradient-info btn-sm" th:href="@{/adocao/detalhes-animal}">
-                                        Detalhes</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="/resources/images/animals/gato1.png" class="me-2" alt="image"> Miau
-                                </td>
-                                <td> Gato</td>
-                                <td>
-                                    <label class="badge badge-gradient-warning">PARA ADOÇÂO</label>
-                                </td>
-                                <td> 2</td>
-                                <td>
-                                    <a class="btn btn-gradient-info btn-sm" th:href="@{/adocao/detalhes-animal}">
-                                        Detalhes</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="/resources/images/animals/cachorro2.png" class="me-2" alt="image">
-                                    Tiburcinho
-                                </td>
-                                <td> Cachorro</td>
-                                <td>
-                                    <label class="badge badge-gradient-warning">PARA ADOÇÂO</label>
-                                </td>
-                                <td> 3</td>
-                                <td>
-                                    <a class="btn btn-gradient-info btn-sm" th:href="@{/adocao/detalhes-animal}">
-                                        Detalhes</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="/resources/images/animals/gato2.png" class="me-2" alt="image"> Johnzinho
-                                </td>
-                                <td> Gato</td>
-                                <td>
-                                    <label class="badge badge-gradient-success">ADOTADO</label>
-                                </td>
-                                <td> 4</td>
-                                <td>
-                                    <a class="btn btn-gradient-info btn-sm" th:href="@{/adocao/detalhes-animal}">
-                                        Detalhes</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="table-responsive">
+                    <table class="table"
+                           id="animal-table">
+                        <thead>
+                        <tr>
+                            <th> Animal</th>
+                            <th> Tipo</th>
+                            <th> Situação</th>
+                            <th> ID de registro</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody id="myTable">
+                        <tr>
+                            <td>
+                                <img src="/resources/images/animals/gato1.png" class="me-2" alt="image">
+
+
+                        <tr th:each="animal : ${listaAnimal}">
+
+                            <td th:text="${animal.nome}">nome aqui</td>
+                            <td th:text="${animal.tipo}">tipo aqui</td>
+                            <td th:text="${animal.id}">id aqui</td>
+
+                        </tr>
+
+
+                        </td>
+
+                        <td>
+                            <a class="btn btn-gradient-info btn-sm" th:href="@{/adocao/detalhes-animal}">
+                                Detalhes</a>
+                        </td>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -205,6 +166,12 @@ $(document).ready(function() {
             $("#myTable tr").show()
     });
 });
+
+
+
+
+
+
 
 
 

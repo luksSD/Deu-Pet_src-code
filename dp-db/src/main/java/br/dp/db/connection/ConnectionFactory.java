@@ -1,82 +1,78 @@
 package br.dp.db.connection;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ConnectionFactory {
 
-	private static final String url = "jdbc:postgresql://localhost:5432/deu_pet";
+    private static final String url = "jdbc:postgresql://localhost:5432/deu_pet";
 
-	private static final String username = "postgres";
-	private static final String password = "123";
+    private static final String username = "postgres";
+    private static final String password = "rootpass4intelbras";
 
-	private static Connection connection = null;
+    private static Connection connection = null;
 
-	public static Connection getConnection() {
+    public static Connection getConnection() {
 
-		try {
+        try {
 
-			connection = DriverManager.getConnection(url, username, password);
+            connection = DriverManager.getConnection(url, username, password);
 
-		} catch (final SQLException e) {
+        } catch (final SQLException e) {
 
-			System.out.println(e.getMessage());
-		}
+            System.out.println(e.getMessage());
+        }
 
-		return connection;
-	}
+        return connection;
+    }
 
-	private static void closeConnection() {
+    private static void closeConnection() {
 
-		try {
+        try {
 
-			connection.close();
+            connection.close();
 
-		} catch (final SQLException e) {
+        } catch (final SQLException e) {
 
-			System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
 
-		}
-	}
+        }
+    }
 
-	private static void closeResultSet(final ResultSet resultSet) {
+    private static void closeResultSet(final ResultSet resultSet) {
 
-		try {
-			resultSet.close();
-		} catch (final SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+        try {
+            resultSet.close();
+        } catch (final SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
-	private static void closePreparedStatement(final PreparedStatement preparedStatement) {
+    private static void closePreparedStatement(final PreparedStatement preparedStatement) {
 
-		try {
-			preparedStatement.close();
-		} catch (final SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            preparedStatement.close();
+        } catch (final SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-	}
+    }
 
-	public static void close(final ResultSet resultSet, final PreparedStatement preparedStatement,
-			final Connection connection) {
+    public static void close(final ResultSet resultSet, final PreparedStatement preparedStatement,
+                             final Connection connection) {
 
-		closeConnection();
-		closePreparedStatement(preparedStatement);
-		closeResultSet(resultSet);
+        closeConnection();
+        closePreparedStatement(preparedStatement);
+        closeResultSet(resultSet);
 
-	}
+    }
 
-	public static void close(final PreparedStatement preparedStatement, final Connection connection) {
+    public static void close(final PreparedStatement preparedStatement, final Connection connection) {
 
-		closeConnection();
-		closePreparedStatement(preparedStatement);
+        closeConnection();
+        closePreparedStatement(preparedStatement);
 
-	}
+    }
 
 }

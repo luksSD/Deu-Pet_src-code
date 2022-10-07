@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -15,7 +16,26 @@ public class InstitutionServiceImpl implements InstitutionService {
 
     @Override
     public List<Instituicao> readAll() {
-        return null;
+
+        final String endpoint = "http://localhost:8085/api/v1/instituicao/read-all";
+
+        List<Instituicao> response = null;
+        try {
+
+            final RestTemplate restTemplate = new RestTemplate();
+
+            final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+
+            final ResponseEntity<Instituicao[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
+                    Instituicao[].class);
+
+            response = Arrays.asList(requestResponse.getBody());
+
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return response;
     }
 
     @Override

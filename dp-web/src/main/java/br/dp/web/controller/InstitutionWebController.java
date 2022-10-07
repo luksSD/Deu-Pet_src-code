@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/instituicao")
 public class InstitutionWebController {
@@ -23,7 +25,11 @@ public class InstitutionWebController {
     private CityService cityService;
 
     @GetMapping("/gerenciar-instituicoes")
-    public String getInstitutionsPage() {
+    public String getInstitutionsPage(final Model model) {
+
+        final List<Instituicao> institutions = instituicaoService.readAll();
+        model.addAttribute("institutions", institutions);
+
         return "institutions/institutions-page";
     }
 

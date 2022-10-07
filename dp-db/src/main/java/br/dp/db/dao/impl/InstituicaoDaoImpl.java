@@ -33,7 +33,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
 
                 final Instituicao instituicao = new Instituicao();
 
-                instituicao.setId(resultSet.getLong("id"));
+                instituicao.setId(resultSet.getLong("usuario_id"));
                 instituicao.setNome(resultSet.getString("nome"));
                 instituicao.setSenha(resultSet.getString("senha"));
                 instituicao.setEmail(resultSet.getString("email"));
@@ -41,7 +41,6 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
                 instituicao.setSituacao(resultSet.getBoolean("situacao"));
                 instituicao.setDataCadastro(resultSet.getTimestamp("data"));
                 instituicao.setTipo(resultSet.getString("tipo"));
-                instituicao.setTelefone(resultSet.getString("telefone"));
                 instituicao.setCnpj(resultSet.getString("cnpj"));
                 instituicao.setLogradouro(resultSet.getString("logradouro"));
                 instituicao.setNumero(resultSet.getString("numero"));
@@ -133,7 +132,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
             preparedStatement.setString(1, entity.getNome());
             preparedStatement.setString(2, entity.getSenha());
             preparedStatement.setString(3, entity.getEmail());
-            preparedStatement.setString(4, entity.getTelefone());
+            preparedStatement.setString(4, entity.getCelular());
             preparedStatement.setBoolean(5, true);
             preparedStatement.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
             preparedStatement.setBoolean(7, true);

@@ -55,41 +55,25 @@
                             </tr>
                             </thead>
                             <tbody id="myTable">
-                            <tr>
+                            <tr th:each="institutions : ${institutions}">
                                 <td>
                                     <img src="/resources/images/instituicoes/instituicao1.png" class="me-2" alt="image">
-                                    Sociedade Protetora Dos Animais
+                                    <span th:text="${institutions.nome}">nome instituicao</span>
                                 </td>
-                                <td> spa@gmail.com</td>
-                                <td> (35) 99999-9999</td>
-                                <td> 1</td>
+                                <td th:text="${institutions.email}"> email</td>
+                                <td th:text="${institutions.celular}"> telefone/celular</td>
+                                <td th:text="${institutions.id}"> id</td>
                                 <td>
-                                    <a class="btn btn-gradient-info btn-sm"> Editar</a>
+                                    <a th:href="@{/instituicao/detalhes/{id} (id=${institutions.id})}"
+                                       class="btn btn-gradient-info btn-sm"> Detalhes<i
+                                            class="fas fa-address-card"></i>
+                                    </a>
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
-                                    <img src="/resources/images/animals/gato1.png" class="me-2" alt="image"> Lar Feliz
-                                </td>
-                                <td> larfeliz@gmail.com</td>
-                                <td> (35) 99999-9999</td>
-
-                                <td> 2</td>
-                                <td>
-                                    <a class="btn btn-gradient-info btn-sm"> Editar</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="/resources/images/animals/cachorro2.png" class="me-2" alt="image">
-                                    Maria do Carmo
-                                </td>
-                                <td> euamocachorro@gmail.com</td>
-                                <td> (35) 99999-9999</td>
-
-                                <td> 3</td>
-                                <td>
-                                    <a class="btn btn-gradient-info btn-sm"> Editar</a>
+                                    <a th:href="@{/instituicao/deletar/{id} (id=${institutions.id})}"
+                                       class="btn btn-gradient-dark btn-sm"> Excluir<i
+                                            class="fas fa-user-alt-slash"></i>
+                                    </a>
                                 </td>
                             </tr>
                             </tbody>

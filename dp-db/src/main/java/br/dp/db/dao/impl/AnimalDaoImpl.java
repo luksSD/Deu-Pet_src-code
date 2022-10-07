@@ -84,6 +84,7 @@ public class AnimalDaoImpl implements AnimalDao {
                 animal = new Animal();
 
                 animal.setId(resultSet.getLong("id"));
+                animal.setTipo(resultSet.getString("nome"));
                 animal.setTipo(resultSet.getString("tipo"));
                 animal.setNome(resultSet.getString("nome"));
                 animal.setSexo(resultSet.getString("sexo"));
@@ -174,17 +175,17 @@ public class AnimalDaoImpl implements AnimalDao {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        String sql = "UPDATE animal Set ";
+        String sql = "UPDATE animal Set nome = ?, ";
         sql += " tipo = ?, ";
-        sql += " nome = ?, ";
         sql += " sexo = ?, ";
         sql += " peso = ?, ";
         sql += " porte = ?, ";
-        sql += " raca = ? ,";
+        sql += " raca = ?, ";
         sql += " situacao_adocao = ?, ";
         sql += " temperamento = ?, ";
         sql += " pelagem_primaria = ?, ";
-        sql += " pelagem_secundaria = ?  ";
+        sql += " pelagem_secundaria = ?,  ";
+        sql += " instituicao_id = ?  ";
         sql += " WHERE id = ?;  ";
 
         try {
@@ -193,16 +194,18 @@ public class AnimalDaoImpl implements AnimalDao {
 
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setString(1, entity.getTipo());
-            preparedStatement.setString(2, entity.getSexo());
-            preparedStatement.setDouble(3, entity.getPeso());
-            preparedStatement.setString(4, entity.getPorte());
-            preparedStatement.setString(5, entity.getRaca());
-            preparedStatement.setBoolean(6, entity.isSituacaoAodocao());
-            preparedStatement.setString(7, entity.getTemperamento());
-            preparedStatement.setString(8, entity.getPelagemPrimaria());
-            preparedStatement.setString(9, entity.getPelagemSecundaria());
-            preparedStatement.setLong(10, entity.getId());
+            preparedStatement.setString(1, entity.getNome());
+            preparedStatement.setString(2, "Cachorro");
+            preparedStatement.setString(3, "Macho");
+            preparedStatement.setDouble(4, entity.getPeso());
+            preparedStatement.setString(5, entity.getPorte());
+            preparedStatement.setString(6, entity.getRaca());
+            preparedStatement.setBoolean(7, false);
+            preparedStatement.setString(8, entity.getTemperamento());
+            preparedStatement.setString(9, entity.getPelagemPrimaria());
+            preparedStatement.setString(10, entity.getPelagemSecundaria());
+            preparedStatement.setLong(11, 4);
+            preparedStatement.setLong(12, entity.getId());
 
             preparedStatement.execute();
 

@@ -30,7 +30,7 @@
                                 <h4 class="card-title">Lista de animais cadastrados</h4>
                             </div>
                             <div class="col-md-2">
-                                <a class="btn btn-gradient-primary btn-sm" th:href="@{/adocao/cadastrar-animal}">
+                                <a class="btn btn-gradient-primary" th:href="@{/adocao/cadastrar-animal}">
                                     Cadastrar Animal</a>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                                                                         <label class="form-check-label">
                                                                             <input type="checkbox"
                                                                                    class="form-check-input animal-status"
-                                                                                   value="PARA ADOÇÂO">
+                                                                                   value="PARA ADOÇÃO">
                                                                             Para Adoção <i class="input-helper"></i>
                                                                         </label>
                                                                     </div>
@@ -103,47 +103,54 @@
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table"
-                           id="animal-table">
-                        <thead>
-                        <tr>
-                            <th> Animal</th>
-                            <th> Tipo</th>
-                            <th> Situação</th>
-                            <th> ID de registro</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody id="myTable">
-                        <tr>
-                            <td>
-                                <img src="/resources/images/animals/gato1.png" class="me-2" alt="image">
-
-
-                        <tr th:each="animal : ${listaAnimal}">
-
-                            <td th:text="${animal.nome}">nome aqui</td>
-                            <td th:text="${animal.tipo}">tipo aqui</td>
-                            <td th:text="${animal.id}">id aqui</td>
-
-                        </tr>
-
-
-                        </td>
-
-                        <td>
-                            <a class="btn btn-gradient-info btn-sm" th:href="@{/adocao/detalhes-animal}">
-                                Detalhes</a>
-                        </td>
-
-                        </tbody>
-                    </table>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table"
+                               id="animal-table">
+                            <thead>
+                            <tr>
+                                <th> Animal</th>
+                                <th> Tipo</th>
+                                <th> Situação</th>
+                                <th> ID</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody id="myTable">
+                            <tr th:each="animal : ${listaAnimal}">
+                                <td>
+                                    <img src="/resources/images/animals/cachorro1.png" class="me-2" alt="image">
+                                    <span th:text="${animal.nome}">Tibursinho</span>
+                                </td>
+                                <td th:text="${animal.tipo}">tipo aqui</td>
+                                <!--                                <td th:text="${animal.situacaoAodocao}">situacao aqui</td>-->
+                                <td th:if="${animal.situacaoAodocao == true}"><label
+                                        class="badge badge-gradient-success">ADOTADO</label></td>
+                                <td th:if="${animal.situacaoAodocao == false}"><label
+                                        class="badge badge-gradient-warning">PARA ADOÇÃO</label></td>
+                                <td th:text="${animal.id}">id aqui</td>
+                                <td th:text="${animal.id}">id aqui</td>
+                                <td>
+                                    <a th:href="@{/adocao/detalhes-animal/{id} (id=${animal.id})}"
+                                       class="btn btn-gradient-info btn-sm"> Detalhes<i
+                                            class="fas fa-address-card"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a th:href="@{/adocao/deletar/{id} (id=${animal.id})}"
+                                       class="btn btn-gradient-dark btn-sm"> Excluir<i
+                                            class="fas fa-user-alt-slash"></i>
+                                    </a>
+                                </td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 </html>
@@ -166,32 +173,5 @@ $(document).ready(function() {
             $("#myTable tr").show()
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </script>

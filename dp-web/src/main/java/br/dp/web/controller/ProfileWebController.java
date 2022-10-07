@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/perfil")
 public class ProfileWebController {
 
+
     @GetMapping("/detalhes")
     public String getProfileDetailPage() {
         return "profile/profile-detail-page";

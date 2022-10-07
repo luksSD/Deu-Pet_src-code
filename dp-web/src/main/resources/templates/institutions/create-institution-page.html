@@ -81,7 +81,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">CEP</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" id="cep" value="" maxlength="9"
+                                        <input type="text" class="form-control" id="cep" value="" maxlength="9"
                                                onblur="pesquisacep(this.value);" th:field="${instituicao.cep}">
                                     </div>
                                 </div>
@@ -90,7 +90,8 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Logradouro</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" id="rua" th:field="${instituicao.logradouro}">
+                                        <input type="text" class="form-control" id="rua"
+                                               th:field="${instituicao.logradouro}">
                                     </div>
                                 </div>
                             
@@ -103,7 +104,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Cidade</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" id="cidade"
+                                        <input type="text" class="form-control" id="cidade"
                                                th:field="${instituicao.muinicipioNome}">
                                     </div>
                                 </div>
@@ -112,7 +113,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Número</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" th:field="${instituicao.numero}">
+                                        <input type="text" class="form-control" th:field="${instituicao.numero}">
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +124,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">UF</label>
                                     <div class="col-sm-3">
-                                        <input class="form-control" id="uf" th:field="${instituicao.uf}">
+                                        <input type="text" class="form-control" id="uf" th:field="${instituicao.uf}">
                                     </div>
                                 </div>
                             </div>
@@ -154,12 +155,12 @@
                                 </div>
                             </div>
                         </div>
-                    
+                        <div>
+                            <button type="submit" class="btn btn-gradient-primary mr-2">Cadastrar</button>
+                            <a class="btn btn-light" th:href="@{/}">Cancelar</a>
+                        </div>
                     </form>
-                    <div>
-                        <button type="submit" class="btn btn-gradient-primary mr-2">Cadastrar</button>
-                        <a class="btn btn-light" th:href="@{/}">Cancelar</a>
-                    </div>
+                
                 
                 </div>
             </div>

@@ -15,6 +15,8 @@ public class InstituicaoServiceImpl implements InstituicaoService {
 
     @Autowired
     private InstituicaoDao instituicaoDao;
+
+    @Autowired
     private MunicipioDao municipioDao;
 
     @Override
@@ -33,9 +35,9 @@ public class InstituicaoServiceImpl implements InstituicaoService {
     public Long create(final Instituicao entity) {
 
         final Long id;
-        final Municipio municipio = null;
+        final Municipio municipio = new Municipio();
 
-        municipio.setNome(entity.getNome());
+        municipio.setNome(entity.getMuinicipioNome());
         municipio.setUf(entity.getUf());
 
         id = municipioDao.checkExist(municipio);

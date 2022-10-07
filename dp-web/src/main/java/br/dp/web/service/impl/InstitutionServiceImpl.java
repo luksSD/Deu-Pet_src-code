@@ -5,10 +5,12 @@ import br.dp.web.service.InstitutionService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+@Service
 public class InstitutionServiceImpl implements InstitutionService {
 
     @Override
@@ -41,19 +43,16 @@ public class InstitutionServiceImpl implements InstitutionService {
         try {
 
             final RestTemplate restTemplate = new RestTemplate();
-
-            final HttpEntity<Instituicao> httpEntity = new HttpEntity<>(entity);
-
+            final HttpEntity<Instituicao> httpEntity = new HttpEntity<Instituicao>(entity);
             final ResponseEntity<Long> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
                     Long.class);
-
             id = responseEntity.getBody();
 
         } catch (final Exception e) {
-
             System.out.println(e.getMessage());
         }
 
         return id;
+
     }
 }

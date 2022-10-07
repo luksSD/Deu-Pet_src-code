@@ -61,7 +61,9 @@
                                 <td th:text="${campanha.dataFim}"> 01/05/2023</td>
                                 <td th:text="${campanha.id}"> 1</td>
                                 <td>
-                                    <a class="btn btn-gradient-info btn-sm"> Editar</a>
+                                    <a class="btn btn-sm btn-gradient-primary btn-block"
+                                       th:href="@{/campanhas/editar-campanha/{id} (id=${campanha.id})}">
+                                        Editar informações</a>
                                 </td>
                             </tr>
                             </tbody>

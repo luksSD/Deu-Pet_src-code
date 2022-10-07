@@ -35,8 +35,8 @@ public class CampanhaDaoImpl implements CampanhaDao {
             while (resultSet.next()) {
                 final Campanha campain = new Campanha();
                 campain.setTitulo(resultSet.getString("titulo"));
-                campain.setDataInicio(resultSet.getTimestamp("data_inicio"));
-                campain.setDataFim(resultSet.getTimestamp("data_fim"));
+                campain.setDataInicio(resultSet.getDate("data_inicio"));
+                campain.setDataFim(resultSet.getDate("data_fim"));
                 campain.setId(resultSet.getLong("id"));
 
                 campanha.add(campain);
@@ -74,8 +74,8 @@ public class CampanhaDaoImpl implements CampanhaDao {
 
                 campanha.setId(resultSet.getLong("id"));
                 campanha.setTitulo(resultSet.getString("titulo"));
-                campanha.setDataInicio(resultSet.getTimestamp("data_inicio"));
-                campanha.setDataFim(resultSet.getTimestamp("data_fim"));
+                campanha.setDataInicio(resultSet.getDate("data_inicio"));
+                campanha.setDataFim(resultSet.getDate("data_fim"));
             }
 
         } catch (final SQLException e) {
@@ -94,8 +94,8 @@ public class CampanhaDaoImpl implements CampanhaDao {
 
         //nesse ponto tem que verificar se vai colocar o id fixo da instituição pra hoje ou pegar de outra entity
         String sql = "insert into campanha";
-        sql += "(descricao, requisitos, data_inicio, data_fim, instituicao_id, formulario_id ) ";
-        sql += "values(?,?,?,?,?,?)";
+        sql += "(titulo, descricao, requisitos, data_inicio, data_fim, instituicao_id, formulario_id ) ";
+        sql += "values(?,?,?,?,?,?,?)";
 
         Long id = Long.valueOf(-1);
 
@@ -106,12 +106,13 @@ public class CampanhaDaoImpl implements CampanhaDao {
 
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setString(1, entity.getDescricao());
-            preparedStatement.setString(2, entity.getRequisitos());
-            preparedStatement.setTimestamp(3, entity.getDataInicio());
-            preparedStatement.setTimestamp(4, entity.getDataFim());
-            preparedStatement.setLong(5, 4);
+            preparedStatement.setString(1, entity.getTitulo());
+            preparedStatement.setString(2, entity.getDescricao());
+            preparedStatement.setString(3, entity.getRequisitos());
+            preparedStatement.setDate(4, entity.getDataInicio());
+            preparedStatement.setDate(5, entity.getDataFim());
             preparedStatement.setLong(6, 4);
+            preparedStatement.setLong(7, 1);
 
             preparedStatement.execute();
 
@@ -155,8 +156,8 @@ public class CampanhaDaoImpl implements CampanhaDao {
 
             preparedStatement.setString(1, entity.getDescricao());
             preparedStatement.setString(2, entity.getRequisitos());
-            preparedStatement.setTimestamp(3, entity.getDataInicio());
-            preparedStatement.setTimestamp(4, entity.getDataFim());
+            preparedStatement.setDate(3, entity.getDataInicio());
+            preparedStatement.setDate(4, entity.getDataFim());
             preparedStatement.setLong(5, entity.getId());
 
             preparedStatement.execute();

@@ -63,7 +63,26 @@ public class InstitutionServiceImpl implements InstitutionService {
 
     @Override
     public boolean update(final Instituicao entity) {
-        return false;
+        boolean response = false;
+
+        final String endpoint = "http://localhost:8085/api/v1/instituicao/update";
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+
+            final HttpEntity<Instituicao> httpEntity = new HttpEntity<Instituicao>(entity);
+
+            final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.PUT, httpEntity,
+                    Boolean.class);
+
+            response = responseEntity.getBody();
+
+        } catch (final Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+
+        return response;
     }
 
     @Override

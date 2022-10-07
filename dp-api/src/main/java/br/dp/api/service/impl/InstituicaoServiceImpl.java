@@ -53,7 +53,21 @@ public class InstituicaoServiceImpl implements InstituicaoService {
 
     @Override
     public boolean update(final Instituicao entity) {
-        // TODO Auto-generated method stub
+
+        final Long id;
+        final Municipio municipio = new Municipio();
+
+        municipio.setNome(entity.getMuinicipioNome());
+        municipio.setUf(entity.getUf());
+
+        id = municipioDao.checkExist(municipio);
+
+        if (id != -1) {
+            entity.setMunicipioId(id);
+        } else {
+            return false;
+        }
+
         return instituicaoDao.update(entity);
     }
 

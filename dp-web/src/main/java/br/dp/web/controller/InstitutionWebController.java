@@ -65,8 +65,23 @@ public class InstitutionWebController {
     @GetMapping("/editar-instituicao/{id}")
     public String getEditPage(@PathVariable("id") final Long id, final Model model) {
         final Instituicao instituicaoModel = instituicaoService.readById(id);
+        final Municipio city = cityService.readById(instituicaoModel.getMunicipioId());
+
+        instituicaoModel.setMuinicipioNome(city.getNome());
+        instituicaoModel.setUf(city.getUf());
+
         model.addAttribute("instituicao", instituicaoModel);
-        return "institution/edit-institution-page";
+
+        return "institutions/edit-institution-page";
+    }
+
+    @PostMapping("/update")
+    public String update(final Instituicao instituicao, final Model model) {
+
+        instituicaoService.update(instituicao);
+
+        return getInstitutionDetailPage(instituicao.getId(), model);
+
     }
 
 }

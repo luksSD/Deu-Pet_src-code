@@ -198,7 +198,6 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
         sql += " where id = ?;";
 
         String sql2 = "UPDATE instituicao SET";
-        sql2 += " telefone = ?,";
         sql2 += " cnpj = ?,";
         sql2 += " logradouro = ?,";
         sql2 += " numero = ?,";
@@ -224,14 +223,13 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
 
             preparedStatement2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
 
-            preparedStatement2.setString(1, entity.getTelefone());
-            preparedStatement2.setString(2, entity.getCnpj());
-            preparedStatement2.setString(3, entity.getLogradouro());
-            preparedStatement2.setString(4, entity.getNumero());
-            preparedStatement2.setString(5, entity.getCep());
-            preparedStatement2.setString(6, entity.getCpf());
-            preparedStatement2.setLong(7, entity.getMunicipioId());
-            preparedStatement2.setLong(8, entity.getUsuarioId());
+            preparedStatement2.setString(1, entity.getCnpj());
+            preparedStatement2.setString(2, entity.getLogradouro());
+            preparedStatement2.setString(3, entity.getNumero());
+            preparedStatement2.setString(4, entity.getCep());
+            preparedStatement2.setString(5, entity.getCpf());
+            preparedStatement2.setLong(6, entity.getMunicipioId());
+            preparedStatement2.setLong(7, entity.getId());
 
             preparedStatement2.execute();
             connection.commit();

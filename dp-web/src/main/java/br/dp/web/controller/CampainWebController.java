@@ -20,9 +20,10 @@ public class CampainWebController {
     private CampainService campainService;
 
     @GetMapping("/gerenciar-campanhas")
-    public String getCampainsPage() {
-        System.out.println("cai aqui");
-        final List<Campanha> campanha = campainService.readAll();
+    public String getCampainsPage(final Model model) {
+
+        final List<Campanha> campanhas = campainService.readAll();
+        model.addAttribute("listaCampanhas", campanhas);
 
         return "campains/campains-page";
     }

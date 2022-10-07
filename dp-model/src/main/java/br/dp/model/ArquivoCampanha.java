@@ -1,10 +1,8 @@
 package br.dp.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class ArquivoCampanha extends BasePojo {
 
     private Long CampanhaId;

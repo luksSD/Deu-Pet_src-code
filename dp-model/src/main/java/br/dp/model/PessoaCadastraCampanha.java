@@ -1,12 +1,8 @@
 package br.dp.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.security.Timestamp;
 
-@Getter
-@Setter
+@Data
 public class PessoaCadastraCampanha {
 
     private String pessoaId;

@@ -1,10 +1,6 @@
 package br.dp.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
+@Data
 public class Formulario extends BasePojo {
 
     private String url;

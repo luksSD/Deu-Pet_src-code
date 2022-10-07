@@ -15,6 +15,9 @@ public class InstitutionWebController {
     @Autowired
     private InstitutionService instituicaoService;
 
+    @Autowired
+    private ProfileWebController profileWebController;
+
     @GetMapping("/gerenciar-instituicoes")
     public String getInstitutionsPage() {
         return "institutions/institutions-page";
@@ -31,7 +34,7 @@ public class InstitutionWebController {
         final Long id = instituicaoService.create(instituicao);
 
         if (id != -1) {
-            return "redirect:/instituicao/detalhes";
+            return profileWebController.getProfileDetailPage();
         }
 
         return "redirect:/";

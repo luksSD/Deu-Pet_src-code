@@ -129,7 +129,7 @@
                                 <td th:if="${animal.situacaoAodocao == false}"><label
                                         class="badge badge-gradient-warning">PARA ADOÇÃO</label></td>
                                 <td th:text="${animal.id}">id aqui</td>
-                                <td th:text="${animal.id}">id aqui</td>
+
                                 <td>
                                     <a th:href="@{/adocao/detalhes-animal/{id} (id=${animal.id})}"
                                        class="btn btn-gradient-info btn-sm"> Detalhes<i
@@ -173,5 +173,7 @@ $(document).ready(function() {
             $("#myTable tr").show()
     });
 });
+
+
 
 </script>

@@ -119,20 +119,24 @@
                         <tr>
                             <td>
                                 <img src="/resources/images/animals/gato1.png" class="me-2" alt="image">
-                            </td>
+
+
                         <tr th:each="animal : ${listaAnimal}">
-                            <td th:text="${animal.id}">id aqui</td>
+
                             <td th:text="${animal.nome}">nome aqui</td>
                             <td th:text="${animal.tipo}">tipo aqui</td>
+                            <td th:text="${animal.id}">id aqui</td>
 
                         </tr>
+
+
+                        </td>
+
                         <td>
                             <a class="btn btn-gradient-info btn-sm" th:href="@{/adocao/detalhes-animal}">
                                 Detalhes</a>
                         </td>
-                        <tr>
 
-                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -162,6 +166,13 @@ $(document).ready(function() {
             $("#myTable tr").show()
     });
 });
+
+
+
+
+
+
+
 
 
 

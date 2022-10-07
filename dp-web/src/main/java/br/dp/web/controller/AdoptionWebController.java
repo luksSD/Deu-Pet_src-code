@@ -32,7 +32,7 @@ public class AdoptionWebController {
         final Long id = animalService.create(animal);
 
         if (id != -1) {
-            return "redirect:/adocao/detalhes-animal/" + id;
+            return "redirect:/";
         }
 
         return "redirect:/adocao/gerenciar-animais";

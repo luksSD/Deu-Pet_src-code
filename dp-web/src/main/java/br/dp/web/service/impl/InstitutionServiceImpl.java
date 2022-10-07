@@ -86,8 +86,26 @@ public class InstitutionServiceImpl implements InstitutionService {
     }
 
     @Override
-    public boolean delete(final Long id) {
-        return false;
+    public boolean deleteById(final Long id) {
+        boolean response = false;
+
+        final String endpoint = "http://localhost:8085/api/v1/instituicao/delete/" + id;
+
+        try {
+
+            final RestTemplate restTemplate = new RestTemplate();
+
+            final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+
+            final ResponseEntity<Boolean> requestResponse = restTemplate.exchange(endpoint, HttpMethod.DELETE, httpEntity, Boolean.class);
+
+            response = requestResponse.getBody();
+
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return response;
     }
 
     @Override

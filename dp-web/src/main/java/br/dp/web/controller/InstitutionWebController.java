@@ -84,4 +84,10 @@ public class InstitutionWebController {
 
     }
 
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") final Long id, final Model model) {
+        instituicaoService.deleteById(id);
+
+        return "redirect:/instituicao/gerenciar-instituicoes";
+    }
 }

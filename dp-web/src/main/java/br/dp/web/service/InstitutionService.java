@@ -12,7 +12,7 @@ public interface InstitutionService {
 
     boolean update(Instituicao entity);
 
-    boolean delete(Long id);
+    boolean deleteById(Long id);
 
     Long create(Instituicao entity);
 

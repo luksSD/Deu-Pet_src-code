@@ -8,18 +8,18 @@
 <body>
 
 <div layout:fragment="body">
-
+    
     <div class="page-header">
         <h3 class="page-title"> Informações do animal </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-
+                
                 <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/adocao/gerenciar-animais}">Gerenciar
-                    Animais</a>
+                                                                                                                 Animais</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Detalhes Animal</li>
-
+            
             </ol>
         </nav>
     </div>
@@ -30,12 +30,12 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="border-bottom text-center pb-4">
-
-                                <img src="/resources/images/animals/cachorro2.png" alt="profile"
+                                
+                                <img src="/resources/images/animals/animal1.jpg" alt="profile"
                                      class=" mw-100 rounded mb-3">
-
+                            
                             </div>
-
+                            
                             <div class="col-lg-8">
                                 <div class="d-flex justify-content-between">
                                     <div>
@@ -49,19 +49,19 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div class="col-lg-8 mt-5 ">
                                 <div class="d-flex justify-content-between mb-1">
-
+                                    
                                     <a class="btn btn-sm btn-gradient-primary btn-block"
                                        th:href="@{/adocao/editar-animal/{id} (id=${animal.id})}">
                                         Editar informações</a>
                                 </div>
                             </div>
-
-
+                        
+                        
                         </div>
-
+                        
                         <div class="col-lg-6">
                             <div class="py-4">
                                 <div class="border-bottom">
@@ -92,14 +92,14 @@
                                         <span class="float-right text-muted"
                                               th:text="${animal.pelagemPrimaria}"> Marrom </span>
                                     </p>
-
+                                
                                 </div>
-
-
+                            
+                            
                             </div>
                         </div>
-
-
+                    
+                    
                     </div>
                 </div>
             </div>

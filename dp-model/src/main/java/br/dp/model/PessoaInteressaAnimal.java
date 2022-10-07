@@ -1,5 +1,7 @@
 package br.dp.model;
 
+import lombok.Data;
+
 import java.security.Timestamp;
 
 @Data

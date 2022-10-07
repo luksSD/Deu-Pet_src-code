@@ -64,7 +64,7 @@ public class CampainWebController {
         final Long id = campainService.create(campanha);
 
         if (id != -1) {
-            return "redirect:/";
+            return "redirect:/campanhas/detalhes-campanha/" + id;
         }
         return "redirect:/";
     }

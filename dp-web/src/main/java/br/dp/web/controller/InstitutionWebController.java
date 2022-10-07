@@ -4,7 +4,9 @@ import br.dp.model.Instituicao;
 import br.dp.web.service.InstitutionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -34,11 +36,19 @@ public class InstitutionWebController {
         final Long id = instituicaoService.create(instituicao);
 
         if (id != -1) {
-            return profileWebController.getProfileDetailPage();
+            return "redirect:/detalhes/" + id;
         }
 
         return "redirect:/";
     }
 
+    @GetMapping("/detalhes/{id}")
+    public String getInstitutionDetailPage(@PathVariable("id") final Long id, final Model model) {
+
+        final Instituicao instituicao = instituicaoService.readById(id);
+        model.addAttribute("instituicao", instituicao);
+
+        return "intitutions/institution-detail-page";
+    }
 
 }

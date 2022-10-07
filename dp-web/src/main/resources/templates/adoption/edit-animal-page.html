@@ -31,8 +31,8 @@
                 <div class="card-body">
                     <h4 class="card-title">Dados do Animal</h4>
 
-                    <form method="post" action="upload.php" class="dropzone" id="mydropzone"
-                          enctype='multipart/form-data'>
+                    <form th:action="@{/adocao/update}" method="POST"
+                          th:object="${animal}">
 
                         <p class="card-description"> Altere os dados do animal </p>
                         <div class="row">
@@ -40,7 +40,9 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Nome</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control">
+                                        <input class="form-control" id="inputAnimalName" type="text"
+                                               required placeholder="Altera o nome do animal"
+                                               th:field="${animal.nome}"/>
                                     </div>
                                 </div>
                             </div>
@@ -71,8 +73,8 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Peso</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" data-inputmask="'alias': 'wheight'"
-                                               im-insert="true" style="text-align: right;">
+                                        <input class="form-control" id="inputAnimalPeso"
+                                               placeholder="Insira o peso do animal" th:field="${animal.peso}"/>
                                         <!--                                            <input type="text" class="form-control">-->
                                     </div>
                                 </div>
@@ -105,7 +107,10 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Porte</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control">
+
+                                        <input class="form-control" id="inputAnimalPorte"
+                                               required
+                                               placeholder="Insira o porte do animal" th:field="${animal.porte}"/>
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +118,9 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Raça</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control">
+                                        <input class="form-control" id="inputAnimalRaca"
+                                               required
+                                               placeholder="Insira o raça do animal" th:field="${animal.raca}"/>
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +133,10 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Pelagem Primária</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control">
+                                        <input class="form-control" id="inputAnimalPelagemPrimaria"
+                                               required
+                                               placeholder="Insira a cor predominante do animal"
+                                               th:field="${animal.pelagemPrimaria}"/>
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +144,10 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Pelagem Secundária</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control">
+                                        <input class="form-control" id="inputAnimalpelagemSecundaria"
+                                               required
+                                               placeholder="Insira a cor predominante do animal"
+                                               th:field="${animal.pelagemSecundaria}"/>
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +157,10 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Temperamento</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control">
+                                        <input class="form-control" id="inputAnimalTemperamento"
+                                               required
+                                               placeholder="Insira a cor predominante do animal"
+                                               th:field="${animal.temperamento}"/>
                                     </div>
                                 </div>
                             </div>
@@ -153,11 +169,12 @@
                             </div>
                         </div>
 
-                    </form>
-                    <div>
                         <button type="submit" class="btn btn-gradient-primary mr-2">Salvar</button>
-                        <a class="btn btn-light" th:href="@{/adocao/gerenciar-animais}">Sair</a>
-                    </div>
+                        <input th:field="${animal.id}" type="hidden">
+                        <a class="btn btn-light" th:href="@{/adocao/gerenciar-animais}">Cancelar</a>
+
+
+                    </form>
 
                 </div>
             </div>

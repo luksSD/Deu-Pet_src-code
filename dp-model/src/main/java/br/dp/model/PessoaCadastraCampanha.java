@@ -2,8 +2,7 @@ package br.dp.model;
 
 import lombok.Data;
 
-import java.sql.Timestamp;
-
+import java.security.Timestamp;
 
 @Data
 public class PessoaCadastraCampanha {

@@ -3,7 +3,7 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Deu Pet - Cadastrar Campanha de Saúde</title>
+    <title>Deu Pet - Editar Campanha de Saúde</title>
     <script src="/resources/vendors/js/dropzone.js"></script>
 
 </head>
@@ -12,13 +12,13 @@
 <div layout:fragment="body">
 
     <div class="page-header">
-        <h3 class="page-title"> Cadastrar Campanha </h3>
+        <h3 class="page-title"> Editar Campanha </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/campanhas/gerenciar-campanhas}">Gerenciar
                     Campanhas</a>
-                <li class="breadcrumb-item active" aria-current="page">Cadastrar Campanha</li>
+                <li class="breadcrumb-item active" aria-current="page">Editar Campanha</li>
             </ol>
         </nav>
     </div>
@@ -28,10 +28,10 @@
                 <div class="card-body">
                     <h4 class="card-title">Campanhas de saúde geral dos animais</h4>
 
-                    <form th:action="@{/campanhas/create}" method="POST" th:objetc="${campanha}" id="formCadastro"
-                          name="formCadastro">
+                    <form th:action="@{/campanhas/update}" method="POST" th:objetc="${campanha}">
 
-                        <p class="card-description"> Insira os dados da campanha </p>
+
+                        <p class="card-description"> Altere os dados da campanha </p>
 
                         <div class="row">
                             <div class="col-md-6">
@@ -77,7 +77,7 @@
                                     <label for="taDescription">Descrição</label>
                                     <textarea class="form-control" id="taDescription" type="text" required
                                               placeholder="Descrição da sua campanha" rows="5"
-                                              th:field="${campanha.descricao}"></textarea>
+                                    ></textarea>
 
 
                                 </div>
@@ -106,13 +106,10 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div>
-                                <button type="submit" class="btn btn-gradient-primary mr-2">Cadastrar</button>
-                                <a class="btn btn-light" th:href="@{/campanhas/gerenciar-campanhas}">Cancelar</a>
-                            </div>
-
                         </div>
+                        <button type="submit" class="btn btn-gradient-primary mr-2">Salvar</button>
+                        <input th:field="${campanha.id}" type="hidden">
+                        <a class="btn btn-light" th:href="@{/campanhas/gerenciar-campanhas}">Cancelar</a>
                     </form>
 
                 </div>

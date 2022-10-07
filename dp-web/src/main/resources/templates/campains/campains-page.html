@@ -55,22 +55,18 @@
                             </tr>
                             </thead>
                             <tbody id="myTable">
-                            <tr>
-                                <td>Vacinação</td>
-                                <td> 01/01/2022</td>
-                                <td> 01/05/2023</td>
-                                <td> 1</td>
+                            <tr th:each="campanha : ${listaCampanhas}">
+                                <td th:text="${campanha.titulo}">Nome aqui</td>
+                                <td th:text="${campanha.dataInicio}"> 01/01/2022</td>
+                                <td th:text="${campanha.dataFim}"> 01/05/2023</td>
+                                <td th:text="${campanha.id}"> 1</td>
                                 <td>
-                                    <a class="btn btn-gradient-info btn-sm"> Editar</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Castração</td>
-                                <td> 01/09/2022</td>
-                                <td> 01/11/2022</td>
-                                <td> 2</td>
-                                <td>
-                                    <a class="btn btn-gradient-info btn-sm"> Editar</a>
+                                    <a class="btn btn-sm btn-gradient-primary btn-block"
+                                       th:href="@{/campanhas/editar-campanha/{id} (id=${campanha.id})}">
+                                        Editar informações</a>
+
+                                    <a th:href="@{/campanhas/delete/{id} (id=${campanha.id})}"
+                                       class="btn btn-gradient-dark btn-sm"> Deletar</a>
                                 </td>
                             </tr>
                             </tbody>

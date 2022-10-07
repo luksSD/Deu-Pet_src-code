@@ -130,18 +130,13 @@
                                 <td th:text="${animal.id}">id aqui</td>
                                 
                                 <td>
-                                    <a th:href="@{/adocao/detalhes-animal/{id} (id=${animal.id})}"
-                                       class="btn btn-gradient-info btn-sm"> Detalhes<i
-                                            class="fas fa-address-card"></i>
-                                    </a>
-                                </td>
-                                <td>
+                                    <a class="btn btn-gradient-info btn-sm"
+                                       th:href="@{/adocao/detalhes-animal/{id} (id=${animal.id})}">
+                                        Editar</a>
+                                    
                                     <a th:href="@{/adocao/deletar/{id} (id=${animal.id})}"
-                                       class="btn btn-gradient-dark btn-sm"> Excluir<i
-                                            class="fas fa-user-alt-slash"></i>
-                                    </a>
+                                       class="btn btn-gradient-dark btn-sm"> Excluir</a>
                                 </td>
-                                <td></td>
                             </tr>
                             </tbody>
                         </table>
@@ -172,6 +167,11 @@ $(document).ready(function() {
             $("#myTable tr").show()
     });
 });
+
+
+
+
+
 
 
 

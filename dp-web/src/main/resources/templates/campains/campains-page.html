@@ -61,12 +61,12 @@
                                 <td th:text="${campanha.dataFim}"> 01/05/2023</td>
                                 <td th:text="${campanha.id}"> 1</td>
                                 <td>
-                                    <a class="btn btn-sm btn-gradient-primary btn-block"
+                                    <a class="btn btn-gradient-info btn-sm"
                                        th:href="@{/campanhas/editar-campanha/{id} (id=${campanha.id})}">
-                                        Editar informações</a>
-
+                                        Editar</a>
+                                    
                                     <a th:href="@{/campanhas/delete/{id} (id=${campanha.id})}"
-                                       class="btn btn-gradient-dark btn-sm"> Deletar</a>
+                                       class="btn btn-gradient-dark btn-sm"> Excluir</a>
                                 </td>
                             </tr>
                             </tbody>

@@ -10,14 +10,14 @@
 <body>
 
 <div layout:fragment="body">
-
+    
     <div class="page-header">
         <h3 class="page-title"> Editar Campanha </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/campanhas/gerenciar-campanhas}">Gerenciar
-                    Campanhas</a>
+                                                                                                                      Campanhas</a>
                 <li class="breadcrumb-item active" aria-current="page">Editar Campanha</li>
             </ol>
         </nav>
@@ -27,12 +27,12 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Campanhas de saúde geral dos animais</h4>
-
+                    
                     <form th:action="@{/campanhas/update}" method="POST" th:objetc="${campanha}">
-
-
+                        
+                        
                         <p class="card-description"> Altere os dados da campanha </p>
-
+                        
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
@@ -44,8 +44,8 @@
                                     </div>
                                 </div>
                             </div>
-
-
+                            
+                            
                             <div class="col-md-3">
                                 <div class="form-group row">
                                     <label class="col-sm-4 col-form-label">Data Início</label>
@@ -56,8 +56,8 @@
                                     </div>
                                 </div>
                             </div>
-
-
+                            
+                            
                             <div class="col-md-3">
                                 <div class="form-group row">
                                     <label class="col-sm-4 col-form-label">Data Fim</label>
@@ -68,33 +68,34 @@
                                     </div>
                                 </div>
                             </div>
-
+                        
                         </div>
-
+                        
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="taDescription">Descrição</label>
                                     <textarea class="form-control" id="taDescription" type="text" required
                                               placeholder="Descrição da sua campanha" rows="5"
+                                              th:field="${campanha.descricao}"
                                     ></textarea>
-
-
+                                
+                                
                                 </div>
                             </div>
-
+                            
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="tdRequisits">Requisitos</label>
-                                    <textarea class="form-control" id="tdRequisits" type="text" required
-                                              placeholder="Requisitos da sua campanha" rows="5"
-                                              th:field="${campanha.requisitos}"></textarea>
+                                    <input class="form-control" id="tdRequisits" type="text" required
+                                           placeholder="Requisitos da sua campanha"
+                                           th:field="${campanha.requisitos}"/>
                                 </div>
                             </div>
                         </div>
-
+                        
                         <p class="card-description"> Formulário para campanha </p>
-
+                        
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
@@ -111,7 +112,7 @@
                         <input th:field="${campanha.id}" type="hidden">
                         <a class="btn btn-light" th:href="@{/campanhas/gerenciar-campanhas}">Cancelar</a>
                     </form>
-
+                
                 </div>
             </div>
         </div>

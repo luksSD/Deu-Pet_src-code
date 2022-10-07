@@ -44,7 +44,7 @@ public class InstitutionWebController {
         final Long id = instituicaoService.create(instituicao);
 
         if (id != -1) {
-            return "redirect:/detalhes/" + id;
+            return "redirect:/instituicao/detalhes/" + id;
         }
 
         return "redirect:/";

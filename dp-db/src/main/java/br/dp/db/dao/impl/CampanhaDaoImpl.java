@@ -31,7 +31,6 @@ public class CampanhaDaoImpl implements CampanhaDao {
 
             resultSet = preparedStatement.executeQuery();
 
-
             while (resultSet.next()) {
                 final Campanha campain = new Campanha();
                 campain.setTitulo(resultSet.getString("titulo"));
@@ -66,6 +65,7 @@ public class CampanhaDaoImpl implements CampanhaDao {
             final String sql = "select * from campanha where id = ?";
 
             preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, id);
 
             resultSet = preparedStatement.executeQuery();
 
@@ -76,6 +76,8 @@ public class CampanhaDaoImpl implements CampanhaDao {
                 campanha.setTitulo(resultSet.getString("titulo"));
                 campanha.setDataInicio(resultSet.getDate("data_inicio"));
                 campanha.setDataFim(resultSet.getDate("data_fim"));
+                campanha.setDescricao(resultSet.getString("descricao"));
+                campanha.setRequisitos(resultSet.getString("requisitos"));
             }
 
         } catch (final SQLException e) {
@@ -98,7 +100,6 @@ public class CampanhaDaoImpl implements CampanhaDao {
         sql += "values(?,?,?,?,?,?,?)";
 
         Long id = Long.valueOf(-1);
-
 
         try {
             connection = ConnectionFactory.getConnection();
@@ -145,7 +146,9 @@ public class CampanhaDaoImpl implements CampanhaDao {
         sql += "descricao = ?,";
         sql += "requisitos = ?,";
         sql += "data_inicio = ?,";
-        sql += "data_fim = ?";
+        sql += "data_fim = ?,";
+        sql += "instituicao_id = ?,";
+        sql += "formulario_id = ? ";
         sql += "where id = ?";
 
         try {
@@ -154,11 +157,14 @@ public class CampanhaDaoImpl implements CampanhaDao {
 
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setString(1, entity.getDescricao());
-            preparedStatement.setString(2, entity.getRequisitos());
-            preparedStatement.setDate(3, entity.getDataInicio());
-            preparedStatement.setDate(4, entity.getDataFim());
-            preparedStatement.setLong(5, entity.getId());
+            preparedStatement.setString(1, entity.getTitulo());
+            preparedStatement.setString(2, entity.getDescricao());
+            preparedStatement.setString(3, entity.getRequisitos());
+            preparedStatement.setDate(4, entity.getDataInicio());
+            preparedStatement.setDate(5, entity.getDataFim());
+            preparedStatement.setLong(6, 4);
+            preparedStatement.setLong(7, 1);
+            preparedStatement.setLong(8, entity.getId());
 
             preparedStatement.execute();
             connection.commit();

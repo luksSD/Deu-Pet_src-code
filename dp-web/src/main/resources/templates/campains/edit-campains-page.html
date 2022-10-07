@@ -28,8 +28,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Campanhas de saúde geral dos animais</h4>
 
-                    <form th:action="@{/campanhas/update}" method="POST"
-                          th:object="${campanha}">
+                    <form th:action="@{/campanhas/update}" method="POST" th:objetc="${campanha}">
 
 
                         <p class="card-description"> Altere os dados da campanha </p>
@@ -41,8 +40,7 @@
                                     <div class="col-sm-10">
                                         <input class="form-control" id="inputCampanhaTitulo" type="text"
                                                required placeholder="Titulo da campanha"
-                                               th:field="${campanha.titulo}"
-                                        />
+                                               th:field="${campanha.titulo}"/>
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +52,7 @@
                                     <div class="col-sm-8">
                                         <input class="form-control" id="inputDataInicio" type="date"
                                                required placeholder="Data Inicio campanha"
-                                        />
+                                               th:field="${campanha.dataInicio}"/>
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +88,7 @@
                                     <label for="tdRequisits">Requisitos</label>
                                     <textarea class="form-control" id="tdRequisits" type="text" required
                                               placeholder="Requisitos da sua campanha" rows="5"
-                                    ></textarea>
+                                              th:field="${campanha.requisitos}"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -104,13 +102,13 @@
                                     <div class="col-sm-10">
                                         <input class="form-control" id="inputurl" type="text"
                                                required placeholder="Link do formulário da campanha"
-                                        />
+                                               th:field="${campanha.formularioId}"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-gradient-primary mr-2">Salvar</button>
-                        <input type="hidden">
+                        <input th:field="${campanha.id}" type="hidden">
                         <a class="btn btn-light" th:href="@{/campanhas/gerenciar-campanhas}">Cancelar</a>
                     </form>
 

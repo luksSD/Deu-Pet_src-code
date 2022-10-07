@@ -69,10 +69,10 @@ public class CampainWebController {
         return "redirect:/";
     }
 
-    @GetMapping("/deletar/{id}")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") final Long id, final Model model) {
         campainService.deleteById(id);
-        return "redirect:/";
+        return "redirect:/campanhas/gerenciar-campanhas";
     }
 
 }

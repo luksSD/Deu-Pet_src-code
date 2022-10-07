@@ -54,7 +54,7 @@ public class CampainServiceImpl implements CampainService {
     @Override
     public Campanha readById(final Long id) {
 
-        final String endpoint = "http://localhost:8085/api/v1/campanha/read-by-id" + id;
+        final String endpoint = "http://localhost:8085/api/v1/campanha/read-by-id/" + id;
 
         Campanha response = null;
 
@@ -97,7 +97,7 @@ public class CampainServiceImpl implements CampainService {
     public boolean deleteById(final Long id) {
         boolean response = false;
 
-        final String endpoint = "http://localhost:8085/api/v1/campanha/delete" + id;
+        final String endpoint = "http://localhost:8085/api/v1/campanha/delete/" + id;
 
         try {
 

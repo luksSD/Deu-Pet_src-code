@@ -64,6 +64,9 @@
                                     <a class="btn btn-sm btn-gradient-primary btn-block"
                                        th:href="@{/campanhas/editar-campanha/{id} (id=${campanha.id})}">
                                         Editar informações</a>
+
+                                    <a th:href="@{/campanhas/delete/{id} (id=${campanha.id})}"
+                                       class="btn btn-gradient-dark btn-sm"> Deletar</a>
                                 </td>
                             </tr>
                             </tbody>

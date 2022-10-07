@@ -61,6 +61,15 @@ public class AdoptionWebController {
         return "adoption/edit-animal-page";
     }
 
+    @PostMapping("/update")
+    public String update(final Animal animal, final Model model) {
+
+        animalService.update(animal);
+
+        return getDetailPage(animal.getId(), model);
+
+    }
+
     @GetMapping("/deletar/{id}")
     public String delete(@PathVariable("id") final Long id, final Model model) {
 

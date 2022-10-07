@@ -30,7 +30,8 @@
                                 <h4 class="card-title">Lista de animais cadastrados</h4>
                             </div>
                             <div class="col-md-2">
-                                <a class="btn btn-gradient-primary btn-sm" th:href="@{/adocao/cadastrar-animal}">
+
+                                <a class="btn btn-gradient-primary" th:href="@{/adocao/cadastrar-animal}">
                                     Cadastrar Animal</a>
                             </div>
                         </div>
@@ -110,16 +111,14 @@
                         <tr>
                             <th> Animal</th>
                             <th> Tipo</th>
-                            <th> Situação</th>
-                            <th> ID de registro</th>
+                            <th> ID</th>
+
                             <th></th>
                         </tr>
                         </thead>
                         <tbody id="myTable">
                         <tr>
                             <td>
-                                <img src="/resources/images/animals/gato1.png" class="me-2" alt="image">
-
 
                         <tr th:each="animal : ${listaAnimal}">
 
@@ -127,16 +126,31 @@
                             <td th:text="${animal.tipo}">tipo aqui</td>
                             <td th:text="${animal.id}">id aqui</td>
 
+
+                            <td>
+                                <div class="row">
+
+                                    <div class="col-4">
+                                        <a th:href="@{/adocao/detalhes-animal/{id} (id=${animal.id})}"
+                                           class="btn btn-gradient-info"> Detalhes<i
+                                                class="fas fa-address-card"></i>
+                                        </a>
+
+                                    </div>
+                                    <div class="col-4">
+
+                                        <a th:href="@{/adocao/deletar/{id} (id=${animal.id})}"
+                                           class="btn btn-gradient-dark"> Excluir<i
+                                                class="fas fa-user-alt-slash"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </td>
+
+
                         </tr>
-
-
                         </td>
-
-                        <td>
-                            <a class="btn btn-gradient-info btn-sm" th:href="@{/adocao/detalhes-animal}">
-                                Detalhes</a>
-                        </td>
-
                         </tbody>
                     </table>
                 </div>
@@ -166,6 +180,26 @@ $(document).ready(function() {
             $("#myTable tr").show()
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

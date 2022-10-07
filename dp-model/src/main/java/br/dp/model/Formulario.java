@@ -1,5 +1,7 @@
 package br.dp.model;
 
+import lombok.Data;
+
 @Data
 public class Formulario extends BasePojo {
 

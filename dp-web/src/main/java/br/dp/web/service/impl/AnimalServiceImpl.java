@@ -29,7 +29,7 @@ public class AnimalServiceImpl implements AnimalService {
             final HttpEntity<String> httpEntity = new HttpEntity<String>("");
 
             final ResponseEntity<Animal[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
-                    Animal[].class);
+                Animal[].class);
 
             response = Arrays.asList(requestResponse.getBody());
 
@@ -53,7 +53,7 @@ public class AnimalServiceImpl implements AnimalService {
             final HttpEntity<String> httpEntity = new HttpEntity<String>("");
 
             final ResponseEntity<Animal> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
-                    Animal.class);
+                Animal.class);
 
             response = requestResponse.getBody();
 
@@ -76,7 +76,7 @@ public class AnimalServiceImpl implements AnimalService {
             final HttpEntity<Animal> httpEntity = new HttpEntity<Animal>(entity);
 
             final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.PUT, httpEntity,
-                    Boolean.class);
+                Boolean.class);
 
             response = responseEntity.getBody();
 
@@ -101,7 +101,7 @@ public class AnimalServiceImpl implements AnimalService {
             final HttpEntity<String> httpEntity = new HttpEntity<String>("");
 
             final ResponseEntity<Boolean> requestResponse = restTemplate.exchange(endpoint, HttpMethod.DELETE,
-                    httpEntity, Boolean.class);
+                httpEntity, Boolean.class);
 
             response = requestResponse.getBody();
 
@@ -125,7 +125,7 @@ public class AnimalServiceImpl implements AnimalService {
             final HttpEntity<Animal> httpEntity = new HttpEntity<>(entity);
 
             final ResponseEntity<Long> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
-                    Long.class);
+                Long.class);
 
             id = responseEntity.getBody();
 

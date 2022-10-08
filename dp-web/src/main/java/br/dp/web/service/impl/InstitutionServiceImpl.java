@@ -27,7 +27,7 @@ public class InstitutionServiceImpl implements InstitutionService {
             final HttpEntity<String> httpEntity = new HttpEntity<String>("");
 
             final ResponseEntity<Instituicao[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
-                    Instituicao[].class);
+                Instituicao[].class);
 
             response = Arrays.asList(requestResponse.getBody());
 
@@ -50,7 +50,7 @@ public class InstitutionServiceImpl implements InstitutionService {
             final HttpEntity<String> httpEntity = new HttpEntity<String>("");
 
             final ResponseEntity<Instituicao> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
-                    Instituicao.class);
+                Instituicao.class);
 
             response = requestResponse.getBody();
 
@@ -73,7 +73,7 @@ public class InstitutionServiceImpl implements InstitutionService {
             final HttpEntity<Instituicao> httpEntity = new HttpEntity<Instituicao>(entity);
 
             final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.PUT, httpEntity,
-                    Boolean.class);
+                Boolean.class);
 
             response = responseEntity.getBody();
 
@@ -120,7 +120,7 @@ public class InstitutionServiceImpl implements InstitutionService {
             final RestTemplate restTemplate = new RestTemplate();
             final HttpEntity<Instituicao> httpEntity = new HttpEntity<Instituicao>(entity);
             final ResponseEntity<Long> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
-                    Long.class);
+                Long.class);
             id = responseEntity.getBody();
 
         } catch (final Exception e) {

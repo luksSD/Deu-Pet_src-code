@@ -2,123 +2,123 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Deu Pet - Cadastrar Campanha de Saúde</title>
-    <script src="/resources/vendors/js/dropzone.js"></script>
+  <meta charset="UTF-8">
+  <title>Deu Pet - Cadastrar Campanha de Saúde</title>
+  <script src="/resources/vendors/js/dropzone.js"></script>
 
 </head>
 <body>
 
 <div layout:fragment="body">
 
-    <div class="page-header">
-        <h3 class="page-title"> Cadastrar Campanha </h3>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/campanhas/gerenciar-campanhas}">Gerenciar
-                    Campanhas</a>
-                <li class="breadcrumb-item active" aria-current="page">Cadastrar Campanha</li>
-            </ol>
-        </nav>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Campanhas de saúde geral dos animais</h4>
+  <div class="page-header">
+    <h3 class="page-title"> Cadastrar Campanha </h3>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/campanhas/gerenciar-campanhas}">Gerenciar
+          Campanhas</a>
+        <li class="breadcrumb-item active" aria-current="page">Cadastrar Campanha</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Campanhas de saúde geral dos animais</h4>
 
-                    <form th:action="@{/campanhas/create}" method="POST" th:objetc="${campanha}" id="formCadastro"
-                          name="formCadastro">
+          <form th:action="@{/campanhas/create}" method="POST" th:objetc="${campanha}" id="formCadastro"
+                name="formCadastro">
 
-                        <p class="card-description"> Insira os dados da campanha </p>
+            <p class="card-description"> Insira os dados da campanha </p>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Título</label>
-                                    <div class="col-sm-10">
-                                        <input class="form-control" id="inputCampanhaTitulo" type="text"
-                                               required placeholder="Titulo da campanha"
-                                               th:field="${campanha.titulo}"/>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-3">
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Data Início</label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" id="inputDataInicio" type="date"
-                                               required placeholder="Data Inicio campanha"
-                                               th:field="${campanha.dataInicio}"/>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Título</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" id="inputCampanhaTitulo" type="text"
+                           required placeholder="Titulo da campanha"
+                           th:field="${campanha.titulo}"/>
+                  </div>
+                </div>
+              </div>
 
 
-                            <div class="col-md-3">
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Data Fim</label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" id="inputDataFim" type="date"
-                                               required placeholder="Data fim campanha"
-                                               th:field="${campanha.dataFim}"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="taDescription">Descrição</label>
-                                    <textarea class="form-control" id="taDescription" type="text" required
-                                              placeholder="Descrição da sua campanha" rows="5"
-                                              th:field="${campanha.descricao}"></textarea>
+              <div class="col-md-3">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Data Início</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" id="inputDataInicio" type="date"
+                           required placeholder="Data Inicio campanha"
+                           th:field="${campanha.dataInicio}"/>
+                  </div>
+                </div>
+              </div>
 
 
-                                </div>
-                            </div>
+              <div class="col-md-3">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Data Fim</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" id="inputDataFim" type="date"
+                           required placeholder="Data fim campanha"
+                           th:field="${campanha.dataFim}"/>
+                  </div>
+                </div>
+              </div>
 
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="tdRequisits">Requisitos</label>
-                                    <textarea class="form-control" id="tdRequisits" type="text" required
-                                              placeholder="Requisitos da sua campanha" rows="5"
-                                              th:field="${campanha.requisitos}"></textarea>
-                                </div>
-                            </div>
-                        </div>
+            </div>
 
-                        <p class="card-description"> Formulário para campanha </p>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="taDescription">Descrição</label>
+                  <textarea class="form-control" id="taDescription" type="text" required
+                            placeholder="Descrição da sua campanha" rows="5"
+                            th:field="${campanha.descricao}"></textarea>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Link do formulário</label>
-                                    <div class="col-sm-10">
-                                        <input class="form-control" id="inputurl" type="text"
-                                               required placeholder="Link do formulário da campanha"
-                                               th:field="${campanha.formularioId}"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <button type="submit" class="btn btn-gradient-primary mr-2">Cadastrar</button>
-                                <a class="btn btn-light" th:href="@{/campanhas/gerenciar-campanhas}">Cancelar</a>
-                            </div>
-
-                        </div>
-                    </form>
 
                 </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="tdRequisits">Requisitos</label>
+                  <textarea class="form-control" id="tdRequisits" type="text" required
+                            placeholder="Requisitos da sua campanha" rows="5"
+                            th:field="${campanha.requisitos}"></textarea>
+                </div>
+              </div>
             </div>
+
+            <p class="card-description"> Formulário para campanha </p>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Link do formulário</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" id="inputurl" type="text"
+                           required placeholder="Link do formulário da campanha"
+                           th:field="${campanha.formularioId}"/>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <button type="submit" class="btn btn-gradient-primary mr-2">Cadastrar</button>
+                <a class="btn btn-light" th:href="@{/campanhas/gerenciar-campanhas}">Cancelar</a>
+              </div>
+
+            </div>
+          </form>
+
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 

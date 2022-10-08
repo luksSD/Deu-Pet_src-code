@@ -24,7 +24,7 @@ public class CityServiceImpl implements CityService {
             final HttpEntity<String> httpEntity = new HttpEntity<String>("");
 
             final ResponseEntity<Municipio> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
-                    Municipio.class);
+                Municipio.class);
 
             response = requestResponse.getBody();
 

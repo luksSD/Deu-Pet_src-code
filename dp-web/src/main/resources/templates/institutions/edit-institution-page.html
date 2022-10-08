@@ -2,160 +2,160 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Deu Pet - Editar Instituição</title>
-    <script src="/resources/js/viacep.js"></script>
+  <meta charset="UTF-8">
+  <title>Deu Pet - Editar Instituição</title>
+  <script src="/resources/js/viacep.js"></script>
 </head>
 
 <body>
 
 <div layout:fragment="body">
-    
-    <div class="page-header">
-        <h3 class="page-title"> Editar Instituição </h3>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a
-                        th:href="@{/instituicao/gerenciar-instituicoes}">Gerenciar
-                                                                         Instituições</a>
-                <li class="breadcrumb-item active" aria-current="page">Cadastrar Instituições</li>
-            </ol>
-        </nav>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Dados da Instituição</h4>
-                    
-                    <form th:action="@{/instituicao/update}" method="POST" th:objetc="${instituicao}">
-                        
-                        <p class="card-description"> Altere os dados da instituição </p>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Nome/Razão Social</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" th:field="${instituicao.nome}">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Telefone/Celular</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" th:field="${instituicao.celular}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class=" row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">CNPJ</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" th:field="${instituicao.cnpj}">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">CPF</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" th:field="${instituicao.cpf}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <p class="card-description"> Endereço </p>
-                        
-                        <div class="row">
-                            
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">CEP</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="cep" value="" maxlength="9"
-                                               onblur="pesquisacep(this.value);" th:field="${instituicao.cep}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Logradouro</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="rua"
-                                               th:field="${instituicao.logradouro}">
-                                    </div>
-                                </div>
-                            
-                            
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Cidade</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="cidade"
-                                               th:field="${instituicao.muinicipioNome}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Número</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" th:field="${instituicao.numero}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">UF</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" class="form-control" id="uf" th:field="${instituicao.uf}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <p class="card-description"> Informações de Acesso </p>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">E-Mail</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" th:field="${instituicao.email}">
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        </div>
-                        <div>
-                            <button type="submit" class="btn btn-gradient-primary mr-2">Salvar</button>
-                            <input th:field="${instituicao.id}" type="hidden">
-                            <a class="btn btn-light" th:href="@{/instituicao/gerenciar-instituicoes}">Cancelar</a>
-                        </div>
-                    </form>
-                
-                
+
+  <div class="page-header">
+    <h3 class="page-title"> Editar Instituição </h3>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a
+          th:href="@{/instituicao/gerenciar-instituicoes}">Gerenciar
+          Instituições</a>
+        <li class="breadcrumb-item active" aria-current="page">Cadastrar Instituições</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Dados da Instituição</h4>
+
+          <form th:action="@{/instituicao/update}" method="POST" th:objetc="${instituicao}">
+
+            <p class="card-description"> Altere os dados da instituição </p>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Nome/Razão Social</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" th:field="${instituicao.nome}">
+                  </div>
                 </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Telefone/Celular</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" th:field="${instituicao.celular}">
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <div class=" row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">CNPJ</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" th:field="${instituicao.cnpj}">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">CPF</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" th:field="${instituicao.cpf}">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p class="card-description"> Endereço </p>
+
+            <div class="row">
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">CEP</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="cep" value="" maxlength="9"
+                           onblur="pesquisacep(this.value);" th:field="${instituicao.cep}">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Logradouro</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="rua"
+                           th:field="${instituicao.logradouro}">
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Cidade</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="cidade"
+                           th:field="${instituicao.muinicipioNome}">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Número</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" th:field="${instituicao.numero}">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">UF</label>
+                  <div class="col-sm-3">
+                    <input type="text" class="form-control" id="uf" th:field="${instituicao.uf}">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p class="card-description"> Informações de Acesso </p>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">E-Mail</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" th:field="${instituicao.email}">
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+            <div>
+              <button type="submit" class="btn btn-gradient-primary mr-2">Salvar</button>
+              <input th:field="${instituicao.id}" type="hidden">
+              <a class="btn btn-light" th:href="@{/instituicao/gerenciar-instituicoes}">Cancelar</a>
+            </div>
+          </form>
+
+
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 </body>

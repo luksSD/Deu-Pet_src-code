@@ -2,104 +2,104 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Deu Pet - Detalhes da campanha</title>
+  <meta charset="UTF-8">
+  <title>Deu Pet - Detalhes da campanha</title>
 </head>
 <body>
 
 <div layout:fragment="body">
 
-    <div class="page-header">
-        <h3 class="page-title"> Informações da campanha </h3>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
+  <div class="page-header">
+    <h3 class="page-title"> Informações da campanha </h3>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
 
-                <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/campanhas/gerenciar-campanhas}">Gerenciar
-                    Capanhas</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">Detalhes Campanha</li>
+        <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/campanhas/gerenciar-campanhas}">Gerenciar
+          Capanhas</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Detalhes Campanha</li>
 
-            </ol>
-        </nav>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="border-bottom text-center pb-4">
+      </ol>
+    </nav>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="border-bottom text-center pb-4">
 
-                                <img src="/resources/images/animals/cachorro2.png" alt="profile"
-                                     class=" mw-100 rounded mb-3">
+                <img src="/resources/images/animals/cachorro2.png" alt="profile"
+                     class=" mw-100 rounded mb-3">
 
-                            </div>
+              </div>
 
-                            <div class="col-lg-8">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <h3 th:text="${campanha.titulo}">Titulo</h3>
-                                        <div class="d-flex align-items-center">
-                                            <h5 class="mb-0 mr-2 text-muted">Santa Rita do Sapucaí - MG </h5>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <h5 class="mb-0 mr-2 text-muted">Brasil</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-8 mt-5 ">
-                                <div class="d-flex justify-content-between mb-1">
-
-                                    <a class="btn btn-sm btn-gradient-primary btn-block"
-                                       th:href="@{/campanhas/editar-campanha/{id} (id=${campanha.id})}">
-                                        Editar informações</a>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                        <div class="col-lg-6">
-                            <div class="py-4">
-                                <div class="border-bottom">
-                                    <p class="lead">
-                                        <span class="float-left"> Titulo </span>
-                                        <span class="float-right text-muted"
-                                              th:text="${campanha.titulo}"> Titulo </span>
-                                    </p>
-                                    <p class="lead">
-                                        <span class="float-left"> Descrição </span>
-                                        <span class="float-right text-muted"
-                                              th:text="${campanha.descricao}"> Descrição </span>
-                                    </p>
-                                    <p class="lead">
-                                        <span class="float-left"> Requisitos </span>
-                                        <span class="float-right text-muted" th:text="${campanha.requisitos}"> Requisitos </span>
-                                    </p>
-                                    <p class="lead">
-                                        <span class="float-left"> Data Inicio </span>
-                                        <span class="float-right text-muted"
-                                              th:text="${campanha.dataInicio}"> data_inicio </span>
-                                    </p>
-                                    <p class="lead">
-                                        <span class="float-left"> Data fim </span>
-                                        <span class="float-right text-muted"
-                                              th:text="${campanha.dataFim}"> Data fim </span>
-                                    </p>
-
-                                </div>
-
-
-                            </div>
-                        </div>
+              <div class="col-lg-8">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <h3 th:text="${campanha.titulo}">Titulo</h3>
+                    <div class="d-flex align-items-center">
+                      <h5 class="mb-0 mr-2 text-muted">Santa Rita do Sapucaí - MG </h5>
                     </div>
+                    <div class="d-flex align-items-center">
+                      <h5 class="mb-0 mr-2 text-muted">Brasil</h5>
+                    </div>
+                  </div>
                 </div>
+              </div>
+
+              <div class="col-lg-8 mt-5 ">
+                <div class="d-flex justify-content-between mb-1">
+
+                  <a class="btn btn-sm btn-gradient-primary btn-block"
+                     th:href="@{/campanhas/editar-campanha/{id} (id=${campanha.id})}">
+                    Editar informações</a>
+                </div>
+              </div>
+
+
             </div>
+
+            <div class="col-lg-6">
+              <div class="py-4">
+                <div class="border-bottom">
+                  <p class="lead">
+                    <span class="float-left"> Titulo </span>
+                    <span class="float-right text-muted"
+                          th:text="${campanha.titulo}"> Titulo </span>
+                  </p>
+                  <p class="lead">
+                    <span class="float-left"> Descrição </span>
+                    <span class="float-right text-muted"
+                          th:text="${campanha.descricao}"> Descrição </span>
+                  </p>
+                  <p class="lead">
+                    <span class="float-left"> Requisitos </span>
+                    <span class="float-right text-muted" th:text="${campanha.requisitos}"> Requisitos </span>
+                  </p>
+                  <p class="lead">
+                    <span class="float-left"> Data Inicio </span>
+                    <span class="float-right text-muted"
+                          th:text="${campanha.dataInicio}"> data_inicio </span>
+                  </p>
+                  <p class="lead">
+                    <span class="float-left"> Data fim </span>
+                    <span class="float-right text-muted"
+                          th:text="${campanha.dataFim}"> Data fim </span>
+                  </p>
+
+                </div>
+
+
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 

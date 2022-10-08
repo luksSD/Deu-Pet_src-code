@@ -2,123 +2,123 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Início</title>
+  <meta charset="UTF-8">
+  <title>Início</title>
 </head>
 <body>
 
 <div layout:fragment="body">
-    <div class="page-header">
-        <h3 class="page-title">
+  <div class="page-header">
+    <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
                   <i class="mdi mdi-home"></i>
                 </span> Início
-        </h3>
-        <nav aria-label="breadcrumb">
-        
-        </nav>
+    </h3>
+    <nav aria-label="breadcrumb">
+
+    </nav>
+  </div>
+  <div class="row">
+    <div class="col-md-4  grid-margin stretch-card ">
+      <div class="card">
+        <div class="card-body">
+          <img src="resources/images/DeuPetLogo-2.png" class="mw-100 w-100 rounded"
+               alt="image">
+        </div>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-md-4  grid-margin stretch-card ">
-            <div class="card">
-                <div class="card-body">
-                    <img src="resources/images/DeuPetLogo-2.png" class="mw-100 w-100 rounded"
-                         alt="image">
-                </div>
-            </div>
+    <div class="col-md-8  grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Administrativo</h4>
+          <p class="card-description" style="color:#524A4E;"> Instituição/ORG </p>
+          <p class="" style="color:#524a4e;">Gerencie suas informações, cadastros de animais para adoção,
+            solicitações de adoção e campanhas de bem estar do animal.
+          </p>
         </div>
-        <div class="col-md-8  grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Administrativo</h4>
-                    <p class="card-description" style="color:#524A4E;"> Instituição/ORG </p>
-                    <p class="" style="color:#524a4e;">Gerencie suas informações, cadastros de animais para adoção,
-                                                       solicitações de adoção e campanhas de bem estar do animal.
-                    </p>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-    
-    <div class="row">
-        <div class="col-md-4 stretch-card grid-margin">
-            <div class="card bg-gradient-danger card-img-holder text-white">
-                <a class="" th:href="@{/adocao/gerenciar-animais}" style="text-decoration: none; color: #361E1B">
-                    <div class="card-body">
-                        <img src="resources/images/dashboard/circle.svg" class="card-img-absolute"
-                             alt="circle-image"/>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <h4 class="font-weight-normal mb-3">Adoção de Animais</h4>
-                            </div>
-                            <div class="col-md-2 px-2">
-                                <i class="mdi mdi-cat mdi-48px float-left" style="color: black"></i>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <h5 class="card-text">Gerencie os animais para adoção e visualize as solicitações de
-                                                      adoção. </h5>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 stretch-card grid-margin">
+      <div class="card bg-gradient-danger card-img-holder text-white">
+        <a class="" th:href="@{/adocao/gerenciar-animais}" style="text-decoration: none; color: #361E1B">
+          <div class="card-body">
+            <img src="resources/images/dashboard/circle.svg" class="card-img-absolute"
+                 alt="circle-image"/>
+            <div class="row">
+              <div class="col-md-10">
+                <h4 class="font-weight-normal mb-3">Adoção de Animais</h4>
+              </div>
+              <div class="col-md-2 px-2">
+                <i class="mdi mdi-cat mdi-48px float-left" style="color: black"></i>
+              </div>
             </div>
-        </div>
-        <div class="col-md-4 stretch-card grid-margin">
-            <div class="card bg-gradient-info card-img-holder text-white">
-                <a class="" th:href="@{/campanhas/gerenciar-campanhas}" style="text-decoration: none; color:#361E1B">
-                    <div class="card-body">
-                        <img src="resources/images/dashboard/circle.svg" class="card-img-absolute"
-                             alt="circle-image"/>
-                        
-                        <div class="row">
-                            <div class="col-md-10">
-                                <h4 class="font-weight-normal mb-3">Campanhas de Bem Estar Animal</h4>
-                            </div>
-                            <div class="col-md-2 px-2">
-                                <i class="mdi mdi-hospital mdi-48px float-right" style="color: black"></i>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <h5 class="card-text">Gerencie campanhas de saúde, cadastre nova ou exclua campanhas
-                                                      existentes. </h5>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+            <div class="row">
+              <div class="col-md-10">
+                <h5 class="card-text">Gerencie os animais para adoção e visualize as solicitações de
+                  adoção. </h5>
+              </div>
             </div>
-        </div>
-        
-        <div class="col-md-4 stretch-card grid-margin">
-            
-            <div class="card bg-gradient-success card-img-holder text-white">
-                <a class="" th:href="@{/perfil/detalhes}" style="text-decoration: none; color:#361E1B">
-                    <div class="card-body">
-                        <img src="resources/images/dashboard/circle.svg" class="card-img-absolute"
-                             alt="circle-image"/>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <h4 class="font-weight-normal mb-3">Perfíl</h4>
-                            </div>
-                            <div class="col-md-2 px-2">
-                                <i class="mdi mdi-account-card-details mdi-48px float-right"
-                                   style="color: black"></i>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <h5 class="card-text">Gerenciar perfíl, visualizar dados e alterar senha. </h5>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        
-        </div>
-    
+          </div>
+        </a>
+      </div>
     </div>
+    <div class="col-md-4 stretch-card grid-margin">
+      <div class="card bg-gradient-info card-img-holder text-white">
+        <a class="" th:href="@{/campanhas/gerenciar-campanhas}" style="text-decoration: none; color:#361E1B">
+          <div class="card-body">
+            <img src="resources/images/dashboard/circle.svg" class="card-img-absolute"
+                 alt="circle-image"/>
+
+            <div class="row">
+              <div class="col-md-10">
+                <h4 class="font-weight-normal mb-3">Campanhas de Bem Estar Animal</h4>
+              </div>
+              <div class="col-md-2 px-2">
+                <i class="mdi mdi-hospital mdi-48px float-right" style="color: black"></i>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10">
+                <h5 class="card-text">Gerencie campanhas de saúde, cadastre nova ou exclua campanhas
+                  existentes. </h5>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-4 stretch-card grid-margin">
+
+      <div class="card bg-gradient-success card-img-holder text-white">
+        <a class="" th:href="@{/perfil/detalhes}" style="text-decoration: none; color:#361E1B">
+          <div class="card-body">
+            <img src="resources/images/dashboard/circle.svg" class="card-img-absolute"
+                 alt="circle-image"/>
+            <div class="row">
+              <div class="col-md-10">
+                <h4 class="font-weight-normal mb-3">Perfíl</h4>
+              </div>
+              <div class="col-md-2 px-2">
+                <i class="mdi mdi-account-card-details mdi-48px float-right"
+                   style="color: black"></i>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10">
+                <h5 class="card-text">Gerenciar perfíl, visualizar dados e alterar senha. </h5>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
 </div>
 </div>
 

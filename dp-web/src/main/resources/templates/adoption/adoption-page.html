@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Deu Pet - Adoção</title>
-    <script></script>
 </head>
 <body>
 <div layout:fragment="body">
-    
+
     <div class="page-header">
         <h3 class="page-title"> Gerenciar Animais </h3>
         <nav aria-label="breadcrumb">
@@ -128,12 +127,12 @@
                                 <td th:if="${animal.situacaoAodocao == false}"><label
                                         class="badge badge-gradient-warning">PARA ADOÇÃO</label></td>
                                 <td th:text="${animal.id}">id aqui</td>
-                                
+
                                 <td>
                                     <a class="btn btn-gradient-info btn-sm"
                                        th:href="@{/adocao/detalhes-animal/{id} (id=${animal.id})}">
                                         Detalhes</a>
-                                    
+
                                     <a th:href="@{/adocao/deletar/{id} (id=${animal.id})}"
                                        class="btn btn-gradient-dark btn-sm"> Excluir</a>
                                 </td>
@@ -148,34 +147,4 @@
 </div>
 </body>
 </html>
-
-<script>
-$(document).ready(function() {
-    $("input:checkbox").on("click", function() {
-
-        $("#animal-table tr").hide()
-        var flag = 1
-        $("input:checkbox:checked").each(function() {
-            flag = 0;
-            var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function() {
-                if ($(this).text().toLowerCase().indexOf(value) > -1)
-                    $(this).show()
-            });
-        });
-        if (flag == 1)
-            $("#myTable tr").show()
-    });
-});
-
-
-
-
-
-
-
-
-
-
-
-</script>
+<script src="/resources/js/adoption-table-filter.js"></script>

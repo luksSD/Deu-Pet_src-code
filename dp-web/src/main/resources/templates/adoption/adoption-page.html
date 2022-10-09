@@ -25,14 +25,21 @@
         <div class="card-body">
           <div class="col-12">
             <div class="row">
-              <div class="col-md-10">
+              <div class="col-md-9">
                 <h4 class="card-title">Lista de animais cadastrados</h4>
               </div>
+
               <div class="col-md-2">
                 <a class="btn btn-gradient-primary" th:href="@{/adocao/cadastrar-animal}">
                   Cadastrar Animal</a>
               </div>
             </div>
+
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="col-12">
             <div class="row">
               <div class="accordion" id="accordion" role="tablist">
                 <div class="col-12">
@@ -45,56 +52,58 @@
                     </div>
                     <div id="collapse-1" class="collapse" role="tabpanel"
                          aria-labelledby="heading-1" data-parent="#accordion" style="">
-                      <div class="card-body">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="form-group">
-                              <div class="row">
-                                <div class="col-2">
-                                  <div class="form-check form-check-primary">
-                                    <label class="form-check-label">
-                                      <input type="checkbox"
-                                             class="form-check-input animal-status"
-                                             value="PARA ADOÇÃO">
-                                      Para Adoção <i class="input-helper"></i>
-                                    </label>
-                                  </div>
-                                </div>
-                                <div class="col-2">
-                                  <div class="form-check form-check-primary">
-                                    <label class="form-check-label">
-                                      <input type="checkbox"
-                                             class="form-check-input animal-status"
-                                             value="Adotado">
-                                      Adotado <i class="input-helper"></i>
-                                    </label>
-                                  </div>
-                                </div>
-                                <div class="col-2">
-                                  <div class="form-check form-check-primary">
-                                    <label class="form-check-label">
-                                      <input type="checkbox"
-                                             class="form-check-input animal-type"
-                                             value="Cachorro">
-                                      Cachorro <i class="input-helper"></i>
-                                    </label>
-                                  </div>
-                                </div>
-                                <div class="col-2">
-                                  <div class="form-check form-check-primary">
-                                    <label class="form-check-label">
-                                      <input type="checkbox"
-                                             class="form-check-input animal-type"
-                                             value="Gato">
-                                      Gato <i class="input-helper"></i>
-                                    </label>
-                                  </div>
-                                </div>
+                      <div class="row">
+                        <div class="col-md-12 mx-3">
+
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div class="form-check form-check-primary">
+                                <label class="form-check-label">
+                                  <input type="checkbox"
+                                         class="form-check-input animal-status"
+                                         value="PARA ADOÇÃO"
+                                         name="status">
+                                  Para Adoção <i class="input-helper"></i>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="form-check form-check-primary">
+                                <label class="form-check-label">
+                                  <input type="checkbox"
+                                         class="form-check-input animal-status"
+                                         value="Adotado"
+                                         name="status">
+                                  Adotado <i class="input-helper"></i>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="form-check form-check-primary">
+                                <label class="form-check-label">
+                                  <input type="checkbox"
+                                         class="form-check-input animal-type"
+                                         value="Cachorro"
+                                         name="animal">
+                                  Cachorro <i class="input-helper"></i>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="form-check form-check-primary">
+                                <label class="form-check-label">
+                                  <input type="checkbox"
+                                         class="form-check-input animal-type"
+                                         value="Gato"
+                                         name="animal">
+                                  Gato <i class="input-helper"></i>
+                                </label>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
+
                     </div>
                   </div>
                 </div>
@@ -102,11 +111,13 @@
             </div>
           </div>
         </div>
+
+
         <div class="card-body">
           <div class="table-responsive">
             <table class="table"
-                   id="animal-table">
-              <thead>
+                   id="custom-table">
+              <thead id="table-head">
               <tr>
                 <th> Animal</th>
                 <th> Tipo</th>
@@ -115,8 +126,8 @@
                 <th></th>
               </tr>
               </thead>
-              <tbody id="myTable">
-              <tr th:each="animal : ${listaAnimal}">
+              <tbody id="table-body">
+              <tr th:each="animal : ${listaAnimal}" id="table-lines">
                 <td>
                   <img src="/resources/images/animals/animal1.jpg" class="me-2" alt="image">
                   <span th:text="${animal.nome}">Tibursinho</span>
@@ -139,11 +150,14 @@
               </tr>
               </tbody>
             </table>
+
+            <div class="alert alert-warning" id="noEntryAlert" role="alert"> Nem um registro encontrado.</div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
 </div>
 </body>
 </html>

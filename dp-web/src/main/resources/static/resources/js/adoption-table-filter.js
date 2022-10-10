@@ -2,6 +2,14 @@ $(document).ready(function() {
 
     alertEmptyTable();
 
+     $("#search-field").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#table-body tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+        alertEmptyTable();
+      });
+
     $("input:checkbox").on("click", function() {
 
         $("#table-body tr").hide()
@@ -41,7 +49,7 @@ $(document).ready(function() {
         } else{
             $("#table-body tr").filter(function() {
 
-                if((dogFlag == true && catFlag == true) || (adoptedFlag == true && adoptFlag == true)){
+                if((dogFlag == true && catFlag == true) && (adoptedFlag == true && adoptFlag == true)){
                     $(this).show()
                 } else if((dogFlag == true) && ($(this).text().toLowerCase().indexOf("cachorro") > -1)){
                     if(adoptFlag == true && adoptedFlag == false){
@@ -87,7 +95,7 @@ $(document).ready(function() {
             });
         }
         alertEmptyTable();
-    });
+    })};
 
     function alertEmptyTable(){
       if($('#custom-table tbody tr:visible').length <= 0){

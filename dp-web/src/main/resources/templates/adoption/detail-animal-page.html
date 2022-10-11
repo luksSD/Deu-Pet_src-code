@@ -4,6 +4,25 @@
 <head>
   <meta charset="UTF-8">
   <title>Deu Pet - Detalhes do Animal</title>
+
+  <script src="/resources/js/validate-exclusion.js"></script>
+
+  <script th:inline="javascript" th:if="${errorMessage}">
+     window.onload = () => {
+        $('#errorModal').modal('show');
+    }
+
+
+
+
+
+
+
+
+
+
+
+  </script>
 </head>
 <body>
 
@@ -52,15 +71,100 @@
 
               <div class="col-lg-8 mt-5 ">
                 <div class="d-flex justify-content-between mb-1">
-
                   <a class="btn btn-sm btn-gradient-primary btn-block"
                      th:href="@{/adocao/editar-animal/{id} (id=${animal.id})}">
                     Editar informações</a>
                 </div>
               </div>
-
-
+              <div class="d-flex justify-content-between mb-1">
+                <button type="button" class="btn btn-gradient-dark btn-sm"
+                        data-toggle="modal"
+                        data-target="#exclusionModal">
+                  Excluir
+                </button>
+              </div>
             </div>
+
+            <!--            MODAL PARA CONFIORMACAO DE EXCLUSAO-->
+            <div class="modal fade" id="exclusionModal" tabindex="-1" role="dialog"
+                 aria-labelledby="exclusionModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="swal2-icon swal2-warning swal2-icon-show"
+                       style="display: flex;">
+                    <div class="swal2-icon-content">!</div>
+                  </div>
+                  <h2 class="swal2-title" id="swal2-title" style="display: block;">Deseja
+                    excluir o cadastro?</h2>
+                  <div class="row text-center mt-3">
+
+                    <p>Atenção! Esta ação não poderá ser revertida!</p>
+                  </div>
+                  <div class="modal-body">
+                    <form th:action="@{/adocao/deletar}" method="POST" th:object="${animal}">
+
+                      <div class="form-group">
+                        <label for="confirm-password" class="col-form-label">Digite sua senha para confirmar a
+                          exclusão:</label>
+                        <input type="password" class="form-control" id="confirm-password"
+                               th:name="password">
+                        <input th:field="${animal.id}" hidden>
+                      </div>
+                      <div class="form-group bg-light py-1 text-center text-danger d-none"
+                           id="errorMessageDiv">
+                        <p id="errorMessage"></p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-gradient-danger"
+                                onclick="clearErrorMessage();"
+                                data-dismiss="modal">Cancelar
+                        </button>
+                        <button class="btn btn-gradient-success" id="teste"
+                                onclick="validateExclusion()"
+                                type="submit">Confirmar
+                        </button>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--            MODAL DE ERRO-->
+            <div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
+                 aria-labelledby="errorModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="swal2-icon swal2-error swal2-icon-show"
+                       style="display: flex;">
+                    <span class="swal2-x-mark">
+                    <span class="swal2-x-mark-line-left"></span>
+                    <span class="swal2-x-mark-line-right"></span>
+                    </span>
+                  </div>
+
+                  <h2 class="swal2-title" style="display: block;">Erro ao realizar operação!</h2>
+                  <div class="row text-center mt-3">
+
+                  </div>
+
+                  <div class="modal-body text-right">
+                    <h5 th:text="${errorMessage}">Error message</h5>
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-gradient-danger"
+                            onclick="clearErrorMessage();"
+                            data-dismiss="modal">Fechar
+                    </button>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
 
             <div class="col-lg-6">
               <div class="py-4">

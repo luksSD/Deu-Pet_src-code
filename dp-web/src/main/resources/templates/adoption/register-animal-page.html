@@ -4,8 +4,13 @@
   <meta charset="UTF-8">
   <title>Deu Pet - Cadastrar Animal</title>
   <script src="/resources/vendors/js/dropzone.js"></script>
-  <!--    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>-->
-  <!--    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>-->
+  <script th:inline="javascript" th:if="${errorMessage}">
+     window.onload = () => {
+        $('#errorModal').modal('show');
+    }
+
+
+  </script>
 </head>
 
 <body>
@@ -184,13 +189,48 @@
               <a class="btn btn-light" th:href="@{/adocao/gerenciar-animais}">Cancelar</a>
             </div>
 
-
           </form>
 
         </div>
       </div>
     </div>
   </div>
+
+
+  <!--MODAL DE ERRO-->
+  <div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
+       aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="swal2-icon swal2-error swal2-icon-show"
+             style="display: flex;">
+                    <span class="swal2-x-mark">
+                    <span class="swal2-x-mark-line-left"></span>
+                    <span class="swal2-x-mark-line-right"></span>
+                    </span>
+        </div>
+
+        <h2 class="swal2-title" style="display: block;">Erro ao realizar operação!</h2>
+        <div class="row text-center mt-3">
+
+        </div>
+
+        <div class="modal-body text-right">
+          <h5 th:text="${errorMessage}">Error message</h5>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-gradient-danger"
+                  data-dismiss="modal">Fechar
+          </button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
 </div>
 <script type="application/javascript">
 Dropzone.options.mydropzone = {
@@ -222,63 +262,6 @@ Dropzone.options.mydropzone = {
             });
         } // init end
     };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

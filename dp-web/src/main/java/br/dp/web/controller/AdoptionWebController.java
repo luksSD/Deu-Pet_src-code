@@ -14,27 +14,35 @@ import java.util.List;
 public class AdoptionWebController {
 
     String message = "";
+    Animal tempAnimal = null;
 
     @Autowired
     private AnimalService animalService;
 
 
     @GetMapping("/cadastrar-animal")
-    public String getRegisterAnimalPage(final Animal animal) {
+    public String getRegisterAnimalPage(final Animal animal, final Model model) {
+
+        if (!message.equals("")) {
+            model.addAttribute("errorMessage", message);
+        }
 
         return "adoption/register-animal-page";
     }
 
     @PostMapping("/create")
-    public String create(final Animal animal) {
+    public String create(final Animal animal, final Model model) {
 
         final Long id = animalService.create(animal);
 
         if (id != -1) {
+            message = "Animal cadastrado com sucesso!";
             return "redirect:/adocao/detalhes-animal/" + id;
+        } else {
+            message = "Erro ao cadastrar anima! Tente novamente.";
+            return "redirect:/adocao/cadastrar-animal";
         }
 
-        return "redirect:/adocao/gerenciar-animais";
     }
 
     @GetMapping("/gerenciar-animais")
@@ -44,6 +52,7 @@ public class AdoptionWebController {
         model.addAttribute("listaAnimal", animals);
         if (!message.equals("")) {
             model.addAttribute("succesMessage", message);
+            message = "";
         }
 
         return "adoption/adoption-page";
@@ -55,6 +64,9 @@ public class AdoptionWebController {
 
 
         model.addAttribute("animal", animalModel);
+        if (message != null) {
+            model.addAttribute("succesMessage", message);
+        }
 
         return "adoption/detail-animal-page";
     }

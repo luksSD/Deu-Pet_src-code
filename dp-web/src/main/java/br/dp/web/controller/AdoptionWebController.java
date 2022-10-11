@@ -25,6 +25,7 @@ public class AdoptionWebController {
 
         if (!message.equals("")) {
             model.addAttribute("errorMessage", message);
+            message = "";
         }
 
         return "adoption/register-animal-page";
@@ -64,8 +65,9 @@ public class AdoptionWebController {
 
 
         model.addAttribute("animal", animalModel);
-        if (message != "") {
+        if (!message.equals("")) {
             model.addAttribute("succesMessage", message);
+            message = "";
         }
 
         return "adoption/detail-animal-page";
@@ -75,9 +77,11 @@ public class AdoptionWebController {
     public String getEditPage(@PathVariable("id") final Long id, final Model model) {
 
         model.addAttribute("animal", animalService.readById(id));
-        if (message != null) {
+        if (!message.equals("")) {
             model.addAttribute("errorMessage", message);
             model.addAttribute("errorMessage", tempAnimal);
+            message = "";
+            tempAnimal = null;
         }
 
         return "adoption/edit-animal-page";

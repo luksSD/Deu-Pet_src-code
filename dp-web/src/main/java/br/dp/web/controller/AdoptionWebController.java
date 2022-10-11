@@ -64,7 +64,7 @@ public class AdoptionWebController {
 
 
         model.addAttribute("animal", animalModel);
-        if (message != null) {
+        if (message != "") {
             model.addAttribute("succesMessage", message);
         }
 
@@ -75,6 +75,10 @@ public class AdoptionWebController {
     public String getEditPage(@PathVariable("id") final Long id, final Model model) {
 
         model.addAttribute("animal", animalService.readById(id));
+        if (message != null) {
+            model.addAttribute("errorMessage", message);
+            model.addAttribute("errorMessage", tempAnimal);
+        }
 
         return "adoption/edit-animal-page";
     }
@@ -82,9 +86,17 @@ public class AdoptionWebController {
     @PostMapping("/update")
     public String update(final Animal animal, final Model model) {
 
-        animalService.update(animal);
+        final boolean response = animalService.update(animal);
 
-        return getDetailPage(animal.getId(), model);
+        if (response) {
+            message = "Cadastro do animal atualizado com sucesso!";
+            return "redirect:/adocao/detalhes-animal/" + animal.getId();
+        } else {
+            model.addAttribute("animal", animal);
+            model.addAttribute("errorMessage", "Não foi possível atualizar o cadastro do animal. Tente novamente!");
+
+            return "adoption/edit-animal-page";
+        }
 
     }
 

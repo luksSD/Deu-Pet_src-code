@@ -13,6 +13,8 @@ import java.util.List;
 @RequestMapping("/adocao")
 public class AdoptionWebController {
 
+    String message = "";
+
     @Autowired
     private AnimalService animalService;
 
@@ -40,6 +42,9 @@ public class AdoptionWebController {
 
         final List<Animal> animals = animalService.readAll();
         model.addAttribute("listaAnimal", animals);
+        if (!message.equals("")) {
+            model.addAttribute("succesMessage", message);
+        }
 
         return "adoption/adoption-page";
     }
@@ -74,11 +79,21 @@ public class AdoptionWebController {
     @PostMapping("/deletar")
     public String delete(@RequestParam(value = "password") final String senha, final Animal animal, final Model model) {
 
+        boolean response = false;
+
         if (senha.equals("123")) {
             System.out.println("opa");
-            animalService.delete(animal.getId());
+            response = animalService.delete(animal.getId());
 
-            return "redirect:/adocao/gerenciar-animais";
+            if (response) {
+                message = "Cadastro do animal excluído com sucesso!";
+                return "redirect:/adocao/gerenciar-animais";
+            } else {
+                model.addAttribute("animal", animal);
+                model.addAttribute("errorMessage", "Não foi possível excluir o animal!");
+
+                return "adoption/detail-animal-page";
+            }
 
         } else {
             model.addAttribute("animal", animal);

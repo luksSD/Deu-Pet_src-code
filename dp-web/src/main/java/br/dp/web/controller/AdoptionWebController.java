@@ -66,7 +66,11 @@ public class AdoptionWebController {
 
         model.addAttribute("animal", animalModel);
         if (!message.equals("")) {
-            model.addAttribute("succesMessage", message);
+            if (message.contains("successo")) {
+                model.addAttribute("succesMessage", message);
+            } else {
+                model.addAttribute("errorMessage", message);
+            }
             message = "";
         }
 
@@ -79,7 +83,6 @@ public class AdoptionWebController {
         model.addAttribute("animal", animalService.readById(id));
         if (!message.equals("")) {
             model.addAttribute("errorMessage", message);
-            model.addAttribute("errorMessage", tempAnimal);
             message = "";
             tempAnimal = null;
         }
@@ -117,17 +120,12 @@ public class AdoptionWebController {
                 message = "Cadastro do animal excluído com sucesso!";
                 return "redirect:/adocao/gerenciar-animais";
             } else {
-                model.addAttribute("animal", animal);
-                model.addAttribute("errorMessage", "Não foi possível excluir o animal!");
-
-                return "adoption/detail-animal-page";
+                message = "Não foi possível excluir o animal!";
+                return "redirect:/adocao/detalhes-animal/" + animal.getId();
             }
-
         } else {
-            model.addAttribute("animal", animal);
-            model.addAttribute("errorMessage", "A senha informada esta incorreta!");
-
-            return "adoption/detail-animal-page";
+            message = "A senha informada esta incorreta!";
+            return "redirect:/adocao/detalhes-animal/" + animal.getId();
         }
 
     }

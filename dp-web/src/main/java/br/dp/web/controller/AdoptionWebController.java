@@ -66,7 +66,7 @@ public class AdoptionWebController {
 
         model.addAttribute("animal", animalModel);
         if (!message.equals("")) {
-            if (message.contains("successo")) {
+            if (message.equals("Animal cadastrado com sucesso!")) {
                 model.addAttribute("succesMessage", message);
             } else {
                 model.addAttribute("errorMessage", message);
@@ -84,7 +84,6 @@ public class AdoptionWebController {
         if (!message.equals("")) {
             model.addAttribute("errorMessage", message);
             message = "";
-            tempAnimal = null;
         }
 
         return "adoption/edit-animal-page";
@@ -95,14 +94,12 @@ public class AdoptionWebController {
 
         final boolean response = animalService.update(animal);
 
-        if (response) {
+        if (!response) {
             message = "Cadastro do animal atualizado com sucesso!";
             return "redirect:/adocao/detalhes-animal/" + animal.getId();
         } else {
-            model.addAttribute("animal", animal);
-            model.addAttribute("errorMessage", "Não foi possível atualizar o cadastro do animal. Tente novamente!");
-
-            return "adoption/edit-animal-page";
+            message = "Não foi possível atualizar o cadastro do animal. Tente novamente!";
+            return "redirect:/adocao/editar-animal/" + animal.getId();
         }
 
     }

@@ -7,6 +7,7 @@
      window.onload = () => {
         $('#errorModal').modal('show');
     }
+
   </script>
 </head>
 
@@ -22,7 +23,8 @@
         <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/adocao/gerenciar-animais}">Gerenciar
           Animais</a>
         </li>
-        <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/adocao/detalhes-animal}">Detalhes
+        <li class="breadcrumb-item active" aria-current="page"><a
+          th:href="@{/adocao/detalhes-animal/{id} (id=${animal.id})}">Detalhes
           Animais</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Editar Animal</li>

@@ -1,6 +1,7 @@
 package br.dp.web.controller;
 
 import br.dp.model.Animal;
+import br.dp.model.ArquivoAnimal;
 import br.dp.web.service.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -40,33 +42,61 @@ public class AdoptionWebController {
     @PostMapping("/create")
     public String create(@RequestParam("file") final List<MultipartFile> files, final Animal animal, final Model model) {
 
+        //Cadastra animal
         final Long id = animalService.create(animal);
 
+        boolean firstFile = true;
+        final List<ArquivoAnimal> fileAttributesList = new ArrayList<ArquivoAnimal>();
+
+        //Verifica se o cadastro de animal foi registrado com sucesso
         if (id != -1) {
-            final StringBuilder fileNames = new StringBuilder();
-            final StringBuilder path = new StringBuilder();
 
-            path.append(uploadDirectory + id);
+            if (files.size() > 0) {
+                final StringBuilder fileNames = new StringBuilder();
 
-            for (final MultipartFile file : files) {
+                //Varre a lista de imagens enviadas para cadastro
+                for (final MultipartFile file : files) {
 
-                final Path fileNameAndPath = Paths.get(String.valueOf(path), file.getOriginalFilename());
-                System.out.println(fileNameAndPath.toAbsolutePath());
+                    final Path path = Paths.get(uploadDirectory + id, file.getOriginalFilename());
+                    System.out.println(path.toAbsolutePath());
 
-                if (!Files.exists(Path.of(uploadDirectory + id))) {
+                    //verifica se o caminho de destino existe  e cria se nao esxistir
+                    if (!Files.exists(Path.of(uploadDirectory + id))) {
+                        try {
+                            Files.createDirectories(Path.of(uploadDirectory + id));
+                        } catch (final IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    fileNames.append(file.getOriginalFilename() + " ");
+                    final ArquivoAnimal fileAttributes = new ArquivoAnimal();
+
                     try {
-                        Files.createDirectories(Path.of(uploadDirectory + id));
+                        Files.write(path, file.getBytes());
+
+                        fileAttributes.setAnimalID(id);
+                        fileAttributes.setPath("/resources/images/animals/" + id + "/" + file.getOriginalFilename());
+                        fileAttributes.setPrimary(firstFile);
+                        firstFile = false;
+
+                        fileAttributesList.add(fileAttributes);
+
                     } catch (final IOException e) {
                         e.printStackTrace();
                     }
                 }
+            } else {
+                final ArquivoAnimal fileAttributes = new ArquivoAnimal();
+                fileAttributes.setAnimalID(id);
+                fileAttributes.setPath("/resources/images/animals/animal-default.jpg");
+                fileAttributes.setPrimary(true);
 
-                fileNames.append(file.getOriginalFilename() + " ");
-                try {
-                    Files.write(fileNameAndPath, file.getBytes());
-                } catch (final IOException e) {
-                    e.printStackTrace();
-                }
+                fileAttributesList.add(fileAttributes);
+            }
+
+            if (!fileAttributesList.isEmpty()) {
+                animalService.saveFileAttributes(fileAttributesList);
             }
 
             message = "Animal cadastrado com sucesso!";
@@ -93,10 +123,12 @@ public class AdoptionWebController {
 
     @GetMapping("/detalhes-animal/{id}")
     public String getDetailPage(@PathVariable("id") final Long id, final Model model) {
-        final Animal animalModel = animalService.readById(id);
 
+        final Animal animalModel = animalService.readById(id);
+        final List<ArquivoAnimal> imgsAttrList = animalService.loadAnimalImgs(id);
 
         model.addAttribute("animal", animalModel);
+        model.addAttribute("imgs", imgsAttrList);
         if (!message.equals("")) {
             if (message.equals("Animal cadastrado com sucesso!")) {
                 model.addAttribute("succesMessage", message);

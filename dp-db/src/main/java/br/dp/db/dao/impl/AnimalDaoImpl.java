@@ -3,6 +3,7 @@ package br.dp.db.dao.impl;
 import br.dp.db.connection.ConnectionFactory;
 import br.dp.db.dao.AnimalDao;
 import br.dp.model.Animal;
+import br.dp.model.ArquivoAnimal;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -143,27 +144,20 @@ public class AnimalDaoImpl implements AnimalDao {
             preparedStatement.execute();
 
             resultSet = preparedStatement.getGeneratedKeys();
-            if (resultSet.next())
-                ;
-            {
+            if (resultSet.next()) {
                 id = resultSet.getLong(1);
             }
 
             connection.commit();
 
         } catch (final Exception e) {
-
             try {
                 connection.rollback();
-
             } catch (final SQLException e1) {
-
                 System.out.println(e1.getMessage());
             } finally {
                 ConnectionFactory.close(resultSet, preparedStatement, connection);
-
             }
-
         }
 
         return id;
@@ -261,6 +255,97 @@ public class AnimalDaoImpl implements AnimalDao {
         } finally {
             ConnectionFactory.close(preparedStatement, connection);
         }
+    }
+
+    @Override
+    public Long saveFileAttributes(final List<ArquivoAnimal> imagesAttributes) {
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        String sql = "INSERT INTO arquivo_animal ";
+        sql += " (animal_id, caminho, primaria)";
+        sql += "VALUES(?, ?, ?);";
+
+        Long id = Long.valueOf(1);
+
+        try {
+
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
+
+            for (final ArquivoAnimal imgAtt : imagesAttributes) {
+                preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+                preparedStatement.setLong(1, imgAtt.getAnimalID());
+                preparedStatement.setString(2, imgAtt.getPath());
+                preparedStatement.setBoolean(3, imgAtt.isPrimary());
+
+                preparedStatement.execute();
+
+                resultSet = preparedStatement.getGeneratedKeys();
+
+                if (!resultSet.next()) {
+                    id = Long.valueOf(-1);
+                    break;
+                }
+            }
+
+            if (id != -1) {
+                connection.commit();
+            } else {
+                connection.abort(null);
+            }
+
+        } catch (final Exception e) {
+            try {
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println(e1.getMessage());
+            } finally {
+                ConnectionFactory.close(resultSet, preparedStatement, connection);
+            }
+        }
+
+        return id;
+    }
+
+    @Override
+    public List<ArquivoAnimal> loadAnimalImages(final Long id) {
+
+        final List<ArquivoAnimal> animalsImagesList = new ArrayList<ArquivoAnimal>();
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = ConnectionFactory.getConnection();
+
+            final String sql = "SELECT * FROM arquivo_animal WHERE animal_id = " + id;
+
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+
+                final ArquivoAnimal animalImage = new ArquivoAnimal();
+
+                animalImage.setId(resultSet.getLong("id"));
+                animalImage.setAnimalID(resultSet.getLong("animal_id"));
+                animalImage.setPath(resultSet.getString("caminho"));
+                animalImage.setPrimary(resultSet.getBoolean("primaria"));
+
+                animalsImagesList.add(animalImage);
+            }
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            ConnectionFactory.close(resultSet, preparedStatement, connection);
+        }
+
+        return animalsImagesList;
     }
 
 }

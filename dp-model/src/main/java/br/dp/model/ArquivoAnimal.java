@@ -6,6 +6,7 @@ import lombok.Data;
 public class ArquivoAnimal extends BasePojo {
 
     private Long animalID;
-    private String fotos;
+    private String path;
+    private boolean primary;
 
 }

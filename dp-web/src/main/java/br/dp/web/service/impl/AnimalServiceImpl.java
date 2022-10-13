@@ -1,6 +1,7 @@
 package br.dp.web.service.impl;
 
 import br.dp.model.Animal;
+import br.dp.model.ArquivoAnimal;
 import br.dp.web.service.AnimalService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -135,5 +136,48 @@ public class AnimalServiceImpl implements AnimalService {
         }
 
         return id;
+    }
+
+    @Override
+    public Long saveFileAttributes(final List<ArquivoAnimal> entity) {
+        Long id = Long.valueOf(-1);
+
+        final String endpoint = "http://localhost:8085/api/v1/animal/save-images";
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<List<ArquivoAnimal>> httpEntity = new HttpEntity<>(entity);
+            final ResponseEntity<Long> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
+                Long.class);
+
+            id = responseEntity.getBody();
+
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return id;
+    }
+
+    @Override
+    public List<ArquivoAnimal> loadAnimalImgs(final Long id) {
+        final String endpoint = "http://localhost:8085/api/v1/animal/load-images/" + id;
+
+        List<ArquivoAnimal> response = null;
+        try {
+
+            final RestTemplate restTemplate = new RestTemplate();
+
+            final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+
+            final ResponseEntity<ArquivoAnimal[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
+                ArquivoAnimal[].class);
+
+            response = Arrays.asList(requestResponse.getBody());
+
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return response;
     }
 }

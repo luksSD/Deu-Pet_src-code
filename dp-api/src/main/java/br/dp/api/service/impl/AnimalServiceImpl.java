@@ -1,48 +1,58 @@
 package br.dp.api.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import br.dp.api.service.AnimalService;
 import br.dp.db.dao.AnimalDao;
 import br.dp.model.Animal;
+import br.dp.model.ArquivoAnimal;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AnimalServiceImpl implements AnimalService {
 
-	@Autowired
-	private AnimalDao dao;
+    @Autowired
+    private AnimalDao dao;
 
-	@Override
-	public List<Animal> readAll() {
-		// TODO Auto-generated method stub
-		return dao.readAll();
-	}
+    @Override
+    public List<Animal> readAll() {
+        // TODO Auto-generated method stub
+        return dao.readAll();
+    }
 
-	@Override
-	public Animal readById(final Long id) {
-		// TODO Auto-generated method stub
-		return dao.readById(id);
-	}
+    @Override
+    public Animal readById(final Long id) {
+        // TODO Auto-generated method stub
+        return dao.readById(id);
+    }
 
-	@Override
-	public Long create(final Animal entity) {
-		// TODO Auto-generated method stub
-		return dao.create(entity);
-	}
+    @Override
+    public Long create(final Animal entity) {
+        // TODO Auto-generated method stub
+        return dao.create(entity);
+    }
 
-	@Override
-	public boolean update(final Animal entity) {
-		// TODO Auto-generated method stub
-		return dao.update(entity);
-	}
+    @Override
+    public boolean update(final Animal entity) {
+        // TODO Auto-generated method stub
+        return dao.update(entity);
+    }
 
-	@Override
-	public boolean delete(final Long id) {
-		// TODO Auto-generated method stub
-		return dao.delete(id);
-	}
+    @Override
+    public boolean delete(final Long id) {
+        // TODO Auto-generated method stub
+        return dao.delete(id);
+    }
+
+    @Override
+    public Long saveFileAttributes(final List<ArquivoAnimal> imagesAttributes) {
+        return dao.saveFileAttributes(imagesAttributes);
+    }
+
+    @Override
+    public List<ArquivoAnimal> loadAnimalImgs(final Long id) {
+        return dao.loadAnimalImages(id);
+    }
 
 }

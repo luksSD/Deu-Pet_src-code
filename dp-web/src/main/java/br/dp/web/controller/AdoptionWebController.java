@@ -8,14 +8,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
 @RequestMapping("/adocao")
 public class AdoptionWebController {
 
-    String message = "";
-    Animal tempAnimal = null;
+    public static String uploadDirectory = System.getProperty("user.dir") + "/dp-web/src/main/resources/static/resources/images/animals/";
+    private String message = "";
+    private final Animal tempAnimal = null;
 
     @Autowired
     private AnimalService animalService;
@@ -38,6 +43,32 @@ public class AdoptionWebController {
         final Long id = animalService.create(animal);
 
         if (id != -1) {
+            final StringBuilder fileNames = new StringBuilder();
+            final StringBuilder path = new StringBuilder();
+
+            path.append(uploadDirectory + id);
+
+            for (final MultipartFile file : files) {
+
+                final Path fileNameAndPath = Paths.get(String.valueOf(path), file.getOriginalFilename());
+                System.out.println(fileNameAndPath.toAbsolutePath());
+
+                if (!Files.exists(Path.of(uploadDirectory + id))) {
+                    try {
+                        Files.createDirectories(Path.of(uploadDirectory + id));
+                    } catch (final IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                fileNames.append(file.getOriginalFilename() + " ");
+                try {
+                    Files.write(fileNameAndPath, file.getBytes());
+                } catch (final IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
             message = "Animal cadastrado com sucesso!";
             return "redirect:/adocao/detalhes-animal/" + id;
         } else {

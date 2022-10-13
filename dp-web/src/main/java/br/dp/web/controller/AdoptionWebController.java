@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class AdoptionWebController {
     }
 
     @PostMapping("/create")
-    public String create(final Animal animal, final Model model) {
+    public String create(@RequestParam("file") final List<MultipartFile> files, final Animal animal, final Model model) {
 
         final Long id = animalService.create(animal);
 

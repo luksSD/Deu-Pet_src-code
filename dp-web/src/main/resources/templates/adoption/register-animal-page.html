@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Deu Pet - Cadastrar Animal</title>
-  <script src="/resources/vendors/js/dropzone.js"></script>
   <script th:inline="javascript" th:if="${errorMessage}">
      window.onload = () => {
         $('#errorModal').modal('show');
-    }
-
-
   </script>
+  <script src="/resources/js/img-preview.js"></script>
 </head>
 
 <body>
@@ -35,238 +32,225 @@
         <div class="card-body">
           <h4 class="card-title">Dados do Animal</h4>
 
-          <form th:action="@{/adocao/create}" method="POST" th:objetc="${animal}" id="formCadastro"
-                name="formCadastro">
+          <div id="my-dropzone">
+            <form th:action="@{/adocao/create}" method="POST" th:objetc="${animal}"
+                  name="formCadastro" enctype='multipart/form-data' class="dropzone">
 
-            <p class="card-description"> Insira os dados do animal a ser cadastrado </p>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Nome</label>
-                  <div class="col-sm-9">
-                    <input class="form-control" id="inputAnimalName" type="text"
-                           required placeholder="Insira o nome do animal"
-                           th:field="${animal.nome}"/>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Tipo</label>
-                  <div class="col-sm-4">
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="radio" required class="form-check-input" name="tipo1"
-                               id="tipo1" th:field="*{animal.tipo}" value="Cachorro"
-                               checked="Cachorro">
-                        Cachorro </label>
-                    </div>
-                  </div>
-                  <div class="col-sm-5">
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="radio" required class="form-check-input" name="tipo2"
-                               id="tipo2" th:field="*{animal.tipo}" value="Gato"
-                               checked="Gato">
-                        Gato </label>
+              <p class="card-description"> Insira os dados do animal a ser cadastrado </p>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Nome</label>
+                    <div class="col-sm-9">
+                      <input class="form-control" id="inputAnimalName" type="text"
+                             required placeholder="Insira o nome do animal"
+                             th:field="${animal.nome}"/>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Peso</label>
-                  <div class="col-sm-9">
-                    <input class="form-control" required id="inputAnimalPeso"
-                           placeholder="Insira o peso do animal" th:field="${animal.peso}"/>
-                    <!--                                            <input type="text" class="form-control">-->
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Sexo</label>
-                  <div class="col-sm-4">
-                    <div class="form-check">
-                      <label class="form-check-label">
 
 
-                        <input type="radio" required class="form-check-input" name="sexo1"
-                               id="sexo1" th:field="*{animal.sexo}" value="Macho"
-                               checked="Macho">
-                        Macho </label>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Tipo</label>
+                    <div class="col-sm-4">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input type="radio" required class="form-check-input" name="tipo1"
+                                 id="tipo1" th:field="*{animal.tipo}" value="Cachorro"
+                                 checked="Cachorro">
+                          Cachorro </label>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-sm-5">
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="radio" required class="form-check-input" name="sexo2"
-                               id="sexo2" th:field="*{animal.sexo}" value="Fêmea"
-                               checked="Fêmea">
-                        Fêmea </label>
+                    <div class="col-sm-5">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input type="radio" required class="form-check-input" name="tipo2"
+                                 id="tipo2" th:field="*{animal.tipo}" value="Gato"
+                                 checked="Gato">
+                          Gato </label>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Peso</label>
+                    <div class="col-sm-9">
+                      <input class="form-control" required id="inputAnimalPeso"
+                             placeholder="Insira o peso do animal" th:field="${animal.peso}"/>
+                      <!--                                            <input type="text" class="form-control">-->
+                    </div>
+                  </div>
+                </div>
 
-            <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Sexo</label>
+                    <div class="col-sm-4">
+                      <div class="form-check">
+                        <label class="form-check-label">
 
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Porte</label>
-                  <div class="col-sm-9">
 
-                    <input class="form-control" id="inputAnimalPorte"
-                           required
-                           placeholder="Insira o porte do animal" th:field="${animal.porte}"/>
+                          <input type="radio" required class="form-check-input" name="sexo1"
+                                 id="sexo1" th:field="*{animal.sexo}" value="Macho"
+                                 checked="Macho">
+                          Macho </label>
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input type="radio" required class="form-check-input" name="sexo2"
+                                 id="sexo2" th:field="*{animal.sexo}" value="Fêmea"
+                                 checked="Fêmea">
+                          Fêmea </label>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Raça</label>
-                  <div class="col-sm-9">
-                    <input class="form-control" id="inputAnimalRaca"
-                           required
-                           placeholder="Insira o raça do animal" th:field="${animal.raca}"/>
+
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Porte</label>
+                    <div class="col-sm-9">
+
+                      <input class="form-control" id="inputAnimalPorte"
+                             required
+                             placeholder="Insira o porte do animal" th:field="${animal.porte}"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Raça</label>
+                    <div class="col-sm-9">
+                      <input class="form-control" id="inputAnimalRaca"
+                             required
+                             placeholder="Insira o raça do animal" th:field="${animal.raca}"/>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div class="row"></div>
+              <div class="row"></div>
 
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Pelagem Primária</label>
-                  <div class="col-sm-9">
-                    <input class="form-control" id="inputAnimalPelagemPrimaria"
-                           required
-                           placeholder="Insira a cor predominante do animal"
-                           th:field="${animal.pelagemPrimaria}"/>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Pelagem Primária</label>
+                    <div class="col-sm-9">
+                      <input class="form-control" id="inputAnimalPelagemPrimaria"
+                             required
+                             placeholder="Insira a cor predominante do animal"
+                             th:field="${animal.pelagemPrimaria}"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Pelagem Secundária</label>
+                    <div class="col-sm-9">
+                      <input class="form-control" id="inputAnimalpelagemSecundaria"
+                             required
+                             placeholder="Insira a cor predominante do animal"
+                             th:field="${animal.pelagemSecundaria}"/>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Pelagem Secundária</label>
-                  <div class="col-sm-9">
-                    <input class="form-control" id="inputAnimalpelagemSecundaria"
-                           required
-                           placeholder="Insira a cor predominante do animal"
-                           th:field="${animal.pelagemSecundaria}"/>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Temperamento</label>
+                    <div class="col-sm-9">
+                      <input class="form-control" id="inputAnimalTemperamento"
+                             required
+                             placeholder="Insira a cor predominante do animal"
+                             th:field="${animal.temperamento}"/>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Temperamento</label>
-                  <div class="col-sm-9">
-                    <input class="form-control" id="inputAnimalTemperamento"
-                           required
-                           placeholder="Insira a cor predominante do animal"
-                           th:field="${animal.temperamento}"/>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group row">
+                    <label for="files">Selecione as fotos do animal: </label>
+                    <input id="files" name="file" type="file" multiple/>
+                    <!--                    <input type="file" id="files" name="image[]" multiple/>-->
                   </div>
                 </div>
+
               </div>
-              <h3 class="page-title mb-3"> Inserir Fotos </h3>
-              <div class="col-mlx-10">
-                <div class="dropzone-previews" id="dropzonePreview"></div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group row" id="result">
+                  </div>
+                </div>
+
               </div>
-            </div>
+              <div>
+                <div>
+                  <button type="submit" class="btn btn-gradient-primary mr-2" id="submit-all">Cadastrar</button>
+                  <a class="btn btn-light" th:href="@{/adocao/gerenciar-animais}">Cancelar</a>
+                </div>
 
-            <div>
-              <button type="submit" class="btn btn-gradient-primary mr-2">Cadastrar</button>
-              <a class="btn btn-light" th:href="@{/adocao/gerenciar-animais}">Cancelar</a>
-            </div>
+              </div>
 
-          </form>
 
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
 
-  <!--MODAL DE ERRO-->
-  <div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
-       aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="swal2-icon swal2-error swal2-icon-show"
-             style="display: flex;">
+      <!--MODAL DE ERRO-->
+      <div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
+           aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="swal2-icon swal2-error swal2-icon-show"
+                 style="display: flex;">
                     <span class="swal2-x-mark">
                     <span class="swal2-x-mark-line-left"></span>
                     <span class="swal2-x-mark-line-right"></span>
                     </span>
+            </div>
+
+            <h2 class="swal2-title" style="display: block;">Erro ao realizar operação!</h2>
+            <div class="row text-center mt-3">
+
+            </div>
+
+            <div class="modal-body text-right">
+              <h5 th:text="${errorMessage}">Error message</h5>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-gradient-danger"
+                      data-dismiss="modal">Fechar
+              </button>
+            </div>
+
+
+          </div>
         </div>
-
-        <h2 class="swal2-title" style="display: block;">Erro ao realizar operação!</h2>
-        <div class="row text-center mt-3">
-
-        </div>
-
-        <div class="modal-body text-right">
-          <h5 th:text="${errorMessage}">Error message</h5>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-gradient-danger"
-                  data-dismiss="modal">Fechar
-          </button>
-        </div>
-
-
       </div>
+
+
     </div>
+
+
   </div>
-
-
 </div>
-<script type="application/javascript">
-Dropzone.options.mydropzone = {
-    //url does not has to be written
-    //if we have wrote action in the form
-    //tag but i have mentioned here just for convenience sake
-        url: 'upload.php',
-        addRemoveLinks: true,
-        autoProcessQueue: false, // this is important as you dont want form to be submitted unless you have clicked the submit button
-        autoDiscover: false,
-        paramName: 'pic', // this is optional Like this one will get accessed in php by writing $_FILE['pic'] // if you dont specify it then bydefault it taked 'file' as paramName eg: $_FILE['file']
-        previewsContainer: '#dropzonePreview', // we specify on which div id we must show the files
-        clickable: false, // this tells that the dropzone will not be clickable . we have to do it because v dont want the whole form to be clickable
-        accept: function(file, done) {
-            console.log("uploaded");
-            done();
-        },
-        error: function(file, msg){
-            alert(msg);
-        },
-        init: function() {
-            var myDropzone = this;
-            //now we will submit the form when the button is clicked
-            $("#sbmtbtn").on('click',function(e) {
-               e.preventDefault();
-               myDropzone.processQueue(); // this will submit your form to the specified action path
-              // after this, your whole form will get submitted with all the inputs + your files and the php code will remain as usual
-        //REMEMBER you DON'T have to call ajax or anything by yourself, dropzone will take care of that
-            });
-        } // init end
-    };
 
-
-
-
-
-</script>
 </body>
+
 </html>

@@ -20,9 +20,9 @@ import java.util.List;
 @RequestMapping("/adocao")
 public class AdoptionWebController {
 
-    public static String uploadDirectory = System.getProperty("user.dir") + "/images/animals/";
+    public static final String ANIMAL_DEFAULT_IMG = "/resources/images/animals/animal-default.jpg";
+    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/images/animals/";
     private String message = "";
-    private final Animal tempAnimal = null;
 
     @Autowired
     private AnimalService animalService;
@@ -57,21 +57,21 @@ public class AdoptionWebController {
                 //Varre a lista de imagens enviadas para cadastro
                 for (final MultipartFile file : files) {
 
-                    final Path path = Paths.get(uploadDirectory + id, file.getOriginalFilename());
+                    final Path path = Paths.get(UPLOAD_DIRECTORY + id, file.getOriginalFilename());
                     System.out.println(path.toAbsolutePath());
 
                     //verifica se o caminho de destino existe  e cria se nao esxistir
-                    if (!Files.exists(Path.of(uploadDirectory + id))) {
+                    if (!Files.exists(Path.of(UPLOAD_DIRECTORY + id))) {
                         try {
-                            Files.createDirectories(Path.of(uploadDirectory + id));
+                            Files.createDirectories(Path.of(UPLOAD_DIRECTORY + id));
                         } catch (final IOException e) {
                             e.printStackTrace();
                         }
                     } else {
                         try {
                             //Limpa diretorio antes de adicionar imagens caso ja exista
-                            Files.delete(Path.of(uploadDirectory + id));
-                            Files.createDirectories(Path.of(uploadDirectory + id));
+                            Files.delete(Path.of(UPLOAD_DIRECTORY + id));
+                            Files.createDirectories(Path.of(UPLOAD_DIRECTORY + id));
                         } catch (final IOException e) {
                             e.printStackTrace();
                         }
@@ -98,14 +98,14 @@ public class AdoptionWebController {
             } else {
                 final ArquivoAnimal fileAttributes = new ArquivoAnimal();
                 fileAttributes.setAnimalID(id);
-                fileAttributes.setPath("/resources/images/animals/animal-default.jpg");
+                fileAttributes.setPath(ANIMAL_DEFAULT_IMG);
                 fileAttributes.setPrimary(true);
 
                 fileAttributesList.add(fileAttributes);
             }
 
             if (!fileAttributesList.isEmpty()) {
-                animalService.saveFileAttributes(fileAttributesList);
+                final Long response = animalService.saveFileAttributes(fileAttributesList);
             }
 
             message = "Animal cadastrado com sucesso!";
@@ -129,10 +129,10 @@ public class AdoptionWebController {
             if (imgsAttrList.size() != 0) {
                 pathName = "/images/animals/" + imgsAttrList.get(0).getPath();
                 if (!Files.exists(Path.of(System.getProperty("user.dir") + pathName))) {
-                    pathName = "/resources/images/animals/animal-default.jpg";
+                    pathName = ANIMAL_DEFAULT_IMG;
                 }
             } else {
-                pathName = "/resources/images/animals/animal-default.jpg";
+                pathName = ANIMAL_DEFAULT_IMG;
             }
             animal.setPrimaryImagePath(pathName);
         }
@@ -151,17 +151,20 @@ public class AdoptionWebController {
 
         final Animal animalModel = animalService.readById(id);
 
-        final List<ArquivoAnimal> imgsAttrList = animalService.loadAnimalImgs(id);
-        String pathName;
-        final String aux = null;
+        //Carrega imagens relacionas ao animal
+        final List<ArquivoAnimal> imgsList = animalService.loadAnimalImgs(id);
+        final List<String> pathName = new ArrayList<String>();
 
-        if (imgsAttrList.size() != 0) {
-            pathName = "/images/animals/" + imgsAttrList.get(0).getPath();
-            if (!Files.exists(Path.of(System.getProperty("user.dir") + pathName))) {
-                pathName = "/resources/images/animals/animal-default.jpg";
+        if (imgsList.size() != 0) {
+            for (final ArquivoAnimal animalImg : imgsList) {
+                if (!Files.exists(Path.of(System.getProperty("user.dir") + "/images/animals/" + animalImg.getPath()))) {
+                    pathName.add(ANIMAL_DEFAULT_IMG);
+                } else {
+                    pathName.add("/images/animals/" + animalImg.getPath());
+                }
             }
         } else {
-            pathName = "/resources/images/animals/animal-default.jpg";
+            pathName.add(ANIMAL_DEFAULT_IMG);
         }
 
         model.addAttribute("animal", animalModel);

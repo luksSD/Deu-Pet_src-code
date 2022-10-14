@@ -10,6 +10,7 @@
     }
 
 
+
   </script>
 </head>
 <body>
@@ -156,7 +157,7 @@
               <tbody id="table-body">
               <tr th:each="animal : ${listaAnimal}" id="table-lines">
                 <td>
-                  <img src="/resources/images/animals/animal1.jpg" class="me-2" alt="image">
+                  <img th:src="${animal.PrimaryImagePath}" class="me-2" alt="image">
                   <span th:text="${animal.nome}">Tibursinho</span>
                 </td>
                 <td th:text="${animal.tipo}">tipo aqui</td>

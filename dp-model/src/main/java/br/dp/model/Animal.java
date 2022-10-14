@@ -16,5 +16,6 @@ public class Animal extends BasePojo {
     private String pelagemPrimaria;
     private String pelagemSecundaria;
     private Long idInstituicao;
+    private String primaryImagePath;
 
 }

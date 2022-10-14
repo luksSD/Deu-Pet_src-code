@@ -41,7 +41,7 @@ public class AnimalDaoImpl implements AnimalDao {
                 animal.setPeso(resultSet.getDouble("peso"));
                 animal.setPorte(resultSet.getString("porte"));
                 animal.setRaca(resultSet.getString("raca"));
-                animal.setSituacaoAodocao(resultSet.getBoolean("situacao_adocao"));
+                animal.setSituacao(resultSet.getString("situacao"));
                 animal.setTemperamento(resultSet.getString("temperamento"));
                 animal.setPelagemPrimaria(resultSet.getString("pelagem_primaria"));
                 animal.setPelagemSecundaria(resultSet.getString("pelagem_secundaria"));
@@ -92,7 +92,7 @@ public class AnimalDaoImpl implements AnimalDao {
                 animal.setPeso(resultSet.getDouble("peso"));
                 animal.setPorte(resultSet.getString("porte"));
                 animal.setRaca(resultSet.getString("raca"));
-                animal.setSituacaoAodocao(resultSet.getBoolean("situacao_adocao"));
+                animal.setSituacao(resultSet.getString("situacao"));
                 animal.setTemperamento(resultSet.getString("temperamento"));
                 animal.setPelagemPrimaria(resultSet.getString("pelagem_primaria"));
                 animal.setPelagemSecundaria(resultSet.getString("pelagem_secundaria"));
@@ -117,7 +117,7 @@ public class AnimalDaoImpl implements AnimalDao {
 
         String sql = "INSERT INTO animal";
         sql += " (nome, tipo, sexo, peso, porte, ";
-        sql += " raca, situacao_adocao, temperamento, ";
+        sql += " raca, situacao, temperamento, ";
         sql += " pelagem_primaria, pelagem_secundaria, instituicao_id) ";
         sql += "VALUES(?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
@@ -135,7 +135,7 @@ public class AnimalDaoImpl implements AnimalDao {
             preparedStatement.setDouble(4, entity.getPeso());
             preparedStatement.setString(5, entity.getPorte());
             preparedStatement.setString(6, entity.getRaca());
-            preparedStatement.setBoolean(7, false);
+            preparedStatement.setString(7, entity.getSituacao());
             preparedStatement.setString(8, entity.getTemperamento());
             preparedStatement.setString(9, entity.getPelagemPrimaria());
             preparedStatement.setString(10, entity.getPelagemSecundaria());
@@ -175,7 +175,7 @@ public class AnimalDaoImpl implements AnimalDao {
         sql += " peso = ?, ";
         sql += " porte = ?, ";
         sql += " raca = ?, ";
-        sql += " situacao_adocao = ?, ";
+        sql += " situacao = ?, ";
         sql += " temperamento = ?, ";
         sql += " pelagem_primaria = ?, ";
         sql += " pelagem_secundaria = ?,  ";
@@ -194,7 +194,7 @@ public class AnimalDaoImpl implements AnimalDao {
             preparedStatement.setDouble(4, entity.getPeso());
             preparedStatement.setString(5, entity.getPorte());
             preparedStatement.setString(6, entity.getRaca());
-            preparedStatement.setBoolean(7, false);
+            preparedStatement.setString(7, entity.getSituacao());
             preparedStatement.setString(8, entity.getTemperamento());
             preparedStatement.setString(9, entity.getPelagemPrimaria());
             preparedStatement.setString(10, entity.getPelagemSecundaria());

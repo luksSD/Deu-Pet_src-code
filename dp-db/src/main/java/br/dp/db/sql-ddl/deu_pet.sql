@@ -71,7 +71,7 @@ CREATE TABLE animal
     peso DOUBLE PRECISION not null,
     porte VARCHAR (50) not null,
     raca VARCHAR (50) not null,
-    situacao_adocao BOOL not null,
+    situacao VARCHAR(15) not null,
     temperamento VARCHAR (100),
     pelagem_primaria VARCHAR (100) not null,
     pelagem_secundaria VARCHAR (100) not null,
@@ -226,7 +226,7 @@ values ('4' , '00000000000000', 'Rua 5', '10','375540000','00000000000','1');
 
 --Adicionando animal
 -----------------------------------------------------------
-INSERT INTO animal (id ,nome, tipo,sexo,peso,porte,raca,situacao_adocao,temperamento,pelagem_primaria,pelagem_secundaria,instituicao_id)
+INSERT INTO animal (id ,nome, tipo,sexo,peso,porte,raca,situacao,temperamento,pelagem_primaria,pelagem_secundaria,instituicao_id)
 values ('1' , 'Tibursio','cachorro', 'masculino', '5','médio','Sem raça','true','Calmo', 'Branco', 'Marrom', '4');
 
 

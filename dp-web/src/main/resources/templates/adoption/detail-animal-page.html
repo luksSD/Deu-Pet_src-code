@@ -11,59 +11,11 @@
      window.onload = () => {
         $('#errorModal').modal('show');
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   </script>
   <script th:inline="javascript" th:if="${succesMessage}">
      window.onload = () => {
         $('#succesModal').modal('show');
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   </script>
 
 </head>
@@ -101,7 +53,10 @@
                   <div>
                     <h3 th:text="${animal.nome}">Tibursinho</h3>
                     <div class="d-flex align-items-center">
-                      <h5 class="mb-0 mr-2 text-muted">Status </h5>
+                      <label th:if="${animal.situacaoAodocao == true}"
+                             class="badge badge-gradient-success">ADOTADO</label>
+                      <label th:if="${animal.situacaoAodocao == false}"
+                             class="badge badge-gradient-success">PARA ADOÇÃO</label>
                     </div>
                   </div>
                 </div>

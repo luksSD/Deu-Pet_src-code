@@ -11,7 +11,7 @@ public class Animal extends BasePojo {
     private Double peso;
     private String porte;
     private String raca;
-    private boolean situacaoAodocao;
+    private String situacao;
     private String temperamento;
     private String pelagemPrimaria;
     private String pelagemSecundaria;

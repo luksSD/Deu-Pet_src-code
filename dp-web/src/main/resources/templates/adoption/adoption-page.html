@@ -161,10 +161,12 @@
                   <span th:text="${animal.nome}">Tibursinho</span>
                 </td>
                 <td th:text="${animal.tipo}">tipo aqui</td>
-                <td th:if="${animal.situacaoAodocao == true}"><label
+                <td th:if="${animal.situacaoAodocao == 'adotado'}"><label
                   class="badge badge-gradient-success">ADOTADO</label></td>
-                <td th:if="${animal.situacaoAodocao == false}"><label
+                <td th:if="${animal.situacaoAodocao == 'para-adocao'}"><label
                   class="badge badge-gradient-warning">PARA ADOÇÃO</label></td>
+                <td th:if="${animal.situacaoAodocao == 'em-espera'}"><label
+                  class="badge badge-gradient-warning">EM ESPERA</label></td>
                 <td th:text="${animal.id}">id aqui</td>
 
                 <td>

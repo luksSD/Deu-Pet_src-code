@@ -16,11 +16,13 @@
 
 
 
+
   </script>
   <script th:inline="javascript" th:if="${succesMessage}">
      window.onload = () => {
         $('#succesModal').modal('show');
     }
+
 
 
 
@@ -65,9 +67,9 @@
                     <div class="d-flex align-items-center">
                       <label th:if="${animal.situacao == 'adotado'}"
                              class="badge badge-gradient-success badge-pill">ADOTADO</label>
-                      <label th:if="${animal.situacao == 'para-animal'}"
+                      <label th:if="${animal.situacao == 'adocao'}"
                              class="badge badge-gradient-info badge-pill">PARA ADOÇÃO</label>
-                      <label th:if="${animal.situacao == 'em-espera'}"
+                      <label th:if="${animal.situacao == 'espera'}"
                              class="badge badge-gradient-warning badge-pill">EM ESPERA</label>
                     </div>
                   </div>

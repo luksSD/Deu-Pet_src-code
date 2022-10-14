@@ -6,6 +6,12 @@
   <script th:inline="javascript" th:if="${errorMessage}">
      window.onload = () => {
         $('#errorModal').modal('show');
+
+
+
+
+
+
   </script>
   <script src="/resources/js/img-preview.js"></script>
 </head>
@@ -180,10 +186,10 @@
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Status</label>
                     <div class="col-sm-9">
-                      <select class="form-control" th:field="${animal.situacao}}">
-                        <option th:value="em-espera" th:text="Em Espera" selected>Em Espera</option>
-                        <option th:value="para-adocao" th:text="Para Adoção">Para Adoção</option>
-                        <option th:value="adotado" th:text="Adotado">Adotado</option>
+                      <select class="form-control" th:field="${animal.situacao}">
+                        <option value="espera">Em Espera</option>
+                        <option value="adocao">Para Adoção</option>
+                        <option value="adotado">Adotado</option>
                       </select>
                     </div>
                   </div>

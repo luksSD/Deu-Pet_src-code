@@ -8,6 +8,7 @@
      window.onload = () => {
         $('#succesModal').modal('show');
     }
+
   </script>
 </head>
 <body>
@@ -160,9 +161,9 @@
                 <td th:text="${animal.tipo}">tipo aqui</td>
                 <td th:if="${animal.situacao == 'adotado'}"><label
                   class="badge badge-gradient-success badge-pill">ADOTADO</label></td>
-                <td th:if="${animal.situacao == 'para-adocao'}"><label
+                <td th:if="${animal.situacao == 'adocao'}"><label
                   class="badge badge-gradient-info badge-pill">PARA ADOÇÃO</label></td>
-                <td th:if="${animal.situacao == 'em-espera'}"><label
+                <td th:if="${animal.situacao == 'espera'}"><label
                   class="badge badge-gradient-warning badge-pill">EM ESPERA</label></td>
                 <td th:text="${animal.id}">id aqui</td>
 

@@ -6,6 +6,19 @@
   <script th:inline="javascript" th:if="${errorMessage}">
      window.onload = () => {
         $('#errorModal').modal('show');
+
+
+
+
+
+
+
+
+
+
+
+
+
   </script>
   <script src="/resources/js/img-preview.js"></script>
 </head>
@@ -173,6 +186,18 @@
                              required
                              placeholder="Insira a cor predominante do animal"
                              th:field="${animal.temperamento}"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Status</label>
+                    <div class="col-sm-9">
+                      <select class="form-control" id="exampleSelectGender" th:field="${animal.situacao}}">
+                        <option th:value="em-espera" th:text="Em Espera" selected>Em Espera</option>
+                        <option th:value="para-adocao" th:text="Para Adoção">Para Adoção</option>
+                        <option th:value="adotado" th:text="Adotado">Adotado</option>
+                      </select>
                     </div>
                   </div>
                 </div>

@@ -214,10 +214,30 @@ public class AdoptionWebController {
         boolean response = false;
 
         if (senha.equals("123")) {
-            System.out.println("opa");
+
+            final List<ArquivoAnimal> imgsList = animalService.loadAnimalImgs(animal.getId());
             response = animalService.delete(animal.getId());
 
             if (response) {
+                //Exclui arquivos dentro do diretorio se existir
+                final String pathName = System.getProperty("user.dir") + "/images/animals/" + animal.getId();
+                if (Files.exists(Path.of(pathName))) {
+                    for (final ArquivoAnimal animalImg : imgsList) {
+                        try {
+                            Files.delete(Path.of(System.getProperty("user.dir") + "/images/animals/" + animalImg.getPath()));
+                        } catch (final IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    //Exclui o diretorio
+                    try {
+                        Files.delete(Path.of(pathName));
+                    } catch (final IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 message = "Cadastro do animal excluído com sucesso!";
                 return "redirect:/adocao/gerenciar-animais";
             } else {

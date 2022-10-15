@@ -41,7 +41,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
                 instituicao.setSituacao(resultSet.getBoolean("situacao"));
                 instituicao.setDataCadastro(resultSet.getTimestamp("data"));
                 instituicao.setTipo(resultSet.getString("tipo"));
-                instituicao.setCpfCnpj(resultSet.getString("cpf-cnpj"));
+                instituicao.setCpfCnpj(resultSet.getString("cpf_cnpj"));
                 instituicao.setLogradouro(resultSet.getString("logradouro"));
                 instituicao.setNumero(resultSet.getString("numero"));
                 instituicao.setCep(resultSet.getString("cep"));
@@ -91,7 +91,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
                 institution.setSituacao(resultSet.getBoolean("situacao"));
                 institution.setDataCadastro(resultSet.getTimestamp("data"));
                 institution.setTipo(resultSet.getString("tipo"));
-                institution.setCpfCnpj(resultSet.getString("cpf-cnpj"));
+                institution.setCpfCnpj(resultSet.getString("cpf_cnpj"));
                 institution.setLogradouro(resultSet.getString("logradouro"));
                 institution.setNumero(resultSet.getString("numero"));
                 institution.setCep(resultSet.getString("cep"));
@@ -115,7 +115,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
 
         final String sql = " INSERT INTO usuario (nome, senha, email, celular, situacao, data, aceite, tipo) values (?, ? , ? , ?, ?, ?, ?, ?);";
 
-        final String sql2 = "INSERT INTO instituicao (usuario_id , cpf-cnpj, logradouro, numero, cep, municipio_id) values (? , ? , ? , ?, ?, ? );";
+        final String sql2 = "INSERT INTO instituicao (usuario_id , cpf_cnpj, logradouro, numero, cep, municipio_id) values (? , ? , ? , ?, ?, ? );";
 
         Long id = Long.valueOf(-1);
         Long id2 = Long.valueOf(-1);
@@ -195,7 +195,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
         sql += " where id = ?;";
 
         String sql2 = "UPDATE instituicao SET";
-        sql2 += " cpf-cnpj = ?,";
+        sql2 += " cpf_cnpj = ?,";
         sql2 += " logradouro = ?,";
         sql2 += " numero = ?,";
         sql2 += " cep = ?,";

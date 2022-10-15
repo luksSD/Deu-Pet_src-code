@@ -46,7 +46,7 @@ ALTER TABLE pessoa ADD CONSTRAINT fk2_pessoa foreign key (usuario_id) references
 CREATE TABLE instituicao
 (
     usuario_id INTEGER primary key,
-    cpf-cnpj VARCHAR (21) not null,
+    cpf_cnpj VARCHAR (21) not null,
     logradouro VARCHAR (100) not null,
     numero VARCHAR (10) not null,
     cep VARCHAR (10),
@@ -58,7 +58,7 @@ ALTER TABLE instituicao ADD CONSTRAINT fk1_instituicao foreign key (municipio_id
 ALTER TABLE instituicao ADD CONSTRAINT fk2_instituicao foreign key (usuario_id) references usuario(id) on update cascade on delete cascade;
 
 --Colocando UK entre cpf e cnpj na tabela instituicao
-ALTER TABLE instituicao ADD CONSTRAINT uk1_instituicao unique(cnpj, cpf);
+ALTER TABLE instituicao ADD CONSTRAINT uk1_instituicao unique(cpf_cnpj);
 
 --Criando tabela animal
 CREATE TABLE animal
@@ -219,8 +219,8 @@ values ('3' , 'Rua 3' , '3', '375540000','1');
 
 --Adicionando instituicao
 -----------------------------------------------------------
-INSERT INTO instituicao (usuario_id,cnpj,logradouro,numero,cep,cpf,municipio_id)
-values ('4' , '00000000000000', 'Rua 5', '10','375540000','00000000000','1');
+INSERT INTO instituicao (usuario_id,cpf_cnpj,logradouro,numero,cep,municipio_id)
+values ('4' , '00.000.000/0000-00', 'Rua 5', '10','375540000','1');
 
 
 --Adicionando animal

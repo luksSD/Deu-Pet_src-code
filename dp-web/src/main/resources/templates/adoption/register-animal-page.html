@@ -8,9 +8,6 @@
         $('#errorModal').modal('show');
      }
 
-
-
-
   </script>
   <script src="/resources/js/img-preview.js"></script>
 </head>
@@ -39,7 +36,7 @@
 
           <div id="my-dropzone">
             <form th:action="@{/adocao/create}" method="POST" th:objetc="${animal}"
-                  name="formCadastro" enctype='multipart/form-data' class="dropzone">
+                  name="formCadastro" enctype='multipart/form-data'>
 
               <p class="card-description"> Insira os dados do animal a ser cadastrado </p>
               <div class="row">
@@ -322,7 +319,6 @@
 </html>
 <script>
 
-
 	                function handleFileSelect(evt) {
 	                        var files = evt.target.files;
 
@@ -336,6 +332,9 @@
 	                }
 
 	                document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+
+
 
 
 

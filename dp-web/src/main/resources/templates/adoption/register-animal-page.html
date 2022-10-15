@@ -6,45 +6,7 @@
   <script th:inline="javascript" th:if="${errorMessage}">
      window.onload = () => {
         $('#errorModal').modal('show');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+     }
 
 
 
@@ -186,7 +148,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-4">Pelagem Primária</label>
+                    <label class="col-sm-6">Pelagem Primária</label>
                     <div class="col-sm-12">
                       <input class="form-control" id="inputAnimalPelagemPrimaria"
                              required
@@ -197,7 +159,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-4">Pelagem Secundária</label>
+                    <label class="col-sm-6">Pelagem Secundária</label>
                     <div class="col-sm-12">
                       <input class="form-control" id="inputAnimalpelagemSecundaria"
                              required
@@ -275,10 +237,7 @@
                   <button type="submit" class="btn btn-gradient-primary mr-2" id="submit-all">Cadastrar</button>
                   <a class="btn btn-light" th:href="@{/adocao/gerenciar-animais}">Cancelar</a>
                 </div>
-
               </div>
-
-
             </form>
           </div>
         </div>
@@ -318,6 +277,39 @@
         </div>
       </div>
 
+      <!--MODAL DE ERRO-->
+      <div class="modal fade" id="errorImgModal" tabindex="-1" role="dialog"
+           aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="swal2-icon swal2-error swal2-icon-show"
+                 style="display: flex;">
+                    <span class="swal2-x-mark">
+                    <span class="swal2-x-mark-line-left"></span>
+                    <span class="swal2-x-mark-line-right"></span>
+                    </span>
+            </div>
+
+            <h2 class="swal2-title" style="display: block;">Erro ao realizar operação!</h2>
+            <div class="row text-center mt-3">
+
+            </div>
+
+            <div class="modal-body text-right">
+              <h5>Você deve adicionar até 5 imagens apenas.</h5>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-gradient-danger"
+                      data-dismiss="modal">Fechar
+              </button>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
 
     </div>
 
@@ -328,3 +320,29 @@
 </body>
 
 </html>
+<script>
+
+
+	                function handleFileSelect(evt) {
+	                        var files = evt.target.files;
+
+	                        if (files.length <= 5) {
+	                        	console.log('opa tem menos');
+		                   	} else {
+		                		console.log('opa tem mais q 5');
+		                		document.getElementById("files").value = "";
+                        $('#errorImgModal').modal('show');
+	 	               		}
+	                }
+
+	                document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+
+
+
+
+
+
+
+
+</script>

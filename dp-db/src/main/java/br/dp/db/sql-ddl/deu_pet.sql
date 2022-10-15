@@ -46,11 +46,10 @@ ALTER TABLE pessoa ADD CONSTRAINT fk2_pessoa foreign key (usuario_id) references
 CREATE TABLE instituicao
 (
     usuario_id INTEGER primary key,
-    cnpj VARCHAR (21) DEFAULT 00000000000000 not null,
+    cpf-cnpj VARCHAR (21) not null,
     logradouro VARCHAR (100) not null,
     numero VARCHAR (10) not null,
     cep VARCHAR (10),
-    cpf VARCHAR (14) DEFAULT 00000000000000 not null,
     municipio_id integer not null
 );
 

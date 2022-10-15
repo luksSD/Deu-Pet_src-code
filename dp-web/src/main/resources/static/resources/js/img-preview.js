@@ -26,9 +26,15 @@ window.onload = function(){
                       var picFile = event.target;
 
                       var div = document.createElement("div");
-                      div.classList.add("col-md-4");
-                      div.classList.add("mb-3");
-                      div.classList.add("mw-50");
+                      if(window.location.href === "http://localhost:8100/instituicao/cadastrar-instituicao"){
+                          div.classList.add("col-md-9");
+                          div.classList.add("mw-25");
+                      } else {
+                          div.classList.add("col-md-4");
+                          div.classList.add("mb-3");
+                          div.classList.add("mw-50");
+                      }
+
 
                       div.innerHTML = "<img class='thumbnail img-fluid' src='" + picFile.result + "'" +
                               "title='img-" + nameImg + "'/>";

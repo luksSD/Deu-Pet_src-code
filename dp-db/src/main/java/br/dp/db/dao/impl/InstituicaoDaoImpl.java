@@ -41,11 +41,10 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
                 instituicao.setSituacao(resultSet.getBoolean("situacao"));
                 instituicao.setDataCadastro(resultSet.getTimestamp("data"));
                 instituicao.setTipo(resultSet.getString("tipo"));
-                instituicao.setCnpj(resultSet.getString("cnpj"));
+                instituicao.setCpfCnpj(resultSet.getString("cpf-cnpj"));
                 instituicao.setLogradouro(resultSet.getString("logradouro"));
                 instituicao.setNumero(resultSet.getString("numero"));
                 instituicao.setCep(resultSet.getString("cep"));
-                instituicao.setCpf(resultSet.getString("cpf"));
                 instituicao.setMunicipioId(resultSet.getLong("municipio_id"));
 
                 instituicoes.add(instituicao);
@@ -92,11 +91,10 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
                 institution.setSituacao(resultSet.getBoolean("situacao"));
                 institution.setDataCadastro(resultSet.getTimestamp("data"));
                 institution.setTipo(resultSet.getString("tipo"));
-                institution.setCnpj(resultSet.getString("cnpj"));
+                institution.setCpfCnpj(resultSet.getString("cpf-cnpj"));
                 institution.setLogradouro(resultSet.getString("logradouro"));
                 institution.setNumero(resultSet.getString("numero"));
                 institution.setCep(resultSet.getString("cep"));
-                institution.setCpf(resultSet.getString("cpf"));
                 institution.setMunicipioId(resultSet.getLong("municipio_id"));
             }
         } catch (final Exception e) {
@@ -117,7 +115,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
 
         final String sql = " INSERT INTO usuario (nome, senha, email, celular, situacao, data, aceite, tipo) values (?, ? , ? , ?, ?, ?, ?, ?);";
 
-        final String sql2 = "INSERT INTO instituicao (usuario_id , cnpj, logradouro, numero, cep, cpf, municipio_id) values (? , ? , ? , ? , ?, ?, ? );";
+        final String sql2 = "INSERT INTO instituicao (usuario_id , cpf-cnpj, logradouro, numero, cep, municipio_id) values (? , ? , ? , ?, ?, ? );";
 
         Long id = Long.valueOf(-1);
         Long id2 = Long.valueOf(-1);
@@ -149,12 +147,11 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
             preparedStatement2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement2.setLong(1, id);
-            preparedStatement2.setString(2, entity.getCnpj());
+            preparedStatement2.setString(2, entity.getCpfCnpj());
             preparedStatement2.setString(3, entity.getLogradouro());
             preparedStatement2.setString(4, entity.getNumero());
             preparedStatement2.setString(5, entity.getCep());
-            preparedStatement2.setString(6, entity.getCpf());
-            preparedStatement2.setLong(7, entity.getMunicipioId());
+            preparedStatement2.setLong(6, entity.getMunicipioId());
 
             preparedStatement2.execute();
             resultSet = preparedStatement2.getGeneratedKeys();
@@ -198,11 +195,10 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
         sql += " where id = ?;";
 
         String sql2 = "UPDATE instituicao SET";
-        sql2 += " cnpj = ?,";
+        sql2 += " cpf-cnpj = ?,";
         sql2 += " logradouro = ?,";
         sql2 += " numero = ?,";
         sql2 += " cep = ?,";
-        sql2 += " cpf = ?,";
         sql2 += " municipio_id = ?";
         sql2 += " where usuario_id = ?;";
 
@@ -223,13 +219,12 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
 
             preparedStatement2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
 
-            preparedStatement2.setString(1, entity.getCnpj());
+            preparedStatement2.setString(1, entity.getCpfCnpj());
             preparedStatement2.setString(2, entity.getLogradouro());
             preparedStatement2.setString(3, entity.getNumero());
             preparedStatement2.setString(4, entity.getCep());
-            preparedStatement2.setString(5, entity.getCpf());
-            preparedStatement2.setLong(6, entity.getMunicipioId());
-            preparedStatement2.setLong(7, entity.getId());
+            preparedStatement2.setLong(5, entity.getMunicipioId());
+            preparedStatement2.setLong(6, entity.getId());
 
             preparedStatement2.execute();
             connection.commit();

@@ -4359,6 +4359,11 @@
      filter: none;
      opacity: 0.65;
 }
+
+.input-group-append .btn-gradient-primary {
+    padding: 0.875rem 1rem !important;
+}
+
  .form-range {
      width: 100%;
      height: 1.5rem;

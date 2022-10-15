@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>Deu Pet - Editar Instituição</title>
   <script src="/resources/js/viacep.js"></script>
+  <script src="/resources/js/inputmask.js"></script>
 </head>
 
 <body>
@@ -31,23 +32,24 @@
 
           <form th:action="@{/instituicao/update}" method="POST" th:objetc="${instituicao}">
 
-            <p class="card-description"> Altere os dados da instituição </p>
-
+            <p class="card-description"> Insira os dados da instituição a ser cadastrado </p>
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Nome/Razão Social</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" th:field="${instituicao.nome}">
+                  <label class="col-sm-12">Nome / Razão social</label>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" required placeholder="Insira o nome ou razão social"
+                           th:field="${instituicao.nome}">
                   </div>
                 </div>
               </div>
 
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Telefone/Celular</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" th:field="${instituicao.celular}">
+                  <label class="col-sm-12">Telefone / Celular</label>
+                  <div class="col-sm-12">
+                    <input type="text" id="tel-cel" class="form-control" th:field="${instituicao.celular}" required
+                           placeholder="Insira o número de telefone ou celular">
                   </div>
                 </div>
               </div>
@@ -56,33 +58,39 @@
             <div class=" row">
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">CNPJ / CPF</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" th:field="${instituicao.cpfCnpj}">
+                  <label class="col-sm-12">CNPJ / CPF</label>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" name="cpfcnpj" id="cpfcnpj"
+                           th:field="${instituicao.cpfCnpj}"
+                           required placeholder="Insira o CNPJ ou CPF">
                   </div>
                 </div>
               </div>
             </div>
 
-            <p class="card-description"> Endereço </p>
+            <div class="border-bottom mb-3"></div>
+
+            <h4 class="card-title"> Endereço </h4>
+            <p class="card-description"> Insira o endereço da instituição </p>
 
             <div class="row">
 
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">CEP</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="cep" value="" maxlength="9"
-                           onblur="pesquisacep(this.value);" th:field="${instituicao.cep}">
+                  <label class="col-sm-12">CEP</label>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" id="cep" value="" maxlength="10"
+                           onblur="pesquisacep(this.value);" th:field="${instituicao.cep}" required
+                           placeholder="Insira o CEP">
                   </div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Logradouro</label>
-                  <div class="col-sm-9">
+                  <label class="col-sm-12">Logradouro</label>
+                  <div class="col-sm-12">
                     <input type="text" class="form-control" id="rua"
-                           th:field="${instituicao.logradouro}">
+                           th:field="${instituicao.logradouro}" required placeholder="Insira o logradouro">
                   </div>
                 </div>
 
@@ -93,18 +101,19 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Cidade</label>
-                  <div class="col-sm-9">
+                  <label class="col-sm-12">Município</label>
+                  <div class="col-sm-12">
                     <input type="text" class="form-control" id="cidade"
-                           th:field="${instituicao.muinicipioNome}">
+                           th:field="${instituicao.muinicipioNome}" required disabled placeholder="Município">
                   </div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Número</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" th:field="${instituicao.numero}">
+                  <label class="col-sm-12">Número</label>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" th:field="${instituicao.numero}" required
+                           placeholder="Insira o número">
                   </div>
                 </div>
               </div>
@@ -113,28 +122,33 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">UF</label>
+                  <label class="col-sm-12">UF</label>
                   <div class="col-sm-3">
-                    <input type="text" class="form-control" id="uf" th:field="${instituicao.uf}">
+                    <input type="text" class="form-control" id="uf" th:field="${instituicao.uf}" required disabled
+                           placeholder="UF">
                   </div>
                 </div>
               </div>
             </div>
 
-            <p class="card-description"> Informações de Acesso </p>
+            <div class="border-bottom mb-3"></div>
+
+            <h4 class="card-title"> Informações de Acesso </h4>
 
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">E-Mail</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" th:field="${instituicao.email}">
+                  <label class="col-sm-12">E-mail</label>
+                  <div class="col-sm-12">
+                    <input type="email" class="form-control" th:field="${instituicao.email}" required
+                           placeholder="Insira o e-mail de acesso">
                   </div>
                 </div>
               </div>
-
-
             </div>
+
+            <div class="border-bottom mb-3"></div>
+
             <div>
               <button type="submit" class="btn btn-gradient-primary mr-2">Salvar</button>
               <input th:field="${instituicao.id}" type="hidden">
@@ -151,3 +165,22 @@
 
 </body>
 </html>
+<script src="/resources/js/show-password.js"></script>
+<script>
+$("input[id*='cpfcnpj']").inputmask({
+  mask: ['999.999.999-99', '99.999.999/9999-99'],
+  keepStatic: true
+});
+
+$("input[id*='cep']").inputmask({
+  mask: ['99999-999'],
+  keepStatic: true
+});
+
+$("input[id*='tel-cel']").inputmask({
+  mask: ['(99)99999-9999', '(99)9999-9999'],
+  keepStatic: true
+});
+
+
+</script>

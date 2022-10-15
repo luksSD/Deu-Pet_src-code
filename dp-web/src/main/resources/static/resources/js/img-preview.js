@@ -26,7 +26,7 @@ window.onload = function(){
                       var picFile = event.target;
 
                       var div = document.createElement("div");
-                      div.classList.add("col-md-3");
+                      div.classList.add("col-md-4");
                       div.classList.add("mb-3");
                       div.classList.add("mw-50");
 

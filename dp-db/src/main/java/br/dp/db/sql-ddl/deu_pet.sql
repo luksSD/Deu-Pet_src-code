@@ -180,10 +180,10 @@ ALTER TABLE campanha ADD CONSTRAINT fk2_campanha foreign key (formulario_id) ref
 --Adicionando cidades que o projeto vai atender inicialmente
 -----------------------------------------------------------
 INSERT INTO municipio (id , uf, nome)
-values ('1' , 'Minas Gerais' , 'Pouso Alegre');
+values ('1' , 'MG' , 'Pouso Alegre');
 
 INSERT INTO municipio (id , uf, nome)
-values ('2' , 'Minas Gerais' , 'Santa Rita do Sapucai');
+values ('2' , 'MG' , 'Santa Rita do Sapucaí');
 
 
 --Adicionando usuarios do tipo pessoa

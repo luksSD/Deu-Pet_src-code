@@ -170,7 +170,7 @@ public class AdoptionWebController {
         model.addAttribute("animal", animalModel);
         model.addAttribute("imgs", pathName);
         if (!message.equals("")) {
-            if (message.equals("Animal cadastrado com sucesso!")) {
+            if (message.equals("Animal cadastrado com sucesso!") || message.equals("Cadastro do animal atualizado com sucesso!")) {
                 model.addAttribute("succesMessage", message);
             } else {
                 model.addAttribute("errorMessage", message);
@@ -198,7 +198,7 @@ public class AdoptionWebController {
 
         final boolean response = animalService.update(animal);
 
-        if (!response) {
+        if (response) {
             message = "Cadastro do animal atualizado com sucesso!";
             return "redirect:/adocao/detalhes-animal/" + animal.getId();
         } else {

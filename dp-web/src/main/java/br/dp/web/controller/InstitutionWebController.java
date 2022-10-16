@@ -213,12 +213,13 @@ public class InstitutionWebController {
 
         if (response) {
             //Exclui arquivos dentro do diretorio se existir
-            final String pathName = System.getProperty("user.dir") + "/images/user/" + id;
+            final Path folderPath = Paths.get(System.getProperty("user.dir") + "/images/users/" + id);
 
-            if (Files.exists(Path.of(pathName))) {
+            if (Files.exists(folderPath)) {
                 try {
-                    if (Files.exists(Path.of(System.getProperty("user.dir") + "/images/users/" + userImg.getPath()))) {
-                        Files.delete(Path.of(System.getProperty("user.dir") + "/images/users/" + userImg.getPath()));
+                    final Path imgPath = Path.of(System.getProperty("user.dir") + "/images/users/" + userImg.getPath());
+                    if (Files.exists(imgPath)) {
+                        Files.delete(imgPath);
                     }
                 } catch (final IOException e) {
                     e.printStackTrace();
@@ -226,7 +227,7 @@ public class InstitutionWebController {
 
                 //Exclui o diretorio
                 try {
-                    Files.delete(Path.of(pathName));
+                    Files.delete(folderPath);
                 } catch (final IOException e) {
                     e.printStackTrace();
                 }

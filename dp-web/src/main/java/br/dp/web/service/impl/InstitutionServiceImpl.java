@@ -151,4 +151,27 @@ public class InstitutionServiceImpl implements InstitutionService {
         }
         return id;
     }
+
+    @Override
+    public UsersArquives loadInstitutionImg(final Long id) {
+        final String endpoint = "http://localhost:8085/api/v1/instituicao/load-images/" + id;
+
+        UsersArquives response = null;
+        try {
+
+            final RestTemplate restTemplate = new RestTemplate();
+
+            final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+
+            final ResponseEntity<UsersArquives> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
+                UsersArquives.class);
+
+            response = requestResponse.getBody();
+
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return response;
+    }
 }

@@ -120,8 +120,33 @@ public class InstitutionWebController {
         final Instituicao institution = instituicaoService.readById(id);
         final Municipio city = cityService.readById(institution.getMunicipioId());
 
+        //Carrega imagens relacionas ao animal
+        final UsersArquives userImg = instituicaoService.loadInstitutionImg(id);
+        String pathName = "";
+
+        if (!userImg.getPath().isEmpty()) {
+            if (!Files.exists(Path.of(System.getProperty("user.dir") + "/images/users/" + userImg.getPath()))) {
+                pathName = INSTITUTION_DEFAULT_IMG;
+            } else {
+                pathName = "/images/users/" + userImg.getPath();
+            }
+        } else {
+            pathName = INSTITUTION_DEFAULT_IMG;
+        }
+
+
         model.addAttribute("instituicao", institution);
         model.addAttribute("cidade", city);
+        model.addAttribute("img", pathName);
+
+        if (!message.equals("")) {
+            if (message.equals("Instituição cadastrada com sucesso!") || message.equals("Cadastro da instituição atualizado com sucesso!")) {
+                model.addAttribute("succesMessage", message);
+            } else {
+                model.addAttribute("errorMessage", message);
+            }
+            message = "";
+        }
 
         return "institutions/institution-detail-page";
     }

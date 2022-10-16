@@ -18,4 +18,6 @@ public interface InstituicaoDao {
     boolean delete(Long id);
 
     Long saveFileAttributes(UsersArquives imagePath);
+
+    UsersArquives loadUserImage(long id);
 }

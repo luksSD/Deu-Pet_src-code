@@ -18,4 +18,6 @@ public interface InstitutionService {
     Long create(Instituicao entity);
 
     Long saveFileAttributes(UsersArquives userImage);
+
+    UsersArquives loadInstitutionImg(Long id);
 }

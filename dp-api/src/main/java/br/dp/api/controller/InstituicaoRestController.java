@@ -68,4 +68,12 @@ public class InstituicaoRestController {
 
     }
 
+    @ApiOperation(value = "Retorna uma lista com os atributos das imagens do usuario")
+    @GetMapping("/load-images/{id}")
+    public ResponseEntity<UsersArquives> loadUserImg(@PathVariable("id") final long id) {
+
+        return ResponseEntity.ok(instituicaoService.LoadUserImg(id));
+
+    }
+
 }

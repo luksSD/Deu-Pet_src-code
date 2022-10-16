@@ -20,6 +20,9 @@
 
 
 
+
+
+
   </script>
 </head>
 
@@ -199,7 +202,7 @@
 
             <button type="submit" class="btn btn-gradient-primary mr-2">Salvar</button>
             <input th:field="${animal.id}" type="hidden">
-            <a class="btn btn-light" th:href="@{/adocao/gerenciar-animais}">Cancelar</a>
+            <a class="btn btn-light" th:href="@{/adocao/detalhes-animal/{id} (id=${animal.id})}">Cancelar</a>
 
 
           </form>
@@ -209,7 +212,7 @@
     </div>
   </div>
   <!--MODAL DE ERRO-->
-  <div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
+  <div class=" modal fade" id="errorModal" tabindex="-1" role="dialog"
        aria-labelledby="errorModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">

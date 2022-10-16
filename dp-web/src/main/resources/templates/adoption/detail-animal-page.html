@@ -19,11 +19,15 @@
 
 
 
+
+
   </script>
   <script th:inline="javascript" th:if="${succesMessage}">
      window.onload = () => {
         $('#succesModal').modal('show');
     }
+
+
 
 
 
@@ -239,9 +243,15 @@
                           th:text="${animal.temperamento}"> Calmo </span>
                   </p>
                   <p class="clearfix">
-                    <span class="float-left"> Pelagem primaria </span>
+                    <span class="float-left"> Pelagem primária </span>
                     <span class="float-right text-muted"
                           th:text="${animal.pelagemPrimaria}"> Marrom </span>
+                  </p>
+
+                  <p class="clearfix">
+                    <span class="float-left"> Pelagem secundária </span>
+                    <span class="float-right text-muted"
+                          th:text="${animal.pelagemSecundaria}"> Marrom </span>
                   </p>
 
                 </div>

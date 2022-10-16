@@ -16,6 +16,9 @@
 
 
 
+
+
+
   </script>
 </head>
 
@@ -164,7 +167,7 @@
                   <label>Senha</label>
                   <div class="input-group col-sm-6">
                     <input type="password" class="form-control" th:field="${instituicao.senha}" required
-                           placeholder="Insira a senha de acesso" id="passwordInput">
+                           placeholder="Insira a senha de acesso" id="passwordInput1">
                     <span class="input-group-append">
                             <button class="btn btn-gradient-primary" type="button" onclick="showPassword1();"
                                     data-toggle="tooltip" data-placement="top" title="Exibir senha">
@@ -177,8 +180,8 @@
                 <div class="form-group row">
                   <label>Confirmar Senha</label>
                   <div class="input-group col-sm-6">
-                    <input type="text" class="form-control" required
-                           placeholder="Insira a senha de acesso">
+                    <input type="password" class="form-control" required
+                           placeholder="Confirme a senha de acesso" id="passwordInput2">
                     <span class="input-group-append">
                       <button class="btn btn-gradient-primary" type="button"
                               onclick="showPassword2();" data-toggle="tooltip" data-placement="top"
@@ -282,6 +285,9 @@
 
 
 
+
+
+
 </script>
 <script>
 $("input[id*='cpfcnpj']").inputmask({
@@ -298,6 +304,9 @@ $("input[id*='tel-cel']").inputmask({
   mask: ['(99)99999-9999', '(99)9999-9999'],
   keepStatic: true
 });
+
+
+
 
 
 

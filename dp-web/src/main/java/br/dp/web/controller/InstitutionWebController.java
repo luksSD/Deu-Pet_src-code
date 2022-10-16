@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("/instituicao")
 public class InstitutionWebController {
 
-    public static final String INSTITUTION_DEFAULT_IMG = "/resources/images/animals/animal-default.jpg";
+    public static final String INSTITUTION_DEFAULT_IMG = "/resources/images/institutions/institution-default.png";
     public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/images/users/";
     private String message = "";
 

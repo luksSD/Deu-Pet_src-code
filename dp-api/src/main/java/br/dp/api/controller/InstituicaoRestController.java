@@ -61,7 +61,7 @@ public class InstituicaoRestController {
     }
 
     @ApiOperation(value = "Salva o caminho da imagen relacionadas a instituição", consumes = "application/json")
-    @PostMapping("/save-images")
+    @PostMapping("/save-image")
     public ResponseEntity<Long> saveFileAttributes(@RequestBody final UsersArquives imagePath) {
 
         return ResponseEntity.ok(instituicaoService.saveFileAttributes(imagePath));

@@ -107,7 +107,7 @@
                   <label class="col-sm-12">Município</label>
                   <div class="col-sm-12">
                     <input type="text" class="form-control" id="cidade"
-                           th:field="${instituicao.muinicipioNome}" required placeholder="Município">
+                           th:field="${instituicao.muinicipioNome}" required readonly placeholder="Município">
                   </div>
                 </div>
               </div>
@@ -127,7 +127,7 @@
                 <div class="form-group row">
                   <label class="col-sm-12">UF</label>
                   <div class="col-sm-3">
-                    <input type="text" class="form-control" id="uf" th:field="${instituicao.uf}" required
+                    <input type="text" class="form-control" id="uf" th:field="${instituicao.uf}" required readonly
                            placeholder="UF">
                   </div>
                 </div>
@@ -236,6 +236,7 @@
 
 
 
+
 </script>
 <script>
 $("input[id*='cpfcnpj']").inputmask({
@@ -252,6 +253,7 @@ $("input[id*='tel-cel']").inputmask({
   mask: ['(99)99999-9999', '(99)9999-9999'],
   keepStatic: true
 });
+
 
 
 

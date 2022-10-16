@@ -297,7 +297,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
 
         String sql = "INSERT INTO arquivo_usuario ";
         sql += " (usuario_id, caminho)";
-        sql += "VALUES(?, ?, ?);";
+        sql += "VALUES(?, ?);";
 
         Long id = Long.valueOf(1);
 

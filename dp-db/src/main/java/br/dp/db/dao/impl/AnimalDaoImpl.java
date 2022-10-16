@@ -139,7 +139,7 @@ public class AnimalDaoImpl implements AnimalDao {
             preparedStatement.setString(8, entity.getTemperamento());
             preparedStatement.setString(9, entity.getPelagemPrimaria());
             preparedStatement.setString(10, entity.getPelagemSecundaria());
-            preparedStatement.setLong(11, 4);
+            preparedStatement.setLong(11, 1);
 
             preparedStatement.execute();
 

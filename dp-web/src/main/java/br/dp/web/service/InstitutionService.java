@@ -1,6 +1,7 @@
 package br.dp.web.service;
 
 import br.dp.model.Instituicao;
+import br.dp.model.UsersArquives;
 
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface InstitutionService {
 
     Long create(Instituicao entity);
 
+    Long saveFileAttributes(UsersArquives userImage);
 }

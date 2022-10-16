@@ -5,6 +5,7 @@ import br.dp.db.dao.InstituicaoDao;
 import br.dp.db.dao.MunicipioDao;
 import br.dp.model.Instituicao;
 import br.dp.model.Municipio;
+import br.dp.model.UsersArquives;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,6 +76,11 @@ public class InstituicaoServiceImpl implements InstituicaoService {
     public boolean delete(final Long id) {
         // TODO Auto-generated method stub
         return instituicaoDao.delete(id);
+    }
+
+    @Override
+    public Long saveFileAttributes(final UsersArquives imagePath) {
+        return instituicaoDao.saveFileAttributes(imagePath);
     }
 
 }

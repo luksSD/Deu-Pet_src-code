@@ -1,6 +1,7 @@
 package br.dp.web.service.impl;
 
 import br.dp.model.Instituicao;
+import br.dp.model.UsersArquives;
 import br.dp.web.service.InstitutionService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -129,5 +130,25 @@ public class InstitutionServiceImpl implements InstitutionService {
 
         return id;
 
+    }
+
+    @Override
+    public Long saveFileAttributes(final UsersArquives userImage) {
+        Long id = Long.valueOf(-1);
+
+        final String endpoint = "http://localhost:8085/api/v1/instituicao/save-image";
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<UsersArquives> httpEntity = new HttpEntity<>(userImage);
+            final ResponseEntity<Long> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
+                Long.class);
+
+            id = responseEntity.getBody();
+
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return id;
     }
 }

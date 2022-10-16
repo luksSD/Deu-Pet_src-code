@@ -10,7 +10,7 @@ CREATE TABLE usuario
     nome VARCHAR (100) not null,
     senha VARCHAR (50) not null,
     email VARCHAR (200) unique not null,
-    celular VARCHAR (20) unique not null,
+    celular_telefone VARCHAR (20) unique not null,
     situacao BOOL not null,
     data DATE not null,
     aceite BOOL not null,
@@ -200,19 +200,19 @@ values ('2' , 'MG' , 'Santa Rita do Sapucaí');
 
 --Adicionando usuarios do tipo pessoa
 -----------------------------------------------------------
-INSERT INTO usuario (id , nome, senha,email,celular,situacao,data,aceite,tipo)
+INSERT INTO usuario (id , nome, senha,email,celular_telefone,situacao,data,aceite,tipo)
 values ('1' , 'Vinicius Almeida' , '123', 'vinicius@gmail.com','9','true','01/09/2022','true','pessoa');
 
-INSERT INTO usuario (id , nome, senha,email,celular,situacao,data,aceite,tipo)
+INSERT INTO usuario (id , nome, senha,email,celular_telefone,situacao,data,aceite,tipo)
 values ('2' , 'Lucas Dias' , '123', 'lucas@gmail.com','99','true','01/09/2022','true','pessoa');
 
-INSERT INTO usuario (id , nome, senha,email,celular,situacao,data,aceite,tipo)
+INSERT INTO usuario (id , nome, senha,email,celular_telefone,situacao,data,aceite,tipo)
 values ('3' , 'Matheus Souza' , '123', 'matheus@gmail.com','999','true','01/09/2022','true','pessoa');
 
 
 --Adicionando usuarios do tipo instituicao
 -----------------------------------------------------------
-INSERT INTO usuario (id , nome, senha,email,celular,situacao,data,aceite,tipo)
+INSERT INTO usuario (id , nome, senha,email,celular_telefone,situacao,data,aceite,tipo)
 values ('4' , 'Sociedade Protetora dos Animais' , '123', 'spa@gmail.com','99999','true','01/09/2022','true','instituicao');
 
 

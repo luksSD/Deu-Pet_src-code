@@ -10,7 +10,7 @@ public abstract class Usuario extends BasePojo {
     private String nome;
     private String senha;
     private String email;
-    private String celular;
+    private String celularTelefone;
     private boolean situacao;
     private Timestamp dataCadastro;
     private boolean aceite;

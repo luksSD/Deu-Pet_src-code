@@ -50,7 +50,8 @@
                 <div class="form-group row">
                   <label class="col-sm-12">Telefone / Celular</label>
                   <div class="col-sm-12">
-                    <input type="text" id="tel-cel" class="form-control" th:field="${instituicao.celular}" required
+                    <input type="text" id="tel-cel" class="form-control" th:field="${instituicao.celularTelefone}"
+                           required
                            placeholder="Insira o número de telefone ou celular">
                   </div>
                 </div>
@@ -106,7 +107,7 @@
                   <label class="col-sm-12">Município</label>
                   <div class="col-sm-12">
                     <input type="text" class="form-control" id="cidade"
-                           th:field="${instituicao.muinicipioNome}" required disabled placeholder="Município">
+                           th:field="${instituicao.muinicipioNome}" required placeholder="Município">
                   </div>
                 </div>
               </div>
@@ -126,7 +127,7 @@
                 <div class="form-group row">
                   <label class="col-sm-12">UF</label>
                   <div class="col-sm-3">
-                    <input type="text" class="form-control" id="uf" th:field="${instituicao.uf}" required disabled
+                    <input type="text" class="form-control" id="uf" th:field="${instituicao.uf}" required
                            placeholder="UF">
                   </div>
                 </div>
@@ -233,6 +234,8 @@
   $('[data-toggle="tooltip"]').tooltip()
 })
 
+
+
 </script>
 <script>
 $("input[id*='cpfcnpj']").inputmask({
@@ -249,6 +252,8 @@ $("input[id*='tel-cel']").inputmask({
   mask: ['(99)99999-9999', '(99)9999-9999'],
   keepStatic: true
 });
+
+
 
 </script>
 

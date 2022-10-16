@@ -1,19 +1,21 @@
 package br.dp.db.dao;
 
-import java.util.List;
-
 import br.dp.model.Instituicao;
+import br.dp.model.UsersArquives;
+
+import java.util.List;
 
 public interface InstituicaoDao {
 
-	List<Instituicao> readAll();
+    List<Instituicao> readAll();
 
-	Instituicao readById(Long id);
+    Instituicao readById(Long id);
 
-	Long create(Instituicao entity);
+    Long create(Instituicao entity);
 
-	boolean update(Instituicao entity);
+    boolean update(Instituicao entity);
 
-	boolean delete(Long id);
+    boolean delete(Long id);
 
+    Long saveFileAttributes(UsersArquives imagePath);
 }

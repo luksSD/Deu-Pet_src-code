@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class Instituicao extends Usuario {
 
-    private String telefone;
     private String cpfCnpj;
     private String logradouro;
     private String numero;

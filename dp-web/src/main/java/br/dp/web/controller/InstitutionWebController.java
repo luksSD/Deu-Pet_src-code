@@ -2,21 +2,28 @@ package br.dp.web.controller;
 
 import br.dp.model.Instituicao;
 import br.dp.model.Municipio;
+import br.dp.model.UsersArquives;
 import br.dp.web.service.CityService;
 import br.dp.web.service.InstitutionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
 @RequestMapping("/instituicao")
 public class InstitutionWebController {
+
+    public static final String INSTITUTION_DEFAULT_IMG = "/resources/images/animals/animal-default.jpg";
+    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/images/users/";
+    private String message = "";
 
     @Autowired
     private InstitutionService instituicaoService;
@@ -34,20 +41,77 @@ public class InstitutionWebController {
     }
 
     @GetMapping("/cadastrar-instituicao")
-    public String getRegisterInstitutionPage(final Instituicao instituicao) {
+    public String getRegisterInstitutionPage(final Instituicao instituicao, final Model model) {
+
+        if (!message.equals("")) {
+            model.addAttribute("errorMessage", message);
+            message = "";
+        }
+
         return "institutions/create-institution-page";
     }
 
     @PostMapping("/create")
-    public String create(final Instituicao instituicao) {
+    public String create(@RequestParam("file") final MultipartFile file, final Instituicao instituicao) {
 
         final Long id = instituicaoService.create(instituicao);
+        UsersArquives userImage = null;
 
         if (id != -1) {
+
+            userImage = new UsersArquives();
+
+            if (!file.isEmpty()) {
+                final StringBuilder fileNames = new StringBuilder();
+
+                final Path path = Paths.get(UPLOAD_DIRECTORY + id, file.getOriginalFilename());
+                System.out.println(path.toAbsolutePath());
+
+                if (!Files.exists(Path.of(UPLOAD_DIRECTORY + id))) {
+                    try {
+                        Files.createDirectories(Path.of(UPLOAD_DIRECTORY + id));
+                    } catch (final IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        //Limpa diretorio antes de adicionar imagens caso ja exista
+                        Files.delete(Path.of(UPLOAD_DIRECTORY + id));
+                        Files.createDirectories(Path.of(UPLOAD_DIRECTORY + id));
+                    } catch (final IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                fileNames.append(file.getOriginalFilename() + " ");
+
+                try {
+                    Files.write(path, file.getBytes());
+
+                    userImage.setUserId(id);
+                    userImage.setPath(id + "/" + file.getOriginalFilename());
+
+                } catch (final IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                userImage.setUserId(id);
+                userImage.setPath(INSTITUTION_DEFAULT_IMG);
+            }
+
+            if (userImage != null) {
+                final Long response = instituicaoService.saveFileAttributes(userImage);
+            }
+
+            message = "Instituição cadastrada com sucesso!";
             return "redirect:/instituicao/detalhes/" + id;
+
+        } else {
+            message = "Erro ao cadastrar instituição! Tente novamente.";
+            return "redirect:/instituicao/cadastrar-instituicao";
         }
 
-        return "redirect:/";
     }
 
     @GetMapping("/detalhes/{id}")

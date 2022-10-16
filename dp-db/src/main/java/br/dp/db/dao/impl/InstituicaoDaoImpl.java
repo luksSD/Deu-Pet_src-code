@@ -3,6 +3,7 @@ package br.dp.db.dao.impl;
 import br.dp.db.connection.ConnectionFactory;
 import br.dp.db.dao.InstituicaoDao;
 import br.dp.model.Instituicao;
+import br.dp.model.UsersArquives;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -37,7 +38,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
                 instituicao.setNome(resultSet.getString("nome"));
                 instituicao.setSenha(resultSet.getString("senha"));
                 instituicao.setEmail(resultSet.getString("email"));
-                instituicao.setCelular(resultSet.getString("celular"));
+                instituicao.setCelularTelefone(resultSet.getString("celular_telefone"));
                 instituicao.setSituacao(resultSet.getBoolean("situacao"));
                 instituicao.setDataCadastro(resultSet.getTimestamp("data"));
                 instituicao.setTipo(resultSet.getString("tipo"));
@@ -87,7 +88,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
                 institution.setNome(resultSet.getString("nome"));
                 institution.setSenha(resultSet.getString("senha"));
                 institution.setEmail(resultSet.getString("email"));
-                institution.setCelular(resultSet.getString("celular"));
+                institution.setCelularTelefone(resultSet.getString("celular_telefone"));
                 institution.setSituacao(resultSet.getBoolean("situacao"));
                 institution.setDataCadastro(resultSet.getTimestamp("data"));
                 institution.setTipo(resultSet.getString("tipo"));
@@ -113,7 +114,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
         PreparedStatement preparedStatement2 = null;
         ResultSet resultSet = null;
 
-        final String sql = " INSERT INTO usuario (nome, senha, email, celular, situacao, data, aceite, tipo) values (?, ? , ? , ?, ?, ?, ?, ?);";
+        final String sql = " INSERT INTO usuario (nome, senha, email, celular_telefone, situacao, data, aceite, tipo) values (?, ? , ? , ?, ?, ?, ?, ?);";
 
         final String sql2 = "INSERT INTO instituicao (usuario_id , cpf_cnpj, logradouro, numero, cep, municipio_id) values (? , ? , ? , ?, ?, ? );";
 
@@ -130,7 +131,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
             preparedStatement.setString(1, entity.getNome());
             preparedStatement.setString(2, entity.getSenha());
             preparedStatement.setString(3, entity.getEmail());
-            preparedStatement.setString(4, entity.getCelular());
+            preparedStatement.setString(4, entity.getCelularTelefone());
             preparedStatement.setBoolean(5, true);
             preparedStatement.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
             preparedStatement.setBoolean(7, true);
@@ -191,7 +192,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
         String sql = "UPDATE usuario SET";
         sql += " nome = ?,";
         sql += " email = ?,";
-        sql += " celular = ?";
+        sql += " celular_telefone = ?";
         sql += " where id = ?;";
 
         String sql2 = "UPDATE instituicao SET";
@@ -211,7 +212,7 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
 
             preparedStatement.setString(1, entity.getNome());
             preparedStatement.setString(2, entity.getEmail());
-            preparedStatement.setString(3, entity.getCelular());
+            preparedStatement.setString(3, entity.getCelularTelefone());
             preparedStatement.setLong(4, entity.getId());
 
             preparedStatement.execute();
@@ -288,4 +289,53 @@ public class InstituicaoDaoImpl implements InstituicaoDao {
         }
     }
 
+    @Override
+    public Long saveFileAttributes(final UsersArquives imagePath) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        String sql = "INSERT INTO arquivo_usuario ";
+        sql += " (usuario_id, caminho)";
+        sql += "VALUES(?, ?, ?);";
+
+        Long id = Long.valueOf(1);
+
+        try {
+
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
+
+            preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setLong(1, imagePath.getUserId());
+            preparedStatement.setString(2, imagePath.getPath());
+
+            preparedStatement.execute();
+
+            resultSet = preparedStatement.getGeneratedKeys();
+
+            if (!resultSet.next()) {
+                id = Long.valueOf(-1);
+            }
+
+
+            if (id != -1) {
+                connection.commit();
+            } else {
+                connection.abort(null);
+            }
+
+        } catch (final Exception e) {
+            try {
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println(e1.getMessage());
+            } finally {
+                ConnectionFactory.close(resultSet, preparedStatement, connection);
+            }
+        }
+
+        return id;
+    }
 }

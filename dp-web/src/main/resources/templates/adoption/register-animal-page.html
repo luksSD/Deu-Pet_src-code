@@ -9,6 +9,8 @@
      }
 
 
+
+
   </script>
   <script src="/resources/js/img-preview.js"></script>
 </head>
@@ -82,7 +84,7 @@
                   <div class="form-group row">
                     <label class="col-sm-4">Peso</label>
                     <div class="col-sm-12">
-                      <input class="form-control" required id="inputAnimalPeso"
+                      <input class="form-control" type="number" step="0.01" required id="inputAnimalPeso"
                              placeholder="Insira o peso do animal" th:field="${animal.peso}"/>
                       <!--                                            <input type="text" class="form-control">-->
                     </div>
@@ -333,6 +335,8 @@
 	                }
 
 	                document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+
 
 
 

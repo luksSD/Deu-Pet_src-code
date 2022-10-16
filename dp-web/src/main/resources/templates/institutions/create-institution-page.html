@@ -7,6 +7,16 @@
   <script src="/resources/js/viacep.js"></script>
   <script src="/resources/js/img-preview.js"></script>
   <script src="/resources/js/inputmask.js"></script>
+  <script th:inline="javascript" th:if="${errorMessage}">
+     window.onload = () => {
+        $('#errorModal').modal('show');
+     }
+
+
+
+
+
+  </script>
 </head>
 
 <body>
@@ -227,12 +237,47 @@
     </div>
   </div>
 </div>
+
+<!--MODAL DE ERRO-->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
+     aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="swal2-icon swal2-error swal2-icon-show"
+           style="display: flex;">
+                    <span class="swal2-x-mark">
+                    <span class="swal2-x-mark-line-left"></span>
+                    <span class="swal2-x-mark-line-right"></span>
+                    </span>
+      </div>
+
+      <h2 class="swal2-title" style="display: block;">Erro ao realizar operação!</h2>
+      <div class="row text-center mt-3">
+
+      </div>
+
+      <div class="modal-body text-right">
+        <h5 th:text="${errorMessage}">Error message</h5>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gradient-danger"
+                data-dismiss="modal">Fechar
+        </button>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
 <script src="/resources/js/show-password.js"></script>
 <script>$(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+
 
 
 
@@ -253,6 +298,7 @@ $("input[id*='tel-cel']").inputmask({
   mask: ['(99)99999-9999', '(99)9999-9999'],
   keepStatic: true
 });
+
 
 
 

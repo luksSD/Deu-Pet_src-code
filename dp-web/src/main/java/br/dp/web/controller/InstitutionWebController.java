@@ -182,22 +182,63 @@ public class InstitutionWebController {
 
         model.addAttribute("instituicao", instituicaoModel);
 
+        if (!message.equals("")) {
+            model.addAttribute("errorMessage", message);
+            message = "";
+        }
+
         return "institutions/edit-institution-page";
     }
 
     @PostMapping("/update")
     public String update(final Instituicao instituicao, final Model model) {
 
-        instituicaoService.update(instituicao);
+        final boolean response = instituicaoService.update(instituicao);
 
-        return getInstitutionDetailPage(instituicao.getId(), model);
+        if (response) {
+            message = "Cadastro da instituição atualizado com sucesso!";
+            return "redirect:/instituicao/detalhes/" + instituicao.getId();
+        } else {
+            message = "Não foi possível atualizar o cadastro da instituição. Tente novamente!";
+            return "redirect:/instituicao/editar-instituicao/" + instituicao.getId();
+        }
 
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") final Long id, final Model model) {
-        instituicaoService.deleteById(id);
 
-        return "redirect:/instituicao/gerenciar-instituicoes";
+        final UsersArquives userImg = instituicaoService.loadInstitutionImg(id);
+        final boolean response = instituicaoService.deleteById(id);
+
+        if (response) {
+            //Exclui arquivos dentro do diretorio se existir
+            final String pathName = System.getProperty("user.dir") + "/images/user/" + id;
+
+            if (Files.exists(Path.of(pathName))) {
+                try {
+                    if (Files.exists(Path.of(System.getProperty("user.dir") + "/images/users/" + userImg.getPath()))) {
+                        Files.delete(Path.of(System.getProperty("user.dir") + "/images/users/" + userImg.getPath()));
+                    }
+                } catch (final IOException e) {
+                    e.printStackTrace();
+                }
+
+                //Exclui o diretorio
+                try {
+                    Files.delete(Path.of(pathName));
+                } catch (final IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            message = "Cadastro da instituição excluído com sucesso!";
+            return "redirect:/instituicao/gerenciar-instituicoes";
+        } else {
+            message = "Não foi possível excluir a instituição!";
+            return "redirect:/instituicao/detalhes/" + id;
+        }
     }
+
+
 }

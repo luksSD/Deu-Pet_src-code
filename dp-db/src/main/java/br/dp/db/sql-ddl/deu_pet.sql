@@ -17,6 +17,18 @@ CREATE TABLE usuario
     tipo VARCHAR (50) not null
 );
 
+--Criando tabela arquivo_usuario
+CREATE TABLE arquivo_usuario
+(
+    id BIGSERIAL primary key,
+    usuario_id integer not null,
+	caminho VARCHAR (256) not null
+);
+
+
+--Tornando animal_id uma FK da tabela arquivo_animal
+ALTER TABLE arquivo_usuario ADD CONSTRAINT fk1_arquivo_usuario foreign key (usuario_id) references usuario(id) on update cascade on delete cascade;
+
 --Criando tabela municipio
 CREATE TABLE municipio
 (

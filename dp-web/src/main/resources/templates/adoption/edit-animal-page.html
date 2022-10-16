@@ -8,6 +8,17 @@
         $('#errorModal').modal('show');
     }
 
+
+
+
+
+
+
+
+
+
+
+
   </script>
 </head>
 
@@ -40,14 +51,14 @@
           <form th:action="@{/adocao/update}" method="POST"
                 th:object="${animal}">
 
-            <p class="card-description"> Altere os dados do animal </p>
+            <p class="card-description"> Insira os dados do animal a ser cadastrado </p>
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Nome</label>
-                  <div class="col-sm-9">
+                  <label class="col-sm-4 ">Nome</label>
+                  <div class="col-sm-12">
                     <input class="form-control" id="inputAnimalName" type="text"
-                           required placeholder="Altera o nome do animal"
+                           required placeholder="Insira o nome do animal"
                            th:field="${animal.nome}"/>
                   </div>
                 </div>
@@ -77,9 +88,9 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Peso</label>
-                  <div class="col-sm-9">
-                    <input class="form-control" id="inputAnimalPeso"
+                  <label class="col-sm-4">Peso</label>
+                  <div class="col-sm-12">
+                    <input class="form-control" required id="inputAnimalPeso"
                            placeholder="Insira o peso do animal" th:field="${animal.peso}"/>
                     <!--                                            <input type="text" class="form-control">-->
                   </div>
@@ -111,8 +122,8 @@
 
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Porte</label>
-                  <div class="col-sm-9">
+                  <label class="col-sm-4">Porte</label>
+                  <div class="col-sm-12">
 
                     <input class="form-control" id="inputAnimalPorte"
                            required
@@ -122,8 +133,8 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Raça</label>
-                  <div class="col-sm-9">
+                  <label class="col-sm-4">Raça</label>
+                  <div class="col-sm-12">
                     <input class="form-control" id="inputAnimalRaca"
                            required
                            placeholder="Insira o raça do animal" th:field="${animal.raca}"/>
@@ -137,8 +148,8 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Pelagem Primária</label>
-                  <div class="col-sm-9">
+                  <label class="col-sm-6">Pelagem Primária</label>
+                  <div class="col-sm-12">
                     <input class="form-control" id="inputAnimalPelagemPrimaria"
                            required
                            placeholder="Insira a cor predominante do animal"
@@ -148,8 +159,8 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Pelagem Secundária</label>
-                  <div class="col-sm-9">
+                  <label class="col-sm-6">Pelagem Secundária</label>
+                  <div class="col-sm-12">
                     <input class="form-control" id="inputAnimalpelagemSecundaria"
                            required
                            placeholder="Insira a cor predominante do animal"
@@ -161,8 +172,8 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Temperamento</label>
-                  <div class="col-sm-9">
+                  <label class="col-sm-4">Temperamento</label>
+                  <div class="col-sm-12">
                     <input class="form-control" id="inputAnimalTemperamento"
                            required
                            placeholder="Insira a cor predominante do animal"
@@ -170,10 +181,20 @@
                   </div>
                 </div>
               </div>
-              <div class="col-mlx-10">
-                <div class="dropzone-previews" id="dropzonePreview"></div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4">Status</label>
+                  <div class="col-sm-12">
+                    <select class="form-control form-control-lg" th:field="${animal.situacao}">
+                      <option value="espera">Em Espera</option>
+                      <option value="adocao">Para Adoção</option>
+                      <option value="adotado">Adotado</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
+            <div class="border-bottom mb-3"></div>
 
             <button type="submit" class="btn btn-gradient-primary mr-2">Salvar</button>
             <input th:field="${animal.id}" type="hidden">

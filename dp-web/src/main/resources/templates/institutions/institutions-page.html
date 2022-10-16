@@ -58,7 +58,7 @@
               <tbody id="myTable">
               <tr th:each="institutions : ${institutions}">
                 <td>
-                  <img src="/resources/images/instituicoes/instituicao1.png" class="me-2" alt="image">
+                  <img th:src="${institutions.profileImg}" class="me-2" alt="image">
                   <span th:text="${institutions.nome}">nome instituicao</span>
                 </td>
                 <td th:text="${institutions.email}"> email</td>

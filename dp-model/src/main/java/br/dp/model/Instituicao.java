@@ -13,5 +13,6 @@ public class Instituicao extends Usuario {
     private String uf;
     private Long municipioId;
     private Long usuarioId;
+    private String profileImg;
 
 }

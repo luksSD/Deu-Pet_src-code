@@ -35,7 +35,28 @@ public class InstitutionWebController {
     public String getInstitutionsPage(final Model model) {
 
         final List<Instituicao> institutions = instituicaoService.readAll();
+
+        for (final Instituicao institution : institutions) {
+            final UsersArquives userImgs = instituicaoService.loadInstitutionImg(institution.getId());
+            String pathName;
+
+            if (!userImgs.getPath().isEmpty()) {
+                pathName = "/images/users/" + userImgs.getPath();
+                if (!Files.exists(Path.of(System.getProperty("user.dir") + pathName))) {
+                    pathName = INSTITUTION_DEFAULT_IMG;
+                }
+            } else {
+                pathName = INSTITUTION_DEFAULT_IMG;
+            }
+            institution.setProfileImg(pathName);
+        }
+
         model.addAttribute("institutions", institutions);
+
+        if (!message.equals("")) {
+            model.addAttribute("succesMessage", message);
+            message = "";
+        }
 
         return "institutions/institutions-page";
     }

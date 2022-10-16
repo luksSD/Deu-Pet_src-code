@@ -152,7 +152,7 @@
             <div>
               <button type="submit" class="btn btn-gradient-primary mr-2">Salvar</button>
               <input th:field="${instituicao.id}" type="hidden">
-              <a class="btn btn-light" th:href="@{/instituicao/gerenciar-instituicoes}">Cancelar</a>
+              <a class="btn btn-light" th:href="@{/instituicao/detalhes/{id} (id=${instituicao.id})}">Cancelar</a>
             </div>
           </form>
 
@@ -181,6 +181,7 @@ $("input[id*='tel-cel']").inputmask({
   mask: ['(99)99999-9999', '(99)9999-9999'],
   keepStatic: true
 });
+
 
 
 </script>

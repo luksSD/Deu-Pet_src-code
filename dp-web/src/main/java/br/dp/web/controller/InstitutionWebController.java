@@ -37,10 +37,11 @@ public class InstitutionWebController {
         final List<Instituicao> institutions = instituicaoService.readAll();
 
         for (final Instituicao institution : institutions) {
-            final UsersArquives userImgs = instituicaoService.loadInstitutionImg(institution.getId());
+            UsersArquives userImgs = new UsersArquives();
+            userImgs = instituicaoService.loadInstitutionImg(institution.getId());
             String pathName;
 
-            if (!userImgs.getPath().isEmpty()) {
+            if (userImgs.getPath() != null && !userImgs.getPath().isEmpty()) {
                 pathName = "/images/users/" + userImgs.getPath();
                 if (!Files.exists(Path.of(System.getProperty("user.dir") + pathName))) {
                     pathName = INSTITUTION_DEFAULT_IMG;
@@ -145,7 +146,7 @@ public class InstitutionWebController {
         final UsersArquives userImg = instituicaoService.loadInstitutionImg(id);
         String pathName = "";
 
-        if (!userImg.getPath().isEmpty()) {
+        if (userImg.getPath() != null && !userImg.getPath().isEmpty()) {
             if (!Files.exists(Path.of(System.getProperty("user.dir") + "/images/users/" + userImg.getPath()))) {
                 pathName = INSTITUTION_DEFAULT_IMG;
             } else {

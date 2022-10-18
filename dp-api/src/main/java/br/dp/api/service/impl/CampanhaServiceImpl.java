@@ -1,14 +1,13 @@
 package br.dp.api.service.impl;
 
-import java.util.List;
-
-
+import br.dp.api.service.CampanhaService;
+import br.dp.db.dao.CampanhaDao;
+import br.dp.model.CampainsArquives;
+import br.dp.model.Campanha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.dp.api.service.CampanhaService;
-import br.dp.db.dao.CampanhaDao;
-import br.dp.model.Campanha;
+import java.util.List;
 
 @Service
 public class CampanhaServiceImpl implements CampanhaService {
@@ -43,5 +42,15 @@ public class CampanhaServiceImpl implements CampanhaService {
     public boolean delete(final Long id) {
         // TODO Auto-generated method stub
         return dao.delete(id);
+    }
+
+    @Override
+    public Long saveFileAttributes(final CampainsArquives imagePath) {
+        return dao.saveFileAttributes(imagePath);
+    }
+
+    @Override
+    public CampainsArquives LoadCampainImg(final long id) {
+        return dao.loadUserImage(id);
     }
 }

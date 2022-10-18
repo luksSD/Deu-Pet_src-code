@@ -2,13 +2,11 @@ package br.dp.db.dao.impl;
 
 import br.dp.db.connection.ConnectionFactory;
 import br.dp.db.dao.CampanhaDao;
+import br.dp.model.CampainsArquives;
 import br.dp.model.Campanha;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -215,6 +213,86 @@ public class CampanhaDaoImpl implements CampanhaDao {
         } finally {
             ConnectionFactory.close(preparedStatement, connection);
         }
+    }
+
+    @Override
+    public Long saveFileAttributes(final CampainsArquives imagePath) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        String sql = "INSERT INTO arquivo_campanha ";
+        sql += " (campanha_id, caminho)";
+        sql += "VALUES(?, ?);";
+
+        Long id = Long.valueOf(1);
+
+        try {
+
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
+
+            preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setLong(1, imagePath.getCampainId());
+            preparedStatement.setString(2, imagePath.getPath());
+
+            preparedStatement.execute();
+
+            resultSet = preparedStatement.getGeneratedKeys();
+
+            if (!resultSet.next()) {
+                id = Long.valueOf(-1);
+            }
+
+
+            if (id != -1) {
+                connection.commit();
+            } else {
+                connection.abort(null);
+            }
+
+        } catch (final Exception e) {
+            try {
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println(e1.getMessage());
+            } finally {
+                ConnectionFactory.close(resultSet, preparedStatement, connection);
+            }
+        }
+
+        return id;
+    }
+
+    @Override
+    public CampainsArquives loadUserImage(final long id) {
+        final CampainsArquives campainImg = new CampainsArquives();
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = ConnectionFactory.getConnection();
+
+            final String sql = "SELECT * FROM arquivo_campanha WHERE campanha_id = " + id;
+
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                campainImg.setId(resultSet.getLong("id"));
+                campainImg.setCampainId(resultSet.getLong("campanha_id"));
+                campainImg.setPath(resultSet.getString("caminho"));
+            }
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            ConnectionFactory.close(resultSet, preparedStatement, connection);
+        }
+
+        return campainImg;
     }
 
 }

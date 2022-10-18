@@ -1,5 +1,6 @@
 package br.dp.web.service;
 
+import br.dp.model.CampainsArquives;
 import br.dp.model.Campanha;
 
 import java.util.List;
@@ -17,4 +18,7 @@ public interface CampainService {
     boolean deleteById(Long id);
 
 
+    CampainsArquives loadCampainImg(Long id);
+
+    Long saveFileAttributes(CampainsArquives campainImg);
 }

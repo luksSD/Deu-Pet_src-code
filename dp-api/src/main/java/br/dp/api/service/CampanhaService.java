@@ -1,5 +1,6 @@
 package br.dp.api.service;
 
+import br.dp.model.CampainsArquives;
 import br.dp.model.Campanha;
 
 import java.util.List;
@@ -16,4 +17,7 @@ public interface CampanhaService {
 
     boolean delete(Long id);
 
+    Long saveFileAttributes(CampainsArquives imagePath);
+
+    CampainsArquives LoadCampainImg(long id);
 }

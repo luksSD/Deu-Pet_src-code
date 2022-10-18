@@ -14,6 +14,7 @@ public class Campanha extends BasePojo {
     private Date dataFim;
     private Long instituicaoId;
     private Long formularioId;
+    private String campainImg;
 
 
 }

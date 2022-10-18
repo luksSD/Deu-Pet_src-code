@@ -149,7 +149,7 @@ CREATE TABLE arquivo_campanha
 (
     id BIGSERIAL primary key,
     campanha_id integer not null,
-    fotos VARCHAR not null
+    caminho VARCHAR not null
 
 );
 

@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Deu Pet - Campanhas</title>
-  <script></script>
+  <script th:inline="javascript" th:if="${succesMessage}">
+     window.onload = () => {
+        $('#succesModal').modal('show');
+    }
+
+
+
+  </script>
 </head>
 <body>
 <div layout:fragment="body">
@@ -38,7 +45,7 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table">
+            <table class="table" id="custom-table">
               <thead>
               <tr>
                 <th> Título</th>
@@ -65,9 +72,43 @@
               </tr>
               </tbody>
             </table>
+
+            <div class="alert alert-warning" id="noEntryAlert" role="alert"> Nenhum registro encontrado.</div>
+
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="succesModal" tabindex="-1" role="dialog"
+     aria-labelledby="succesModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="swal2-icon swal2-success swal2-icon-show" style="display: flex;">
+        <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
+        <span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
+        <div class="swal2-success-ring"></div>
+        <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
+        <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
+      </div>
+
+      <h2 class="swal2-title" style="display: block;">Operação realizada com sucesso!</h2>
+      <div class="row text-center mt-3">
+
+      </div>
+
+      <div class="modal-body text-right">
+        <h5 th:text="${succesMessage}">Error message</h5>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gradient-danger"
+                data-dismiss="modal">Fechar
+        </button>
+      </div>
+
+
     </div>
   </div>
 </div>
@@ -76,4 +117,5 @@
 </html>
 
 
-</script>
+<script src="/resources/js/campains-page.js"></script>
+

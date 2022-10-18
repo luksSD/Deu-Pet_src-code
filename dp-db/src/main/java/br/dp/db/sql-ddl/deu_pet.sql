@@ -137,7 +137,7 @@ CREATE TABLE campanha
     data_inicio DATE not null,
     data_fim DATE not null,
 	instituicao_id integer not null,
-	formulario_id integer not null
+	formulario_url VARCHAR (300)
 
 );
 
@@ -158,7 +158,7 @@ CREATE TABLE arquivo_campanha
 ALTER TABLE arquivo_campanha ADD CONSTRAINT fk1_arquivo_campanha foreign key (campanha_id) references campanha(id) on update cascade on delete cascade;
 
 --Criando pessoa_cadastra_campanha
-CREATE TABLE pessoa_cadastra_campanha
+CREATE TABLE pessoa_interessa_campanha
 (
     id BIGSERIAL primary key,
 	pessoa_id INTEGER not null,
@@ -174,19 +174,6 @@ ALTER TABLE pessoa_cadastra_campanha ADD CONSTRAINT fk2_pessoa_cadastra_campanha
 
 --Colocando UK entre pessoa_id e campanha_id na tabela pessoa_cadastra_campanha
 ALTER TABLE pessoa_cadastra_campanha ADD CONSTRAINT uk1_pessoa_cadastra_campanha unique(pessoa_id, campanha_id);
-
-
---Criando tabela formulario
-CREATE TABLE formulario
-(
-    id BIGSERIAL primary key,
-    url VARCHAR (300) not null
-
-);
-
-
---Tornando formulario_id uma FK da tabela campanha
-ALTER TABLE campanha ADD CONSTRAINT fk2_campanha foreign key (formulario_id) references formulario(id) on update cascade on delete cascade;
 
 
 --Adicionando cidades que o projeto vai atender inicialmente

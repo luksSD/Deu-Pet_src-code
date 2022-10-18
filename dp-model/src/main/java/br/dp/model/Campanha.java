@@ -13,8 +13,7 @@ public class Campanha extends BasePojo {
     private Date dataInicio;
     private Date dataFim;
     private Long instituicaoId;
-    private Long formularioId;
+    private String urlForm;
     private String campainImg;
-
 
 }

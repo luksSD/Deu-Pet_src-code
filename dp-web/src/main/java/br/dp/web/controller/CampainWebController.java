@@ -31,23 +31,6 @@ public class CampainWebController {
 
         final List<Campanha> campanhas = campainService.readAll();
 
-
-        for (final Campanha campanha : campanhas) {
-            CampainsArquives campainImg = new CampainsArquives();
-            campainImg = campainService.loadCampainImg(campanha.getId());
-            String pathName;
-
-            if (campainImg.getPath() != null && !campainImg.getPath().isEmpty()) {
-                pathName = "/images/campains/" + campainImg.getPath();
-                if (!Files.exists(Path.of(System.getProperty("user.dir") + pathName))) {
-                    pathName = CAMPAIN_DEFAULT_IMG;
-                }
-            } else {
-                pathName = CAMPAIN_DEFAULT_IMG;
-            }
-            campanha.setCampainImg(pathName);
-        }
-
         model.addAttribute("listaCampanhas", campanhas);
 
         if (!message.equals("")) {
@@ -67,7 +50,7 @@ public class CampainWebController {
         String pathName = "";
 
         if (campainImg.getPath() != null && !campainImg.getPath().isEmpty()) {
-            if (!Files.exists(Path.of(System.getProperty("user.dir") + "/images/users/" + campainImg.getPath()))) {
+            if (!Files.exists(Path.of(System.getProperty("user.dir") + "/images/campains/" + campainImg.getPath()))) {
                 pathName = CAMPAIN_DEFAULT_IMG;
             } else {
                 pathName = "/images/campains/" + campainImg.getPath();
@@ -185,7 +168,7 @@ public class CampainWebController {
             return "redirect:/campanhas/detalhes-campanha/" + id;
         } else {
             message = "Erro ao cadastrar campanha! Tente novamente.";
-            return "redirect:/campanhas/cadastrar-campanha";
+            return "redirect:/campanhas/cadastrar-campanhas";
         }
 
     }
@@ -217,11 +200,11 @@ public class CampainWebController {
                     e.printStackTrace();
                 }
             }
-            message = "Cadastro da instituição excluído com sucesso!";
+            message = "Cadastro da campanha excluído com sucesso!";
             return "redirect:/campanhas/gerenciar-campanhas";
         } else {
-            message = "Não foi possível excluir a instituição!";
-            return "redirect:/instituicao/detalhes/" + id;
+            message = "Não foi possível excluir a campanha!";
+            return "redirect:/campanhas/detalhes-campanha/" + id;
         }
     }
 }

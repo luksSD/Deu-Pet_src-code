@@ -76,6 +76,7 @@ public class CampanhaDaoImpl implements CampanhaDao {
                 campanha.setDataFim(resultSet.getDate("data_fim"));
                 campanha.setDescricao(resultSet.getString("descricao"));
                 campanha.setRequisitos(resultSet.getString("requisitos"));
+                campanha.setUrlForm(resultSet.getString("formulario_url"));
             }
 
         } catch (final SQLException e) {
@@ -94,7 +95,7 @@ public class CampanhaDaoImpl implements CampanhaDao {
 
         //nesse ponto tem que verificar se vai colocar o id fixo da instituição pra hoje ou pegar de outra entity
         String sql = "insert into campanha";
-        sql += "(titulo, descricao, requisitos, data_inicio, data_fim, instituicao_id, formulario_id ) ";
+        sql += "(titulo, descricao, requisitos, data_inicio, data_fim, instituicao_id, formulario_url ) ";
         sql += "values(?,?,?,?,?,?,?)";
 
         Long id = Long.valueOf(-1);
@@ -103,15 +104,17 @@ public class CampanhaDaoImpl implements CampanhaDao {
             connection = ConnectionFactory.getConnection();
             connection.setAutoCommit(false);
 
-            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, entity.getTitulo());
             preparedStatement.setString(2, entity.getDescricao());
             preparedStatement.setString(3, entity.getRequisitos());
             preparedStatement.setDate(4, entity.getDataInicio());
             preparedStatement.setDate(5, entity.getDataFim());
-            preparedStatement.setLong(6, 4);
-            preparedStatement.setLong(7, 1);
+            preparedStatement.setLong(6, 1);
+
+            preparedStatement.setString(7, entity.getUrlForm());
+
 
             preparedStatement.execute();
 
@@ -145,8 +148,10 @@ public class CampanhaDaoImpl implements CampanhaDao {
         sql += "requisitos = ?,";
         sql += "data_inicio = ?,";
         sql += "data_fim = ?,";
-        sql += "instituicao_id = ?,";
-        sql += "formulario_id = ? ";
+        sql += "instituicao_id = ? ";
+        if (entity.getUrlForm() != null && !entity.getUrlForm().isEmpty()) {
+            sql += ", formulario_id = ? ";
+        }
         sql += "where id = ?";
 
         try {
@@ -161,8 +166,12 @@ public class CampanhaDaoImpl implements CampanhaDao {
             preparedStatement.setDate(4, entity.getDataInicio());
             preparedStatement.setDate(5, entity.getDataFim());
             preparedStatement.setLong(6, 4);
-            preparedStatement.setLong(7, 1);
-            preparedStatement.setLong(8, entity.getId());
+            if (entity.getUrlForm() != null && !entity.getUrlForm().isEmpty()) {
+                preparedStatement.setString(7, entity.getUrlForm());
+                preparedStatement.setLong(8, entity.getId());
+            } else {
+                preparedStatement.setLong(7, entity.getId());
+            }
 
             preparedStatement.execute();
             connection.commit();

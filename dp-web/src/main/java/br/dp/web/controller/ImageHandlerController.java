@@ -37,4 +37,15 @@ public class ImageHandlerController {
             return null;
         }
     }
+
+    @GetMapping("/campains/{id}/{img}")
+    @ResponseBody
+    public byte[] requestCampainImage(@PathVariable("id") final Long id, @PathVariable("img") final String imgName) {
+        final File imagemArquivo = new File(uploadDirectory + "/images/campains/" + id + "/" + imgName);
+        try {
+            return Files.readAllBytes(imagemArquivo.toPath());
+        } catch (final IOException e) {
+            return null;
+        }
+    }
 }

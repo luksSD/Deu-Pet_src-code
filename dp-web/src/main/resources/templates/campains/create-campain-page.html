@@ -9,6 +9,8 @@
      window.onload = () => {
         $('#errorModal').modal('show');
      }
+
+
   </script>
 </head>
 <body>
@@ -33,7 +35,7 @@
           <h4 class="card-title">Campanhas de bem-estar geral dos animais</h4>
 
           <form th:action="@{/campanhas/create}" method="POST" th:objetc="${campanha}" id="formCadastro"
-                name="formCadastro">
+                enctype='multipart/form-data' name="formCadastro">
 
             <p class="card-description"> Insira os dados da campanha </p>
 
@@ -109,7 +111,7 @@
                   <div class="col-sm-6">
                     <input class="form-control" id="inputurl" type="text"
                            placeholder="Link do formulário da campanha"
-                           th:field="${campanha.formularioId}"/>
+                           th:field="${campanha.urlForm}"/>
                   </div>
                 </div>
               </div>

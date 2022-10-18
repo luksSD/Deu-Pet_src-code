@@ -26,7 +26,8 @@ window.onload = function(){
                       var picFile = event.target;
 
                       var div = document.createElement("div");
-                      if(window.location.href === "http://localhost:8100/instituicao/cadastrar-instituicao"){
+                      if((window.location.href === "http://localhost:8100/instituicao/cadastrar-instituicao")
+                          || (window.location.href === "http://localhost:8100/campanhas/cadastrar-campanhas")){
                           div.classList.add("col-md-9");
                           div.classList.add("mw-25");
                       } else {

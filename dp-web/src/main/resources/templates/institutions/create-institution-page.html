@@ -11,14 +11,6 @@
      window.onload = () => {
         $('#errorModal').modal('show');
      }
-
-
-
-
-
-
-
-
   </script>
 </head>
 
@@ -204,7 +196,7 @@
                     <div class="row">
                       <h4 class="card-title">Selecione a foto da instituição:</h4>
 
-                      <div class="col-md-8">
+                      <div class="col-md-8 mt-3">
                         <input id="files" name="file" type="file" accept="image/jpg, image/jpeg, image/png"
                                hidden/>
                         <label class="btn btn-outline-danger btn-icon-text " for="files">
@@ -239,40 +231,40 @@
       </div>
     </div>
   </div>
-</div>
-
-<!--MODAL DE ERRO-->
-<div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
-     aria-labelledby="errorModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="swal2-icon swal2-error swal2-icon-show"
-           style="display: flex;">
+  <!--MODAL DE ERRO-->
+  <div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
+       aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="swal2-icon swal2-error swal2-icon-show"
+             style="display: flex;">
                     <span class="swal2-x-mark">
                     <span class="swal2-x-mark-line-left"></span>
                     <span class="swal2-x-mark-line-right"></span>
                     </span>
+        </div>
+
+        <h2 class="swal2-title" style="display: block;">Erro ao realizar operação!</h2>
+        <div class="row text-center mt-3">
+
+        </div>
+
+        <div class="modal-body text-right">
+          <h5 th:text="${errorMessage}">Error message</h5>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-gradient-danger"
+                  data-dismiss="modal">Fechar
+          </button>
+        </div>
+
+
       </div>
-
-      <h2 class="swal2-title" style="display: block;">Erro ao realizar operação!</h2>
-      <div class="row text-center mt-3">
-
-      </div>
-
-      <div class="modal-body text-right">
-        <h5 th:text="${errorMessage}">Error message</h5>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-gradient-danger"
-                data-dismiss="modal">Fechar
-        </button>
-      </div>
-
-
     </div>
   </div>
 </div>
+
 
 </body>
 </html>
@@ -280,13 +272,6 @@
 <script>$(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
-
-
-
-
-
-
-
 
 </script>
 <script>
@@ -304,13 +289,5 @@ $("input[id*='tel-cel']").inputmask({
   mask: ['(99)99999-9999', '(99)9999-9999'],
   keepStatic: true
 });
-
-
-
-
-
-
-
-
 </script>
 

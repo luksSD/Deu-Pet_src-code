@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Acesso</title>
+  <link rel="stylesheet" href="/resources/vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/resources/vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <!-- endinject -->
+  <!-- Layout styles -->
+  <link rel="stylesheet" href="/resources/css/style.css">
+  <!-- End layout styles -->
+  <link rel="shortcut icon" href="/resources/images/favicon.ico"/>
+</head>
+
+<body>
+<div class="container-scroller">
+  <div class="container-fluid page-body-wrapper full-page-wrapper">
+    <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg">
+      <div class="row flex-grow">
+        <div class="col-lg-6 d-flex align-items-center justify-content-center">
+          <div class="auth-form-transparent text-left p-3">
+            <div class="brand-logo">
+              <img src="resources/images/DeuPetLogo-2.png" alt="logo">
+            </div>
+            <h4>Bem vindo novamente!</h4>
+            <form class="pt-3">
+              <div class="form-group">
+                <label for="userInput">E-mail</label>
+                <div class="input-group">
+                  <div class="input-group-prepend bg-transparent">
+                        <span class="input-group-text bg-transparent border-right-0">
+                          <i class="mdi mdi-account-outline text-primary"></i>
+                        </span>
+                  </div>
+                  <input type="text" class="form-control form-control-lg border-left-0" id="userInput"
+                         placeholder="Insira o e-mail">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="passwordInput">Senha</label>
+                <div class="input-group">
+                  <div class="input-group-prepend bg-transparent">
+                        <span class="input-group-text bg-transparent border-right-0">
+                          <i class="mdi mdi-lock-outline text-primary"></i>
+                        </span>
+                  </div>
+                  <input type="password" class="form-control form-control-lg border-left-0" id="passwordInput"
+                         placeholder="Insira sua senha">
+                </div>
+              </div>
+              <div class="my-2 d-flex justify-content-between align-items-center">
+                <a href="#" class="auth-link text-black">Esqueceu sua senha?</a>
+              </div>
+              <div class="my-3">
+                <a class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn"
+                   href="../../index.html">Acessar</a>
+              </div>
+
+
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-6 login-half-bg d-flex flex-row">
+          <p class="text-white font-weight-medium text-center flex-grow align-self-end">Copyright © 2018 All rights
+            reserved.</p>
+        </div>
+      </div>
+    </div>
+    <!-- content-wrapper ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+</div>
+
+
+<script src="/resources/vendors/js/vendor.bundle.base.js"></script>
+<script src="/resources/vendors/js/jquery.inputmask.bundle.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script src="/resources/vendors/chart.js/Chart.min.js"></script>
+<!--<script src="/resources/vendors/sweetalert/sweetalert.min.js"></script>-->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/resources/js/jquery.cookie.js" type="text/javascript"></script>
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="/resources/js/off-canvas.js"></script>
+<script src="/resources/js/hoverable-collapse.js"></script>
+<script src="/resources/js/misc.js"></script>
+
+<!-- endinject -->
+<!-- Custom js for this page -->
+<script src="/resources/js/dashboard.js"></script>
+<script src="/resources/js/todolist.js"></script>
+<script src="/resources/js/inputmask.js"></script>
+
+
+</body>
+</html>
+<script>(function($) {
+  'use strict';
+  $(function() {
+    $(".nav-settings").click(function() {
+      $("#right-sidebar").toggleClass("open");
+    });
+    $(".settings-close").click(function() {
+      $("#right-sidebar,#theme-settings").removeClass("open");
+    });
+
+    $("#settings-trigger").on("click", function() {
+      $("#theme-settings").toggleClass("open");
+    });
+
+
+    //background constants
+    var navbar_classes = "navbar-danger navbar-success navbar-warning navbar-dark navbar-light navbar-primary navbar-info navbar-pink";
+    var sidebar_classes = "sidebar-light sidebar-dark";
+    var $body = $("body");
+
+    //sidebar backgrounds
+    $("#sidebar-default-theme").on("click", function() {
+      $body.removeClass(sidebar_classes);
+      $(".sidebar-bg-options").removeClass("selected");
+      $(this).addClass("selected");
+    });
+    $("#sidebar-dark-theme").on("click", function() {
+      $body.removeClass(sidebar_classes);
+      $body.addClass("sidebar-dark");
+      $(".sidebar-bg-options").removeClass("selected");
+      $(this).addClass("selected");
+    });
+
+
+    //Navbar Backgrounds
+    $(".tiles.primary").on("click", function() {
+      $(".navbar").removeClass(navbar_classes);
+      $(".navbar").addClass("navbar-primary");
+      $(".tiles").removeClass("selected");
+      $(this).addClass("selected");
+    });
+    $(".tiles.success").on("click", function() {
+      $(".navbar").removeClass(navbar_classes);
+      $(".navbar").addClass("navbar-success");
+      $(".tiles").removeClass("selected");
+      $(this).addClass("selected");
+    });
+    $(".tiles.warning").on("click", function() {
+      $(".navbar").removeClass(navbar_classes);
+      $(".navbar").addClass("navbar-warning");
+      $(".tiles").removeClass("selected");
+      $(this).addClass("selected");
+    });
+    $(".tiles.danger").on("click", function() {
+      $(".navbar").removeClass(navbar_classes);
+      $(".navbar").addClass("navbar-danger");
+      $(".tiles").removeClass("selected");
+      $(this).addClass("selected");
+    });
+    $(".tiles.info").on("click", function() {
+      $(".navbar").removeClass(navbar_classes);
+      $(".navbar").addClass("navbar-info");
+      $(".tiles").removeClass("selected");
+      $(this).addClass("selected");
+    });
+    $(".tiles.dark").on("click", function() {
+      $(".navbar").removeClass(navbar_classes);
+      $(".navbar").addClass("navbar-dark");
+      $(".tiles").removeClass("selected");
+      $(this).addClass("selected");
+    });
+    $(".tiles.default").on("click", function() {
+      $(".navbar").removeClass(navbar_classes);
+      $(".tiles").removeClass("selected");
+      $(this).addClass("selected");
+    });
+
+    //Horizontal menu in mobile
+    $('[data-toggle="horizontal-menu-toggle"]').on("click", function() {
+      $(".horizontal-menu .bottom-navbar").toggleClass("header-toggled");
+    });
+    // Horizontal menu navigation in mobile menu on click
+    var navItemClicked = $('.horizontal-menu .page-navigation >.nav-item');
+    navItemClicked.on("click", function(event) {
+      if(window.matchMedia('(max-width: 991px)').matches) {
+        if(!($(this).hasClass('show-submenu'))) {
+          navItemClicked.removeClass('show-submenu');
+        }
+        $(this).toggleClass('show-submenu');
+      }
+    });
+
+    $(window).scroll(function() {
+      if(window.matchMedia('(min-width: 992px)').matches) {
+        var header = $('.horizontal-menu');
+        if ($(window).scrollTop() >= 71) {
+          $(header).addClass('fixed-on-scroll');
+        } else {
+          $(header).removeClass('fixed-on-scroll');
+        }
+      }
+    });
+
+  });
+})(jQuery);
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

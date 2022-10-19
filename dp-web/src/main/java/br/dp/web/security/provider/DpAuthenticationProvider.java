@@ -33,7 +33,7 @@ public class DpAuthenticationProvider implements AuthenticationProvider {
 
         final Usuario user = userService.validateUsernameAndPassword(username, password);
 
-        if (user != null) {
+        if (user == null) {
             return null;
         }
 

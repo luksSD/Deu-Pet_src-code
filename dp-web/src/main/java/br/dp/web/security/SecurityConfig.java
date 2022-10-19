@@ -1,16 +1,24 @@
 package br.dp.web.security;
 
+import br.dp.web.security.provider.DpAuthenticationProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private DpAuthenticationProvider authenticationProvider;
+
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        super.configure(auth);
+
+        auth.authenticationProvider(authenticationProvider);
+
     }
 
     @Override
@@ -19,12 +27,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             .antMatchers("/resources/**").permitAll()
-            .antMatchers("/").permitAll()
             .antMatchers("/acessar").permitAll()
             .anyRequest().authenticated()
             .and()
             .formLogin()
-            .loginPage("/acessar");
+            .loginPage("/acessar")
+            .loginProcessingUrl("/login").permitAll()
+            .defaultSuccessUrl("/")
+            .and()
+            .logout()
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            .logoutSuccessUrl("/acessar");
     }
 
 

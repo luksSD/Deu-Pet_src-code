@@ -52,12 +52,6 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>br.dp</groupId>
-      <artifactId>dp-model</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-
     <!-- <dependency> -->
     <!-- <groupId>net.sf.jasperreports</groupId> -->
     <!-- <artifactId>jasperreports</artifactId> -->
@@ -74,6 +68,10 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>br.dp</groupId>
+      <artifactId>dp-model</artifactId>
     </dependency>
   </dependencies>
 

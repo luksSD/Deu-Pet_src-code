@@ -17,16 +17,11 @@
   <description>Modulo de banco de dados do projeto Deu Pet</description>
 
   <properties>
-    <revision>1.0.0</revision>
+    <revision>1.5.0</revision>
   </properties>
 
 
   <dependencies>
-    <dependency>
-      <groupId>br.dp</groupId>
-      <artifactId>dp-model</artifactId>
-      <version>1.0.0</version>
-    </dependency>
 
     <dependency>
       <groupId>org.postgresql</groupId>
@@ -43,6 +38,10 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>br.dp</groupId>
+      <artifactId>dp-model</artifactId>
     </dependency>
 
 

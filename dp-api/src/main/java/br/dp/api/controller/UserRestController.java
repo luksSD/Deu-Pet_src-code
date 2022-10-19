@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 public class UserRestController {
 
     @PostMapping("/login")
-    public ResponseEntity<Usuario> login(@RequestHeader("Authorization") final String authorization, final String encodedData) {
+    public ResponseEntity<Usuario> login(@RequestHeader("Authorization") final String encodedData) {
 
         System.out.println("Chegou request com base64: " + encodedData);
 
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok().build();
 
     }
 

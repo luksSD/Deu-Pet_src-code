@@ -2,7 +2,6 @@ package br.dp.web.service;
 
 import org.springframework.http.HttpHeaders;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 public class RestService {
@@ -11,15 +10,12 @@ public class RestService {
 
         final String auth = "Username=" + username + ";Password=" + password;
 
-        final byte[] encodedBytes;
-
-
         try {
+            final byte[] encondedBytes = Base64.getEncoder().encode(auth.getBytes("utf-8"));
 
-            encodedBytes = Base64.getEncoder().encode(auth.getBytes(StandardCharsets.UTF_8));
-            System.out.println("encoded bytes: " + new String(encodedBytes));
+            System.out.println("Dados em formato base64: " + new String(encondedBytes));
 
-            final String header = "Basic " + new String(encodedBytes);
+            final String header = "Basic " + new String(encondedBytes);
 
             final HttpHeaders headers = new HttpHeaders();
             headers.set("Authorization", header);
@@ -27,7 +23,7 @@ public class RestService {
             return headers;
 
         } catch (final Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return null;
         }
 

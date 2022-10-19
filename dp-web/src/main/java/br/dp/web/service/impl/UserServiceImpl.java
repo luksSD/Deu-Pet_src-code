@@ -37,4 +37,9 @@ public class UserServiceImpl implements UserService {
         return user;
 
     }
+
+    @Override
+    public Usuario validateLogin(final String encodedData) {
+        return null;
+    }
 }

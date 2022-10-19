@@ -30,17 +30,24 @@
     <div class="col-md-8  grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Administrativo</h4>
-          <p class="card-description" style="color:#524A4E;"> Instituição/ORG </p>
-          <p class="" style="color:#524a4e;">Gerencie suas informações, cadastros de animais para adoção,
+          <h4 class="card-title">Painel Administrativo</h4>
+          <p class="card-description" style="color:#524A4E;" sec:authorize="hasRole('INSTITUICAO')">
+            Instituição/ORG </p>
+          <p class="card-description" style="color:#524A4E;" sec:authorize="hasRole('ADMIN')"> Administrador do
+            sistema </p>
+          <p class="" style="color:#524a4e;" sec:authorize="hasRole('INSTITUICAO')">Gerencie suas informações, cadastros
+            de animais para adoção,
             solicitações de adoção e campanhas de bem-estar do animal.
+          </p>
+          <p class="" style="color:#524a4e;" sec:authorize="hasRole('ADMIN')">Gerencie as instituições e altere
+            informações do seu cadastro.
           </p>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" sec:authorize="hasRole('INSTITUICAO')">
     <div class="col-md-4 stretch-card grid-margin">
       <div class="card bg-gradient-danger card-img-holder text-white">
         <a class="" th:href="@{/adocao/gerenciar-animais}" style="text-decoration: none; color: #361E1B">
@@ -93,6 +100,61 @@
 
     <div class="col-md-4 stretch-card grid-margin">
 
+      <div class="card bg-gradient-success card-img-holder text-white">
+        <a class="" th:href="@{/perfil/detalhes}" style="text-decoration: none; color:#361E1B">
+          <div class="card-body">
+            <img src="resources/images/dashboard/circle.svg" class="card-img-absolute"
+                 alt="circle-image"/>
+            <div class="row">
+              <div class="col-md-10">
+                <h4 class="font-weight-normal mb-3">Perfíl</h4>
+              </div>
+              <div class="col-md-2 px-2">
+                <i class="mdi mdi-account-card-details mdi-48px float-right"
+                   style="color: black"></i>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10">
+                <h5 class="card-text">Gerencie seu perfíl, visualize dados e alterar a senha. </h5>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row" sec:authorize="hasRole('ADMIN')">
+    <div class="col-md-6 stretch-card grid-margin">
+      <div class="card bg-gradient-danger card-img-holder text-white">
+        <a class="" th:href="@{/instituicao/gerenciar-instituicoes}" style="text-decoration: none; color: #361E1B">
+          <div class="card-body">
+            <img src="resources/images/dashboard/circle.svg" class="card-img-absolute"
+                 alt="circle-image"/>
+            <div class="row">
+              <div class="col-md-10">
+                <h4 class="font-weight-normal mb-3">Instituições</h4>
+              </div>
+              <div class="col-md-2 px-2">
+                <i class="mdi mdi-store mdi-48px float-left" style="color: black"></i>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10">
+                <h5 class="card-text">Gerencie as instituições cadastradas no sistema, cadastre, edite ou eclua uma
+                  instituição. </h5>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+
+    <div class="col-md-6 stretch-card grid-margin">
       <div class="card bg-gradient-success card-img-holder text-white">
         <a class="" th:href="@{/perfil/detalhes}" style="text-decoration: none; color:#361E1B">
           <div class="card-body">

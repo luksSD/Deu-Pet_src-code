@@ -51,7 +51,7 @@ public class LayoutWebController {
             }
 
             model.addAttribute("user", user);
-            model.addAttribute("img", pathName);
+            model.addAttribute("profileImg", pathName);
         }
 
 

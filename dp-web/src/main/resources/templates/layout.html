@@ -119,10 +119,10 @@
         <li class="nav-item nav-profile">
           <a href="#" class="nav-link">
             <div class="nav-profile-image">
-              <img src="/resources/images/instituicoes/instituicao1.png" alt="profile">
+              <img th:src="${img}" alt="profile">
             </div>
-            <div class="nav-profile-text d-flex flex-column">
-              <span class="font-weight-bold mb-2">Soc. Prot. Animais</span>
+            <div class="nav-profile-text d-flex flex-column" sec:authorize="isAuthenticated()">
+              <span class="font-weight-bold mb-2" th:text="${user.nome}">Soc. Prot. Animais</span>
               <span class="text-secondary text-small">Santa Rita do Sapucaí</span>
             </div>
 

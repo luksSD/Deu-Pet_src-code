@@ -2,6 +2,7 @@ package br.dp.api.service.impl;
 
 import br.dp.api.service.UserService;
 import br.dp.db.dao.UserDao;
+import br.dp.model.UsersArquives;
 import br.dp.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,11 @@ public class UserServiceImpl implements UserService {
 
         return user;
 
+    }
+
+    @Override
+    public UsersArquives LoadUserImg(final long id) {
+        return userDao.loadUserImage(id);
     }
 
     private enum CREDENTIALS {

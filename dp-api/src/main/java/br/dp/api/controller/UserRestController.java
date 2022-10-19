@@ -1,7 +1,9 @@
 package br.dp.api.controller;
 
 import br.dp.api.service.UserService;
+import br.dp.model.UsersArquives;
 import br.dp.model.Usuario;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,14 @@ public class UserRestController {
         }
 
         return ResponseEntity.ok(user);
+
+    }
+
+    @ApiOperation(value = "Retorna uma lista com os atributos das imagens do usuario")
+    @GetMapping("/load-images/{id}")
+    public ResponseEntity<UsersArquives> loadUserImg(@PathVariable("id") final long id) {
+
+        return ResponseEntity.ok(userService.LoadUserImg(id));
 
     }
 

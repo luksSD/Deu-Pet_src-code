@@ -2,6 +2,7 @@ package br.dp.db.dao.impl;
 
 import br.dp.db.connection.ConnectionFactory;
 import br.dp.db.dao.UserDao;
+import br.dp.model.UsersArquives;
 import br.dp.model.Usuario;
 import org.springframework.stereotype.Repository;
 
@@ -53,5 +54,35 @@ public class UserDaoImpl implements UserDao {
             ConnectionFactory.close(resultSet, preparedStatement, connection);
         }
         return user;
+    }
+
+    @Override
+    public UsersArquives loadUserImage(final long id) {
+        final UsersArquives userImg = new UsersArquives();
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = ConnectionFactory.getConnection();
+
+            final String sql = "SELECT * FROM arquivo_usuario WHERE usuario_id = " + id;
+
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                userImg.setId(resultSet.getLong("id"));
+                userImg.setUserId(resultSet.getLong("usuario_id"));
+                userImg.setPath(resultSet.getString("caminho"));
+            }
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            ConnectionFactory.close(resultSet, preparedStatement, connection);
+        }
+
+        return userImg;
     }
 }

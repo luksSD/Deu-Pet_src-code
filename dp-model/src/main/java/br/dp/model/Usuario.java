@@ -5,7 +5,7 @@ import lombok.Data;
 import java.sql.Timestamp;
 
 @Data
-public abstract class Usuario extends BasePojo {
+public class Usuario extends BasePojo {
 
     private String nome;
     private String senha;

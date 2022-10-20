@@ -111,7 +111,7 @@ public class CampanhaDaoImpl implements CampanhaDao {
             preparedStatement.setString(3, entity.getRequisitos());
             preparedStatement.setDate(4, entity.getDataInicio());
             preparedStatement.setDate(5, entity.getDataFim());
-            preparedStatement.setLong(6, 1);
+            preparedStatement.setLong(6, 4);
 
             preparedStatement.setString(7, entity.getUrlForm());
 
@@ -143,16 +143,16 @@ public class CampanhaDaoImpl implements CampanhaDao {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        String sql = "update campanha set titulo = ?,";
-        sql += "descricao = ?,";
-        sql += "requisitos = ?,";
-        sql += "data_inicio = ?,";
-        sql += "data_fim = ?,";
-        sql += "instituicao_id = ? ";
+        String sql = "update campanha set titulo = ?, ";
+        sql += "descricao = ?, ";
+        sql += "requisitos = ?, ";
+        sql += "data_inicio = ?, ";
+        sql += "data_fim = ?, ";
+        sql += "instituicao_id = ?";
         if (entity.getUrlForm() != null && !entity.getUrlForm().isEmpty()) {
-            sql += ", formulario_id = ? ";
+            sql += ", formulario_url = ?";
         }
-        sql += "where id = ?";
+        sql += " where id = ?;";
 
         try {
             connection = ConnectionFactory.getConnection();
@@ -168,7 +168,7 @@ public class CampanhaDaoImpl implements CampanhaDao {
             preparedStatement.setLong(6, 4);
             if (entity.getUrlForm() != null && !entity.getUrlForm().isEmpty()) {
                 preparedStatement.setString(7, entity.getUrlForm());
-                preparedStatement.setLong(8, entity.getId());
+                preparedStatement.setLong(8, entity.getId()); //colocar aqui id da campanha
             } else {
                 preparedStatement.setLong(7, entity.getId());
             }

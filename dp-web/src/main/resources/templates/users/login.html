@@ -26,7 +26,8 @@
             <div class="brand-logo">
               <img src="resources/images/DeuPetLogo-2.png" alt="logo">
             </div>
-            <h4>Bem vindo novamente!</h4>
+            <h4>Olá! Vamos começar.</h4>
+            <span>Faça o acesso para continuar.</span>
 
             <form class="pt-3" th:action="@{/login}" method="POST">
 
@@ -64,7 +65,11 @@
               </div>
 
               <div class="form-group">
-                <span class="alert alert-danger" th:if="${param.error}">E-mail ou senha inválidos</span>
+                <div class="col-12">
+                  <span class="alert alert-danger" style="white-space: nowrap;"
+                        th:if="${param.error}">E-mail ou senha inválidos. Tente novamente!</span>
+                </div>
+
               </div>
 
 
@@ -222,6 +227,14 @@
 
   });
 })(jQuery);
+
+
+
+
+
+
+
+
 
 
 

@@ -85,7 +85,6 @@ public class AnimalDaoImpl implements AnimalDao {
                 animal = new Animal();
 
                 animal.setId(resultSet.getLong("id"));
-                animal.setTipo(resultSet.getString("nome"));
                 animal.setTipo(resultSet.getString("tipo"));
                 animal.setNome(resultSet.getString("nome"));
                 animal.setSexo(resultSet.getString("sexo"));

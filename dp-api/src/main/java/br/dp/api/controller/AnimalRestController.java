@@ -20,7 +20,7 @@ public class AnimalRestController {
     @Autowired
     private AnimalService animalService;
 
-    @ApiOperation(nickname = "teste", value = "Retorna uma lista de Animais")
+    @ApiOperation(value = "Retorna uma lista de Animais")
     @GetMapping("/read-all")
     public ResponseEntity<List<Animal>> readAll() {
 
@@ -36,7 +36,7 @@ public class AnimalRestController {
 
     }
 
-    @ApiOperation(value = "Cria uma novo animal", consumes = "application/json")
+    @ApiOperation(value = "Cria um novo animal", consumes = "application/json")
     @PostMapping("/create")
     public ResponseEntity<Long> create(@RequestBody final Animal animal) {
 

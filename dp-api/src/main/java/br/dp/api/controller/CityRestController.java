@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/city")
-@Api(value = "City", tags = "City")
+@Api(value = "City", tags = "Município")
 @CrossOrigin(origins = "*")
 public class CityRestController {
 
@@ -18,7 +18,7 @@ public class CityRestController {
     private CityService cityService;
 
     @GetMapping("/read-by-id/{id}")
-    @ApiOperation(value = "Retorna cidade selecionada pelo ID")
+    @ApiOperation(value = "Retorna um município selecionado pelo ID")
     public ResponseEntity<Municipio> readById(@PathVariable("id") final long id) {
 
         return ResponseEntity.ok(cityService.readById(id));

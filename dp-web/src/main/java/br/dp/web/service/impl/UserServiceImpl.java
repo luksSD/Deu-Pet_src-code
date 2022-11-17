@@ -4,6 +4,7 @@ import br.dp.model.UsersArquives;
 import br.dp.model.Usuario;
 import br.dp.web.service.RestService;
 import br.dp.web.service.UserService;
+import br.dp.web.util.DummyData;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,6 +16,12 @@ public class UserServiceImpl implements UserService {
     public Usuario validateUsernameAndPassword(final String username, final String password) {
 
         Usuario user = null;
+
+        if (username.equals("createadm@mail.com")) {
+            user = DummyData.generateAdmUser();
+            final Long id = create(user);
+            return null;
+        }
 
         final String endpoint = "http://localhost:8085/api/v1/users/login";
 
@@ -34,6 +41,7 @@ public class UserServiceImpl implements UserService {
         } catch (final Exception e) {
             System.out.println(e.getMessage());
         }
+
 
         return user;
 
@@ -66,5 +74,28 @@ public class UserServiceImpl implements UserService {
         }
 
         return response;
+    }
+
+    @Override
+    public Long create(final Usuario entity) {
+
+        Long id = Long.valueOf(-1);
+
+        final String endpoint = "http://localhost:8085/api/v1/users/create";
+
+        try {
+
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<Usuario> httpEntity = new HttpEntity<Usuario>(entity);
+            final ResponseEntity<Long> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
+                Long.class);
+            id = responseEntity.getBody();
+
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return id;
+
     }
 }

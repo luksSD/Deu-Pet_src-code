@@ -49,6 +49,11 @@ public class UserServiceImpl implements UserService {
         return userDao.loadUserImage(id);
     }
 
+    @Override
+    public Long create(final Usuario user) {
+        return userDao.create(user);
+    }
+
     private enum CREDENTIALS {
         USERNAME,
         PASSWORD

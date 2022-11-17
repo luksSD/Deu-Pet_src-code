@@ -42,5 +42,13 @@ public class UserRestController {
 
     }
 
+    @PostMapping("/create")
+    @ApiOperation(value = "Cria cadastro de Instituição")
+    public ResponseEntity<Long> create(@RequestBody final Usuario user) {
+
+        return ResponseEntity.ok(userService.create(user));
+
+    }
+
 
 }

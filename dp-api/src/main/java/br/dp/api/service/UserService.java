@@ -10,4 +10,6 @@ public interface UserService {
     Usuario validateLogin(String encodedData);
 
     UsersArquives LoadUserImg(long id);
+
+    Long create(Usuario user);
 }

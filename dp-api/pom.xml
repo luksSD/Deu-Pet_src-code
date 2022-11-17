@@ -7,12 +7,12 @@
   <parent>
     <artifactId>deu-pet-parent</artifactId>
     <groupId>br.dp</groupId>
-    <version>1.6.0</version>
+    <version>1.6.2</version>
   </parent>
 
   <groupId>br.dp</groupId>
   <artifactId>dp-api</artifactId>
-  <version>1.6.0</version>
+  <version>1.6.2</version>
   <name>dp-api</name>
   <description>API do projeto Deu Pet</description>
 
@@ -85,9 +85,38 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <version>2.4.0</version>
+        <executions>
+          <execution>
+            <configuration>
+              <mainClass>br.dp.api.DpApiApplication</mainClass>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
 
-
+  <profiles>
+    <profile>
+      <id>beanstalk</id>
+      <build>
+        <finalName>${project.name}-eb</finalName>
+        <plugins>
+          <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <excludes>
+                <exclude>**/cloud/config/*.java</exclude>
+              </excludes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

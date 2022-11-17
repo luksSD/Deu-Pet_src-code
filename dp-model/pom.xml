@@ -5,11 +5,11 @@
   <parent>
     <artifactId>deu-pet-parent</artifactId>
     <groupId>br.dp</groupId>
-    <version>1.6.0</version>
+    <version>1.6.2</version>
   </parent>
 
   <artifactId>dp-model</artifactId>
-  <version>1.6.0</version>
+  <version>1.6.2</version>
 
 
   <name>dp-model</name>

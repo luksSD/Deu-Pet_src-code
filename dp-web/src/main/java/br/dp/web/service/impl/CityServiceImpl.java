@@ -2,6 +2,7 @@ package br.dp.web.service.impl;
 
 import br.dp.model.Municipio;
 import br.dp.web.service.CityService;
+import br.dp.web.util.Constants;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public Municipio readById(final Long id) {
-        final String endpoint = "http://localhost:8085/api/v1/city/read-by-id/" + id;
+        final String endpoint = Constants.ENDPOINT + "city/read-by-id/" + id;
 
         Municipio response = null;
 

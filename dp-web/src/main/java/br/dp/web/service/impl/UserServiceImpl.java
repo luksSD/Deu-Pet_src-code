@@ -4,6 +4,7 @@ import br.dp.model.UsersArquives;
 import br.dp.model.Usuario;
 import br.dp.web.service.RestService;
 import br.dp.web.service.UserService;
+import br.dp.web.util.Constants;
 import br.dp.web.util.DummyData;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
             return null;
         }
 
-        final String endpoint = "http://localhost:8085/api/v1/users/login";
+        final String endpoint = Constants.ENDPOINT + "users/login";
 
         final RestTemplate restTemplate = new RestTemplate();
 
@@ -55,7 +56,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UsersArquives loadUserImg(final Long id) {
-        final String endpoint = "http://localhost:8085/api/v1/users/load-images/" + id;
+        final String endpoint = Constants.ENDPOINT + "users/load-images/" + id;
 
         UsersArquives response = null;
         try {
@@ -81,7 +82,7 @@ public class UserServiceImpl implements UserService {
 
         Long id = Long.valueOf(-1);
 
-        final String endpoint = "http://localhost:8085/api/v1/users/create";
+        final String endpoint = Constants.ENDPOINT + "users/create";
 
         try {
 

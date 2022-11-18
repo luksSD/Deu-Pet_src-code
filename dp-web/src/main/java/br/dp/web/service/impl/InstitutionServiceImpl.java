@@ -3,6 +3,7 @@ package br.dp.web.service.impl;
 import br.dp.model.Instituicao;
 import br.dp.model.UsersArquives;
 import br.dp.web.service.InstitutionService;
+import br.dp.web.util.Constants;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class InstitutionServiceImpl implements InstitutionService {
     @Override
     public List<Instituicao> readAll() {
 
-        final String endpoint = "http://localhost:8085/api/v1/instituicao/read-all";
+        final String endpoint = Constants.ENDPOINT + "instituicao/read-all";
 
         List<Instituicao> response = null;
         try {
@@ -41,7 +42,7 @@ public class InstitutionServiceImpl implements InstitutionService {
 
     @Override
     public Instituicao readById(final Long id) {
-        final String endpoint = "http://localhost:8085/api/v1/instituicao/read-by-id/" + id;
+        final String endpoint = Constants.ENDPOINT + "instituicao/read-by-id/" + id;
 
         Instituicao response = null;
 
@@ -66,7 +67,7 @@ public class InstitutionServiceImpl implements InstitutionService {
     public boolean update(final Instituicao entity) {
         boolean response = false;
 
-        final String endpoint = "http://localhost:8085/api/v1/instituicao/update";
+        final String endpoint = Constants.ENDPOINT + "instituicao/update";
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
@@ -90,7 +91,7 @@ public class InstitutionServiceImpl implements InstitutionService {
     public boolean deleteById(final Long id) {
         boolean response = false;
 
-        final String endpoint = "http://localhost:8085/api/v1/instituicao/delete/" + id;
+        final String endpoint = Constants.ENDPOINT + "instituicao/delete/" + id;
 
         try {
 
@@ -114,7 +115,7 @@ public class InstitutionServiceImpl implements InstitutionService {
 
         Long id = Long.valueOf(-1);
 
-        final String endpoint = "http://localhost:8085/api/v1/instituicao/create";
+        final String endpoint = Constants.ENDPOINT + "instituicao/create";
 
         try {
 
@@ -136,7 +137,7 @@ public class InstitutionServiceImpl implements InstitutionService {
     public Long saveFileAttributes(final UsersArquives userImage) {
         Long id = Long.valueOf(-1);
 
-        final String endpoint = "http://localhost:8085/api/v1/instituicao/save-image";
+        final String endpoint = Constants.ENDPOINT + "instituicao/save-image";
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
@@ -154,7 +155,7 @@ public class InstitutionServiceImpl implements InstitutionService {
 
     @Override
     public UsersArquives loadInstitutionImg(final Long id) {
-        final String endpoint = "http://localhost:8085/api/v1/instituicao/load-images/" + id;
+        final String endpoint = Constants.ENDPOINT + "instituicao/load-images/" + id;
 
         UsersArquives response = null;
         try {

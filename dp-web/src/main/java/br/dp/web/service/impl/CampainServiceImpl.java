@@ -3,6 +3,7 @@ package br.dp.web.service.impl;
 import br.dp.model.CampainsArquives;
 import br.dp.model.Campanha;
 import br.dp.web.service.CampainService;
+import br.dp.web.util.Constants;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class CampainServiceImpl implements CampainService {
     @Override
     public List<Campanha> readAll() {
 
-        final String endpoint = "http://localhost:8085/api/v1/campanha/read-all";
+        final String endpoint = Constants.ENDPOINT + "campanha/read-all";
 
         List<Campanha> response = null;
 
@@ -38,7 +39,7 @@ public class CampainServiceImpl implements CampainService {
     @Override
     public Long create(final Campanha entity) {
         Long id = Long.valueOf(-1);
-        final String endpoint = "http://localhost:8085/api/v1/campanha/create";
+        final String endpoint = Constants.ENDPOINT + "campanha/create";
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
@@ -55,7 +56,7 @@ public class CampainServiceImpl implements CampainService {
     @Override
     public Campanha readById(final Long id) {
 
-        final String endpoint = "http://localhost:8085/api/v1/campanha/read-by-id/" + id;
+        final String endpoint = Constants.ENDPOINT + "campanha/read-by-id/" + id;
 
         Campanha response = null;
 
@@ -76,7 +77,7 @@ public class CampainServiceImpl implements CampainService {
     @Override
     public boolean update(final Campanha entity) {
 
-        final String endpoint = "http://localhost:8085/api/v1/campanha/update";
+        final String endpoint = Constants.ENDPOINT + "campanha/update";
 
         boolean response = false;
 
@@ -98,7 +99,7 @@ public class CampainServiceImpl implements CampainService {
     public boolean deleteById(final Long id) {
         boolean response = false;
 
-        final String endpoint = "http://localhost:8085/api/v1/campanha/delete/" + id;
+        final String endpoint = Constants.ENDPOINT + "campanha/delete/" + id;
 
         try {
 
@@ -119,7 +120,7 @@ public class CampainServiceImpl implements CampainService {
 
     @Override
     public CampainsArquives loadCampainImg(final Long id) {
-        final String endpoint = "http://localhost:8085/api/v1/campanha/load-images/" + id;
+        final String endpoint = Constants.ENDPOINT + "campanha/load-images/" + id;
 
         CampainsArquives response = null;
         try {
@@ -144,7 +145,7 @@ public class CampainServiceImpl implements CampainService {
     public Long saveFileAttributes(final CampainsArquives campainImg) {
         Long id = Long.valueOf(-1);
 
-        final String endpoint = "http://localhost:8085/api/v1/campanha/save-image";
+        final String endpoint = Constants.ENDPOINT + "campanha/save-image";
 
         try {
             final RestTemplate restTemplate = new RestTemplate();

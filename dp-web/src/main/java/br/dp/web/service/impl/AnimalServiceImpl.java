@@ -3,6 +3,7 @@ package br.dp.web.service.impl;
 import br.dp.model.Animal;
 import br.dp.model.ArquivoAnimal;
 import br.dp.web.service.AnimalService;
+import br.dp.web.util.Constants;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class AnimalServiceImpl implements AnimalService {
     public List<Animal> readAll() {
 
 
-        final String endpoint = "http://localhost:8085/api/v1/animal/read-all";
+        final String endpoint = Constants.ENDPOINT + "animal/read-all";
 
         List<Animal> response = null;
         try {
@@ -43,7 +44,7 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     public Animal readById(final Long id) {
-        final String endpoint = "http://localhost:8085/api/v1/animal/read-by-id/" + id;
+        final String endpoint = Constants.ENDPOINT + "animal/read-by-id/" + id;
 
         Animal response = null;
 
@@ -69,7 +70,7 @@ public class AnimalServiceImpl implements AnimalService {
     public boolean update(final Animal entity) {
         boolean response = false;
 
-        final String endpoint = "http://localhost:8085/api/v1/animal/update";
+        final String endpoint = Constants.ENDPOINT + "animal/update";
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
@@ -93,7 +94,7 @@ public class AnimalServiceImpl implements AnimalService {
     public boolean delete(final Long id) {
         boolean response = false;
 
-        final String endpoint = "http://localhost:8085/api/v1/animal/delete/" + id;
+        final String endpoint = Constants.ENDPOINT + "animal/delete/" + id;
 
         try {
 
@@ -118,7 +119,7 @@ public class AnimalServiceImpl implements AnimalService {
     public Long create(final Animal entity) {
         Long id = Long.valueOf(-1);
 
-        final String endpoint = "http://localhost:8085/api/v1/animal/create";
+        final String endpoint = Constants.ENDPOINT + "animal/create";
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
@@ -142,7 +143,7 @@ public class AnimalServiceImpl implements AnimalService {
     public Long saveFileAttributes(final List<ArquivoAnimal> entity) {
         Long id = Long.valueOf(-1);
 
-        final String endpoint = "http://localhost:8085/api/v1/animal/save-images";
+        final String endpoint = Constants.ENDPOINT + "animal/save-images";
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
@@ -160,7 +161,7 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     public List<ArquivoAnimal> loadAnimalImgs(final Long id) {
-        final String endpoint = "http://localhost:8085/api/v1/animal/load-images/" + id;
+        final String endpoint = Constants.ENDPOINT + "animal/load-images/" + id;
 
         List<ArquivoAnimal> response = null;
         try {

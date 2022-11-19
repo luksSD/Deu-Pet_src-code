@@ -30,11 +30,11 @@ public class SwaggerConfig {
 	}
 
 	private ApiInfo getApiInfo() {
-		
+
       return new ApiInfoBuilder()
     		  .title("Projeto Deu Pet")
-    		  .description("API REST do  projeto Deu Pet")
-    		  .version("1.0")
+    		  .description("API REST do  projeto Deu Pet \nDesenvolvido por:\n - Lucas Dias\n - Matheus Souza\n - Vinicius Almeida")
+    		  .version("1.6.2")
     		  .build();
 
 	}

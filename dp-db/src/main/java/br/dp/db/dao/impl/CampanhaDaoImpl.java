@@ -231,8 +231,8 @@ public class CampanhaDaoImpl implements CampanhaDao {
         ResultSet resultSet = null;
 
         String sql = "INSERT INTO arquivo_campanha ";
-        sql += " (campanha_id, caminho)";
-        sql += "VALUES(?, ?);";
+        sql += " (campanha_id, caminho, tipo, chave)";
+        sql += "VALUES(?, ?, ?, ?);";
 
         Long id = Long.valueOf(1);
 
@@ -245,15 +245,16 @@ public class CampanhaDaoImpl implements CampanhaDao {
 
             preparedStatement.setLong(1, imagePath.getCampainId());
             preparedStatement.setString(2, imagePath.getPath());
+            preparedStatement.setString(3, imagePath.getType());
+            preparedStatement.setString(4, imagePath.getKey());
 
             preparedStatement.execute();
 
             resultSet = preparedStatement.getGeneratedKeys();
 
-            if (!resultSet.next()) {
-                id = Long.valueOf(-1);
+            if (resultSet.next()) {
+                id = resultSet.getLong(1);
             }
-
 
             if (id != -1) {
                 connection.commit();
@@ -294,6 +295,8 @@ public class CampanhaDaoImpl implements CampanhaDao {
                 campainImg.setId(resultSet.getLong("id"));
                 campainImg.setCampainId(resultSet.getLong("campanha_id"));
                 campainImg.setPath(resultSet.getString("caminho"));
+                campainImg.setType(resultSet.getString("tipo"));
+                campainImg.setKey(resultSet.getString("chave"));
             }
         } catch (final Exception e) {
             System.out.println(e.getMessage());

@@ -19,5 +19,4 @@ public interface InstituicaoDao {
 
     Long saveFileAttributes(UsersArquives imagePath);
 
-    UsersArquives loadUserImage(long id);
 }

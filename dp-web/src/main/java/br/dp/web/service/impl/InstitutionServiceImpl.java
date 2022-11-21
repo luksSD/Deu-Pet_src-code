@@ -133,46 +133,4 @@ public class InstitutionServiceImpl implements InstitutionService {
 
     }
 
-    @Override
-    public Long saveFileAttributes(final UsersArquives userImage) {
-        Long id = Long.valueOf(-1);
-
-        final String endpoint = Constants.ENDPOINT + "instituicao/save-image";
-
-        try {
-            final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<UsersArquives> httpEntity = new HttpEntity<>(userImage);
-            final ResponseEntity<Long> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
-                Long.class);
-
-            id = responseEntity.getBody();
-
-        } catch (final Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return id;
-    }
-
-    @Override
-    public UsersArquives loadInstitutionImg(final Long id) {
-        final String endpoint = Constants.ENDPOINT + "instituicao/load-images/" + id;
-
-        UsersArquives response = null;
-        try {
-
-            final RestTemplate restTemplate = new RestTemplate();
-
-            final HttpEntity<String> httpEntity = new HttpEntity<String>("");
-
-            final ResponseEntity<UsersArquives> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
-                UsersArquives.class);
-
-            response = requestResponse.getBody();
-
-        } catch (final Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        return response;
-    }
 }

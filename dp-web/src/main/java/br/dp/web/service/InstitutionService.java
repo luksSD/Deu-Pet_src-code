@@ -16,8 +16,4 @@ public interface InstitutionService {
     boolean deleteById(Long id);
 
     Long create(Instituicao entity);
-
-    Long saveFileAttributes(UsersArquives userImage);
-
-    UsersArquives loadInstitutionImg(Long id);
 }

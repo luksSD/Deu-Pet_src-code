@@ -60,20 +60,5 @@ public class InstituicaoRestController {
 
     }
 
-    @ApiOperation(value = "Salva o caminho da imagen relacionadas a instituição", consumes = "application/json")
-    @PostMapping("/save-image")
-    public ResponseEntity<Long> saveFileAttributes(@RequestBody final UsersArquives imagePath) {
-
-        return ResponseEntity.ok(instituicaoService.saveFileAttributes(imagePath));
-
-    }
-
-    @ApiOperation(value = "Retorna uma lista com os atributos das imagens do usuario")
-    @GetMapping("/load-images/{id}")
-    public ResponseEntity<UsersArquives> loadUserImg(@PathVariable("id") final long id) {
-
-        return ResponseEntity.ok(instituicaoService.LoadUserImg(id));
-
-    }
 
 }

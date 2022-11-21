@@ -52,7 +52,7 @@ public class CampainWebController {
         //Carrega imagens relacionas a campanha
         final String imageFile = fileService.downloadCampainFile(id);
 
-        if (!imageFile.isEmpty() && imageFile.length() > 0 && imageFile != "" && imageFile != null) {
+        if (imageFile != null && imageFile != "") {
             model.addAttribute("img", imageFile);
         } else {
             model.addAttribute("img", CAMPAIN_DEFAULT_IMG);

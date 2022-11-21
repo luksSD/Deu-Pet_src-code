@@ -1,5 +1,6 @@
 package br.dp.web.service.impl;
 
+import br.dp.model.CampainsArquives;
 import br.dp.model.UsersArquives;
 import br.dp.web.service.FileService;
 import br.dp.web.service.RestService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.*;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -26,15 +28,10 @@ public class FileServiceImpl implements FileService {
     @Override
     public boolean uploadFile(MultipartFile file, Long id, String type) {
 
-        UsersArquives userFile = new UsersArquives();
+
         boolean response = false;
         String endpoint = "";
 
-        if(type.equals("user")) {
-            endpoint = Constants.UPLOAD_USER_FILE_ENDPOINT;
-        } else{
-            endpoint = Constants.UPLOAD_CAMPAIN_FILE_ENDPOINT;
-        }
         byte[] dataByte;
         String dataString = "";
 
@@ -45,17 +42,35 @@ public class FileServiceImpl implements FileService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        userFile.setFile(dataString);
-        userFile.setUserId(id);
-        userFile.setType(file.getContentType());
+        Object fileToUpload;
+        if(type.equals("user")) {
+            fileToUpload = new UsersArquives();
+            ((UsersArquives) fileToUpload).setFile(dataString);
+            ((UsersArquives) fileToUpload).setUserId(id);
+            ((UsersArquives) fileToUpload).setType(file.getContentType());
+            endpoint = Constants.UPLOAD_USER_FILE_ENDPOINT;
+        } else{
+            fileToUpload = new CampainsArquives();
+            ((CampainsArquives) fileToUpload).setFile(dataString);
+            ((CampainsArquives) fileToUpload).setCampainId(id);
+            ((CampainsArquives) fileToUpload).setType(file.getContentType());
+            endpoint = Constants.UPLOAD_CAMPAIN_FILE_ENDPOINT;
+        }
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<UsersArquives> httpEntity = new HttpEntity<UsersArquives>(userFile);
-            final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
-                Boolean.class);
-            response = responseEntity.getBody();
+            if(type.equals("user")) {
+                HttpEntity<UsersArquives> httpEntity = new HttpEntity<UsersArquives>((UsersArquives) fileToUpload);
+                final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
+                    Boolean.class);
+                response = responseEntity.getBody();
+
+            } else{
+                HttpEntity<CampainsArquives> httpEntity = new HttpEntity<CampainsArquives>((CampainsArquives) fileToUpload);
+                final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
+                    Boolean.class);
+                response = responseEntity.getBody();
+            }
 
         } catch (final Exception e) {
             System.out.println(e.getMessage());

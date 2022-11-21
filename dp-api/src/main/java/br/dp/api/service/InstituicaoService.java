@@ -16,8 +16,4 @@ public interface InstituicaoService {
     boolean update(Instituicao entity);
 
     boolean delete(Long id);
-
-    Long saveFileAttributes(UsersArquives imagePath);
-
-    UsersArquives LoadUserImg(long id);
 }

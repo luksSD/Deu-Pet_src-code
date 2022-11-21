@@ -78,14 +78,4 @@ public class InstituicaoServiceImpl implements InstituicaoService {
         return instituicaoDao.delete(id);
     }
 
-    @Override
-    public Long saveFileAttributes(final UsersArquives imagePath) {
-        return instituicaoDao.saveFileAttributes(imagePath);
-    }
-
-    @Override
-    public UsersArquives LoadUserImg(final long id) {
-        return instituicaoDao.loadUserImage(id);
-    }
-
 }

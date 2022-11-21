@@ -3,6 +3,7 @@ package br.dp.web.controller;
 import br.dp.model.CampainsArquives;
 import br.dp.model.Campanha;
 import br.dp.web.service.CampainService;
+import br.dp.web.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,9 @@ public class CampainWebController {
     @Autowired
     private CampainService campainService;
 
+    @Autowired
+    private FileService fileService;
+
     @GetMapping("/gerenciar-campanhas")
     public String getCampainsPage(final Model model) {
 
@@ -45,22 +49,15 @@ public class CampainWebController {
     public String getDetailPage(@PathVariable("id") final Long id, final Model model) {
         final Campanha campanhaModel = campainService.readById(id);
 
-        //Carrega imagens relacionas a a campanha
-        final CampainsArquives campainImg = campainService.loadCampainImg(id);
-        String pathName = "";
+        //Carrega imagens relacionas a campanha
+        final String imageFile = fileService.downloadCampainFile(id);
 
-        if (campainImg.getPath() != null && !campainImg.getPath().isEmpty()) {
-            if (!Files.exists(Path.of(System.getProperty("user.dir") + "/images/campains/" + campainImg.getPath()))) {
-                pathName = CAMPAIN_DEFAULT_IMG;
-            } else {
-                pathName = "/images/campains/" + campainImg.getPath();
-            }
+        if (!imageFile.isEmpty() && imageFile.length() > 0 && imageFile != "" && imageFile != null) {
+            model.addAttribute("img", imageFile);
         } else {
-            pathName = CAMPAIN_DEFAULT_IMG;
+            model.addAttribute("img", CAMPAIN_DEFAULT_IMG);
         }
-
         model.addAttribute("campanha", campanhaModel);
-        model.addAttribute("img", pathName);
 
         if (!message.equals("")) {
             if (message.equals("Campanha cadastrada com sucesso!") || message.equals("Cadastro de campanha atualizado com sucesso!")) {
@@ -118,50 +115,8 @@ public class CampainWebController {
         CampainsArquives campainImg = null;
 
         if (id != -1) {
-            campainImg = new CampainsArquives();
-
             if (!file.isEmpty()) {
-                final StringBuilder fileNames = new StringBuilder();
-
-                final Path path = Paths.get(UPLOAD_DIRECTORY + id, file.getOriginalFilename());
-                System.out.println(path.toAbsolutePath());
-
-                if (!Files.exists(Path.of(UPLOAD_DIRECTORY + id))) {
-                    try {
-                        Files.createDirectories(Path.of(UPLOAD_DIRECTORY + id));
-                    } catch (final IOException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    try {
-                        //Limpa diretorio antes de adicionar imagens caso ja exista
-                        Files.delete(Path.of(UPLOAD_DIRECTORY + id));
-                        Files.createDirectories(Path.of(UPLOAD_DIRECTORY + id));
-                    } catch (final IOException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-
-                fileNames.append(file.getOriginalFilename() + " ");
-
-                try {
-                    Files.write(path, file.getBytes());
-
-                    campainImg.setCampainId(id);
-                    campainImg.setPath(id + "/" + file.getOriginalFilename());
-
-                } catch (final IOException e) {
-                    e.printStackTrace();
-                }
-
-            } else {
-                campainImg.setCampainId(id);
-                campainImg.setPath(CAMPAIN_DEFAULT_IMG);
-            }
-
-            if (campainImg != null) {
-                final Long response = campainService.saveFileAttributes(campainImg);
+                fileService.uploadFile(file, id,"campain");
             }
 
             message = "Campanha cadastrada com sucesso!";
@@ -176,30 +131,30 @@ public class CampainWebController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") final Long id, final Model model) {
 
-        final CampainsArquives campainImg = campainService.loadCampainImg(id);
+//        final CampainsArquives campainImg = campainService.loadCampainImg(id);
         final boolean response = campainService.deleteById(id);
 
         if (response) {
-            //Exclui arquivos dentro do diretorio se existir
-            final Path folderPath = Paths.get(System.getProperty("user.dir") + "/images/campains/" + id);
-
-            if (Files.exists(folderPath)) {
-                try {
-                    final Path imgPath = Path.of(System.getProperty("user.dir") + "/images/campains/" + campainImg.getPath());
-                    if (Files.exists(imgPath)) {
-                        Files.delete(imgPath);
-                    }
-                } catch (final IOException e) {
-                    e.printStackTrace();
-                }
-
-                //Exclui o diretorio
-                try {
-                    Files.delete(folderPath);
-                } catch (final IOException e) {
-                    e.printStackTrace();
-                }
-            }
+//            //Exclui arquivos dentro do diretorio se existir
+//            final Path folderPath = Paths.get(System.getProperty("user.dir") + "/images/campains/" + id);
+//
+//            if (Files.exists(folderPath)) {
+//                try {
+//                    final Path imgPath = Path.of(System.getProperty("user.dir") + "/images/campains/" + campainImg.getPath());
+//                    if (Files.exists(imgPath)) {
+//                        Files.delete(imgPath);
+//                    }
+//                } catch (final IOException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                //Exclui o diretorio
+//                try {
+//                    Files.delete(folderPath);
+//                } catch (final IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
             message = "Cadastro da campanha excluído com sucesso!";
             return "redirect:/campanhas/gerenciar-campanhas";
         } else {

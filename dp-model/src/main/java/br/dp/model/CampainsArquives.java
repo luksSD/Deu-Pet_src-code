@@ -9,5 +9,6 @@ public class CampainsArquives extends BasePojo {
     private String path;
     private String type;
     private String key;
+    private String file;
 
 }

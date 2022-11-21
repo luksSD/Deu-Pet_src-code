@@ -159,30 +159,30 @@ public class InstitutionWebController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") final Long id, final Model model) {
 
-        final UsersArquives userImg = instituicaoService.loadInstitutionImg(id);
+//        final UsersArquives userImg = instituicaoService.loadInstitutionImg(id);
         final boolean response = instituicaoService.deleteById(id);
 
         if (response) {
-            //Exclui arquivos dentro do diretorio se existir
-            final Path folderPath = Paths.get(System.getProperty("user.dir") + "/images/users/" + id);
-
-            if (Files.exists(folderPath)) {
-                try {
-                    final Path imgPath = Path.of(System.getProperty("user.dir") + "/images/users/" + userImg.getPath());
-                    if (Files.exists(imgPath)) {
-                        Files.delete(imgPath);
-                    }
-                } catch (final IOException e) {
-                    e.printStackTrace();
-                }
-
-                //Exclui o diretorio
-                try {
-                    Files.delete(folderPath);
-                } catch (final IOException e) {
-                    e.printStackTrace();
-                }
-            }
+//            //Exclui arquivos dentro do diretorio se existir
+//            final Path folderPath = Paths.get(System.getProperty("user.dir") + "/images/users/" + id);
+//
+//            if (Files.exists(folderPath)) {
+//                try {
+//                    final Path imgPath = Path.of(System.getProperty("user.dir") + "/images/users/" + userImg.getPath());
+//                    if (Files.exists(imgPath)) {
+//                        Files.delete(imgPath);
+//                    }
+//                } catch (final IOException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                //Exclui o diretorio
+//                try {
+//                    Files.delete(folderPath);
+//                } catch (final IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
 
             message = "Cadastro da instituição excluído com sucesso!";
             return "redirect:/instituicao/gerenciar-instituicoes";

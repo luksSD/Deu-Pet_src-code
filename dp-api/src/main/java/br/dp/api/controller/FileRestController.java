@@ -1,6 +1,7 @@
 package br.dp.api.controller;
 
 import br.dp.api.service.AwsS3Service;
+import br.dp.model.CampainsArquives;
 import br.dp.model.UsersArquives;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,13 @@ public class FileRestController {
 
         System.out.println("Chegou no FileRestController upload user");
         return ResponseEntity.ok(awss3Service.uploadUserFile(userFile));
+    }
+
+    @PostMapping("/upload-campain-file")
+    public ResponseEntity<Boolean> uploadCampainFile(@RequestBody final CampainsArquives campainFile){
+
+        System.out.println("Chegou no FileRestController upload user");
+        return ResponseEntity.ok(awss3Service.uplo(campainFile));
     }
 
 }

@@ -15,18 +15,14 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class AwsS3ServiceImpl implements AwsS3Service {
@@ -79,21 +75,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 
     @Override
     public String downloadCampainFile(Long id) {
-        CampainsArquives file = campainDao.loadImage(id);
-        S3Object s3Object = awsS3Client.getObject(Constants.BUCKET_NAME, file.getPath());
-        S3ObjectInputStream inputStream = s3Object.getObjectContent();
-//        printFileDetails(file, s3Object);
-
-        try {
-            byte[] content = IOUtils.toByteArray(inputStream);
-            String result = new String(Base64.getEncoder().encode(content));
-            result = "data:image/" + s3Object.getObjectMetadata().getContentType() + ";base64, " + result;
-
-            return result;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
+        return campainDao.loadImage(id).getPath();
     }
 
     @Override
@@ -117,6 +99,40 @@ public class AwsS3ServiceImpl implements AwsS3Service {
             file.setKey(key);
 
             result = userDao.saveFileAttributes(file);
+
+            if(result != -1){
+                return true;
+            }
+
+        } catch (SdkClientException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return false;
+
+    }
+
+    @Override
+    public Boolean uploadCampainFile(CampainsArquives file) {
+
+        Long result = Long.valueOf(-1);
+        try {
+            String[] filenameExtension = file.getType().split("/");
+            String key = Constants.CAMPAIN_KEY + file.getCampainId() + "." +filenameExtension[1];
+
+            byte[] data = Base64.getDecoder().decode(file.getFile().getBytes(StandardCharsets.UTF_8));
+            InputStream stream = new ByteArrayInputStream(data);
+            ObjectMetadata metaData = new ObjectMetadata();
+            metaData.setContentType(file.getType());
+            metaData.setContentLength(data.length);
+
+            awsS3Client.putObject(Constants.BUCKET_NAME, key, stream , metaData);
+            awsS3Client.setObjectAcl(Constants.BUCKET_NAME, key, CannedAccessControlList.PublicRead);
+
+            file.setPath(awsS3Client.getResourceUrl(Constants.BUCKET_NAME, key));
+            file.setKey(key);
+
+            result = campainDao.saveFileAttributes(file);
 
             if(result != -1){
                 return true;

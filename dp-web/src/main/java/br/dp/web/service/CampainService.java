@@ -17,8 +17,4 @@ public interface CampainService {
 
     boolean deleteById(Long id);
 
-
-    CampainsArquives loadCampainImg(Long id);
-
-    Long saveFileAttributes(CampainsArquives campainImg);
 }

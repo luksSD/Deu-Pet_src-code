@@ -118,46 +118,4 @@ public class CampainServiceImpl implements CampainService {
         return response;
     }
 
-    @Override
-    public CampainsArquives loadCampainImg(final Long id) {
-        final String endpoint = Constants.ENDPOINT + "campanha/load-images/" + id;
-
-        CampainsArquives response = null;
-        try {
-
-            final RestTemplate restTemplate = new RestTemplate();
-
-            final HttpEntity<String> httpEntity = new HttpEntity<String>("");
-
-            final ResponseEntity<CampainsArquives> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
-                CampainsArquives.class);
-
-            response = requestResponse.getBody();
-
-        } catch (final Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        return response;
-    }
-
-    @Override
-    public Long saveFileAttributes(final CampainsArquives campainImg) {
-        Long id = Long.valueOf(-1);
-
-        final String endpoint = Constants.ENDPOINT + "campanha/save-image";
-
-        try {
-            final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<CampainsArquives> httpEntity = new HttpEntity<>(campainImg);
-            final ResponseEntity<Long> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
-                Long.class);
-
-            id = responseEntity.getBody();
-
-        } catch (final Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return id;
-    }
 }

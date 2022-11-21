@@ -1,5 +1,6 @@
 package br.dp.api.service;
 
+import br.dp.model.CampainsArquives;
 import br.dp.model.UsersArquives;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,5 +12,7 @@ public interface AwsS3Service {
     List<String> downloadAnimalFiles(Long id);
     String downloadCampainFile(Long id);
     Boolean uploadUserFile(UsersArquives userFile);
+    Boolean uploadCampainFile(CampainsArquives file);
+
     Boolean uploadFiles(Long id);
 }

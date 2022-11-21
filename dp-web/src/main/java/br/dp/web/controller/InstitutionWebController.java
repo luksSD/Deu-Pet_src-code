@@ -4,6 +4,7 @@ import br.dp.model.Instituicao;
 import br.dp.model.Municipio;
 import br.dp.model.UsersArquives;
 import br.dp.web.service.CityService;
+import br.dp.web.service.FileService;
 import br.dp.web.service.InstitutionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,21 +32,20 @@ public class InstitutionWebController {
     @Autowired
     private CityService cityService;
 
+    @Autowired
+    private FileService fileService;
+
     @GetMapping("/gerenciar-instituicoes")
     public String getInstitutionsPage(final Model model) {
 
         final List<Instituicao> institutions = instituicaoService.readAll();
 
         for (final Instituicao institution : institutions) {
-            UsersArquives userImgs = new UsersArquives();
-            userImgs = instituicaoService.loadInstitutionImg(institution.getId());
+            String userImgs = fileService.downloadUserFile(institution.getId());
             String pathName;
 
-            if (userImgs.getPath() != null && !userImgs.getPath().isEmpty()) {
-                pathName = "/images/users/" + userImgs.getPath();
-                if (!Files.exists(Path.of(System.getProperty("user.dir") + pathName))) {
-                    pathName = INSTITUTION_DEFAULT_IMG;
-                }
+            if (userImgs != null && !userImgs.isEmpty()) {
+                pathName = userImgs;
             } else {
                 pathName = INSTITUTION_DEFAULT_IMG;
             }
@@ -77,53 +77,10 @@ public class InstitutionWebController {
     public String create(@RequestParam("file") final MultipartFile file, final Instituicao instituicao) {
 
         final Long id = instituicaoService.create(instituicao);
-        UsersArquives userImage = null;
 
         if (id != -1) {
-
-            userImage = new UsersArquives();
-
             if (!file.isEmpty()) {
-                final StringBuilder fileNames = new StringBuilder();
-
-                final Path path = Paths.get(UPLOAD_DIRECTORY + id, file.getOriginalFilename());
-                System.out.println(path.toAbsolutePath());
-
-                if (!Files.exists(Path.of(UPLOAD_DIRECTORY + id))) {
-                    try {
-                        Files.createDirectories(Path.of(UPLOAD_DIRECTORY + id));
-                    } catch (final IOException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    try {
-                        //Limpa diretorio antes de adicionar imagens caso ja exista
-                        Files.delete(Path.of(UPLOAD_DIRECTORY + id));
-                        Files.createDirectories(Path.of(UPLOAD_DIRECTORY + id));
-                    } catch (final IOException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-
-                fileNames.append(file.getOriginalFilename() + " ");
-
-                try {
-                    Files.write(path, file.getBytes());
-
-                    userImage.setUserId(id);
-                    userImage.setPath(id + "/" + file.getOriginalFilename());
-
-                } catch (final IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                userImage.setUserId(id);
-                userImage.setPath(INSTITUTION_DEFAULT_IMG);
-            }
-
-            if (userImage != null) {
-                final Long response = instituicaoService.saveFileAttributes(userImage);
+                fileService.uploadFile(file, id,"user");
             }
 
             message = "Instituição cadastrada com sucesso!";
@@ -142,24 +99,17 @@ public class InstitutionWebController {
         final Instituicao institution = instituicaoService.readById(id);
         final Municipio city = cityService.readById(institution.getMunicipioId());
 
-        //Carrega imagens relacionas ao animal
-        final UsersArquives userImg = instituicaoService.loadInstitutionImg(id);
-        String pathName = "";
-
-        if (userImg.getPath() != null && !userImg.getPath().isEmpty()) {
-            if (!Files.exists(Path.of(System.getProperty("user.dir") + "/images/users/" + userImg.getPath()))) {
-                pathName = INSTITUTION_DEFAULT_IMG;
-            } else {
-                pathName = "/images/users/" + userImg.getPath();
-            }
-        } else {
-            pathName = INSTITUTION_DEFAULT_IMG;
-        }
-
+        //Carrega imagens
+        String imageFile =  fileService.downloadUserFile(institution.getId());
 
         model.addAttribute("instituicao", institution);
         model.addAttribute("cidade", city);
-        model.addAttribute("img", pathName);
+
+        if (!imageFile.isEmpty() && imageFile.length() > 0 && imageFile != "" && imageFile != null) {
+            model.addAttribute("img", imageFile);
+        } else {
+            model.addAttribute("img", INSTITUTION_DEFAULT_IMG);
+        }
 
         if (!message.equals("")) {
             if (message.equals("Instituição cadastrada com sucesso!") || message.equals("Cadastro da instituição atualizado com sucesso!")) {

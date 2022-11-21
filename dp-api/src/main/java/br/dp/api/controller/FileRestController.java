@@ -52,7 +52,7 @@ public class FileRestController {
     public ResponseEntity<Boolean> uploadCampainFile(@RequestBody final CampainsArquives campainFile){
 
         System.out.println("Chegou no FileRestController upload user");
-        return ResponseEntity.ok(awss3Service.uplo(campainFile));
+        return ResponseEntity.ok(awss3Service.uploadCampainFile(campainFile));
     }
 
 }

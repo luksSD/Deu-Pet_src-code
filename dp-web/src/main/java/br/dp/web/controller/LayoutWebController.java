@@ -35,23 +35,14 @@ public class LayoutWebController {
         }
 
         if (user != null) {
+            String userImgPath = userService.loadUserImg(user.getId()).getPath();
 
-            final UsersArquives userImg = userService.loadUserImg(user.getId());
-
-            String pathName = "";
-
-            if (userImg.getPath() != null && !userImg.getPath().isEmpty()) {
-                if (!Files.exists(Path.of(System.getProperty("user.dir") + "/images/users/" + userImg.getPath()))) {
-                    pathName = USER_DEFAULT_IMG;
-                } else {
-                    pathName = "/images/users/" + userImg.getPath();
-                }
-            } else {
-                pathName = USER_DEFAULT_IMG;
+            if (userImgPath == null || userImgPath.isEmpty()) {
+                userImgPath = USER_DEFAULT_IMG;
             }
 
             model.addAttribute("user", user);
-            model.addAttribute("profileImg", pathName);
+            model.addAttribute("profileImg", userImgPath);
         }
 
 

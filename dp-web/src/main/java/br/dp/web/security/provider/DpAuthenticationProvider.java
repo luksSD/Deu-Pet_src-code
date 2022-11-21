@@ -56,8 +56,9 @@ public class DpAuthenticationProvider implements AuthenticationProvider {
         CustomUserDetails userDetails = null;
         try {
             final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-            userDetails = (CustomUserDetails) authentication.getPrincipal();
+            if(authentication.isAuthenticated()) {
+                userDetails = (CustomUserDetails) authentication.getPrincipal();
+            }
         } catch (final Exception e) {
             e.printStackTrace();
             return null;

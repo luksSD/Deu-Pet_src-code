@@ -7,7 +7,9 @@ public interface UserDao {
 
     Usuario validateUsernameAndPassword(String username, String password);
 
-    UsersArquives loadUserImage(long id);
+    UsersArquives loadImage(long id);
+
+    Long saveFileAttributes(UsersArquives imagePath);
 
     Long create(Usuario user);
 }

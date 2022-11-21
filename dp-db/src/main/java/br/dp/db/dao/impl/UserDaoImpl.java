@@ -55,7 +55,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public UsersArquives loadUserImage(final long id) {
+    public UsersArquives loadImage(final long id) {
         final UsersArquives userImg = new UsersArquives();
 
         Connection connection = null;
@@ -74,6 +74,8 @@ public class UserDaoImpl implements UserDao {
                 userImg.setId(resultSet.getLong("id"));
                 userImg.setUserId(resultSet.getLong("usuario_id"));
                 userImg.setPath(resultSet.getString("caminho"));
+                userImg.setType(resultSet.getString("tipo"));
+                userImg.setKey(resultSet.getString("chave"));
             }
         } catch (final Exception e) {
             System.out.println(e.getMessage());
@@ -82,6 +84,77 @@ public class UserDaoImpl implements UserDao {
         }
 
         return userImg;
+    }
+
+    @Override
+    public Long saveFileAttributes(final UsersArquives userArquives) {
+
+        System.out.println("USER DAO - LINHA 92");
+        System.out.println("userArquives");
+        System.out.println("user_id - " + userArquives.getUserId());
+        System.out.println("path - " + userArquives.getPath());
+        System.out.println("key - " + userArquives.getKey());
+        System.out.println("type - " + userArquives.getType());
+
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        String sql = "INSERT INTO arquivo_usuario";
+        sql += " (usuario_id, caminho, tipo, chave)";
+        sql += "VALUES(?, ?, ?, ?);";
+
+        Long id = Long.valueOf(1);
+
+        System.out.println("USER DAO - LINHA 101");
+        try {
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
+
+            System.out.println("USER DAO - LINHA 106");
+            preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setLong(1, userArquives.getUserId());
+            preparedStatement.setString(2, userArquives.getPath());
+            preparedStatement.setString(3, userArquives.getType());
+            preparedStatement.setString(4, userArquives.getKey());
+
+            System.out.println("USER DAO - LINHA 114");
+            preparedStatement.execute();
+
+            System.out.println("USER DAO - LINHA 117");
+            resultSet = preparedStatement.getGeneratedKeys();
+
+            if (resultSet.next()) {
+                System.out.println("USER DAO - LINHA 121");
+                id = resultSet.getLong(1);
+            }
+
+
+            if (id != -1) {
+                System.out.println("USER DAO - LINHA 126");
+                connection.commit();
+            } else {
+                System.out.println("USER DAO - LINHA 130");
+                connection.abort(null);
+            }
+
+        } catch (final Exception e) {
+            try {
+                System.out.println("USER DAO - LINHA 136");
+                System.out.println(e.getMessage());
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println("USER DAO - LINHA 140");
+                System.out.println(e1.getMessage());
+            } finally {
+                System.out.println("USER DAO - LINHA 143");
+                ConnectionFactory.close(resultSet, preparedStatement, connection);
+            }
+        }
+
+        return id;
     }
 
     @Override

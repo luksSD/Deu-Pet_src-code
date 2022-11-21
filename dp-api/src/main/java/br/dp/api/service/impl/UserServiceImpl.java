@@ -4,6 +4,7 @@ import br.dp.api.service.UserService;
 import br.dp.db.dao.UserDao;
 import br.dp.model.UsersArquives;
 import br.dp.model.Usuario;
+import com.amazonaws.services.s3.AmazonS3Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private AmazonS3Client awsS3Client;
 
     @Override
     public Usuario validateUsernameAndPassword(final String username, final String password) {
@@ -46,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UsersArquives LoadUserImg(final long id) {
-        return userDao.loadUserImage(id);
+        return userDao.loadImage(id);
     }
 
     @Override

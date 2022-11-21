@@ -59,7 +59,7 @@ public class FileRestController {
     @PostMapping("/upload-animal-files")
     public ResponseEntity<Boolean> uploadAnimalFiles(@RequestBody final List<AnimalsArquives> animalFiles){
 
-        System.out.println("Chegou no FileRestController upload user");
+        System.out.println("Chegou no FileRestController upload animal");
         return ResponseEntity.ok(awss3Service.uploadAnimalFiles(animalFiles));
     }
 

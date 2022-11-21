@@ -140,23 +140,37 @@ public class AwsS3ServiceImpl implements AwsS3Service {
         int id = 1;
 
         try {
+            System.out.println("uploadAnimalFiles 143");
             for (AnimalsArquives file: animalFiles) {
                 String[] filenameExtension = file.getType().split("/");
                 String key = Constants.ANIMAL_KEY + file.getAnimalID() + "/" + id++ + "." + filenameExtension[1];
 
+                System.out.println("uploadAnimalFiles 148");
                 byte[] data = Base64.getDecoder().decode(file.getFile().getBytes(StandardCharsets.UTF_8));
                 InputStream stream = new ByteArrayInputStream(data);
                 ObjectMetadata metaData = new ObjectMetadata();
+                System.out.println("uploadAnimalFiles 152");
                 metaData.setContentType(file.getType());
                 metaData.setContentLength(data.length);
 
+                System.out.println("uploadAnimalFiles 156");
                 awsS3Client.putObject(Constants.BUCKET_NAME, key, stream , metaData);
                 awsS3Client.setObjectAcl(Constants.BUCKET_NAME, key, CannedAccessControlList.PublicRead);
 
+                System.out.println("uploadAnimalFiles 160");
                 file.setPath(awsS3Client.getResourceUrl(Constants.BUCKET_NAME, key));
                 file.setKey(key);
+
+                System.out.println("uploadAnimalFiles 164");
+                System.out.println("ANIMAL ID: " + file.getAnimalID());
+                System.out.println("PATH: " + file.getPath());
+                System.out.println("TIPO: " + file.getType());
+                System.out.println("CHAVE: " + file.getKey());
+                System.out.println("PRIMARIA: " + file.isPrimary());
+                System.out.println("=======================================");
             }
 
+            System.out.println("uploadAnimalFiles 173");
             result = animalDao.saveFileAttributes(animalFiles);
 
         } catch (SdkClientException e) {

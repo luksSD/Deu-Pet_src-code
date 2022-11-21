@@ -5,7 +5,7 @@ import java.sql.*;
 public class ConnectionFactory {
 
     //    private static final String url = "jdbc:postgresql://localhost:5432/deu_pet";
-    private static final String url = "jdbc:postgresql://awseb-e-jfhuhbyxtn-stack-awsebrdsdatabase-iaedpwwxuxzq.cgd35dqjznvw.us-east-1.rds.amazonaws.com:5432/deu_pet";
+    private static final String url = "jdbc:postgresql://awseb-e-tkp64zzufx-stack-awsebrdsdatabase-2sp1f0tpgfq5.cgd35dqjznvw.us-east-1.rds.amazonaws.com:5432/deu_pet";
 
     private static final String username = "postgres";
     private static final String password = "postgres";

@@ -19,5 +19,5 @@ public interface CampanhaDao {
 
     Long saveFileAttributes(CampainsArquives imagePath);
 
-    CampainsArquives loadUserImage(long id);
+    CampainsArquives loadImage(long id);
 }

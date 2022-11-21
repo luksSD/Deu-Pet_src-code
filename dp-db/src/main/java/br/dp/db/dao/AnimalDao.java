@@ -19,5 +19,5 @@ public interface AnimalDao {
 
     Long saveFileAttributes(List<ArquivoAnimal> imagesPaths);
 
-    List<ArquivoAnimal> loadAnimalImages(Long id);
+    List<ArquivoAnimal> loadImages(Long id);
 }

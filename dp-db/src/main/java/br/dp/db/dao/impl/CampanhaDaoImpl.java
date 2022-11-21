@@ -275,7 +275,7 @@ public class CampanhaDaoImpl implements CampanhaDao {
     }
 
     @Override
-    public CampainsArquives loadUserImage(final long id) {
+    public CampainsArquives loadImage(final long id) {
         final CampainsArquives campainImg = new CampainsArquives();
 
         Connection connection = null;

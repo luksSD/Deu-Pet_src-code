@@ -51,6 +51,6 @@ public class CampanhaServiceImpl implements CampanhaService {
 
     @Override
     public CampainsArquives LoadCampainImg(final long id) {
-        return dao.loadUserImage(id);
+        return dao.loadImage(id);
     }
 }

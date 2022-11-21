@@ -311,7 +311,7 @@ public class AnimalDaoImpl implements AnimalDao {
     }
 
     @Override
-    public List<ArquivoAnimal> loadAnimalImages(final Long id) {
+    public List<ArquivoAnimal> loadImages(final Long id) {
 
         final List<ArquivoAnimal> animalsImagesList = new ArrayList<ArquivoAnimal>();
 

@@ -52,7 +52,7 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     public List<ArquivoAnimal> loadAnimalImgs(final Long id) {
-        return dao.loadAnimalImages(id);
+        return dao.loadImages(id);
     }
 
 }

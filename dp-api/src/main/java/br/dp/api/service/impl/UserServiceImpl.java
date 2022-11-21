@@ -49,11 +49,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UsersArquives LoadUserImg(final long id) {
-        return userDao.loadImage(id);
-    }
-
-    @Override
     public Long create(final Usuario user) {
         return userDao.create(user);
     }

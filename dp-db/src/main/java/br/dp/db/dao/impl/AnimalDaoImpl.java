@@ -3,7 +3,7 @@ package br.dp.db.dao.impl;
 import br.dp.db.connection.ConnectionFactory;
 import br.dp.db.dao.AnimalDao;
 import br.dp.model.Animal;
-import br.dp.model.ArquivoAnimal;
+import br.dp.model.AnimalsArquives;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -257,7 +257,7 @@ public class AnimalDaoImpl implements AnimalDao {
     }
 
     @Override
-    public Long saveFileAttributes(final List<ArquivoAnimal> imagesAttributes) {
+    public boolean saveFileAttributes(final List<AnimalsArquives> animalFiles) {
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -267,31 +267,33 @@ public class AnimalDaoImpl implements AnimalDao {
         sql += " (animal_id, caminho, primaria)";
         sql += "VALUES(?, ?, ?);";
 
-        Long id = Long.valueOf(1);
+        boolean response = true;
 
         try {
 
             connection = ConnectionFactory.getConnection();
             connection.setAutoCommit(false);
 
-            for (final ArquivoAnimal imgAtt : imagesAttributes) {
+            for (final AnimalsArquives imgAtt : animalFiles) {
                 preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
                 preparedStatement.setLong(1, imgAtt.getAnimalID());
                 preparedStatement.setString(2, imgAtt.getPath());
                 preparedStatement.setBoolean(3, imgAtt.isPrimary());
+                preparedStatement.setString(4, imgAtt.getType());
+                preparedStatement.setString(5, imgAtt.getKey());
 
                 preparedStatement.execute();
 
                 resultSet = preparedStatement.getGeneratedKeys();
 
                 if (!resultSet.next()) {
-                    id = Long.valueOf(-1);
+                    response = false;
                     break;
                 }
             }
 
-            if (id != -1) {
+            if (response) {
                 connection.commit();
             } else {
                 connection.abort(null);
@@ -307,13 +309,13 @@ public class AnimalDaoImpl implements AnimalDao {
             }
         }
 
-        return id;
+        return response;
     }
 
     @Override
-    public List<ArquivoAnimal> loadImages(final Long id) {
+    public List<AnimalsArquives> loadImages(final Long id) {
 
-        final List<ArquivoAnimal> animalsImagesList = new ArrayList<ArquivoAnimal>();
+        final List<AnimalsArquives> animalsImagesList = new ArrayList<AnimalsArquives>();
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -322,19 +324,21 @@ public class AnimalDaoImpl implements AnimalDao {
         try {
             connection = ConnectionFactory.getConnection();
 
-            final String sql = "SELECT * FROM arquivo_animal WHERE animal_id = " + id;
+            final String sql = "SELECT * FROM arquivo_animal WHERE animal_id = " + id + " ORDER BY id ASC";
 
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
 
-                final ArquivoAnimal animalImage = new ArquivoAnimal();
+                final AnimalsArquives animalImage = new AnimalsArquives();
 
                 animalImage.setId(resultSet.getLong("id"));
                 animalImage.setAnimalID(resultSet.getLong("animal_id"));
                 animalImage.setPath(resultSet.getString("caminho"));
                 animalImage.setPrimary(resultSet.getBoolean("primaria"));
+                animalImage.setType(resultSet.getString("tipo"));
+                animalImage.setKey(resultSet.getString("chave"));
 
                 animalsImagesList.add(animalImage);
             }

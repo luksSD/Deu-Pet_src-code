@@ -3,7 +3,7 @@ package br.dp.api.service.impl;
 import br.dp.api.service.AnimalService;
 import br.dp.db.dao.AnimalDao;
 import br.dp.model.Animal;
-import br.dp.model.ArquivoAnimal;
+import br.dp.model.AnimalsArquives;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,16 +43,6 @@ public class AnimalServiceImpl implements AnimalService {
     public boolean delete(final Long id) {
         // TODO Auto-generated method stub
         return dao.delete(id);
-    }
-
-    @Override
-    public Long saveFileAttributes(final List<ArquivoAnimal> imagesAttributes) {
-        return dao.saveFileAttributes(imagesAttributes);
-    }
-
-    @Override
-    public List<ArquivoAnimal> loadAnimalImgs(final Long id) {
-        return dao.loadImages(id);
     }
 
 }

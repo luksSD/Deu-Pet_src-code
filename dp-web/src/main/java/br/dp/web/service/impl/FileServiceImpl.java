@@ -1,18 +1,17 @@
 package br.dp.web.service.impl;
 
+import br.dp.model.AnimalsArquives;
 import br.dp.model.CampainsArquives;
 import br.dp.model.UsersArquives;
 import br.dp.web.service.FileService;
-import br.dp.web.service.RestService;
 import br.dp.web.util.Constants;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.*;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
@@ -21,13 +20,55 @@ import java.util.List;
 public class FileServiceImpl implements FileService {
 
     @Override
-    public boolean uploadFiles(List<MultipartFile> file) {
-        return false;
+    public boolean uploadFiles(List<MultipartFile> files, Long id) {
+        boolean response = false;
+        String endpoint = Constants.UPLOAD_ANIMAL_FILES_ENDPOINT;
+
+        List<AnimalsArquives> filesList = new ArrayList<AnimalsArquives>();
+        boolean primary = true;
+
+        for (MultipartFile file : files) {
+            byte[] dataByte;
+            String dataString = "";
+
+            try {
+                dataByte = file.getBytes();
+                dataString = new String(Base64.getEncoder().encode(dataByte));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            AnimalsArquives fileToUpload = new AnimalsArquives();
+            fileToUpload.setFile(dataString);
+            fileToUpload.setAnimalID(id);
+            fileToUpload.setType(file.getContentType());
+            fileToUpload.setPrimary(false);
+
+            if(primary){
+                fileToUpload.setPrimary(true);
+                primary = false;
+            }
+
+            filesList.add(fileToUpload);
+        }
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            HttpEntity<List<AnimalsArquives>> httpEntity = new HttpEntity<List<AnimalsArquives>>(filesList);
+            final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
+                    Boolean.class);
+            response = responseEntity.getBody();
+
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return response;
     }
 
     @Override
     public boolean uploadFile(MultipartFile file, Long id, String type) {
-
 
         boolean response = false;
         String endpoint = "";

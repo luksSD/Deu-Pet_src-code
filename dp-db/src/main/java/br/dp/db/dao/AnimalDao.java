@@ -1,7 +1,7 @@
 package br.dp.db.dao;
 
 import br.dp.model.Animal;
-import br.dp.model.ArquivoAnimal;
+import br.dp.model.AnimalsArquives;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public interface AnimalDao {
 
     boolean delete(Long id);
 
-    Long saveFileAttributes(List<ArquivoAnimal> imagesPaths);
+    boolean saveFileAttributes(List<AnimalsArquives> imagesPaths);
 
-    List<ArquivoAnimal> loadImages(Long id);
+    List<AnimalsArquives> loadImages(Long id);
 }

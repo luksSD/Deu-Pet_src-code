@@ -50,20 +50,4 @@ public class CampanhaRestController {
         return ResponseEntity.ok(service.delete(id));
     }
 
-    @ApiOperation(value = "Salva o caminho da imagen relacionadas a campanha", consumes = "application/json")
-    @PostMapping("/save-image")
-    public ResponseEntity<Long> saveFileAttributes(@RequestBody final CampainsArquives imagePath) {
-
-        return ResponseEntity.ok(service.saveFileAttributes(imagePath));
-
-    }
-
-    @ApiOperation(value = "Retorna uma lista com os atributos das imagens da campanha")
-    @GetMapping("/load-images/{id}")
-    public ResponseEntity<CampainsArquives> loadCampainImg(@PathVariable("id") final long id) {
-
-        return ResponseEntity.ok(service.LoadCampainImg(id));
-
-    }
-
 }

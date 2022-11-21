@@ -1,7 +1,7 @@
 package br.dp.web.service.impl;
 
 import br.dp.model.Animal;
-import br.dp.model.ArquivoAnimal;
+import br.dp.model.AnimalsArquives;
 import br.dp.web.service.AnimalService;
 import br.dp.web.util.Constants;
 import org.springframework.http.HttpEntity;
@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AnimalServiceImpl implements AnimalService {
@@ -33,7 +34,7 @@ public class AnimalServiceImpl implements AnimalService {
             final ResponseEntity<Animal[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
                 Animal[].class);
 
-            response = Arrays.asList(requestResponse.getBody());
+            response = Arrays.asList(Objects.requireNonNull(requestResponse.getBody()));
 
         } catch (final Exception e) {
             System.out.println(e.getMessage());
@@ -49,11 +50,8 @@ public class AnimalServiceImpl implements AnimalService {
         Animal response = null;
 
         try {
-
             final RestTemplate restTemplate = new RestTemplate();
-
             final HttpEntity<String> httpEntity = new HttpEntity<String>("");
-
             final ResponseEntity<Animal> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
                 Animal.class);
 
@@ -67,6 +65,28 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
+    public Long create(final Animal entity) {
+        Long id = Long.valueOf(-1);
+
+        final String endpoint = Constants.ENDPOINT + "animal/create";
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<Animal> httpEntity = new HttpEntity<>(entity);
+            final ResponseEntity<Long> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
+                Long.class);
+
+            id = responseEntity.getBody();
+
+        } catch (final Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+
+        return id;
+    }
+
+    @Override
     public boolean update(final Animal entity) {
         boolean response = false;
 
@@ -74,9 +94,7 @@ public class AnimalServiceImpl implements AnimalService {
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
-
             final HttpEntity<Animal> httpEntity = new HttpEntity<Animal>(entity);
-
             final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.PUT, httpEntity,
                 Boolean.class);
 
@@ -99,9 +117,7 @@ public class AnimalServiceImpl implements AnimalService {
         try {
 
             final RestTemplate restTemplate = new RestTemplate();
-
             final HttpEntity<String> httpEntity = new HttpEntity<String>("");
-
             final ResponseEntity<Boolean> requestResponse = restTemplate.exchange(endpoint, HttpMethod.DELETE,
                 httpEntity, Boolean.class);
 
@@ -115,70 +131,4 @@ public class AnimalServiceImpl implements AnimalService {
         return response;
     }
 
-    @Override
-    public Long create(final Animal entity) {
-        Long id = Long.valueOf(-1);
-
-        final String endpoint = Constants.ENDPOINT + "animal/create";
-
-        try {
-            final RestTemplate restTemplate = new RestTemplate();
-
-            final HttpEntity<Animal> httpEntity = new HttpEntity<>(entity);
-
-            final ResponseEntity<Long> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
-                Long.class);
-
-            id = responseEntity.getBody();
-
-        } catch (final Exception e) {
-
-            System.out.println(e.getMessage());
-        }
-
-        return id;
-    }
-
-    @Override
-    public Long saveFileAttributes(final List<ArquivoAnimal> entity) {
-        Long id = Long.valueOf(-1);
-
-        final String endpoint = Constants.ENDPOINT + "animal/save-images";
-
-        try {
-            final RestTemplate restTemplate = new RestTemplate();
-            final HttpEntity<List<ArquivoAnimal>> httpEntity = new HttpEntity<>(entity);
-            final ResponseEntity<Long> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
-                Long.class);
-
-            id = responseEntity.getBody();
-
-        } catch (final Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return id;
-    }
-
-    @Override
-    public List<ArquivoAnimal> loadAnimalImgs(final Long id) {
-        final String endpoint = Constants.ENDPOINT + "animal/load-images/" + id;
-
-        List<ArquivoAnimal> response = null;
-        try {
-
-            final RestTemplate restTemplate = new RestTemplate();
-
-            final HttpEntity<String> httpEntity = new HttpEntity<String>("");
-
-            final ResponseEntity<ArquivoAnimal[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
-                ArquivoAnimal[].class);
-
-            response = Arrays.asList(requestResponse.getBody());
-
-        } catch (final Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        return response;
-    }
 }

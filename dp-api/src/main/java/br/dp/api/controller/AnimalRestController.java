@@ -2,7 +2,7 @@ package br.dp.api.controller;
 
 import br.dp.api.service.AnimalService;
 import br.dp.model.Animal;
-import br.dp.model.ArquivoAnimal;
+import br.dp.model.AnimalsArquives;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,22 +57,6 @@ public class AnimalRestController {
     public ResponseEntity<Boolean> delete(@PathVariable("id") final long id) {
 
         return ResponseEntity.ok(animalService.delete(id));
-
-    }
-
-    @ApiOperation(value = "Salva o caminho das imagens relacionadas ao animal", consumes = "application/json")
-    @PostMapping("/save-images")
-    public ResponseEntity<Long> saveFileAttributes(@RequestBody final List<ArquivoAnimal> imagesPaths) {
-
-        return ResponseEntity.ok(animalService.saveFileAttributes(imagesPaths));
-
-    }
-
-    @ApiOperation(value = "Retorna uma lista com os atributos das imagens do animal")
-    @GetMapping("/load-images/{id}")
-    public ResponseEntity<List<ArquivoAnimal>> loadAnimalImgs(@PathVariable("id") final long id) {
-
-        return ResponseEntity.ok(animalService.loadAnimalImgs(id));
 
     }
 

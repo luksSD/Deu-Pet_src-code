@@ -34,14 +34,6 @@ public class UserRestController {
 
     }
 
-    @ApiOperation(value = "Retorna uma lista com os atributos das imagens do usuario")
-    @GetMapping("/load-images/{id}")
-    public ResponseEntity<UsersArquives> loadUserImg(@PathVariable("id") final long id) {
-
-        return ResponseEntity.ok(userService.LoadUserImg(id));
-
-    }
-
     @PostMapping("/create")
     @ApiOperation(value = "Cria cadastro de Instituição")
     public ResponseEntity<Long> create(@RequestBody final Usuario user) {
@@ -49,6 +41,5 @@ public class UserRestController {
         return ResponseEntity.ok(userService.create(user));
 
     }
-
 
 }

@@ -3,6 +3,7 @@ package br.dp.web.controller;
 import br.dp.model.UsersArquives;
 import br.dp.model.Usuario;
 import br.dp.web.security.provider.DpAuthenticationProvider;
+import br.dp.web.service.FileService;
 import br.dp.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -24,6 +25,9 @@ public class LayoutWebController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private FileService fileService;
+
     @ModelAttribute
     public void setUserData(final Model model) {
 
@@ -35,7 +39,7 @@ public class LayoutWebController {
         }
 
         if (user != null) {
-            String userImgPath = userService.loadUserImg(user.getId()).getPath();
+            String userImgPath = fileService.downloadUserFile(user.getId());
 
             if (userImgPath == null || userImgPath.isEmpty()) {
                 userImgPath = USER_DEFAULT_IMG;

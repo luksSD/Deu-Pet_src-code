@@ -49,28 +49,15 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 
     @Override
     public List<String> downloadAnimalFiles(Long id) {
-        List<ArquivoAnimal> files = animalDao.loadImages(id);
-        List<String> filesList = new ArrayList<String>();
 
-        for(ArquivoAnimal file : files){
-            S3Object s3Object = awsS3Client.getObject(Constants.BUCKET_NAME, file.getPath());
-            S3ObjectInputStream inputStream = s3Object.getObjectContent();
-            try {
-                byte[] content = IOUtils.toByteArray(inputStream);
-                String result = new String(Base64.getEncoder().encode(content));
-                result = "data:image/" + s3Object.getObjectMetadata().getContentType() + ";base64, " + result;
-                filesList.add(result);
+        List<String> pathList = new ArrayList<String>();
+        List<AnimalsArquives> animalFiles = animalDao.loadImages(id);
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        for(AnimalsArquives animal : animalFiles){
+            pathList.add(animal.getPath());
         }
 
-        if(filesList.size() > 0) {
-            return filesList;
-        }
-
-        return null;
+        return pathList;
     }
 
     @Override
@@ -147,8 +134,36 @@ public class AwsS3ServiceImpl implements AwsS3Service {
     }
 
     @Override
-    public Boolean uploadFiles(Long id) {
-        return null;
+    public Boolean uploadAnimalFiles(List<AnimalsArquives> animalFiles) {
+
+        boolean result = false;
+        int id = 1;
+
+        try {
+            for (AnimalsArquives file: animalFiles) {
+                String[] filenameExtension = file.getType().split("/");
+                String key = Constants.ANIMAL_KEY + file.getAnimalID() + "/" + id++ + "." + filenameExtension[1];
+
+                byte[] data = Base64.getDecoder().decode(file.getFile().getBytes(StandardCharsets.UTF_8));
+                InputStream stream = new ByteArrayInputStream(data);
+                ObjectMetadata metaData = new ObjectMetadata();
+                metaData.setContentType(file.getType());
+                metaData.setContentLength(data.length);
+
+                awsS3Client.putObject(Constants.BUCKET_NAME, key, stream , metaData);
+                awsS3Client.setObjectAcl(Constants.BUCKET_NAME, key, CannedAccessControlList.PublicRead);
+
+                file.setPath(awsS3Client.getResourceUrl(Constants.BUCKET_NAME, key));
+                file.setKey(key);
+            }
+
+            result = animalDao.saveFileAttributes(animalFiles);
+
+        } catch (SdkClientException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return result;
     }
 
     private void printFileDetails(UsersArquives file, S3Object s3Object) {

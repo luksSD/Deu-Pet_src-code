@@ -7,7 +7,7 @@ public class Constants {
     public static final String DOWNLOAD_ANIMAL_FILE_ENDPOINT = ENDPOINT + "files/download-animal-files/";
     public static final String DOWLOAD_CAMPAIN_FILE_ENDPOINT = ENDPOINT + "files/download-campain-file/";
     public static final String UPLOAD_USER_FILE_ENDPOINT = ENDPOINT + "files/upload-user-file";
-    public static final String UPLOAD_ANIMAL_FILE_ENDPOINT = ENDPOINT + "files/upload-animal-files";
+    public static final String UPLOAD_ANIMAL_FILES_ENDPOINT = ENDPOINT + "files/upload-animal-files";
     public static final String UPLOAD_CAMPAIN_FILE_ENDPOINT = ENDPOINT + "files/upload-campain-file";
 
 }

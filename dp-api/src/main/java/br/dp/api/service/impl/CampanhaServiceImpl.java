@@ -44,13 +44,4 @@ public class CampanhaServiceImpl implements CampanhaService {
         return dao.delete(id);
     }
 
-    @Override
-    public Long saveFileAttributes(final CampainsArquives imagePath) {
-        return dao.saveFileAttributes(imagePath);
-    }
-
-    @Override
-    public CampainsArquives LoadCampainImg(final long id) {
-        return dao.loadImage(id);
-    }
 }

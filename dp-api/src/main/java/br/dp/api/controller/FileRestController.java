@@ -1,6 +1,7 @@
 package br.dp.api.controller;
 
 import br.dp.api.service.AwsS3Service;
+import br.dp.model.AnimalsArquives;
 import br.dp.model.CampainsArquives;
 import br.dp.model.UsersArquives;
 import io.swagger.annotations.Api;
@@ -53,6 +54,13 @@ public class FileRestController {
 
         System.out.println("Chegou no FileRestController upload user");
         return ResponseEntity.ok(awss3Service.uploadCampainFile(campainFile));
+    }
+
+    @PostMapping("/upload-animal-files")
+    public ResponseEntity<Boolean> uploadAnimalFiles(@RequestBody final List<AnimalsArquives> animalFiles){
+
+        System.out.println("Chegou no FileRestController upload user");
+        return ResponseEntity.ok(awss3Service.uploadAnimalFiles(animalFiles));
     }
 
 }

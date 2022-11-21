@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface FileService {
 
-    boolean uploadFiles(List<MultipartFile> file);
+    boolean uploadFiles(List<MultipartFile> file, Long id);
     boolean uploadFile(MultipartFile file, Long id, String type);
     String downloadUserFile(Long id);
     List<String> downloadAnimalFiles(Long id);

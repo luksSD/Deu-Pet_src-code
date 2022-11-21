@@ -1,7 +1,7 @@
 package br.dp.api.service;
 
 import br.dp.model.Animal;
-import br.dp.model.ArquivoAnimal;
+import br.dp.model.AnimalsArquives;
 
 import java.util.List;
 
@@ -17,7 +17,4 @@ public interface AnimalService {
 
     boolean delete(Long id);
 
-    Long saveFileAttributes(List<ArquivoAnimal> imagesAttributes);
-
-    List<ArquivoAnimal> loadAnimalImgs(Long id);
 }

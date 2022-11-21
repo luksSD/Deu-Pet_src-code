@@ -44,7 +44,7 @@ public class InstitutionWebController {
             String userImgs = fileService.downloadUserFile(institution.getId());
             String pathName;
 
-            if (userImgs != null && !userImgs.isEmpty()) {
+            if (userImgs != null && userImgs != "") {
                 pathName = userImgs;
             } else {
                 pathName = INSTITUTION_DEFAULT_IMG;
@@ -105,7 +105,7 @@ public class InstitutionWebController {
         model.addAttribute("instituicao", institution);
         model.addAttribute("cidade", city);
 
-        if (!imageFile.isEmpty() && imageFile.length() > 0 && imageFile != "" && imageFile != null) {
+        if (imageFile != null && imageFile != "") {
             model.addAttribute("img", imageFile);
         } else {
             model.addAttribute("img", INSTITUTION_DEFAULT_IMG);

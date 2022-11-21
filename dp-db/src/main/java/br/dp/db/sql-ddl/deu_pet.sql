@@ -22,7 +22,9 @@ CREATE TABLE arquivo_usuario
 (
     id BIGSERIAL primary key,
     usuario_id integer not null,
-	caminho VARCHAR (256) not null
+	caminho VARCHAR (256),
+	tipo VARCHAR (15),
+	chave VARCHAR (100)
 );
 
 
@@ -99,8 +101,10 @@ CREATE TABLE arquivo_animal
 (
     id BIGSERIAL primary key,
     animal_id integer not null,
-	caminho VARCHAR (256) not null,
-	primaria BOOL not null
+	caminho VARCHAR (256),
+	primaria BOOL,
+    tipo VARCHAR (15),
+    chave VARCHAR (100)
 );
 
 
@@ -149,7 +153,9 @@ CREATE TABLE arquivo_campanha
 (
     id BIGSERIAL primary key,
     campanha_id integer not null,
-    caminho VARCHAR not null
+    caminho VARCHAR,
+    tipo VARCHAR (15),
+    chave VARCHAR (100)
 
 );
 
@@ -169,11 +175,11 @@ CREATE TABLE pessoa_interessa_campanha
 );
 
 --Tornando pessoa_id/campanha_id uma FK da tabela pessoa_cadastra_campanha
-ALTER TABLE pessoa_cadastra_campanha ADD CONSTRAINT fk1_pessoa_cadastra_campanha foreign key (pessoa_id) references pessoa(usuario_id) on update cascade on delete cascade;
-ALTER TABLE pessoa_cadastra_campanha ADD CONSTRAINT fk2_pessoa_cadastra_campanha foreign key (campanha_id) references campanha(id) on update cascade on delete cascade;
+ALTER TABLE pessoa_interessa_campanha ADD CONSTRAINT fk1_pessoa_interessa_campanha foreign key (pessoa_id) references pessoa(usuario_id) on update cascade on delete cascade;
+ALTER TABLE pessoa_interessa_campanha ADD CONSTRAINT fk2_pessoa_interessa_campanha foreign key (campanha_id) references campanha(id) on update cascade on delete cascade;
 
 --Colocando UK entre pessoa_id e campanha_id na tabela pessoa_cadastra_campanha
-ALTER TABLE pessoa_cadastra_campanha ADD CONSTRAINT uk1_pessoa_cadastra_campanha unique(pessoa_id, campanha_id);
+ALTER TABLE pessoa_interessa_campanha ADD CONSTRAINT uk1_pessoa_interessa_campanha unique(pessoa_id, campanha_id);
 
 
 --Adicionando cidades que o projeto vai atender inicialmente

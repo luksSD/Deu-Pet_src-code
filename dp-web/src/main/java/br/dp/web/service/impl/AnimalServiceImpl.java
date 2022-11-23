@@ -2,8 +2,10 @@ package br.dp.web.service.impl;
 
 import br.dp.model.Animal;
 import br.dp.model.AnimalsArquives;
+import br.dp.web.security.provider.DpAuthenticationProvider;
 import br.dp.web.service.AnimalService;
 import br.dp.web.util.Constants;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,8 @@ import java.util.Objects;
 @Service
 public class AnimalServiceImpl implements AnimalService {
 
+    @Autowired
+    private DpAuthenticationProvider authProvider;
 
     @Override
     public List<Animal> readAll() {
@@ -69,6 +73,8 @@ public class AnimalServiceImpl implements AnimalService {
         Long id = Long.valueOf(-1);
 
         final String endpoint = Constants.ENDPOINT + "animal/create";
+
+        entity.setIdInstituicao(authProvider.getAuthenticatedUser().getId());
 
         try {
             final RestTemplate restTemplate = new RestTemplate();

@@ -164,10 +164,10 @@ public class CampanhaDaoImpl implements CampanhaDao {
             preparedStatement.setString(3, entity.getRequisitos());
             preparedStatement.setDate(4, entity.getDataInicio());
             preparedStatement.setDate(5, entity.getDataFim());
-            preparedStatement.setLong(6, 4);
+            preparedStatement.setLong(6, entity.getInstituicaoId());
             if (entity.getUrlForm() != null && !entity.getUrlForm().isEmpty()) {
                 preparedStatement.setString(7, entity.getUrlForm());
-                preparedStatement.setLong(8, entity.getId()); //colocar aqui id da campanha
+                preparedStatement.setLong(8, entity.getId());
             } else {
                 preparedStatement.setLong(7, entity.getId());
             }

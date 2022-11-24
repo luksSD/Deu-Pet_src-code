@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Deu Pet - Detalhes da campanha</title>
+  <script src="/resources/js/change-img.js"></script>
+
 </head>
 <body>
 
@@ -30,10 +32,81 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="border-bottom text-center pb-4">
+                <div class="col-sm-12">
+                  <img th:src="${img}" alt="imagem da campanha"
+                       class="img-fluid rounded mb-3 w-75 ">
+                </div>
+                <div class="col-lg-11 mt-1" >
+                  <div class="d-flex justify-content-end mb-1">
+                    <button type="button" class="btn btn-gradient-info btn-sm"
+                            data-toggle="modal"
+                            data-target="#imageModal">
+                      Alterar
+                    </button>
+                  </div>
+                </div>
+              </div>
 
-                <img th:src="${img}" alt="imagem da campanha"
-                     class="img-fluid rounded mb-3 w-75 ">
+              <!--MODAL PARA ALTERACAO DE IMAGEM-->
+              <div class="modal fade" id="imageModal" tabindex="-1" role="dialog"
+                   aria-labelledby="imageModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
 
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="d-flex justify-content-center bd-highlight mb-3">
+                          <div class="d-flex align-items-center mt-4">
+                            <img th:src="${img}" alt="profile" id="imagem" class="img-fluid rounded">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <h2 class="swal2-title" id="swal2-title" style="display: block;">Alterar imagem</h2>
+                    <div class="row text-center mt-3">
+                      <p>Selecione uma uma imagem para carregar</p>
+                    </div>
+
+                    <div class="modal-body">
+
+                      <!--FORMULARIO-->
+                      <form th:action="@{/files/update-campaign}" th:object="${campanha}" method="POST" name="formCadastro"
+                            enctype='multipart/form-data'>
+
+                        <div class="col-md-12">
+                          <div class="form-group row">
+
+                            <div class="col-md-12">
+                              <div class="row">
+
+                                <div class="col-md-12 text-center mt-3">
+                                  <input id="files" name="file" type="file" accept="image/jpg, image/jpeg, image/png"
+                                         hidden/>
+                                  <label class="btn btn-outline-info btn-icon-text " for="files">
+                                    <i class="mdi mdi-upload btn-icon-prepend"></i>
+                                    Carregar
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <input th:field="${campanha.id}" id="idinstituicao" name="idinstituicao" type="hidden">
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-gradient-danger"
+                                  data-dismiss="modal">Cancelar
+                          </button>
+                          <button class="btn btn-gradient-success" id="teste"
+                                  type="submit">Alterar
+                          </button>
+                        </div>
+
+                      </form>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div class="col-lg-8">

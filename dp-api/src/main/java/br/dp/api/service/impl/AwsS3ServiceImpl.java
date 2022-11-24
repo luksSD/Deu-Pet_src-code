@@ -110,7 +110,9 @@ public class AwsS3ServiceImpl implements AwsS3Service {
     public Boolean uploadCampainFile(CampainsArquives file) {
 
         Long result = Long.valueOf(-1);
-        boolean updateFile = file.getKey() != null;
+
+        String existFile = downloadCampainFile(file.getCampainId());
+        boolean updateFile = existFile != null;
 
         try {
             String[] filenameExtension = file.getType().split("/");
@@ -128,12 +130,10 @@ public class AwsS3ServiceImpl implements AwsS3Service {
             file.setPath(awsS3Client.getResourceUrl(Constants.BUCKET_NAME, key));
             file.setKey(key);
 
-            result = campainDao.saveFileAttributes(file);
-
             if(updateFile) {
-                result = campainDao.saveFileAttributes(file);
-            } else{
                 result = (long) (campainDao.updateFileAttributes(file) ? 1 : -1);
+            } else{
+                result = campainDao.saveFileAttributes(file);
             }
 
             if(result != -1){

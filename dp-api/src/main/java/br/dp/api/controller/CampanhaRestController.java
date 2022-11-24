@@ -1,5 +1,6 @@
 package br.dp.api.controller;
 
+import br.dp.api.service.AwsS3Service;
 import br.dp.api.service.CampanhaService;
 import br.dp.model.CampainsArquives;
 import br.dp.model.Campanha;
@@ -19,6 +20,9 @@ public class CampanhaRestController {
 
     @Autowired
     private CampanhaService service;
+
+    @Autowired
+    private AwsS3Service fileService;
 
     @ApiOperation(value = "Retorna uma lista de Campanhas")
     @GetMapping("/read-all")
@@ -44,10 +48,14 @@ public class CampanhaRestController {
         return ResponseEntity.ok(service.create(campanha));
     }
 
-    @ApiOperation(value = "Deleta o cadastro de uma campanha")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable("id") final long id) {
-        return ResponseEntity.ok(service.delete(id));
+
+        if(service.delete(id)){
+            return ResponseEntity.ok(fileService.deleteCampaignFile(id));
+        }
+
+        return ResponseEntity.ok(false);
     }
 
 }

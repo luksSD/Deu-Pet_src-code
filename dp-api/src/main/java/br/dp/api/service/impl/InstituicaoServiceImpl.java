@@ -6,8 +6,8 @@ import br.dp.db.dao.InstituicaoDao;
 import br.dp.db.dao.MunicipioDao;
 import br.dp.model.Instituicao;
 import br.dp.model.Municipio;
-import br.dp.model.UsersArquives;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,7 +57,7 @@ public class InstituicaoServiceImpl implements InstituicaoService {
     }
 
     @Override
-    public boolean update(final Instituicao entity) {
+    public ResponseEntity<Boolean> update(final Instituicao entity) {
 
         final Long id;
         final Municipio municipio = new Municipio();
@@ -70,20 +70,20 @@ public class InstituicaoServiceImpl implements InstituicaoService {
         if (id != -1) {
             entity.setMunicipioId(id);
         } else {
-            return false;
+            return ResponseEntity.ok(false);
         }
 
-        return instituicaoDao.update(entity);
+        return ResponseEntity.ok(instituicaoDao.update(entity));
     }
 
     @Override
-    public boolean delete(final Long id) {
+    public ResponseEntity<Boolean> delete(final Long id) {
 
         if(instituicaoDao.delete(id)){
-            return fileService.deleteUserFile(id);
+            return ResponseEntity.ok(fileService.deleteUserFile(id));
         }
 
-        return false;
+        return ResponseEntity.ok(false);
     }
 
 }

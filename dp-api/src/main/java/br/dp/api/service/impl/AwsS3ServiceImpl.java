@@ -107,6 +107,8 @@ public class AwsS3ServiceImpl implements AwsS3Service {
     public Boolean uploadCampainFile(CampainsArquives file) {
 
         Long result = Long.valueOf(-1);
+        boolean updateFile = file.getKey() != null;
+
         try {
             String[] filenameExtension = file.getType().split("/");
             String key = Constants.CAMPAIN_KEY + file.getCampainId() + "." +filenameExtension[1];
@@ -124,6 +126,12 @@ public class AwsS3ServiceImpl implements AwsS3Service {
             file.setKey(key);
 
             result = campainDao.saveFileAttributes(file);
+
+            if(updateFile) {
+                result = campainDao.saveFileAttributes(file);
+            } else{
+                result = (long) (campainDao.updateFileAttributes(file) ? 1 : -1);
+            }
 
             if(result != -1){
                 return true;
@@ -181,6 +189,19 @@ public class AwsS3ServiceImpl implements AwsS3Service {
         if(key != null || key.equals("")) {
             awsS3Client.deleteObject(Constants.BUCKET_NAME, key);
             response = userDao.deleteFile(id);
+        }
+
+        return response;
+    }
+
+    @Override
+    public Boolean deleteCampaignFile(long id) {
+        boolean response = true;
+        String key = campainDao.loadImage(id).getKey();
+
+        if(key != null || key.equals("")) {
+            awsS3Client.deleteObject(Constants.BUCKET_NAME, key);
+            response = campainDao.deleteFile(id);
         }
 
         return response;

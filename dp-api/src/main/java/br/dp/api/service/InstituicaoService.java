@@ -1,7 +1,7 @@
 package br.dp.api.service;
 
 import br.dp.model.Instituicao;
-import br.dp.model.UsersArquives;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface InstituicaoService {
 
     Long create(Instituicao entity);
 
-    boolean update(Instituicao entity);
+    ResponseEntity<Boolean> update(Instituicao entity);
 
-    boolean delete(Long id);
+    ResponseEntity<Boolean> delete(Long id);
 }

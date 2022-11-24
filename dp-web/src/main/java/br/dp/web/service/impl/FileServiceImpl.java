@@ -183,13 +183,33 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public boolean deleteFile(Long id) {
+    public boolean deleteUserFile(Long id) {
         boolean response = false;
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
             final HttpEntity<String> httpEntity = new HttpEntity<String>("");
             final ResponseEntity<Boolean> requestResponse = restTemplate.exchange(Constants.DELETE_USER_FILE_ENDPOINT + id, HttpMethod.GET, httpEntity,
+                Boolean.class);
+
+            response = Boolean.TRUE.equals(requestResponse.getBody());
+
+            return response;
+
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+            return response;
+        }
+    }
+
+    @Override
+    public boolean deleteCampaignFile(Long id) {
+        boolean response = false;
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+            final ResponseEntity<Boolean> requestResponse = restTemplate.exchange(Constants.DELETE_CAMPAIGN_FILE_ENDPOINT + id, HttpMethod.GET, httpEntity,
                 Boolean.class);
 
             response = Boolean.TRUE.equals(requestResponse.getBody());

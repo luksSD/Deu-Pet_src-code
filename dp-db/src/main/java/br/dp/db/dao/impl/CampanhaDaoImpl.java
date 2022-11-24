@@ -41,7 +41,7 @@ public class CampanhaDaoImpl implements CampanhaDao {
 
 
         } catch (final Exception e) {
-
+            System.out.println(e.getMessage());
         } finally {
             ConnectionFactory.close(resultSet, preparedStatement, connection);
         }
@@ -307,4 +307,77 @@ public class CampanhaDaoImpl implements CampanhaDao {
         return campainImg;
     }
 
+    @Override
+    public boolean deleteFile(long id) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        final String sql = "delete from arquivo_campanha where campanha_id = ?";
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
+
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setLong(1, id);
+
+            preparedStatement.execute();
+
+            connection.commit();
+
+            return true;
+        } catch (final Exception e) {
+            try {
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println(e1.getMessage());
+            }
+            return false;
+        } finally {
+            ConnectionFactory.close(preparedStatement, connection);
+        }
+    }
+
+    @Override
+    public boolean updateFileAttributes(CampainsArquives file) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        String sql = "update arquivo_campanha set " +
+            "caminho = ?, " +
+            "tipo = ?, " +
+            "chave = ? " +
+            "where campanha_id = ?;";
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
+
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, file.getPath());
+            preparedStatement.setString(2, file.getType());
+            preparedStatement.setString(3, file.getKey());
+            preparedStatement.setLong(4, file.getCampainId());
+
+            preparedStatement.execute();
+            connection.commit();
+
+            return true;
+
+
+        } catch (final Exception e) {
+            try {
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println(e1.getMessage());
+            }
+
+            return false;
+        } finally {
+            ConnectionFactory.close(preparedStatement, connection);
+        }
+    }
 }
+
+

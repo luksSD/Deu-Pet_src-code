@@ -15,4 +15,5 @@ public interface AwsS3Service {
     Boolean uploadCampainFile(CampainsArquives file);
     Boolean uploadAnimalFiles(List<AnimalsArquives> animalFiles);
     Boolean deleteUserFile(long id);
+    Boolean deleteCampaignFile(long id);
 }

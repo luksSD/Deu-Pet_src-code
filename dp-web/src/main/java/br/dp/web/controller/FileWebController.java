@@ -1,5 +1,6 @@
 package br.dp.web.controller;
 
+import br.dp.model.Campanha;
 import br.dp.model.Instituicao;
 import br.dp.web.security.provider.DpAuthenticationProvider;
 import br.dp.web.service.FileService;
@@ -29,57 +30,37 @@ public class FileWebController {
         return "redirect:/instituicao/detalhes/" + instituicao.getId();
     }
 
+    @PostMapping("/update-campaign")
+    public String updateCampaignFile(@RequestParam("file") final MultipartFile file, Campanha campanha){
 
-    @DeleteMapping("/delete-institution-file/{id}")
-    public String deleteFile(@PathVariable("id") final Long id){
-
-        if (fileService.deleteFile(id)){
-
+        if (fileService.uploadFile(file, campanha.getId(), "campanha")) {
+            CampainWebController.message = "Imagem alterada com sucesso!";
         } else {
-
+            CampainWebController.message = "Erro ao alterar imagem. Tente novamente!";
         }
-
-        return "redirect:/instituicao/detalhes/" + id;
-
-
+        return "redirect:/campanhas/detalhes-campanha/" + campanha.getId();
     }
 
 
+    @DeleteMapping("/delete-institution-file/{id}")
+    public String deleteInstitutionFile(@PathVariable("id") final Long id){
 
+        if (fileService.deleteUserFile(id)){
+            InstitutionWebController.message = "Imagem excluída com sucesso!";
+        } else {
+            InstitutionWebController.message = "Erro ao excluir a imagem. Tente novamente!";
+        }
+        return "redirect:/instituicao/detalhes/" + id;
+    }
 
+    @DeleteMapping("/delete-campaign-file/{id}")
+    public String deleteCampaignFile(@PathVariable("id") final Long id){
 
-//    private final String uploadDirectory = System.getProperty("user.dir");
-//
-//    @GetMapping("/animals/{id}/{img}")
-//    @ResponseBody
-//    public byte[] requestAnimalImage(@PathVariable("id") final Long id, @PathVariable("img") final String imgName) {
-//        final File imagemArquivo = new File(uploadDirectory + "/images/animals/" + id + "/" + imgName);
-//        try {
-//            return Files.readAllBytes(imagemArquivo.toPath());
-//        } catch (final IOException e) {
-//            return null;
-//        }
-//    }
-//
-//    @GetMapping("/users/{id}/{img}")
-//    @ResponseBody
-//    public byte[] requestUserImage(@PathVariable("id") final Long id, @PathVariable("img") final String imgName) {
-//        final File imagemArquivo = new File(uploadDirectory + "/images/users/" + id + "/" + imgName);
-//        try {
-//            return Files.readAllBytes(imagemArquivo.toPath());
-//        } catch (final IOException e) {
-//            return null;
-//        }
-//    }
-//
-//    @GetMapping("/campains/{id}/{img}")
-//    @ResponseBody
-//    public byte[] requestCampainImage(@PathVariable("id") final Long id, @PathVariable("img") final String imgName) {
-//        final File imagemArquivo = new File(uploadDirectory + "/images/campains/" + id + "/" + imgName);
-//        try {
-//            return Files.readAllBytes(imagemArquivo.toPath());
-//        } catch (final IOException e) {
-//            return null;
-//        }
-//    }
+        if (fileService.deleteCampaignFile(id)){
+            CampainWebController.message = "Imagem excluída com sucesso!";
+        } else {
+            CampainWebController.message = "Erro ao excluir a imagem. Tente novamente!";
+        }
+        return "redirect:/campanhas/detalhes-campanha/" + id;
+    }
 }

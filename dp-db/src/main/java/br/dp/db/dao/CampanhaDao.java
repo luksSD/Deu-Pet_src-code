@@ -20,4 +20,8 @@ public interface CampanhaDao {
     Long saveFileAttributes(CampainsArquives imagePath);
 
     CampainsArquives loadImage(long id);
+
+    boolean deleteFile(long id);
+
+    boolean updateFileAttributes(CampainsArquives file);
 }

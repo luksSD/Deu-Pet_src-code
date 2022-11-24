@@ -2,7 +2,6 @@ package br.dp.web.controller;
 
 import br.dp.model.Instituicao;
 import br.dp.model.Municipio;
-import br.dp.model.UsersArquives;
 import br.dp.web.service.CityService;
 import br.dp.web.service.FileService;
 import br.dp.web.service.InstitutionService;
@@ -12,10 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
@@ -163,7 +158,7 @@ public class InstitutionWebController {
 
         if (response) {
 
-            fileService.deleteFile(id);
+            fileService.deleteUserFile(id);
 
             message = "Cadastro da instituição excluído com sucesso!";
             return "redirect:/instituicao/gerenciar-instituicoes";

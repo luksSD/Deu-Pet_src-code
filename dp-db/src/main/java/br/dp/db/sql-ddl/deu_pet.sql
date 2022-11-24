@@ -27,9 +27,8 @@ CREATE TABLE arquivo_usuario
 	chave VARCHAR (100)
 );
 
-
 --Tornando animal_id uma FK da tabela arquivo_animal
-ALTER TABLE arquivo_usuario ADD CONSTRAINT fk1_arquivo_usuario foreign key (usuario_id) references usuario(id) on update cascade on delete cascade;
+ALTER TABLE arquivo_usuario ADD CONSTRAINT fk1_arquivo_usuario foreign key (usuario_id) references usuario(id) on update cascade;
 
 --Criando tabela municipio
 CREATE TABLE municipio
@@ -53,7 +52,7 @@ CREATE TABLE pessoa
 );
 
 --Tornando municipio_id/usuario_id uma FK da tabela pessoa
-ALTER TABLE pessoa ADD CONSTRAINT fk1_pessoa foreign key (municipio_id) references municipio(id) on update cascade on delete cascade;
+ALTER TABLE pessoa ADD CONSTRAINT fk1_pessoa foreign key (municipio_id) references municipio(id) on update cascade;
 ALTER TABLE pessoa ADD CONSTRAINT fk2_pessoa foreign key (usuario_id) references usuario(id) on update cascade on delete cascade;
 
 --Criando tabela instituicao
@@ -68,7 +67,7 @@ CREATE TABLE instituicao
 );
 
 --Tornando municipio_id/usuario_id uma FK da tabela instituicao
-ALTER TABLE instituicao ADD CONSTRAINT fk1_instituicao foreign key (municipio_id) references municipio(id) on update cascade on delete cascade;
+ALTER TABLE instituicao ADD CONSTRAINT fk1_instituicao foreign key (municipio_id) references municipio(id) on update cascade;
 ALTER TABLE instituicao ADD CONSTRAINT fk2_instituicao foreign key (usuario_id) references usuario(id) on update cascade on delete cascade;
 
 --Colocando UK entre cpf e cnpj na tabela instituicao
@@ -109,7 +108,7 @@ CREATE TABLE arquivo_animal
 
 
 --Tornando animal_id uma FK da tabela arquivo_animal
-ALTER TABLE arquivo_animal ADD CONSTRAINT fk1_arquivo_animal foreign key (animal_id) references animal(id) on update cascade on delete cascade;
+ALTER TABLE arquivo_animal ADD CONSTRAINT fk1_arquivo_animal foreign key (animal_id) references animal(id) on update cascade;
 
 
 --Criando pessoa_interessa_animal
@@ -161,7 +160,7 @@ CREATE TABLE arquivo_campanha
 
 
 --Tornando campanha_id uma FK da tabela arquivo_campanha
-ALTER TABLE arquivo_campanha ADD CONSTRAINT fk1_arquivo_campanha foreign key (campanha_id) references campanha(id) on update cascade on delete cascade;
+ALTER TABLE arquivo_campanha ADD CONSTRAINT fk1_arquivo_campanha foreign key (campanha_id) references campanha(id) on update cascade;
 
 --Criando pessoa_cadastra_campanha
 CREATE TABLE pessoa_interessa_campanha

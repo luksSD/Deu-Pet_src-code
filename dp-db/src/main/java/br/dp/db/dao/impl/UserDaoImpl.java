@@ -55,7 +55,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public UsersArquives loadImage(final long id) {
+    public UsersArquives loadUserImg(final long id) {
         final UsersArquives userImg = new UsersArquives();
 
         Connection connection = null;
@@ -189,5 +189,78 @@ public class UserDaoImpl implements UserDao {
         }
 
         return id;
+    }
+
+    @Override
+    public boolean updateFileAttributes(UsersArquives file) {
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        String sql = "update arquivo_usuario set " +
+            "caminho = ?, " +
+            "tipo = ?, " +
+            "chave = ? " +
+            "where usuario_id = ?;";
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
+
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, file.getPath());
+            preparedStatement.setString(2, file.getType());
+            preparedStatement.setString(3, file.getKey());
+            preparedStatement.setLong(4, file.getUserId());
+
+            preparedStatement.execute();
+            connection.commit();
+
+            return true;
+
+
+        } catch (final Exception e) {
+            try {
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println(e1.getMessage());
+            }
+
+            return false;
+        } finally {
+            ConnectionFactory.close(preparedStatement, connection);
+        }
+    }
+
+    @Override
+    public boolean deleteFile(long id) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        final String sql = "delete from arquivo_usuario where usuario_id = ?";
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
+
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setLong(1, id);
+
+            preparedStatement.execute();
+
+            connection.commit();
+
+            return true;
+        } catch (final Exception e) {
+            try {
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println(e1.getMessage());
+            }
+            return false;
+        } finally {
+            ConnectionFactory.close(preparedStatement, connection);
+        }
     }
 }

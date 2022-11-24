@@ -1,5 +1,6 @@
 package br.dp.api.service.impl;
 
+import br.dp.api.service.AwsS3Service;
 import br.dp.api.service.InstituicaoService;
 import br.dp.db.dao.InstituicaoDao;
 import br.dp.db.dao.MunicipioDao;
@@ -19,6 +20,9 @@ public class InstituicaoServiceImpl implements InstituicaoService {
 
     @Autowired
     private MunicipioDao municipioDao;
+
+    @Autowired
+    private AwsS3Service fileService;
 
     @Override
     public List<Instituicao> readAll() {
@@ -74,8 +78,12 @@ public class InstituicaoServiceImpl implements InstituicaoService {
 
     @Override
     public boolean delete(final Long id) {
-        // TODO Auto-generated method stub
-        return instituicaoDao.delete(id);
+
+        if(instituicaoDao.delete(id)){
+            return fileService.deleteUserFile(id);
+        }
+
+        return false;
     }
 
 }

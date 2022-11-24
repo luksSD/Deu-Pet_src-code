@@ -11,5 +11,5 @@ public interface FileService {
     String downloadUserFile(Long id);
     List<String> downloadAnimalFiles(Long id);
     String downloadCampainFile(Long id);
-
+    boolean deleteFile(Long id);
 }

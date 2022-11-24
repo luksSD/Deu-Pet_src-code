@@ -5,6 +5,7 @@ import br.dp.model.AnimalsArquives;
 import br.dp.model.CampainsArquives;
 import br.dp.model.UsersArquives;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +62,13 @@ public class FileRestController {
 
         System.out.println("Chegou no FileRestController upload animal");
         return ResponseEntity.ok(awss3Service.uploadAnimalFiles(animalFiles));
+    }
+
+    @DeleteMapping("/delete-user-file/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable("id") final long id) {
+
+        return ResponseEntity.ok(awss3Service.deleteUserFile(id));
+
     }
 
 }

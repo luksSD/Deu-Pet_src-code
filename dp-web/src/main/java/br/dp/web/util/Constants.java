@@ -10,5 +10,6 @@ public class Constants {
     public static final String UPLOAD_USER_FILE_ENDPOINT = ENDPOINT + "files/upload-user-file";
     public static final String UPLOAD_ANIMAL_FILES_ENDPOINT = ENDPOINT + "files/upload-animal-files";
     public static final String UPLOAD_CAMPAIN_FILE_ENDPOINT = ENDPOINT + "files/upload-campain-file";
+    public static final String DELETE_USER_FILE_ENDPOINT = ENDPOINT + "files/delete-user-file/";
 
 }

@@ -12,8 +12,6 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
-import com.amazonaws.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,7 +42,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 
     @Override
     public String downloadUserFile(Long id){
-        return userDao.loadImage(id).getPath();
+        return userDao.loadUserImg(id).getPath();
     }
 
     @Override
@@ -69,6 +67,8 @@ public class AwsS3ServiceImpl implements AwsS3Service {
     public Boolean uploadUserFile(UsersArquives file) {
 
         Long result = Long.valueOf(-1);
+        boolean updateFile = file.getKey() != null;
+
         try {
             String[] filenameExtension = file.getType().split("/");
             String key = Constants.USER_KEY + file.getUserId() + "." +filenameExtension[1];
@@ -85,7 +85,11 @@ public class AwsS3ServiceImpl implements AwsS3Service {
             file.setPath(awsS3Client.getResourceUrl(Constants.BUCKET_NAME, key));
             file.setKey(key);
 
-            result = userDao.saveFileAttributes(file);
+            if(updateFile) {
+                result = userDao.saveFileAttributes(file);
+            } else{
+                result = (long) (userDao.updateFileAttributes(file) ? 1 : -1);
+            }
 
             if(result != -1){
                 return true;
@@ -140,37 +144,25 @@ public class AwsS3ServiceImpl implements AwsS3Service {
         int id = 1;
 
         try {
-            System.out.println("uploadAnimalFiles 143");
+
             for (AnimalsArquives file: animalFiles) {
                 String[] filenameExtension = file.getType().split("/");
                 String key = Constants.ANIMAL_KEY + file.getAnimalID() + "/" + id++ + "." + filenameExtension[1];
 
-                System.out.println("uploadAnimalFiles 148");
                 byte[] data = Base64.getDecoder().decode(file.getFile().getBytes(StandardCharsets.UTF_8));
                 InputStream stream = new ByteArrayInputStream(data);
                 ObjectMetadata metaData = new ObjectMetadata();
-                System.out.println("uploadAnimalFiles 152");
                 metaData.setContentType(file.getType());
                 metaData.setContentLength(data.length);
 
-                System.out.println("uploadAnimalFiles 156");
                 awsS3Client.putObject(Constants.BUCKET_NAME, key, stream , metaData);
                 awsS3Client.setObjectAcl(Constants.BUCKET_NAME, key, CannedAccessControlList.PublicRead);
 
-                System.out.println("uploadAnimalFiles 160");
                 file.setPath(awsS3Client.getResourceUrl(Constants.BUCKET_NAME, key));
                 file.setKey(key);
 
-                System.out.println("uploadAnimalFiles 164");
-                System.out.println("ANIMAL ID: " + file.getAnimalID());
-                System.out.println("PATH: " + file.getPath());
-                System.out.println("TIPO: " + file.getType());
-                System.out.println("CHAVE: " + file.getKey());
-                System.out.println("PRIMARIA: " + file.isPrimary());
-                System.out.println("=======================================");
             }
 
-            System.out.println("uploadAnimalFiles 173");
             result = animalDao.saveFileAttributes(animalFiles);
 
         } catch (SdkClientException e) {
@@ -178,6 +170,20 @@ public class AwsS3ServiceImpl implements AwsS3Service {
         }
 
         return result;
+    }
+
+    @Override
+    public Boolean deleteUserFile(long id) {
+
+        boolean response = true;
+        String key = userDao.loadUserImg(id).getKey();
+
+        if(key != null || key.equals("")) {
+            awsS3Client.deleteObject(Constants.BUCKET_NAME, key);
+            response = userDao.deleteFile(id);
+        }
+
+        return response;
     }
 
     private void printFileDetails(UsersArquives file, S3Object s3Object) {

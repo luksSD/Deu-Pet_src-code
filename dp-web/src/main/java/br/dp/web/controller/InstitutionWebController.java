@@ -24,7 +24,7 @@ public class InstitutionWebController {
 
     public static final String INSTITUTION_DEFAULT_IMG = "/resources/images/institutions/institution-default.png";
     public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/images/users/";
-    private String message = "";
+    public static String message = "";
 
     @Autowired
     private InstitutionService instituicaoService;
@@ -112,7 +112,7 @@ public class InstitutionWebController {
         }
 
         if (!message.equals("")) {
-            if (message.equals("Instituição cadastrada com sucesso!") || message.equals("Cadastro da instituição atualizado com sucesso!")) {
+            if (message.contains("sucesso")) {
                 model.addAttribute("succesMessage", message);
             } else {
                 model.addAttribute("errorMessage", message);

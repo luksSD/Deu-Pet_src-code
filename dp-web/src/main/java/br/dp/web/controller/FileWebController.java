@@ -1,18 +1,37 @@
 package br.dp.web.controller;
 
+import br.dp.model.Instituicao;
+import br.dp.web.security.provider.DpAuthenticationProvider;
+import br.dp.web.service.FileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
 @Controller
-@RequestMapping("/images")
-public class ImageHandlerController {
+@RequestMapping("/files")
+public class FileWebController {
+
+    @Autowired
+    FileService fileService;
+
+    @Autowired
+    private DpAuthenticationProvider authProvider;
+
+    @PostMapping("/update-instituicao")
+    public String updateFile(@RequestParam("file") final MultipartFile file, Instituicao instituicao){
+
+        if (fileService.uploadFile(file, instituicao.getId(), instituicao.getTipo())) {
+            InstitutionWebController.message = "Imagem alterada com sucesso!";
+        } else {
+            InstitutionWebController.message = "Erro ao alterar imagem! Tente novamente.";
+        }
+        return "redirect:/instituicao/detalhes/" + instituicao.getId();
+    }
 
     private final String uploadDirectory = System.getProperty("user.dir");
 

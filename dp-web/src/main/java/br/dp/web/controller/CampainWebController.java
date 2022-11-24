@@ -22,7 +22,7 @@ public class CampainWebController {
 
     public static final String CAMPAIN_DEFAULT_IMG = "/resources/images/campains/campain-default.png";
     public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/images/campains/";
-    private String message = "";
+    public static String message = "";
 
     @Autowired
     private CampainService campainService;

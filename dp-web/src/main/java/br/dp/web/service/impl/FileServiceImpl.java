@@ -84,7 +84,7 @@ public class FileServiceImpl implements FileService {
             e.printStackTrace();
         }
         Object fileToUpload;
-        if(type.equals("user")) {
+        if(type.equals("user") || type.equals("INSTITUICAO")) {
             fileToUpload = new UsersArquives();
             ((UsersArquives) fileToUpload).setFile(dataString);
             ((UsersArquives) fileToUpload).setUserId(id);
@@ -100,7 +100,7 @@ public class FileServiceImpl implements FileService {
 
         try {
             final RestTemplate restTemplate = new RestTemplate();
-            if(type.equals("user")) {
+            if(type.equals("user") || type.equals("INSTITUICAO")) {
                 HttpEntity<UsersArquives> httpEntity = new HttpEntity<UsersArquives>((UsersArquives) fileToUpload);
                 final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
                     Boolean.class);

@@ -6,6 +6,7 @@
   <title>Deu Pet - Detalhes da Instituição</title>
 
   <script src="/resources/js/validate-password.js"></script>
+  <script src="/resources/js/change-img.js"></script>
   <script th:inline="javascript" th:if="${errorMessage}">
      window.onload = () => {
         $('#errorModal').modal('show');
@@ -43,10 +44,12 @@
         <div class="card-body">
           <div class="row">
             <div class="col-lg-6">
-              <div class="border-bottom text-center w-75">
-                <img th:src="${img}" alt="profile"
-                     class="img-fluid rounded mb-3 w-25">
-                <div class="col-lg-12 mt-1" >
+              <div class="border-bottom text-center">
+                <div class="col-sm-12">
+                  <img th:src="${img}" alt="profile"
+                       class="img-fluid rounded mb-3 w-25">
+                </div>
+                <div class="col-lg-11 mt-1" >
                   <div class="d-flex justify-content-end mb-1">
                     <button type="button" class="btn btn-gradient-info btn-sm"
                             data-toggle="modal"
@@ -77,38 +80,55 @@
                    aria-labelledby="exclusionModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
-                    <div class="swal2-icon swal2-warning swal2-icon-show"
-                         style="display: flex;">
-                      <div class="swal2-icon-content">!</div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="d-flex justify-content-center bd-highlight mb-3">
+                          <div class="d-flex align-items-center mt-4">
+                            <img th:src="${img}" alt="profile" id="imagem" class="img-fluid rounded">
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <h2 class="swal2-title" id="swal2-title" style="display: block;">Deseja
-                      excluir o cadastro?</h2>
+
+
+                    <h2 class="swal2-title" id="swal2-title" style="display: block;">Alterar imagem</h2>
                     <div class="row text-center mt-3">
-
-                      <p>Atenção! Esta ação não poderá ser revertida!</p>
+                      <p>Selecione uma uma imagem para carregar</p>
                     </div>
-                    <div class="modal-body">
-                      <form  method="POST" >
 
-                        <div class="form-group">
-                          <label for="confirm-password" class="col-form-label">Digite sua senha para confirmar a
-                            exclusão:</label>
-                          <input type="password" class="form-control" id="confirm-password"
-                                 name="password">
-                          <input field="" hidden>
+                    <div class="modal-body">
+
+                      <!--FORMULARIO-->
+                      <form th:action="@{/files/update-instituicao}" th:object="${instituicao}" method="POST" name="formCadastro"
+                             enctype='multipart/form-data'>
+
+                        <div class="col-md-12">
+                          <div class="form-group row">
+
+                            <div class="col-md-12">
+                              <div class="row">
+
+                                <div class="col-md-12 text-center mt-3">
+                                  <input id="files" name="file" type="file" accept="image/jpg, image/jpeg, image/png"
+                                         hidden/>
+                                  <label class="btn btn-outline-info btn-icon-text " for="files">
+                                    <i class="mdi mdi-upload btn-icon-prepend"></i>
+                                    Carregar
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <div class="form-group bg-light py-1 text-center text-danger d-none"
-                             id="errorMessageDiv">
-                          <p id="errorMessage"></p>
-                        </div>
+                        <input th:field="${instituicao.id}" id="idinstituicao" name="idinstituicao" type="hidden">
+                        <input th:field="${instituicao.tipo}" id="tipo" name="tipo" type="hidden">
                         <div class="modal-footer">
                           <button type="button" class="btn btn-gradient-danger"
-                                  onclick="clearErrorMessage();"
                                   data-dismiss="modal">Cancelar
                           </button>
                           <button class="btn btn-gradient-success" id="teste"
-                                  onclick="validateExclusion()"
-                                  type="submit">Confirmar
+                                  type="submit">Alterar
                           </button>
                         </div>
 

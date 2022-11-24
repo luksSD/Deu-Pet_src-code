@@ -57,7 +57,7 @@ public class InstituicaoServiceImpl implements InstituicaoService {
     }
 
     @Override
-    public ResponseEntity<Boolean> update(final Instituicao entity) {
+    public Boolean update(final Instituicao entity) {
 
         final Long id;
         final Municipio municipio = new Municipio();
@@ -70,20 +70,20 @@ public class InstituicaoServiceImpl implements InstituicaoService {
         if (id != -1) {
             entity.setMunicipioId(id);
         } else {
-            return ResponseEntity.ok(false);
+            return false;
         }
 
-        return ResponseEntity.ok(instituicaoDao.update(entity));
+        return instituicaoDao.update(entity);
     }
 
     @Override
-    public ResponseEntity<Boolean> delete(final Long id) {
+    public Boolean delete(final Long id) {
 
         if(instituicaoDao.delete(id)){
-            return ResponseEntity.ok(fileService.deleteUserFile(id));
+            return fileService.deleteUserFile(id);
         }
 
-        return ResponseEntity.ok(false);
+        return false;
     }
 
 }

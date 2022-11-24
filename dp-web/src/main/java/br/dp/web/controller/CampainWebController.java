@@ -2,6 +2,7 @@ package br.dp.web.controller;
 
 import br.dp.model.CampainsArquives;
 import br.dp.model.Campanha;
+import br.dp.web.security.provider.DpAuthenticationProvider;
 import br.dp.web.service.CampainService;
 import br.dp.web.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class CampainWebController {
 
     @Autowired
     private FileService fileService;
+
+    @Autowired
+    private DpAuthenticationProvider authProvider;
 
     @GetMapping("/gerenciar-campanhas")
     public String getCampainsPage(final Model model) {
@@ -111,8 +115,9 @@ public class CampainWebController {
 
     @PostMapping("/create")
     public String create(@RequestParam("file") final MultipartFile file, final Campanha campanha) {
+
+        campanha.setInstituicaoId(authProvider.getAuthenticatedUser().getId());
         final Long id = campainService.create(campanha);
-        CampainsArquives campainImg = null;
 
         if (id != -1) {
             if (!file.isEmpty()) {

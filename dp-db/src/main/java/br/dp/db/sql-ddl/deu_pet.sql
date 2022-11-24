@@ -28,7 +28,7 @@ CREATE TABLE arquivo_usuario
 );
 
 --Tornando animal_id uma FK da tabela arquivo_animal
-ALTER TABLE arquivo_usuario ADD CONSTRAINT fk1_arquivo_usuario foreign key (usuario_id) references usuario(id) on update cascade;
+--ALTER TABLE arquivo_usuario ADD CONSTRAINT fk1_arquivo_usuario foreign key (usuario_id) references usuario(id) on update cascade;
 
 --Criando tabela municipio
 CREATE TABLE municipio
@@ -108,7 +108,7 @@ CREATE TABLE arquivo_animal
 
 
 --Tornando animal_id uma FK da tabela arquivo_animal
-ALTER TABLE arquivo_animal ADD CONSTRAINT fk1_arquivo_animal foreign key (animal_id) references animal(id) on update cascade;
+--ALTER TABLE arquivo_animal ADD CONSTRAINT fk1_arquivo_animal foreign key (animal_id) references animal(id) on update cascade;
 
 
 --Criando pessoa_interessa_animal
@@ -160,7 +160,7 @@ CREATE TABLE arquivo_campanha
 
 
 --Tornando campanha_id uma FK da tabela arquivo_campanha
-ALTER TABLE arquivo_campanha ADD CONSTRAINT fk1_arquivo_campanha foreign key (campanha_id) references campanha(id) on update cascade;
+--ALTER TABLE arquivo_campanha ADD CONSTRAINT fk1_arquivo_campanha foreign key (campanha_id) references campanha(id) on update cascade;
 
 --Criando pessoa_cadastra_campanha
 CREATE TABLE pessoa_interessa_campanha

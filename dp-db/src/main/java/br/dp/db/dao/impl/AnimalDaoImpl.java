@@ -138,7 +138,7 @@ public class AnimalDaoImpl implements AnimalDao {
             preparedStatement.setString(8, entity.getTemperamento());
             preparedStatement.setString(9, entity.getPelagemPrimaria());
             preparedStatement.setString(10, entity.getPelagemSecundaria());
-            preparedStatement.setLong(11, entity.getIdInstituicao());
+            preparedStatement.setLong(11, 4);
 
             preparedStatement.execute();
 
@@ -264,8 +264,8 @@ public class AnimalDaoImpl implements AnimalDao {
         ResultSet resultSet = null;
 
         String sql = "INSERT INTO arquivo_animal ";
-        sql += " (animal_id, caminho, primaria, tipo, chave)";
-        sql += "VALUES(?, ?, ?, ?, ?);";
+        sql += " (animal_id, caminho, primaria)";
+        sql += "VALUES(?, ?, ?);";
 
         boolean response = true;
 

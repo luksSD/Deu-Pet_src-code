@@ -13,7 +13,7 @@ public interface InstituicaoService {
 
     Long create(Instituicao entity);
 
-    ResponseEntity<Boolean> update(Instituicao entity);
+    Boolean update(Instituicao entity);
 
-    ResponseEntity<Boolean> delete(Long id);
+    Boolean delete(Long id);
 }

@@ -67,7 +67,10 @@ public class AwsS3ServiceImpl implements AwsS3Service {
     public Boolean uploadUserFile(UsersArquives file) {
 
         Long result = Long.valueOf(-1);
-        boolean updateFile = file.getKey() != null;
+
+        String existFile = downloadUserFile(file.getUserId());
+
+        boolean updateFile = existFile != null;
 
         try {
             String[] filenameExtension = file.getType().split("/");
@@ -86,9 +89,9 @@ public class AwsS3ServiceImpl implements AwsS3Service {
             file.setKey(key);
 
             if(updateFile) {
-                result = userDao.saveFileAttributes(file);
-            } else{
                 result = (long) (userDao.updateFileAttributes(file) ? 1 : -1);
+            } else{
+                result = userDao.saveFileAttributes(file);
             }
 
             if(result != -1){

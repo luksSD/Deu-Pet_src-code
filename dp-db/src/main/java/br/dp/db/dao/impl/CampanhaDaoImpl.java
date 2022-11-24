@@ -111,8 +111,7 @@ public class CampanhaDaoImpl implements CampanhaDao {
             preparedStatement.setString(3, entity.getRequisitos());
             preparedStatement.setDate(4, entity.getDataInicio());
             preparedStatement.setDate(5, entity.getDataFim());
-            preparedStatement.setLong(6, 4);
-
+            preparedStatement.setLong(6, entity.getInstituicaoId());
             preparedStatement.setString(7, entity.getUrlForm());
 
 

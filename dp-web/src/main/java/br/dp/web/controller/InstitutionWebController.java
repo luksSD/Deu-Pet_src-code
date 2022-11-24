@@ -157,7 +157,6 @@ public class InstitutionWebController {
         final boolean response = instituicaoService.deleteById(id);
 
         if (response) {
-
             fileService.deleteUserFile(id);
 
             message = "Cadastro da instituição excluído com sucesso!";

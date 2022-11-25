@@ -112,7 +112,7 @@ public class AdoptionWebController {
         model.addAttribute("animal", animalModel);
 
         if (!message.equals("")) {
-            if (message.equals("Animal cadastrado com sucesso!") || message.equals("Cadastro do animal atualizado com sucesso!")) {
+            if (message.contains("sucesso")) {
                 model.addAttribute("succesMessage", message);
             } else {
                 model.addAttribute("errorMessage", message);

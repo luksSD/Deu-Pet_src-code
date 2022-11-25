@@ -10,6 +10,9 @@ public interface AwsS3Service {
 
     String downloadUserFile(Long id);
     List<String> downloadAnimalFiles(Long id);
+
+    List<AnimalsArquives> downloadAnimalFilesFull(Long id);
+
     String downloadCampainFile(Long id);
     Boolean uploadUserFile(UsersArquives userFile);
     Boolean uploadCampainFile(CampainsArquives file);

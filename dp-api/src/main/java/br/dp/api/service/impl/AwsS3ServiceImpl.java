@@ -59,6 +59,14 @@ public class AwsS3ServiceImpl implements AwsS3Service {
     }
 
     @Override
+    public List<AnimalsArquives> downloadAnimalFilesFull(Long id) {
+
+        List<AnimalsArquives> animalFiles = animalDao.loadImages(id);
+
+        return animalFiles;
+    }
+
+    @Override
     public String downloadCampainFile(Long id) {
         return campainDao.loadImage(id).getPath();
     }
@@ -154,11 +162,12 @@ public class AwsS3ServiceImpl implements AwsS3Service {
         boolean result = false;
         int id = 1;
 
-        List<String> filesList = downloadAnimalFiles(animalFiles.get(0).getAnimalID());
-        boolean updateFile = filesList.size() > 0;
+        List<AnimalsArquives> filesList = downloadAnimalFilesFull(animalFiles.get(0).getAnimalID());
+        if(filesList.size() > 0) {
+            deleteAnimalFiles(animalFiles.get(0).getAnimalID());
+        }
 
         try {
-
             for (AnimalsArquives file: animalFiles) {
                 String[] filenameExtension = file.getType().split("/");
                 String key = Constants.ANIMAL_KEY + file.getAnimalID() + "/" + id++ + "." + filenameExtension[1];
@@ -177,11 +186,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 
             }
 
-            if(updateFile){
-                result = animalDao.updateFilesAttributes(animalFiles);
-            }else{
-                result = animalDao.saveFileAttributes(animalFiles);
-            }
+            result = animalDao.saveFileAttributes(animalFiles);
 
         } catch (SdkClientException e) {
             System.out.println(e.getMessage());

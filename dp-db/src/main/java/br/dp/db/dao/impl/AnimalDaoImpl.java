@@ -390,11 +390,12 @@ public class AnimalDaoImpl implements AnimalDao {
         ResultSet resultSet = null;
 
         String sql = "update arquivo_animal set " +
+            "animal_id = ?, " +
             "caminho = ?, " +
+            "primaria = ?, " +
             "tipo = ?, " +
             "chave = ? " +
-            "primaria = ? " +
-            "where campanha_id = ?;";
+            "where id = ?;";
 
         boolean response = true;
 
@@ -411,6 +412,7 @@ public class AnimalDaoImpl implements AnimalDao {
                 preparedStatement.setBoolean(3, imgAtt.isPrimary());
                 preparedStatement.setString(4, imgAtt.getType());
                 preparedStatement.setString(5, imgAtt.getKey());
+                preparedStatement.setLong(6, imgAtt.getId());
 
                 preparedStatement.execute();
 

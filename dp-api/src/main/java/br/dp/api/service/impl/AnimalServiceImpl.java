@@ -1,6 +1,7 @@
 package br.dp.api.service.impl;
 
 import br.dp.api.service.AnimalService;
+import br.dp.api.service.AwsS3Service;
 import br.dp.db.dao.AnimalDao;
 import br.dp.model.Animal;
 import br.dp.model.AnimalsArquives;
@@ -14,6 +15,9 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Autowired
     private AnimalDao dao;
+
+    @Autowired
+    private AwsS3Service fileService;
 
     @Override
     public List<Animal> readAll() {
@@ -41,8 +45,11 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     public boolean delete(final Long id) {
-        // TODO Auto-generated method stub
-        return dao.delete(id);
+        boolean response = false;
+        if(dao.delete(id)){
+           response = fileService.deleteAnimalFiles(id);
+        }
+        return response;
     }
 
 }

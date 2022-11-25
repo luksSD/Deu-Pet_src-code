@@ -140,26 +140,6 @@ public class CampainWebController {
         final boolean response = campainService.deleteById(id);
 
         if (response) {
-//            //Exclui arquivos dentro do diretorio se existir
-//            final Path folderPath = Paths.get(System.getProperty("user.dir") + "/images/campains/" + id);
-//
-//            if (Files.exists(folderPath)) {
-//                try {
-//                    final Path imgPath = Path.of(System.getProperty("user.dir") + "/images/campains/" + campainImg.getPath());
-//                    if (Files.exists(imgPath)) {
-//                        Files.delete(imgPath);
-//                    }
-//                } catch (final IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                //Exclui o diretorio
-//                try {
-//                    Files.delete(folderPath);
-//                } catch (final IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
             message = "Cadastro da campanha excluído com sucesso!";
             return "redirect:/campanhas/gerenciar-campanhas";
         } else {

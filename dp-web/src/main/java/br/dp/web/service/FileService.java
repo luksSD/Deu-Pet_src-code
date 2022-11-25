@@ -13,4 +13,5 @@ public interface FileService {
     String downloadCampainFile(Long id);
     boolean deleteUserFile(Long id);
     boolean deleteCampaignFile(Long id);
+    boolean deleteAnimalFiles(Long id);
 }

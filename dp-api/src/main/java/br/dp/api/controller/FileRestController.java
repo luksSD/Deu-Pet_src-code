@@ -76,4 +76,11 @@ public class FileRestController {
 
     }
 
+    @DeleteMapping("/delete-animal-files/{id}")
+    public ResponseEntity<Boolean> deleteAnimalFiles(@PathVariable("id") final long id) {
+
+        return ResponseEntity.ok(awss3Service.deleteAnimalFiles(id));
+
+    }
+
 }

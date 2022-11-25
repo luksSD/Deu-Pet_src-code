@@ -1,5 +1,6 @@
 package br.dp.web.controller;
 
+import br.dp.model.Animal;
 import br.dp.model.Campanha;
 import br.dp.model.Instituicao;
 import br.dp.web.security.provider.DpAuthenticationProvider;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/files")
@@ -41,6 +44,16 @@ public class FileWebController {
         return "redirect:/campanhas/detalhes-campanha/" + campanha.getId();
     }
 
+    @PostMapping("/update-animal")
+    public String updateAnimalFile(@RequestParam("file") List<MultipartFile> files, Animal animal){
+
+        if (fileService.uploadFiles(files, animal.getId())) {
+            AdoptionWebController.message = "Imagem alterada com sucesso!";
+        } else {
+            AdoptionWebController.message = "Erro ao alterar imagem. Tente novamente!";
+        }
+        return "redirect:/adocao/detalhes-animal/" + animal.getId();
+    }
 
     @DeleteMapping("/delete-institution-file/{id}")
     public String deleteInstitutionFile(@PathVariable("id") final Long id){
@@ -62,5 +75,16 @@ public class FileWebController {
             CampainWebController.message = "Erro ao excluir a imagem. Tente novamente!";
         }
         return "redirect:/campanhas/detalhes-campanha/" + id;
+    }
+
+    @DeleteMapping("/delete-animal-files/{id}")
+    public String deleteAnimalFiles(@PathVariable("id") final Long id){
+
+        if (fileService.deleteAnimalFiles(id)){
+            CampainWebController.message = "Imagem excluída com sucesso!";
+        } else {
+            CampainWebController.message = "Erro ao excluir a imagem. Tente novamente!";
+        }
+        return "redirect:/adocao/detalhes-animal/" + id;
     }
 }

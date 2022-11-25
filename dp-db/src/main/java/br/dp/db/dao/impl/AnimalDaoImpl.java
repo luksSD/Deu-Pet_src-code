@@ -138,7 +138,7 @@ public class AnimalDaoImpl implements AnimalDao {
             preparedStatement.setString(8, entity.getTemperamento());
             preparedStatement.setString(9, entity.getPelagemPrimaria());
             preparedStatement.setString(10, entity.getPelagemSecundaria());
-            preparedStatement.setLong(11, 4);
+            preparedStatement.setLong(11, entity.getIdInstituicao());
 
             preparedStatement.execute();
 
@@ -264,8 +264,8 @@ public class AnimalDaoImpl implements AnimalDao {
         ResultSet resultSet = null;
 
         String sql = "INSERT INTO arquivo_animal ";
-        sql += " (animal_id, caminho, primaria)";
-        sql += "VALUES(?, ?, ?);";
+        sql += " (animal_id, caminho, primaria, tipo, chave)";
+        sql += "VALUES(?, ?, ?, ?, ?);";
 
         boolean response = true;
 
@@ -349,6 +349,96 @@ public class AnimalDaoImpl implements AnimalDao {
         }
 
         return animalsImagesList;
+    }
+
+    @Override
+    public boolean deleteFiles(long id) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        final String sql = "delete from arquivo_animal where animal_id = ?";
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
+
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setLong(1, id);
+
+            preparedStatement.execute();
+
+            connection.commit();
+
+            return true;
+        } catch (final Exception e) {
+            try {
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println(e1.getMessage());
+            }
+            return false;
+        } finally {
+            ConnectionFactory.close(preparedStatement, connection);
+        }
+    }
+
+    @Override
+    public boolean updateFilesAttributes(List<AnimalsArquives> file) {
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        String sql = "update arquivo_animal set " +
+            "caminho = ?, " +
+            "tipo = ?, " +
+            "chave = ? " +
+            "primaria = ? " +
+            "where campanha_id = ?;";
+
+        boolean response = true;
+
+        try {
+
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
+
+            for (final AnimalsArquives imgAtt : file) {
+                preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+                preparedStatement.setLong(1, imgAtt.getAnimalID());
+                preparedStatement.setString(2, imgAtt.getPath());
+                preparedStatement.setBoolean(3, imgAtt.isPrimary());
+                preparedStatement.setString(4, imgAtt.getType());
+                preparedStatement.setString(5, imgAtt.getKey());
+
+                preparedStatement.execute();
+
+                resultSet = preparedStatement.getGeneratedKeys();
+
+                if (!resultSet.next()) {
+                    response = false;
+                    break;
+                }
+            }
+
+            if (response) {
+                connection.commit();
+            } else {
+                connection.abort(null);
+            }
+
+        } catch (final Exception e) {
+            try {
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println(e1.getMessage());
+            } finally {
+                ConnectionFactory.close(resultSet, preparedStatement, connection);
+            }
+        }
+
+        return response;
     }
 
 }

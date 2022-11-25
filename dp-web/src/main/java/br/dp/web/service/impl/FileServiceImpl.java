@@ -221,4 +221,24 @@ public class FileServiceImpl implements FileService {
             return response;
         }
     }
+
+    @Override
+    public boolean deleteAnimalFiles(Long id) {
+        boolean response;
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+            final ResponseEntity<Boolean> requestResponse = restTemplate.exchange(Constants.DELETE_ANIMAL_FILES_ENDPOINT + id, HttpMethod.GET, httpEntity,
+                Boolean.class);
+
+            response = Boolean.TRUE.equals(requestResponse.getBody());
+
+            return response;
+
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
 }

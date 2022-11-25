@@ -154,6 +154,9 @@ public class AwsS3ServiceImpl implements AwsS3Service {
         boolean result = false;
         int id = 1;
 
+        List<String> filesList = downloadAnimalFiles(animalFiles.get(0).getAnimalID());
+        boolean updateFile = filesList.size() > 0;
+
         try {
 
             for (AnimalsArquives file: animalFiles) {
@@ -174,7 +177,11 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 
             }
 
-            result = animalDao.saveFileAttributes(animalFiles);
+            if(updateFile){
+                result = animalDao.updateFilesAttributes(animalFiles);
+            }else{
+                result = animalDao.saveFileAttributes(animalFiles);
+            }
 
         } catch (SdkClientException e) {
             System.out.println(e.getMessage());
@@ -209,6 +216,26 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 
         return response;
     }
+
+    @Override
+    public Boolean deleteAnimalFiles(long id) {
+        boolean response = true;
+        List<AnimalsArquives> animalFiles = animalDao.loadImages(id);
+
+
+        for (AnimalsArquives animal : animalFiles) {
+            if(animal.getKey() != null || animal.getKey().equals("")) {
+                awsS3Client.deleteObject(Constants.BUCKET_NAME, animal.getKey());
+            }
+        }
+        if(animalFiles.size() > 0) {
+            response = animalDao.deleteFiles(id);
+        }
+
+        return response;
+    }
+
+
 
     private void printFileDetails(UsersArquives file, S3Object s3Object) {
         System.out.println("URL IMG: " + awsS3Client.getResourceUrl("deu-pet", file.getKey()));

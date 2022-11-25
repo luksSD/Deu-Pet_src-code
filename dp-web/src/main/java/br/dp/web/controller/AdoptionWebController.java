@@ -2,6 +2,7 @@ package br.dp.web.controller;
 
 import br.dp.model.Animal;
 import br.dp.model.AnimalsArquives;
+import br.dp.web.security.provider.DpAuthenticationProvider;
 import br.dp.web.service.AnimalService;
 import br.dp.web.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,16 @@ public class AdoptionWebController {
 
     public static final String ANIMAL_DEFAULT_IMG = "/resources/images/animals/animal-default.jpg";
     public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/images/animals/";
-    private String message = "";
+    public static String message = "";
 
     @Autowired
     private AnimalService animalService;
 
     @Autowired
     private FileService fileService;
+
+    @Autowired
+    private DpAuthenticationProvider authProvider;
 
 
     @GetMapping("/cadastrar-animal")
@@ -45,6 +49,7 @@ public class AdoptionWebController {
     @PostMapping("/create")
     public String create(@RequestParam("file") final List<MultipartFile> files, final Animal animal, final Model model) {
 
+        animal.setIdInstituicao(authProvider.getAuthenticatedUser().getId());
         //Cadastra animal
         final Long id = animalService.create(animal);
 
@@ -154,29 +159,9 @@ public class AdoptionWebController {
 
         if (senha.equals("123")) {
 
-//            final List<AnimalsArquives> imgsList = animalService.loadAnimalImgs(animal.getId());
             response = animalService.delete(animal.getId());
 
             if (response) {
-                //Exclui arquivos dentro do diretorio se existir
-//                final String pathName = System.getProperty("user.dir") + "/images/animals/" + animal.getId();
-//                if (Files.exists(Path.of(pathName))) {
-//                    for (final AnimalsArquives animalImg : imgsList) {
-//                        try {
-//                            Files.delete(Path.of(System.getProperty("user.dir") + "/images/animals/" + animalImg.getPath()));
-//                        } catch (final IOException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//
-//                    //Exclui o diretorio
-//                    try {
-//                        Files.delete(Path.of(pathName));
-//                    } catch (final IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-
                 message = "Cadastro do animal excluído com sucesso!";
                 return "redirect:/adocao/gerenciar-animais";
             } else {

@@ -77,11 +77,9 @@ public class AdoptionWebController {
             List<String> imgList = fileService.downloadAnimalFiles(animal.getId());
 
             if (imgList.size() > 0) {
-                model.addAttribute("imgs", imgList);
+                animal.setPrimaryImagePath(imgList.get(0));
             } else {
-                imgList = new ArrayList<String>();
-                imgList.add(ANIMAL_DEFAULT_IMG);
-                model.addAttribute("imgs", imgList);
+                animal.setPrimaryImagePath(ANIMAL_DEFAULT_IMG);
             }
         }
 

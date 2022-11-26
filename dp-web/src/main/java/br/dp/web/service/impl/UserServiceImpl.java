@@ -99,4 +99,25 @@ public class UserServiceImpl implements UserService {
         return id;
 
     }
+
+    @Override
+    public boolean updatePassword(Usuario entity) {
+
+        boolean response = false;
+
+        final String endpoint = Constants.ENDPOINT + "users/change-password";
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<Usuario> httpEntity = new HttpEntity<Usuario>(entity);
+            final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
+                boolean.class);
+            response = Boolean.TRUE.equals(responseEntity.getBody());
+
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return response;
+    }
 }

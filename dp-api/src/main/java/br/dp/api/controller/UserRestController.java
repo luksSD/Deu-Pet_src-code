@@ -34,12 +34,22 @@ public class UserRestController {
 
     }
 
+    @ApiOperation(value = "Cria novo usuário")
     @PostMapping("/create")
-    @ApiOperation(value = "Cria cadastro de Instituição")
     public ResponseEntity<Long> create(@RequestBody final Usuario user) {
 
         return ResponseEntity.ok(userService.create(user));
 
     }
+
+    @ApiOperation(value = "Altera senha do usuário")
+    @PostMapping("/change-password")
+    public ResponseEntity<Boolean> changePassword(@RequestBody final Usuario user) {
+
+        return ResponseEntity.ok(userService.changePassword(user));
+
+    }
+
+
 
 }

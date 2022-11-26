@@ -53,6 +53,11 @@ public class UserServiceImpl implements UserService {
         return userDao.create(user);
     }
 
+    @Override
+    public boolean changePassword(Usuario user) {
+        return userDao.changePassword(user);
+    }
+
     private enum CREDENTIALS {
         USERNAME,
         PASSWORD

@@ -13,4 +13,6 @@ public interface UserService {
 
     Long create(Usuario entity);
 
+    boolean updatePassword(Usuario entity);
+
 }

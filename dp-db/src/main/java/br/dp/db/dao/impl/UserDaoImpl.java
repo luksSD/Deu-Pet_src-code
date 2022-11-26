@@ -263,4 +263,39 @@ public class UserDaoImpl implements UserDao {
             ConnectionFactory.close(preparedStatement, connection);
         }
     }
+
+    @Override
+    public boolean changePassword(Usuario user) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        String sql = "update usuario set " +
+            "senha = ? " +
+            "where id = ?;";
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
+
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, user.getSenha());
+            preparedStatement.setLong(2, user.getId());
+
+            preparedStatement.execute();
+            connection.commit();
+
+            return true;
+
+        } catch (final Exception e) {
+            try {
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println(e1.getMessage());
+            }
+            return false;
+        } finally {
+            ConnectionFactory.close(preparedStatement, connection);
+        }
+    }
 }

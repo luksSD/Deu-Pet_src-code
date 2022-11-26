@@ -10,4 +10,6 @@ public interface UserService {
     Usuario validateLogin(String encodedData);
 
     Long create(Usuario user);
+
+    boolean changePassword(Usuario user);
 }

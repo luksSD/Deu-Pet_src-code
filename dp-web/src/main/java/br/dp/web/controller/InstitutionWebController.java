@@ -2,9 +2,11 @@ package br.dp.web.controller;
 
 import br.dp.model.Instituicao;
 import br.dp.model.Municipio;
+import br.dp.model.Usuario;
 import br.dp.web.service.CityService;
 import br.dp.web.service.FileService;
 import br.dp.web.service.InstitutionService;
+import br.dp.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +31,9 @@ public class InstitutionWebController {
 
     @Autowired
     private FileService fileService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/gerenciar-instituicoes")
     public String getInstitutionsPage(final Model model) {
@@ -167,5 +172,23 @@ public class InstitutionWebController {
         }
     }
 
+    @PostMapping("/alterar-senha")
+    public String changePassword(@RequestParam(value = "password") final String senha, Instituicao instituicao) {
+
+        Usuario user = new Usuario();
+
+        user.setSenha(senha);
+        user.setId(instituicao.getId());
+
+        final boolean response = userService.updatePassword(user);
+
+        if (response) {
+            message = "Senha da instituição alterada com sucesso!";
+        } else {
+            message = "Não foi possível alterar a senha da instituição. Tente novamente!";
+        }
+        return "redirect:/instituicao/detalhes/" + instituicao.getId();
+
+    }
 
 }

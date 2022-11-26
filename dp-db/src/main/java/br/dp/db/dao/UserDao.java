@@ -16,4 +16,6 @@ public interface UserDao {
     boolean updateFileAttributes(UsersArquives file);
 
     boolean deleteFile(long id);
+
+    boolean changePassword(Usuario user);
 }

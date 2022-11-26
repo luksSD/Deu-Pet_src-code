@@ -3,7 +3,7 @@
       layout:decorate="~{layout}">
 <head>
   <meta charset="UTF-8">
-  <title>Deu Pet - Detalhes da Instituição</title>
+  <title sec:authorize="hasRole('ADMIN')">Deu Pet - Detalhes da Instituição</title>
 
   <script src="/resources/js/validate-password.js"></script>
   <script src="/resources/js/change-img.js"></script>
@@ -31,10 +31,11 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a th:href="@{/}">Início</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><a
-          th:href="@{/instituicao/gerenciar-instituicoes}">Gerenciar
-          Instituições</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Detalhes da Instituição</li>
+        <li class="breadcrumb-item active" aria-current="page" sec:authorize="hasRole('ADMIN')">
+          <a th:href="@{/instituicao/gerenciar-instituicoes}">Gerenciar Instituições</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page" sec:authorize="hasRole('ADMIN')">Detalhes da Instituição</li>
+        <li class="breadcrumb-item active" aria-current="page" sec:authorize="hasRole('INSTITUICAO')">Perfil</li>
       </ol>
     </nav>
   </div>

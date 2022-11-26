@@ -1,9 +1,12 @@
 package br.dp.web.controller;
 
 import br.dp.model.Instituicao;
+import br.dp.model.Municipio;
 import br.dp.model.Usuario;
 import br.dp.web.security.provider.DpAuthenticationProvider;
+import br.dp.web.service.CityService;
 import br.dp.web.service.FileService;
+import br.dp.web.service.InstitutionService;
 import br.dp.web.service.UserService;
 import br.dp.web.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +31,18 @@ public class ProfileWebController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private InstitutionService institutionService;
+
+    @Autowired
+    private CityService cityService;
+
     @GetMapping("/detalhes")
     public String getProfileDetailPage(Model model) {
 
         Usuario user = authProvider.getAuthenticatedUser();
         String file = fileService.downloadUserFile(user.getId());
         user.setProfileImg(file != null ? file : Constants.USER_DEFAULT_IMG);
-        model.addAttribute("usuario", user);
 
         if (!message.equals("")) {
             if (message.contains("sucesso")) {
@@ -44,8 +52,20 @@ public class ProfileWebController {
             }
             message = "";
         }
+        if(user.getTipo().equals("ADMIN")) {
+            model.addAttribute("usuario", user);
+            return "profile/profile-detail-page";
+        } else {
+            String img = fileService.downloadUserFile(user.getId());
+            Instituicao institution = institutionService.readById(user.getId());
+            final Municipio city = cityService.readById(institution.getMunicipioId());
 
-        return "profile/profile-detail-page";
+            model.addAttribute("instituicao",institution);
+            model.addAttribute("img", img);
+            model.addAttribute("cidade", city);
+
+            return "institutions/institution-detail-page";
+        }
     }
 
     @GetMapping("/editar-perfil/{id}")

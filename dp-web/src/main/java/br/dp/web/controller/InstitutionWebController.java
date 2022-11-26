@@ -183,9 +183,9 @@ public class InstitutionWebController {
         final boolean response = userService.updatePassword(user);
 
         if (response) {
-            message = "Senha da instituição alterada com sucesso!";
+            message = "Senha alterada com sucesso!";
         } else {
-            message = "Não foi possível alterar a senha da instituição. Tente novamente!";
+            message = "Não foi possível alterar a senha. Tente novamente!";
         }
         return "redirect:/instituicao/detalhes/" + instituicao.getId();
 

@@ -3,6 +3,7 @@ package br.dp.web.controller;
 import br.dp.model.Animal;
 import br.dp.model.Campanha;
 import br.dp.model.Instituicao;
+import br.dp.model.Usuario;
 import br.dp.web.security.provider.DpAuthenticationProvider;
 import br.dp.web.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,17 @@ public class FileWebController {
             InstitutionWebController.message = "Erro ao alterar imagem! Tente novamente.";
         }
         return "redirect:/instituicao/detalhes/" + instituicao.getId();
+    }
+
+    @PostMapping("/update-user")
+    public String updateFile(@RequestParam("file") final MultipartFile file, Usuario user){
+
+        if (fileService.uploadFile(file, user.getId(), "user")) {
+            InstitutionWebController.message = "Imagem alterada com sucesso!";
+        } else {
+            InstitutionWebController.message = "Erro ao alterar imagem! Tente novamente.";
+        }
+        return "redirect:/perfil/detalhes";
     }
 
     @PostMapping("/update-campaign")

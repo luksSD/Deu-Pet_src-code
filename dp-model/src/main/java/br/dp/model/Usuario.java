@@ -15,5 +15,6 @@ public class Usuario extends BasePojo {
     private Timestamp dataCadastro;
     private boolean aceite;
     private String tipo;
+    private String profileImg;
 
 }

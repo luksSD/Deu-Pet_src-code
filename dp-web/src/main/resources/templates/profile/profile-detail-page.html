@@ -134,6 +134,58 @@
                 </div>
               </div>
 
+
+              <div class="col-lg-8 mt-1 ">
+                <div class="d-flex justify-content-between mb-1">
+                  <button class="btn btn-sm btn-gradient-primary btn-block" data-toggle="modal"
+                          data-target="#passwordModal">
+                    Alterar senha
+                  </button>
+                </div>
+              </div>
+
+              <!--MODAL PARA ALTERAÇAO DE SENHA-->
+              <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog"
+                   aria-labelledby="passwordModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="swal2-icon swal2-warning swal2-icon-show"
+                         style="display: flex;">
+                      <div class="swal2-icon-content">!</div>
+                    </div>
+                    <h2 class="swal2-title" style="display: block;">Alterar senha</h2>
+                    <div class="modal-body">
+                      <form th:action="@{/perfil/alterar-senha}" method="POST" th:object="${usuario}">
+
+                        <div class="form-group">
+                          <label for="new-password" class="col-form-label">Digite a nova senha</label>
+                          <input type="password" class="form-control" id="new-password"
+                                 th:name="password">
+                          <label for="confirm-password" class="col-form-label">Digite a senha novamente para confirmar</label>
+                          <input type="password" class="form-control" id="confirm-password">
+                          <input type="number" th:field="${usuario.id}" hidden>
+                        </div>
+                        <div class="form-group bg-light py-1 text-center text-danger d-none"
+                             id="errorMessageDiv">
+                          <p id="errorMessage"></p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-gradient-danger"
+                                  onclick="clearErrorMessage();"
+                                  data-dismiss="modal">Cancelar
+                          </button>
+                          <button class="btn btn-gradient-success"
+                                  onclick="validatePassword()"
+                                  type="submit">Confirmar
+                          </button>
+                        </div>
+
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
             <div class="col-lg-6">
@@ -208,7 +260,7 @@
     </div>
   </div>
 
-  <!--MODAL DE CONFIRMAÇÃO DE CADASTRO-->
+  <!--MODAL DE SUCESSO-->
   <div class="modal fade" id="succesModal" tabindex="-1" role="dialog"
        aria-labelledby="succesModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -240,6 +292,8 @@
       </div>
     </div>
   </div>
+
+
 </div>
 
 </body>

@@ -5551,7 +5551,7 @@
      border: 0;
 }
  .dropdown-item:hover, .dropdown-item:focus {
-     color: #1e2125;
+     color: #000000;
      background-color: #e9ecef;
 }
  .dropdown-item.active, .dropdown-item:active {
@@ -15245,7 +15245,7 @@
 }
  .dropdown .dropdown-menu .dropdown-item:hover {
      background-color: #f8f9fa;
-     color: #ffffff;
+     color: #000000;
 }
 /* Forms */
  .form-group {

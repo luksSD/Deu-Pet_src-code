@@ -15258,6 +15258,7 @@
 }
  .input-group-append .input-group-text, .input-group-prepend .input-group-text {
      border-color: #ebedf2;
+     border-right: none;
      padding: 0.94rem 0.75rem;
      color: #c9c8c8;
 }
@@ -19247,3 +19248,15 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-right {
 
 .input-group-append {
   margin-left: -1px; }
+
+#user-icon, #lock-icon {
+  color: #fd6efd !important
+}
+
+.justify-content-center {
+    background-color: #f2edf3 !important;
+}
+
+.auth.auth-img-bg .auth-form-transparent {
+    background-color: white
+}

@@ -2,7 +2,7 @@ package br.dp.db.dao;
 
 import br.dp.model.Animal;
 import br.dp.model.AnimalsArquives;
-import br.dp.model.CampainsArquives;
+import br.dp.model.PessoaInteressaAnimal;
 
 import java.util.List;
 
@@ -24,5 +24,13 @@ public interface AnimalDao {
 
     boolean deleteFiles(long id);
 
-    boolean updateFilesAttributes(List<AnimalsArquives> file);
+    Long adoptionRequest(PessoaInteressaAnimal adoptionRequest);
+
+    List<PessoaInteressaAnimal> readAdoptionsRequests(Long id);
+
+    PessoaInteressaAnimal readRequestsById(Long id);
+
+    boolean updateRequestStatus(PessoaInteressaAnimal entity);
+
+    boolean updateAnimalStatus(Animal entity);
 }

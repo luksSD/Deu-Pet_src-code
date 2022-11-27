@@ -2,13 +2,15 @@ package br.dp.model;
 
 import lombok.Data;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 @Data
-public class PessoaInteressaAnimal {
+public class PessoaInteressaAnimal extends BasePojo {
 
-    private String pessoaId;
-    private String animalId;
+    private Long pessoaId;
+    private Long animalId;
+    private String status;
     private Timestamp data;
-
+    private Animal animal;
+    private Pessoa pessoa;
 }

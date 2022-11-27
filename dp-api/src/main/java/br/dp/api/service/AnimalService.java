@@ -1,7 +1,7 @@
 package br.dp.api.service;
 
 import br.dp.model.Animal;
-import br.dp.model.AnimalsArquives;
+import br.dp.model.PessoaInteressaAnimal;
 
 import java.util.List;
 
@@ -17,4 +17,13 @@ public interface AnimalService {
 
     boolean delete(Long id);
 
+    Long adoptionRequest(PessoaInteressaAnimal adoptionRequest);
+
+    List<PessoaInteressaAnimal> readAdoptionsRequests(Long id);
+
+    PessoaInteressaAnimal readRequestById(Long id);
+
+    boolean updateRequestStatus(PessoaInteressaAnimal entity);
+
+    boolean updateAnimalStatus(Animal entity);
 }

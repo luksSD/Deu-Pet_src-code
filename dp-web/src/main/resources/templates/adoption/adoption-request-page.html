@@ -22,53 +22,141 @@
     </nav>
   </div>
 
+
   <div class="row">
-    <div class="col-lg-12 grid-margin stretch-card">
+    <div class="col-md-12 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Gerenciar solicitações de adoção</h4>
-          <p class="card-description"> Lista de solicitações
-          </p>
-          <table class="table table-striped">
-            <thead>
-            <tr>
-              <th> Usuário</th>
-              <th> Nome</th>
-              <th> Animal</th>
-              <th> Data</th>
-              <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <td class="py-1">
-                <img src="/resources/images/faces-clipart/pic-1.png" alt="image">
-              </td>
-              <td> Herman Beck</td>
-              <td> Miau</td>
-              <td> 03/10/2022</td>
-              <td>
+          <h4 class="card-title">Gerenciar solicitações</h4>
+          <p class="card-description">Visualize as solicitações em aberto, aprovadas e recusadas</p>
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home-1" role="tab" aria-controls="home" aria-selected="true">Solicitações</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile-1" role="tab" aria-controls="profile" aria-selected="false">Aprovadas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact-1" role="tab" aria-controls="contact" aria-selected="false">Recusadas</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade active show" id="home-1" role="tabpanel" aria-labelledby="home-tab">
 
-                <a class="btn btn-gradient-info btn-sm"
-                   th:href="@{/adocao/detalhes-solicitacao-adocao}">
-                  Visualizar</a>
-              </td>
-            </tr>
-            <tr>
-              <td class="py-1">
-                <img src="/resources/images/faces-clipart/pic-2.png" alt="image">
-              </td>
-              <td> Olivia Maria</td>
-              <td> Tiburcinho</td>
-              <td> 04/10/2022</td>
-              <td>
-                <a class="btn btn-gradient-info btn-sm"
-                   th:href="@{/adocao/detalhes-solicitacao-adocao}">
-                  Visualizar</a>
-              </td>
-            </tr>
-            </tbody>
-          </table>
+              <table class="table mt-4" id="custom-table-request">
+                <thead>
+                <tr>
+                  <th> Animal</th>
+                  <th> Interessado</th>
+                  <th> Situação</th>
+                  <th> Data</th>
+                  <th></th>
+                </tr>
+                </thead>
+
+                <tbody id="table-request-body">
+                  <tr th:each="request : ${requests}" th:if="${request.status == 'solicitado'}" id="table-request-lines">
+                    <td>
+                      <img th:src="${request.animal.primaryImagePath}" class="me-2" alt="image">
+                      <span th:text="${request.animal.nome}">Nome animal</span>
+                    </td>
+                    <td>
+                      <img th:src="${request.pessoa.profileImg}" class="me-2" alt="image">
+                      <span th:text="${request.pessoa.nome}">Nome interessado</span>
+                    </td>
+                    <td th:if="${request.status == 'solicitado'}"><label
+                      class="badge badge-gradient-info badge-pill">SOLICITADO</label></td>
+                    <td><span th:text="${request.data}">Data</span></td>
+                    <td>
+                      <a class="btn btn-gradient-info btn-sm"
+                         th:href="@{/adocao/detalhes-solicitacao/{id} (id=${request.id})}">
+                        Detalhes</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div th:if="${!solicitado}" class="alert alert-warning" id="noEntryAlert1" role="alert"> Nenhuma solicitação encontrada.</div>
+
+            </div>
+
+            <div class="tab-pane fade" id="profile-1" role="tabpanel" aria-labelledby="profile-tab">
+              <table class="table mt-4"
+                     id="custom-table-approve">
+                <thead id="table-approve-head">
+                <tr>
+                  <th> Animal</th>
+                  <th> Interessado</th>
+                  <th> Situação</th>
+                  <th> Data</th>
+                  <th></th>
+                </tr>
+                </thead>
+
+                <tbody id="table-approve-body">
+                  <tr th:each="request : ${requests}" th:if="${request.status == 'aprovado'}" id="table-approve-lines">
+                    <td>
+                      <img th:src="${request.animal.primaryImagePath}" class="me-2" alt="image">
+                      <span th:text="${request.animal.nome}">Nome animal</span>
+                    </td>
+                    <td>
+                      <img th:src="${request.pessoa.profileImg}" class="me-2" alt="image">
+                      <span th:text="${request.pessoa.nome}">Nome interessado</span>
+                    </td>
+                    <td th:if="${request.status == 'aprovado'}"><label
+                      class="badge badge-gradient-success badge-pill">APROVADO</label></td>
+                    <td><span th:text="${request.data}">Data</span></td>
+                    <td>
+                      <a class="btn btn-gradient-info btn-sm"
+                         th:href="@{/adocao/detalhes-solicitacao/{id} (id=${request.id})}">
+                      Detalhes</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div th:if="${!aprovado}" class="alert alert-warning" id="noEntryAlert2" role="alert"> Nenhuma solicitação encontrada.</div>
+
+            </div>
+
+            <div class="tab-pane fade" id="contact-1" role="tabpanel" aria-labelledby="contact-tab">
+              <table class="table mt-4"
+                     id="custom-table-reject">
+                <thead id="table-reject-head">
+                <tr>
+                  <th> Animal</th>
+                  <th> Interessado</th>
+                  <th> Situação</th>
+                  <th> Data</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody id="table-reject-body">
+                  <tr th:each="request : ${requests}" th:if="${request.status == 'recusado'}" id="table-reject-lines">
+                    <td>
+                      <img th:src="${request.animal.primaryImagePath}" class="me-2" alt="image">
+                      <span th:text="${request.animal.nome}">Nome animal</span>
+                    </td>
+                    <td>
+                      <img th:src="${request.pessoa.profileImg}" class="me-2" alt="image">
+                      <span th:text="${request.pessoa.nome}">Nome interessado</span>
+                    </td>
+                    <td th:if="${request.status == 'recusado'}"><label
+                      class="badge badge-gradient-danger badge-pill">RECUSADO</label></td>
+                    <td><span th:text="${request.data}">Data</span></td>
+                    <td>
+                      <a class="btn btn-gradient-info btn-sm"
+                         th:href="@{/adocao/detalhes-solicitacao/{id} (id=${request.id})}">
+                      Detalhes</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div th:if="${!recusado}" class="alert alert-warning" id="noEntryAlert3" role="alert"> Nenhuma solicitação encontrada.</div>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -77,6 +165,7 @@
 
 </div>
 
+</div>
 
 </body>
 </html>

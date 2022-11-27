@@ -59,7 +59,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
     }
 
     @Override
-    public List<AnimalsArquives> downloadAnimalFilesFull(Long id) {
+    public List<AnimalsArquives> downloadAllAnimalsFiles(Long id) {
 
         List<AnimalsArquives> animalFiles = animalDao.loadImages(id);
 
@@ -162,7 +162,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
         boolean result = false;
         int id = 1;
 
-        List<AnimalsArquives> filesList = downloadAnimalFilesFull(animalFiles.get(0).getAnimalID());
+        List<AnimalsArquives> filesList = downloadAllAnimalsFiles(animalFiles.get(0).getAnimalID());
         if(filesList.size() > 0) {
             deleteAnimalFiles(animalFiles.get(0).getAnimalID());
         }

@@ -1,7 +1,7 @@
 package br.dp.web.service.impl;
 
 import br.dp.model.Animal;
-import br.dp.model.AnimalsArquives;
+import br.dp.model.PessoaInteressaAnimal;
 import br.dp.web.service.AnimalService;
 import br.dp.web.util.Constants;
 import org.springframework.http.HttpEntity;
@@ -20,7 +20,6 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     public List<Animal> readAll() {
-
 
         final String endpoint = Constants.ENDPOINT + "animal/read-all";
 
@@ -122,6 +121,95 @@ public class AnimalServiceImpl implements AnimalService {
                 httpEntity, Boolean.class);
 
             response = requestResponse.getBody();
+
+        } catch (final Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+
+        return response;
+    }
+
+    @Override
+    public List<PessoaInteressaAnimal> readAdoptionsRequests(Long id) {
+
+        final String endpoint = Constants.ENDPOINT + "animal/read-all-adoptions-requests/" + id;
+
+        List<PessoaInteressaAnimal> response = null;
+        try {
+
+            final RestTemplate restTemplate = new RestTemplate();
+
+            final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+
+            final ResponseEntity<PessoaInteressaAnimal[]> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
+                PessoaInteressaAnimal[].class);
+
+            response = Arrays.asList(Objects.requireNonNull(requestResponse.getBody()));
+
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return response;
+    }
+
+    @Override
+    public PessoaInteressaAnimal readRequestById(Long id) {
+        final String endpoint = Constants.ENDPOINT + "animal/read-request-by-id/" + id;
+
+        PessoaInteressaAnimal response = null;
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+            final ResponseEntity<PessoaInteressaAnimal> requestResponse = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity,
+                PessoaInteressaAnimal.class);
+
+            response = requestResponse.getBody();
+
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return response;
+    }
+
+    @Override
+    public boolean requestStatusApproved(final Long id) {
+        boolean response = false;
+
+        final String endpoint = Constants.ENDPOINT + "animal/request-status-approved/" + id;
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+            final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.PUT, httpEntity,
+                Boolean.class);
+
+            response = Boolean.TRUE.equals(responseEntity.getBody());
+
+        } catch (final Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+
+        return response;
+    }
+
+    @Override
+    public boolean requestStatusDenied(final Long id) {
+        boolean response = false;
+
+        final String endpoint = Constants.ENDPOINT + "animal/request-status-denied/" + id;
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<String>("");
+            final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.PUT, httpEntity,
+                Boolean.class);
+
+            response = Boolean.TRUE.equals(responseEntity.getBody());
 
         } catch (final Exception e) {
 

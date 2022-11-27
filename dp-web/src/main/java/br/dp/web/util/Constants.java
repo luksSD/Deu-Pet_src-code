@@ -15,5 +15,5 @@ public class Constants {
     public static final String DELETE_ANIMAL_FILES_ENDPOINT = ENDPOINT + "files/delete-animal-files/";
 
     public static final String USER_DEFAULT_IMG = "/resources/images/users/user-default.png";
-
+    public static final String ANIMAL_DEFAULT_IMG = "/resources/images/animals/animal-default.jpg";
 }

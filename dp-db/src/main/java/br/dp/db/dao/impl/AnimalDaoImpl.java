@@ -4,6 +4,7 @@ import br.dp.db.connection.ConnectionFactory;
 import br.dp.db.dao.AnimalDao;
 import br.dp.model.Animal;
 import br.dp.model.AnimalsArquives;
+import br.dp.model.PessoaInteressaAnimal;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -95,11 +96,11 @@ public class AnimalDaoImpl implements AnimalDao {
                 animal.setTemperamento(resultSet.getString("temperamento"));
                 animal.setPelagemPrimaria(resultSet.getString("pelagem_primaria"));
                 animal.setPelagemSecundaria(resultSet.getString("pelagem_secundaria"));
-
+                animal.setIdInstituicao(resultSet.getLong("instituicao_id"));
             }
 
         } catch (final Exception e) {
-
+            System.out.println(e.getMessage());
         } finally {
 
             ConnectionFactory.close(resultSet, preparedStatement, connection);
@@ -197,7 +198,7 @@ public class AnimalDaoImpl implements AnimalDao {
             preparedStatement.setString(8, entity.getTemperamento());
             preparedStatement.setString(9, entity.getPelagemPrimaria());
             preparedStatement.setString(10, entity.getPelagemSecundaria());
-            preparedStatement.setLong(11, 4);
+            preparedStatement.setLong(11, entity.getIdInstituicao());
             preparedStatement.setLong(12, entity.getId());
 
             preparedStatement.execute();
@@ -383,51 +384,84 @@ public class AnimalDaoImpl implements AnimalDao {
     }
 
     @Override
-    public boolean updateFilesAttributes(List<AnimalsArquives> file) {
+    public Long adoptionRequest(PessoaInteressaAnimal adoptionRequest) {
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        String sql = "update arquivo_animal set " +
-            "animal_id = ?, " +
-            "caminho = ?, " +
-            "primaria = ?, " +
-            "tipo = ?, " +
-            "chave = ? " +
-            "where id = ?;";
+        String sql = "INSERT INTO pessoa_interessa_animal";
+        sql += " (pessoa_id, animal_id, status, data) ";
+        sql += "VALUES(?, ?, ?, ?);";
 
-        boolean response = true;
+        Long id = Long.valueOf(-1);
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
+
+            preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setLong(1, adoptionRequest.getPessoaId());
+            preparedStatement.setLong(2, adoptionRequest.getAnimalId());
+            preparedStatement.setString(3, "solicitado");
+            preparedStatement.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+
+            preparedStatement.execute();
+
+            resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                id = resultSet.getLong(1);
+            }
+
+            connection.commit();
+
+        } catch (final Exception e) {
+            try {
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println(e1.getMessage());
+            } finally {
+                ConnectionFactory.close(resultSet, preparedStatement, connection);
+            }
+        }
+
+        return id;
+    }
+
+    @Override
+    public List<PessoaInteressaAnimal> readAdoptionsRequests(Long id) {
+
+        List<PessoaInteressaAnimal> requestInfoList = new ArrayList<>();
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        String sql = "select * from pessoa_interessa_animal P " +
+            "inner join animal A on P.animal_id = A.id " +
+            "inner join instituicao I on A.instituicao_id = I.usuario_id " +
+            "WHERE A.instituicao_id = ?; ";
 
         try {
 
             connection = ConnectionFactory.getConnection();
-            connection.setAutoCommit(false);
+            preparedStatement = connection.prepareStatement(sql);
 
-            for (final AnimalsArquives imgAtt : file) {
-                preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setLong(1, id);
 
-                preparedStatement.setLong(1, imgAtt.getAnimalID());
-                preparedStatement.setString(2, imgAtt.getPath());
-                preparedStatement.setBoolean(3, imgAtt.isPrimary());
-                preparedStatement.setString(4, imgAtt.getType());
-                preparedStatement.setString(5, imgAtt.getKey());
-                preparedStatement.setLong(6, imgAtt.getId());
+            resultSet = preparedStatement.executeQuery();
 
-                preparedStatement.execute();
+            while (resultSet.next()) {
+                PessoaInteressaAnimal requestInfo = new PessoaInteressaAnimal();
 
-                resultSet = preparedStatement.getGeneratedKeys();
+                requestInfo.setId(resultSet.getLong("id"));
+                requestInfo.setPessoaId(resultSet.getLong("pessoa_id"));
+                requestInfo.setAnimalId(resultSet.getLong("animal_id"));
+                requestInfo.setStatus(resultSet.getString("status"));
+                requestInfo.setData(resultSet.getTimestamp("data"));
 
-                if (!resultSet.next()) {
-                    response = false;
-                    break;
-                }
-            }
-
-            if (response) {
-                connection.commit();
-            } else {
-                connection.abort(null);
+                requestInfoList.add(requestInfo);
             }
 
         } catch (final Exception e) {
@@ -440,7 +474,127 @@ public class AnimalDaoImpl implements AnimalDao {
             }
         }
 
-        return response;
+        return requestInfoList;
+    }
+
+    @Override
+    public PessoaInteressaAnimal readRequestsById(Long id) {
+
+        PessoaInteressaAnimal requestInfo = null;
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        String sql = "select * from pessoa_interessa_animal WHERE id = ?; ";
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setLong(1, id);
+
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                requestInfo = new PessoaInteressaAnimal();
+
+                requestInfo.setId(resultSet.getLong("id"));
+                requestInfo.setPessoaId(resultSet.getLong("pessoa_id"));
+                requestInfo.setAnimalId(resultSet.getLong("animal_id"));
+                requestInfo.setStatus(resultSet.getString("status"));
+                requestInfo.setData(resultSet.getTimestamp("data"));
+            }
+
+        } catch (final Exception e) {
+            try {
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println(e1.getMessage());
+            } finally {
+                ConnectionFactory.close(resultSet, preparedStatement, connection);
+            }
+        }
+
+        return requestInfo;
+    }
+
+    @Override
+    public boolean updateRequestStatus(PessoaInteressaAnimal entity) {
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        String sql = "UPDATE pessoa_interessa_animal SET";
+        sql += " status = ? ";
+        sql += " WHERE id = ?;  ";
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
+
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, entity.getStatus());
+            preparedStatement.setLong(2, entity.getId());
+
+            preparedStatement.execute();
+
+            connection.commit();
+
+            return true;
+
+        } catch (final Exception e) {
+
+            try {
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println(e1.getMessage());
+            }
+
+            return false;
+        } finally {
+            ConnectionFactory.close(preparedStatement, connection);
+        }
+    }
+
+    @Override
+    public boolean updateAnimalStatus(Animal entity) {
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        String sql = "UPDATE animal SET";
+        sql += " situacao = ? ";
+        sql += " WHERE id = ?;  ";
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            connection.setAutoCommit(false);
+
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, entity.getSituacao());
+            preparedStatement.setLong(2, entity.getId());
+
+            preparedStatement.execute();
+
+            connection.commit();
+
+            return true;
+
+        } catch (final Exception e) {
+
+            try {
+                connection.rollback();
+            } catch (final SQLException e1) {
+                System.out.println(e1.getMessage());
+            }
+
+            return false;
+        } finally {
+            ConnectionFactory.close(preparedStatement, connection);
+        }
     }
 
 }

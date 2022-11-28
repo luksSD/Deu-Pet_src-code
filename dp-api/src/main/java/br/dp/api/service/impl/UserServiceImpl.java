@@ -1,5 +1,6 @@
 package br.dp.api.service.impl;
 
+import br.dp.api.email.EmailService;
 import br.dp.api.service.UserService;
 import br.dp.db.dao.UserDao;
 import br.dp.model.UsersArquives;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -45,6 +47,32 @@ public class UserServiceImpl implements UserService {
         }
 
         return user;
+
+    }
+
+    @Override
+    public boolean checkEmailExist(String email) {
+
+        Usuario user = userDao.checkEmailExist(email);
+
+        if(user == null) {
+            return false;
+        }
+
+        String newPassword = generateNewPassword();
+        user.setSenha(newPassword);
+
+        final EmailService emailService = new EmailService();
+        final String subject = "Recuperação de senha - Deu Pet";
+        final String message = emailService.buildMessage(user.getNome(), generateNewPassword());
+        if(emailService.send(email, subject, message)){
+
+            userDao.changePassword(user);
+
+            return true;
+        }
+
+        return false;
 
     }
 
@@ -96,5 +124,21 @@ public class UserServiceImpl implements UserService {
             System.out.println(e.getMessage());
             return null;
         }
+    }
+
+    public String generateNewPassword() {
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 8;
+        Random random = new Random();
+
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+            .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+            .limit(targetStringLength)
+            .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+            .toString();
+
+        System.out.println(generatedString);
+        return generatedString;
     }
 }

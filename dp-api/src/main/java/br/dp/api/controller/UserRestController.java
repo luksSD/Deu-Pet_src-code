@@ -50,6 +50,14 @@ public class UserRestController {
 
     }
 
+    @ApiOperation(value = "Valida se existe email cadastrado")
+    @PostMapping("/check-email")
+    public ResponseEntity<Boolean> checkEmailExist(@RequestBody final String email) {
 
+        boolean existEmail = userService.checkEmailExist(email);
+
+        return ResponseEntity.ok(existEmail);
+
+    }
 
 }

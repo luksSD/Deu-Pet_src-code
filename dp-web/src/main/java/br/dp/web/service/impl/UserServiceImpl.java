@@ -120,4 +120,25 @@ public class UserServiceImpl implements UserService {
 
         return response;
     }
+
+    @Override
+    public boolean checkEmailExist(String email) {
+        boolean response = false;
+
+        final String endpoint = Constants.ENDPOINT + "users/check-email";
+
+        try {
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpEntity<String> httpEntity = new HttpEntity<String>(email);
+            final ResponseEntity<Boolean> responseEntity = restTemplate.exchange(endpoint, HttpMethod.POST, httpEntity,
+                boolean.class);
+
+            response = Boolean.TRUE.equals(responseEntity.getBody());
+
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return response;
+    }
 }

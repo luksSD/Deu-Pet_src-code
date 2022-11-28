@@ -26,65 +26,15 @@
             <div class="brand-logo">
               <img src="resources/images/DeuPetLogo-2.png" alt="logo">
             </div>
-            <h4>Olá! Vamos começar.</h4>
-            <span>Faça o acesso para continuar.</span>
+            <h4>Tudo certo!</h4>
+            <span>Será enviado um e-mail com sua nova senha de acesso.</span>
 
-            <form class="pt-3" th:action="@{/login}" method="POST">
+            <div class="my-3">
+              <a th:href="@{/acessar}" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">
+                Fazer acesso
+              </a>
+            </div>
 
-              <div class="form-group">
-                <label for="userInput">E-mail</label>
-                <div class="input-group">
-                  <div class="input-group-prepend bg-transparent">
-                        <span class="input-group-text bg-transparent border-right-0">
-                          <i class="mdi mdi-account-outline text-primary" id="user-icon"></i>
-                        </span>
-                  </div>
-                  <input type="email"
-                         name="username"
-                         class="form-control form-control-lg border-left-0"
-                         id="userInput"
-                         placeholder="Insira o e-mail"
-                         required>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="passwordInput">Senha</label>
-                <div class="input-group">
-                  <div class="input-group-prepend bg-transparent">
-                        <span class="input-group-text bg-transparent border-right-0">
-                          <i class="mdi mdi-lock-outline text-primary" id="lock-icon"></i>
-                        </span>
-                  </div>
-                  <input type="password"
-                         name="password"
-                         class="form-control form-control-lg border-left-0"
-                         id="passwordInput"
-                         placeholder="Insira sua senha"
-                         required>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="col-12">
-                  <span class="alert alert-danger" style="white-space: nowrap;"
-                        th:if="${param.error}">E-mail ou senha inválidos. Tente novamente!</span>
-                </div>
-
-              </div>
-
-
-              <div class="my-2 d-flex justify-content-between align-items-center">
-                <a th:href="@{/recuperar-senha}" class="auth-link text-black">Esqueceu sua senha?</a>
-              </div>
-              <div class="my-3">
-                <button type="submit"
-                        class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">
-                  Acessar
-                </button>
-              </div>
-
-
-            </form>
           </div>
         </div>
         <div class="col-lg-6 login-half-bg d-flex flex-row">

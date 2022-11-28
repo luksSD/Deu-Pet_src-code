@@ -75,6 +75,25 @@
     </dependency>
 
     <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-mail</artifactId>
+      <version>2.5.6</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-autoconfigure</artifactId>
+      <version>2.5.6</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
+      <version>5.2.8.RELEASE</version>
+    </dependency>
+
+
+    <dependency>
       <groupId>io.awspring.cloud</groupId>
       <artifactId>spring-cloud-aws-context</artifactId>
       <version>2.3.1</version>

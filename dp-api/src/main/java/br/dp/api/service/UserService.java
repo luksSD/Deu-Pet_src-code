@@ -9,6 +9,8 @@ public interface UserService {
 
     Usuario validateLogin(String encodedData);
 
+    boolean checkEmailExist(String email);
+
     Long create(Usuario user);
 
     boolean changePassword(Usuario user);

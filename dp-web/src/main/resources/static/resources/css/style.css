@@ -15791,6 +15791,7 @@
      margin-right: 0;
      padding: .25rem 0;
      width: 100%;
+
 }
  .navbar .navbar-brand-wrapper .navbar-brand:active, .navbar .navbar-brand-wrapper .navbar-brand:focus, .navbar .navbar-brand-wrapper .navbar-brand:hover {
      color: #1b2658;
@@ -19258,5 +19259,9 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-right {
 }
 
 .auth.auth-img-bg .auth-form-transparent {
-    background-color: white
+    background-color: white;
+}
+
+#logo-div {
+    background-color: white !important;
 }

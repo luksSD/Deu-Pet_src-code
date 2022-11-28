@@ -55,6 +55,40 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public Usuario checkEmailExist(String email) {
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = ConnectionFactory.getConnection();
+
+            final String sql = "SELECT * FROM usuario WHERE email = '" + email + "'";
+
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Usuario user = new Usuario();
+
+                user.setId(resultSet.getLong("id"));
+                user.setNome(resultSet.getString("nome"));
+                user.setEmail(resultSet.getString("email"));
+
+                return user;
+            }
+
+        } catch (final Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            ConnectionFactory.close(resultSet, preparedStatement, connection);
+        }
+
+        return null;
+    }
+
+    @Override
     public UsersArquives loadUserImg(final long id) {
         final UsersArquives userImg = new UsersArquives();
 

@@ -15,4 +15,6 @@ public interface UserService {
 
     boolean updatePassword(Usuario entity);
 
+    boolean checkEmailExist(String email);
+
 }

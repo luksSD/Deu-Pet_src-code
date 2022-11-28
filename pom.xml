@@ -12,7 +12,7 @@
 
   <groupId>br.dp</groupId>
   <artifactId>deu-pet-parent</artifactId>
-  <version>1.6.2</version>
+  <version>2.0.0</version>
 
   <name>deu-pet-parent</name>
   <packaging>pom</packaging>
@@ -23,11 +23,11 @@
 
 
   <properties>
-    <deu-pet.version>1.6.2</deu-pet.version>
-    <dp-api.version>1.6.2</dp-api.version>
-    <dp-web.version>1.6.2</dp-web.version>
-    <dp-model.version>1.6.2</dp-model.version>
-    <dp-bd.version>1.6.2</dp-bd.version>
+    <deu-pet.version>2.0.0</deu-pet.version>
+    <dp-api.version>2.0.0</dp-api.version>
+    <dp-web.version>2.0.0</dp-web.version>
+    <dp-model.version>2.0.0</dp-model.version>
+    <dp-bd.version>2.0.0</dp-bd.version>
 
     <!-- build-->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

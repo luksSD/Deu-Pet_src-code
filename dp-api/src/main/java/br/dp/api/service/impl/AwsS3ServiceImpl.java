@@ -124,7 +124,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 
         try {
             String[] filenameExtension = file.getType().split("/");
-            String key = Constants.CAMPAIN_KEY + file.getCampainId() + "." +filenameExtension[1];
+            String key = Constants.CAMPAIGN_KEY + file.getCampainId() + "." +filenameExtension[1];
 
             byte[] data = Base64.getDecoder().decode(file.getFile().getBytes(StandardCharsets.UTF_8));
             InputStream stream = new ByteArrayInputStream(data);

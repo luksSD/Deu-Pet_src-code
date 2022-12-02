@@ -87,6 +87,7 @@ CREATE TABLE animal
     temperamento VARCHAR (100),
     pelagem_primaria VARCHAR (100) not null,
     pelagem_secundaria VARCHAR (100) not null,
+    imagem_principal VARCHAR (100),
 	instituicao_id integer not null
 
 );

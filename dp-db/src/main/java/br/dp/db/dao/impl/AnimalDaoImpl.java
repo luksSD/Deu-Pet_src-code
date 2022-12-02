@@ -46,6 +46,7 @@ public class AnimalDaoImpl implements AnimalDao {
                 animal.setTemperamento(resultSet.getString("temperamento"));
                 animal.setPelagemPrimaria(resultSet.getString("pelagem_primaria"));
                 animal.setPelagemSecundaria(resultSet.getString("pelagem_secundaria"));
+                animal.setPrimaryImagePath(resultSet.getString("imagem_principal"));
 
                 animais.add(animal);
 
@@ -96,6 +97,7 @@ public class AnimalDaoImpl implements AnimalDao {
                 animal.setTemperamento(resultSet.getString("temperamento"));
                 animal.setPelagemPrimaria(resultSet.getString("pelagem_primaria"));
                 animal.setPelagemSecundaria(resultSet.getString("pelagem_secundaria"));
+                animal.setPrimaryImagePath(resultSet.getString("imagem_principal"));
                 animal.setIdInstituicao(resultSet.getLong("instituicao_id"));
             }
 
@@ -262,11 +264,17 @@ public class AnimalDaoImpl implements AnimalDao {
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement2 = null;
+
         ResultSet resultSet = null;
 
         String sql = "INSERT INTO arquivo_animal ";
         sql += " (animal_id, caminho, primaria, tipo, chave)";
         sql += "VALUES(?, ?, ?, ?, ?);";
+
+        String sql2 = "UPDATE animal SET " +
+            "imagem_principal = ? " +
+            " WHERE id = ? ";
 
         boolean response = true;
 
@@ -293,6 +301,11 @@ public class AnimalDaoImpl implements AnimalDao {
                     break;
                 }
             }
+
+            preparedStatement2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement2.setString(1, animalFiles.get(0).getPath());
+            preparedStatement2.setLong(2, animalFiles.get(0).getAnimalID());
+            preparedStatement2.execute();
 
             if (response) {
                 connection.commit();

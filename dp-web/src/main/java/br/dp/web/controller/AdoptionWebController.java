@@ -189,7 +189,7 @@ public class AdoptionWebController {
                 adoptionRequest.getPessoa().setProfileImg(Constants.USER_DEFAULT_IMG);
             }
 
-            if(adoptionRequest.getStatus().equals("solicitacao")){
+            if(adoptionRequest.getStatus().equals("solicitado")){
                 solicitado = true;
             } else if(adoptionRequest.getStatus().equals("aprovado")){
                 aprovado = true;

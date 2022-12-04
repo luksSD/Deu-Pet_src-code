@@ -399,6 +399,10 @@ public class AnimalDaoImpl implements AnimalDao {
     @Override
     public Long adoptionRequest(PessoaInteressaAnimal adoptionRequest) {
 
+        System.out.println("CHEGOU EM DAO adoptionRequest");
+        System.out.println("id animal: " + adoptionRequest.getAnimalId());
+        System.out.println("id pessoa: " + adoptionRequest.getPessoaId());
+
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -431,6 +435,7 @@ public class AnimalDaoImpl implements AnimalDao {
 
         } catch (final Exception e) {
             try {
+                System.out.println(e.getMessage());
                 connection.rollback();
             } catch (final SQLException e1) {
                 System.out.println(e1.getMessage());

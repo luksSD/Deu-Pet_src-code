@@ -129,7 +129,7 @@ ALTER TABLE pessoa_interessa_animal ADD CONSTRAINT fk1_pessoa_interessa_animal f
 ALTER TABLE pessoa_interessa_animal ADD CONSTRAINT fk2_pessoa_interessa_animal foreign key (animal_id) references animal(id) on update cascade on delete cascade;
 
 --Colocando UK entre pessoa_id e animal_id na tabela pessoa_interessa_animal
-ALTER TABLE pessoa_interessa_animal ADD CONSTRAINT uk1_pessoa_interessa_animal unique(pessoa_id, animal_id);
+--ALTER TABLE pessoa_interessa_animal ADD CONSTRAINT uk1_pessoa_interessa_animal unique(pessoa_id, animal_id);
 
 --Criando tabela campanha
 CREATE TABLE campanha

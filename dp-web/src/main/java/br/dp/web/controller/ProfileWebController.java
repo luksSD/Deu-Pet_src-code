@@ -68,8 +68,10 @@ public class ProfileWebController {
         }
     }
 
-    @GetMapping("/editar-perfil/{id}")
-    public String getEditProfilePage(@RequestParam("id") Long id, Usuario user, Model model) {
+    @GetMapping("/editar-perfil")
+    public String getEditProfilePage(Model model) {
+
+        Usuario user = authProvider.getAuthenticatedUser();
 
         model.addAttribute("user", user);
         return "profile/profile-edit-page";

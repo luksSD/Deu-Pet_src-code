@@ -32,6 +32,8 @@ public class AdoptionWebController {
     private DpAuthenticationProvider authProvider;
 
 
+
+
     @GetMapping("/cadastrar-animal")
     public String getRegisterAnimalPage(final Animal animal, final Model model) {
 
@@ -135,6 +137,7 @@ public class AdoptionWebController {
     @PostMapping("/update")
     public String update(final Animal animal, final Model model) {
 
+        animal.setIdInstituicao(authProvider.getAuthenticatedUser().getId());
         final boolean response = animalService.update(animal);
 
         if (response) {
